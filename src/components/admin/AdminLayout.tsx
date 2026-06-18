@@ -97,6 +97,9 @@ const AdminLayout = ({
                   <Link href="/admin/cupons">
                     <a className="navbar-item font-bold">Cupons</a>
                   </Link>
+                  <Link href="/admin/cromatografias">
+                    <a className="navbar-item font-bold">Cromatografias</a>
+                  </Link>
                   <Link href="/admin/relatorios">
                     <a className="navbar-item font-bold">Relatórios</a>
                   </Link>
