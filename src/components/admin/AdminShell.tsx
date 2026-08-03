@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
-import { useLoggedUser } from '@/lib/hooks'
+import { useDisclosure, useLoggedUser } from '@/lib/hooks'
 import { canAccessPath, visibleSections } from '@/lib/admin-nav'
 import { UsersService } from '@/services/users'
+import { Button } from '@/components/ui/Button'
+import { Dialog } from '@/components/ui/Dialog'
 import { Spinner } from '@/components/ui/Feedback'
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -14,6 +16,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const { user, resolved } = useLoggedUser()
   const [menuOpen, setMenuOpen] = useState(false)
+  const signOutConfirm = useDisclosure()
+
+  const signOut = () => {
+    signOutConfirm.close()
+    UsersService.signOut()
+    router.replace('/admin/login')
+  }
 
   const isLoginPage = pathname === '/admin/login'
   const allowed = canAccessPath(pathname, user)
@@ -87,10 +96,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             <span className="hidden text-sm text-white/70 sm:block">{user.name}</span>
             <button
               type="button"
-              onClick={() => {
-                UsersService.signOut()
-                router.replace('/admin/login')
-              }}
+              onClick={signOutConfirm.open}
               className="rounded-full border border-white/25 px-4 py-1.5 text-sm font-medium text-white transition-colors hover:border-white/60 hover:bg-white/10"
             >
               Sair
@@ -136,6 +142,26 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <main className="mx-auto max-w-[92rem] px-4 py-8 lg:px-8 lg:py-10">{children}</main>
+
+      <Dialog
+        open={signOutConfirm.isOpen}
+        onClose={signOutConfirm.close}
+        title="Sair do painel?"
+        size="sm"
+        footer={
+          <>
+            <Button variant="ghost" onClick={signOutConfirm.close}>
+              Cancelar
+            </Button>
+            <Button onClick={signOut}>Sair</Button>
+          </>
+        }
+      >
+        <p className="text-sm text-ink-soft">
+          Sua sessão será encerrada neste navegador. Para voltar ao painel você precisará
+          informar login e senha outra vez.
+        </p>
+      </Dialog>
     </div>
   )
 }

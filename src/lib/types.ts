@@ -100,6 +100,8 @@ export interface Testimony {
 }
 
 export interface User {
+  /** Firestore document id — absent on sessions stored by the previous login. */
+  id?: string
   login: string
   email: string
   name: string

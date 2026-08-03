@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { CouponsService } from '@/services/coupons'
 import { CromatografiasService } from '@/services/cromatografias'
 import { TestimonyService } from '@/services/testimony'
-import { UsersService } from '@/services/users'
+import { onSessionChange, UsersService } from '@/services/users'
 import { VisitsService } from '@/services/visits'
 import type { Coupon, Cromatografia, Testimony, User, Visit } from './types'
 
@@ -56,7 +56,11 @@ export function useLoggedUser() {
   const [user, setUser] = useState<User | null | undefined>(undefined)
 
   useEffect(() => {
-    setUser(UsersService.getStoredUser() ?? null)
+    const read = () => setUser(UsersService.getStoredUser() ?? null)
+    read()
+    // Not just on mount: this hook feeds the route guard in a layout that stays
+    // mounted from the login screen into the panel.
+    return onSessionChange(read)
   }, [])
 
   return {
