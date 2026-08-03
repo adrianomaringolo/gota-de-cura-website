@@ -32,6 +32,8 @@ export interface ProductItem {
   type?: string
   urlName?: string
   amount?: number
+  /** ISO date stamped when the product is first created; drives the "Novo" tag. */
+  createdAt?: string
 }
 
 export interface CartItem extends ProductItem {

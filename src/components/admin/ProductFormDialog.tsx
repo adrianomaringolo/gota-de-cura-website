@@ -81,9 +81,15 @@ export function ProductFormDialog({
 
   const onSubmit = async (data: ProductForm) => {
     try {
+      // saveProduct replaces the whole document, so an edit has to carry the
+      // untouched fields (urlName, categories, optionsSet, createdAt…) forward
+      // instead of only what this form knows about.
       await ProductsService.saveProduct({
+        ...product,
         ...data,
+        id: product?.id ?? data.id,
         oldPrice: data.oldPrice || undefined,
+        createdAt: product?.createdAt ?? new Date().toISOString(),
       } as ProductItem)
       toast.success(editing ? 'Produto atualizado' : 'Produto criado')
       await onSaved()
@@ -125,9 +131,13 @@ export function ProductFormDialog({
         <Input
           label="Código (ID)"
           required
-          disabled={editing}
+          readOnly={editing}
           placeholder="lavanda-10ml"
-          hint={editing ? undefined : 'Identificador único, sem espaços.'}
+          hint={
+            editing
+              ? 'O código não muda depois que o produto é criado.'
+              : 'Identificador único, sem espaços.'
+          }
           error={errors.id && 'Informe um código.'}
           {...register('id', { required: true })}
         />

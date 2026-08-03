@@ -8,7 +8,9 @@ const controlStyles =
   'transition-colors duration-150 placeholder:text-ink-muted ' +
   'hover:border-line-strong focus:border-brand focus:outline-none ' +
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lift ' +
-  'disabled:bg-canvas-sunk disabled:text-ink-muted'
+  'disabled:bg-canvas-sunk disabled:text-ink-muted ' +
+  // read-only keeps the value in the submitted payload, unlike disabled
+  'read-only:bg-canvas-sunk read-only:text-ink-soft'
 
 type LabelledProps = {
   label?: ReactNode

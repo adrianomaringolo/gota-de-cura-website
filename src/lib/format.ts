@@ -25,7 +25,8 @@ export const formatMonthAndYear = (date: Date): string =>
     ? new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: 'long' }).format(date)
     : ''
 
-const toDate = (value: unknown): Date | null => {
+/** Accepts ISO strings, epoch numbers, Dates and Firestore Timestamps alike. */
+export const toDate = (value: unknown): Date | null => {
   if (!value) return null
   if (value instanceof Date) return isValid(value) ? value : null
   if (typeof value === 'object' && 'seconds' in (value as Record<string, unknown>)) {

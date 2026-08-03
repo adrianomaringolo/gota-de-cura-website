@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/lib/cart-context'
 import { formatCurrency } from '@/lib/format'
+import { isNewProduct } from '@/lib/products'
 import type { ProductItem } from '@/lib/types'
 import { OptionsDialog } from './OptionsDialog'
 import { ProductDetailDialog } from './ProductDetailDialog'
@@ -18,6 +19,7 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
 
   const hasOptions = Boolean(item.optionsSet?.length)
   const onSale = Boolean(item.oldPrice)
+  const isNew = isNewProduct(item)
 
   const handleOrder = () => {
     if (hasOptions) setOptionsOpen(true)
@@ -42,10 +44,18 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
             </div>
           )}
 
-          {item.seal && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={item.seal} alt="" className="absolute top-3 left-3 w-16" />
-          )}
+          {/* Stacked so an automatic tag and a manual seal never overlap. */}
+          <div className="absolute top-3 left-3 flex flex-col items-start gap-2">
+            {isNew && (
+              <span className="rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
+                Novo
+              </span>
+            )}
+            {item.seal && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={item.seal} alt="" className="w-16" />
+            )}
+          </div>
 
           {item.priceDiscount && (
             <span className="absolute top-3 right-3 rounded-full bg-terra px-3 py-1.5 text-sm font-bold text-white">

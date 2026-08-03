@@ -8,6 +8,7 @@ import { Container } from '@/components/site/Section'
 import { EmptyState } from '@/components/ui/Feedback'
 import { useCart } from '@/lib/cart-context'
 import { formatCurrency } from '@/lib/format'
+import { isNewProduct } from '@/lib/products'
 import { getProductType } from '@/lib/product-types'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
@@ -91,6 +92,11 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
         )}
 
         <div>
+          {isNewProduct(item) && (
+            <span className="mb-3 inline-block rounded-full bg-brand px-3 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase">
+              Novo
+            </span>
+          )}
           <h1 className="text-3xl font-semibold text-ink">{item.name}</h1>
 
           {item.description && (

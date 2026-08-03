@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { useLoggedUser } from '@/lib/hooks'
-import { formatCurrency } from '@/lib/format'
+import { formatCurrency, formatDate } from '@/lib/format'
+import { isNewProduct } from '@/lib/products'
 import { productTypes } from '@/lib/product-types'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
@@ -118,7 +119,13 @@ export default function AdminManagementPage() {
                       <Badge tone="warning">Esgotado</Badge>
                     )}
                     {product.hidden && <Badge tone="neutral">Oculto</Badge>}
+                    {isNewProduct(product) && <Badge tone="brand">Novo</Badge>}
                   </div>
+                  {product.createdAt && (
+                    <span className="mt-1 block text-xs text-ink-muted">
+                      criado em {formatDate(product.createdAt)}
+                    </span>
+                  )}
                 </Td>
                 <Td className="text-right">
                   {confirmDelete === product.id ? (
