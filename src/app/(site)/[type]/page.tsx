@@ -57,7 +57,7 @@ export default async function CategoryPage({
               alt=""
               fill
               sizes="100vw"
-              className="object-cover opacity-35"
+              className="object-cover opacity-25"
               priority
             />
             <div
@@ -73,7 +73,7 @@ export default async function CategoryPage({
         )}
 
         <Container className="relative pt-32 pb-14 lg:pt-40 lg:pb-20">
-          <nav aria-label="Trilha" className="mb-6 text-sm text-white/60">
+          <nav aria-label="Trilha" className="mb-6 text-sm text-white/70">
             <Link href="/#catalogo" className="transition-colors hover:text-white">
               Catálogo
             </Link>

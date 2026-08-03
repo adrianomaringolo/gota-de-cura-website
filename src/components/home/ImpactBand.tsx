@@ -16,7 +16,7 @@ export function ImpactBand() {
         alt=""
         fill
         sizes="100vw"
-        className="object-cover object-center opacity-30"
+        className="object-cover object-center opacity-20"
       />
       <div
         aria-hidden="true"
@@ -35,7 +35,7 @@ export function ImpactBand() {
             para o seu trabalho de assistência às famílias da periferia de Campinas,
             mantido desde 1980.
           </p>
-          <p className="mt-4 text-base leading-relaxed text-white/60">
+          <p className="mt-4 text-base leading-relaxed text-white/70">
             A chácara é da Morada. Quem planta, colhe, destila e embala são voluntários.
           </p>
 

@@ -61,7 +61,7 @@ export function PhotoGallery() {
           role="dialog"
           aria-modal="true"
           aria-label={visitPhotos[index].alt}
-          className="fixed inset-0 z-[var(--z-modal)] flex flex-col bg-brand-darkest/96 animate-[fade-in_0.2s_ease-out]"
+          className="fixed inset-0 z-[var(--z-modal)] flex flex-col bg-veil/97 animate-[fade-in_0.2s_ease-out]"
           onClick={() => setIndex(null)}
         >
           <div className="flex justify-end p-4">

@@ -23,7 +23,7 @@ export function LaudosBand() {
               mistura. Mandamos nossos óleos essenciais e hidrolatos para o laboratório e
               publicamos o laudo inteiro — não um resumo.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-white/60">
+            <p className="mt-4 text-base leading-relaxed text-white/75">
               É a forma mais simples de você conferir, sem depender da nossa palavra, o
               que saiu do alambique.
             </p>
@@ -45,7 +45,7 @@ export function LaudosBand() {
                 ))}
               </ul>
             ) : preview.length === 0 ? (
-              <p className="rounded-2xl border border-dashed border-white/25 px-6 py-10 text-center text-white/60">
+              <p className="rounded-2xl border border-dashed border-white/25 px-6 py-10 text-center text-white/75">
                 Os laudos estão sendo preparados e aparecem aqui assim que saem do
                 laboratório.
               </p>
@@ -63,16 +63,16 @@ export function LaudosBand() {
                         <span className="font-display text-lg text-white">
                           {item.name}
                         </span>
-                        <span className="ml-2 text-sm text-white/55 italic">
+                        <span className="ml-2 text-sm text-white/75 italic">
                           {item.scientificName}
                         </span>
                       </span>
-                      <span className="hidden shrink-0 text-2xs font-semibold tracking-[0.1em] text-white/65 uppercase sm:block">
+                      <span className="hidden shrink-0 text-2xs font-semibold tracking-[0.1em] text-white/80 uppercase sm:block">
                         {CROMATOGRAFIA_LABELS[item.type] ?? item.type}
                       </span>
                       <svg
                         viewBox="0 0 24 24"
-                        className="h-4 w-4 shrink-0 text-white/45 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white"
+                        className="h-4 w-4 shrink-0 text-white/60 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
@@ -89,7 +89,7 @@ export function LaudosBand() {
             )}
 
             {data.length > preview.length && (
-              <p className="mt-4 text-sm text-white/55">
+              <p className="mt-4 text-sm text-white/75">
                 e mais {data.length - preview.length}{' '}
                 {data.length - preview.length === 1 ? 'laudo' : 'laudos'} —{' '}
                 <Link

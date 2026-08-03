@@ -166,7 +166,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
       <div
         onClick={onClose}
         className={cn(
-          'absolute inset-0 bg-[oklch(0.21_0.062_293_/_0.5)] transition-opacity duration-300',
+          'absolute inset-0 bg-veil/55 transition-opacity duration-300',
           open ? 'opacity-100' : 'opacity-0',
         )}
       />

@@ -66,7 +66,7 @@ export function Dialog({
       }}
       className={cn(
         'w-[calc(100vw-2rem)] rounded-2xl border border-line bg-surface p-0 text-ink shadow-float',
-        'backdrop:bg-[oklch(0.21_0.062_293_/_0.55)] open:animate-[sheet-in_0.28s_var(--ease-out-quart)]',
+        'backdrop:bg-veil/55 open:animate-[sheet-in_0.28s_var(--ease-out-quart)]',
         'backdrop:animate-[fade-in_0.2s_ease-out] my-auto',
         sizes[size],
       )}

@@ -25,7 +25,7 @@ export default function VisitasPage() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-30"
+          className="object-cover object-center opacity-22"
         />
         <div
           aria-hidden="true"
@@ -43,7 +43,7 @@ export default function VisitasPage() {
           </p>
 
           <div className="mt-10">
-            <h2 className="text-sm font-semibold text-white/60">Próximas datas</h2>
+            <h2 className="text-sm font-semibold text-white/70">Próximas datas</h2>
             <VisitDates tone="light" className="mt-3" />
           </div>
 
@@ -169,7 +169,7 @@ export default function VisitasPage() {
                   <span className="block font-display text-lg text-white">
                     {testimony.name}
                   </span>
-                  <span className="text-sm text-white/55">{testimony.date}</span>
+                  <span className="text-sm text-white/75">{testimony.date}</span>
                 </figcaption>
               </figure>
             ))}

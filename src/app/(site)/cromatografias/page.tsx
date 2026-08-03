@@ -16,7 +16,7 @@ export default function CromatografiasPage() {
         title="Cromatografias"
         lead="Cromatografia é o exame que separa e identifica cada componente de uma mistura. Publicamos o laudo completo de cada óleo essencial e hidrolato — do jeito que o laboratório entregou."
       >
-        <p className="max-w-[62ch] text-base text-white/60">
+        <p className="max-w-[62ch] text-base text-white/70">
           Clique em qualquer planta para abrir o PDF do laudo.
         </p>
       </PageHeader>

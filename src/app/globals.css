@@ -21,13 +21,19 @@
   --color-ink-soft: oklch(0.44 0.025 300);
   --color-ink-muted: oklch(0.48 0.022 300);
 
-  /* Brand violet --------------------------------------------------------- */
-  --color-brand: oklch(0.4 0.108 292);
-  --color-brand-deep: oklch(0.28 0.085 292);
-  --color-brand-darkest: oklch(0.21 0.062 293);
-  --color-brand-lift: oklch(0.5 0.13 293);
-  --color-brand-soft: oklch(0.88 0.045 296);
-  --color-brand-tint: oklch(0.955 0.019 298);
+  /* Brand lilac ---------------------------------------------------------- */
+  /* The whole ramp sits in the lilac band, not near-black violet. The floor
+     is set by white body copy on the drenched surfaces: L 0.40–0.50 keeps
+     every band at or above 4.7:1, so nothing here can go lighter. */
+  --color-brand: oklch(0.44 0.145 297);
+  --color-brand-deep: oklch(0.47 0.14 299);
+  --color-brand-darkest: oklch(0.4 0.13 296);
+  --color-brand-lift: oklch(0.58 0.155 300);
+  --color-brand-soft: oklch(0.87 0.065 300);
+  --color-brand-tint: oklch(0.955 0.028 300);
+  /* Scrims laid over photography, where a band colour would be too light to
+     hold white type. Same lilac hue, deeper — a shade, not a surface. */
+  --color-veil: oklch(0.26 0.08 297);
 
   /* Terracotta — the chácara's red soil ---------------------------------- */
   --color-terra: oklch(0.5 0.14 42);
@@ -84,10 +90,10 @@
 
   /* Elevation — violet-cast shadows, never neutral grey ------------------ */
   --shadow-lift:
-    0 1px 2px oklch(0.28 0.085 292 / 0.06), 0 6px 20px oklch(0.28 0.085 292 / 0.08);
+    0 1px 2px oklch(0.26 0.08 297 / 0.07), 0 6px 20px oklch(0.26 0.08 297 / 0.1);
   --shadow-raised:
-    0 2px 4px oklch(0.28 0.085 292 / 0.07), 0 14px 40px oklch(0.28 0.085 292 / 0.13);
-  --shadow-float: 0 24px 70px oklch(0.21 0.062 293 / 0.28);
+    0 2px 4px oklch(0.26 0.08 297 / 0.08), 0 14px 40px oklch(0.26 0.08 297 / 0.15);
+  --shadow-float: 0 24px 70px oklch(0.26 0.08 297 / 0.3);
 
   /* Layered stacking scale ---------------------------------------------- */
   --z-base: 0;
@@ -288,7 +294,7 @@
   }
 
   .text-shadow-photo {
-    text-shadow: 0 2px 24px oklch(0.21 0.062 293 / 0.55);
+    text-shadow: 0 2px 24px oklch(0.26 0.08 297 / 0.6);
   }
 }
 

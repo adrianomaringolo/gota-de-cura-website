@@ -41,7 +41,7 @@ export function Hero() {
             </ButtonLink>
           </div>
 
-          <ul className="animate-rise mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/55 [animation-delay:380ms]">
+          <ul className="animate-rise mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/70 [animation-delay:380ms]">
             {facts.map((fact, index) => (
               <li key={fact} className="flex items-center gap-3">
                 {index > 0 && (
@@ -65,12 +65,12 @@ export function Hero() {
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-brand-darkest/85 via-brand-darkest/10 to-transparent lg:bg-linear-[100deg,var(--color-brand-darkest)_0%,oklch(0.21_0.062_293_/_0.3)_38%,transparent_70%]"
+            className="absolute inset-0 bg-gradient-to-t from-veil/88 via-veil/15 to-transparent lg:bg-linear-[100deg,var(--color-brand-darkest)_0%,var(--color-veil)_30%,transparent_72%]"
           />
           {/* The still is shot in full sun; the caption needs its own floor. */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-brand-darkest/90 to-transparent"
+            className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-veil/92 to-transparent"
           />
 
           <figcaption className="absolute right-4 bottom-6 left-4 text-sm leading-relaxed text-white/85 sm:right-8 sm:left-auto sm:max-w-[28ch] sm:text-right lg:bottom-10">

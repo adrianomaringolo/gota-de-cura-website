@@ -41,7 +41,7 @@ export function Footer() {
 
           {columns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/50 uppercase">
+              <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/70 uppercase">
                 {column.title}
               </h2>
               <ul className="mt-4 space-y-2.5">
@@ -60,7 +60,7 @@ export function Footer() {
           ))}
 
           <div>
-            <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/50 uppercase">
+            <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/70 uppercase">
               Loja física
             </h2>
             <address className="mt-4 text-sm leading-relaxed text-white/80 not-italic">
@@ -77,7 +77,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[62ch]">
             Toda a renda é revertida para os trabalhos assistenciais da{' '}
             <a
@@ -92,7 +92,7 @@ export function Footer() {
           </p>
           <Link
             href="/admin"
-            className="shrink-0 text-white/60 transition-colors hover:text-white"
+            className="shrink-0 text-white/65 transition-colors hover:text-white"
           >
             Área da equipe
           </Link>
