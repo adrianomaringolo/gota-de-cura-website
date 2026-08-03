@@ -20,7 +20,6 @@ type ProductForm = {
   description: string
   detailedDescription?: string
   image: string
-  seal?: string
   available: boolean
   hidden: boolean
 }
@@ -34,7 +33,6 @@ const empty: ProductForm = {
   description: '',
   detailedDescription: '',
   image: '',
-  seal: '',
   available: true,
   hidden: false,
 }
@@ -71,7 +69,6 @@ export function ProductFormDialog({
             description: product.description,
             detailedDescription: product.detailedDescription ?? '',
             image: product.image,
-            seal: product.seal ?? '',
             available: product.available ?? true,
             hidden: product.hidden ?? false,
           }
@@ -203,12 +200,6 @@ export function ProductFormDialog({
           className="sm:col-span-2"
           error={errors.image && 'Informe a URL da imagem.'}
           {...register('image', { required: true })}
-        />
-        <Input
-          label="Selo (URL)"
-          className="sm:col-span-2"
-          hint="Opcional — pequena imagem exibida sobre a foto."
-          {...register('seal')}
         />
 
         <Checkbox label="Disponível para venda" {...register('available')} />

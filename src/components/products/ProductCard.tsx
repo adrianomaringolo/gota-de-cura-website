@@ -44,18 +44,11 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
             </div>
           )}
 
-          {/* Stacked so an automatic tag and a manual seal never overlap. */}
-          <div className="absolute top-3 left-3 flex flex-col items-start gap-2">
-            {isNew && (
-              <span className="rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
-                Novo
-              </span>
-            )}
-            {item.seal && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={item.seal} alt="" className="w-16" />
-            )}
-          </div>
+          {isNew && (
+            <span className="absolute top-3 left-3 rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
+              Novo
+            </span>
+          )}
 
           {item.priceDiscount && (
             <span className="absolute top-3 right-3 rounded-full bg-terra px-3 py-1.5 text-sm font-bold text-white">

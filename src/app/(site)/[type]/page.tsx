@@ -83,13 +83,7 @@ export default async function CategoryPage({
             <span className="text-white/90">{title}</span>
           </nav>
 
-          <div className="flex flex-wrap items-start gap-6">
-            <h1 className="max-w-[16ch] flex-1 text-4xl font-semibold">{title}</h1>
-            {productType.seal && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={productType.seal} alt="" className="w-20 shrink-0 sm:w-24" />
-            )}
-          </div>
+          <h1 className="max-w-[16ch] text-4xl font-semibold">{title}</h1>
 
           {productType.description && (
             <div

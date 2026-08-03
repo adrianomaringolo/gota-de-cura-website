@@ -53,15 +53,6 @@ export function CategoryTile({
         )}
       />
 
-      {type.seal && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={type.seal}
-          alt=""
-          className="absolute top-3 right-3 w-14 drop-shadow-md sm:w-16"
-        />
-      )}
-
       <div className="relative mt-auto flex w-full items-end justify-between gap-3 p-4 sm:p-5">
         <h3
           className={cn(
