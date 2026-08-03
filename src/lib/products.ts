@@ -1,12 +1,19 @@
-import { productTypes } from "data/products";
-import { ProductType } from "interfaces/products";
+import { addMonths, isAfter } from 'date-fns'
+import { toDate } from './format'
+import type { ProductItem } from './types'
 
-export const getAllProductsIds = () =>
-  productTypes.map((productType: ProductType) => ({
-    params: {
-      type: productType.id,
-    },
-  }));
+/** How long a product keeps the "Novo" tag after it is created. */
+export const NEW_PRODUCT_WINDOW_MONTHS = 1
 
-export const getProductData = (type: string) =>
-  productTypes.find((p) => p.id === type);
+/**
+ * A product is new for one calendar month after its creation date. Products
+ * saved before `createdAt` existed simply never carry the tag.
+ */
+export const isNewProduct = (
+  product: Pick<ProductItem, 'createdAt'>,
+  now: Date = new Date(),
+): boolean => {
+  const created = toDate(product.createdAt)
+  if (!created) return false
+  return isAfter(addMonths(created, NEW_PRODUCT_WINDOW_MONTHS), now)
+}
