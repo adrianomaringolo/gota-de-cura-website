@@ -84,6 +84,8 @@ Se você tem uma condição diagnosticada, está gestante, amamentando, usa medi
 
 Aromaterapia é complemento. Ela não substitui consulta, exame nem tratamento, e qualquer pessoa que te disser o contrário está te oferecendo risco embalado como cuidado.
 
-O que a gente pode garantir é a outra ponta: o que está escrito no rótulo é o que está dentro do frasco. Os laudos de cromatografia de cada lote ficam publicados na [página de cromatografias](/cromatografias) — porque aroma agradável não prova composição, e a única forma honesta de sustentar o que um rótulo afirma é mostrar o exame.
+O que a gente pode garantir é a outra ponta: o que está escrito no rótulo é o que está dentro do frasco. Os laudos de cromatografia de cada planta ficam publicados na [página de cromatografias](/cromatografias) — porque aroma agradável não prova composição, e a única forma honesta de sustentar o que um rótulo afirma é mostrar o exame.
 
 Dúvida sobre um caso específico, pergunte. Faz parte do trabalho.
+
+Ainda assim, nada aqui substitui uma avaliação individual: **em caso de dúvida, consulte sempre um profissional da área** — aromaterapeuta certificado, médico ou farmacêutico — antes de iniciar qualquer uso.
