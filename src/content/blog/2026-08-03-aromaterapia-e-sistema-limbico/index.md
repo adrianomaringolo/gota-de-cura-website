@@ -1,7 +1,7 @@
 ---
 title: 'Por que um aroma chega antes do pensamento'
 excerpt: 'O olfato é o único sentido que alcança as estruturas da emoção e da memória sem escala. Isso explica por que um cheiro muda seu estado antes de você decidir nada — e delimita, com honestidade, o que a aromaterapia pode fazer pela sua saúde.'
-author: 'Marcelo Soares Mattar'
+author: 'Equipe Gota de cura'
 publishedAt: '2026-08-03'
 tags: ['aromaterapia', 'saúde integral', 'olfato']
 featured: true
@@ -30,6 +30,8 @@ Isso importa porque amígdala e hipocampo não são estruturas de reconhecimento
 Existe também uma via mais longa, passando pelo tálamo mediodorsal até o córtex orbitofrontal — é ela que permite identificar e nomear um cheiro conscientemente. Mas ela chega depois. A reação emocional já aconteceu.
 
 ## Por que a memória vem junto
+
+![Mulher de olhos fechados aproximando o rosto de flores para sentir o aroma, cercada de folhagem verde](/images/blog/aromaterapia-e-sistema-limbico/aroma-e-memoria.jpg)
 
 O efeito tem nome emprestado da literatura: fenômeno de Proust, pela cena da madeleine mergulhada no chá em *Em Busca do Tempo Perdido*.
 
@@ -68,6 +70,8 @@ E há uma coisa que a experiência de balcão ensina mais rápido que a literatu
 
 ## Quatro maneiras de começar
 
+![Mão pingando óleo essencial em um difusor sobre a mesa, ao lado de uma vela acesa](/images/blog/aromaterapia-e-sistema-limbico/difusor-na-pratica.jpg)
+
 **Difusão no ambiente.** Água e poucas gotas, 20 a 30 minutos, ambiente ventilado. Difusor ligado o dia inteiro não aumenta o efeito e satura o olfato.
 
 **Inalação seca.** Uma ou duas gotas em algodão, lenço ou inalador pessoal. É a forma mais direta e mais controlada — e a que serve para ansiedade pontual, porque cabe no bolso.
@@ -86,6 +90,4 @@ Aromaterapia é complemento. Ela não substitui consulta, exame nem tratamento, 
 
 O que a gente pode garantir é a outra ponta: o que está escrito no rótulo é o que está dentro do frasco. Os laudos de cromatografia de cada planta ficam publicados na [página de cromatografias](/cromatografias) — porque aroma agradável não prova composição, e a única forma honesta de sustentar o que um rótulo afirma é mostrar o exame.
 
-Dúvida sobre um caso específico, pergunte. Faz parte do trabalho.
-
-Ainda assim, nada aqui substitui uma avaliação individual: **em caso de dúvida, consulte sempre um profissional da área** — aromaterapeuta certificado, médico ou farmacêutico — antes de iniciar qualquer uso.
+Sempre tire suas dúvidas, nada aqui substitui uma avaliação individual: **em caso de dúvida, consulte sempre um profissional da área** antes de iniciar qualquer uso.
