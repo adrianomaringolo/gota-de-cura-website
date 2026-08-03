@@ -61,60 +61,72 @@ export function Dialog({
   return (
     <dialog
       ref={ref}
-      onClick={(event) => {
-        if (dismissible && event.target === ref.current) onClose()
-      }}
+      // The <dialog> itself is only the layer: it fills the viewport and stays
+      // transparent. Centring is done by the flex wrapper below rather than by
+      // the UA's `margin: auto`, which depends on a margin Preflight resets and
+      // on how each engine measures the viewport when a scrollbar is present.
       className={cn(
-        'w-[calc(100vw-2rem)] rounded-2xl border border-line bg-surface p-0 text-ink shadow-float',
-        'backdrop:bg-veil/55 open:animate-[sheet-in_0.28s_var(--ease-out-quart)]',
-        // A modal <dialog> centres itself through `margin: auto` against
-        // `inset: 0`. Preflight zeroes every margin, so it has to come back on
-        // BOTH axes or the dialog pins to the left edge.
-        'backdrop:animate-[fade-in_0.2s_ease-out] m-auto',
-        sizes[size],
+        'h-full max-h-full w-full max-w-full overflow-y-auto bg-transparent p-0 text-ink',
+        'backdrop:bg-veil/55 backdrop:animate-[fade-in_0.2s_ease-out]',
       )}
     >
-      <div className="flex max-h-[85vh] flex-col">
-        {(title || dismissible) && (
-          <header className="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
-            <div>
-              {title && (
-                <h2 className="font-display text-xl leading-tight font-semibold text-ink">
-                  {title}
-                </h2>
-              )}
-              {description && <p className="mt-1 text-sm text-ink-soft">{description}</p>}
-            </div>
-            {dismissible && (
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Fechar"
-                className="-mt-1 -mr-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-muted transition-colors hover:bg-canvas-sunk hover:text-ink"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  aria-hidden="true"
+      <div
+        onClick={(event) => {
+          if (dismissible && event.target === event.currentTarget) onClose()
+        }}
+        className="flex min-h-full items-center justify-center p-4"
+      >
+        <div
+          data-dialog-panel=""
+          className={cn(
+            'flex max-h-[85vh] w-full flex-col overflow-hidden rounded-2xl border border-line',
+            'bg-surface shadow-float animate-[sheet-in_0.28s_var(--ease-out-quart)]',
+            sizes[size],
+          )}
+        >
+          {(title || dismissible) && (
+            <header className="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
+              <div>
+                {title && (
+                  <h2 className="font-display text-xl leading-tight font-semibold text-ink">
+                    {title}
+                  </h2>
+                )}
+                {description && (
+                  <p className="mt-1 text-sm text-ink-soft">{description}</p>
+                )}
+              </div>
+              {dismissible && (
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Fechar"
+                  className="-mt-1 -mr-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-muted transition-colors hover:bg-canvas-sunk hover:text-ink"
                 >
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-            )}
-          </header>
-        )}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 6l12 12M18 6L6 18" />
+                  </svg>
+                </button>
+              )}
+            </header>
+          )}
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
+          <div className="min-h-0 flex-1 overflow-y-auto px-6 py-5">{children}</div>
 
-        {footer && (
-          <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-line bg-canvas px-6 py-4">
-            {footer}
-          </footer>
-        )}
+          {footer && (
+            <footer className="flex flex-wrap items-center justify-end gap-3 border-t border-line bg-canvas px-6 py-4">
+              {footer}
+            </footer>
+          )}
+        </div>
       </div>
     </dialog>
   )
