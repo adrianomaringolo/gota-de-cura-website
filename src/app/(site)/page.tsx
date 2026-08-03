@@ -1,3 +1,4 @@
+import { BlogBand } from '@/components/home/BlogBand'
 import { Catalog } from '@/components/home/Catalog'
 import { ContactBand } from '@/components/home/ContactBand'
 import { DifferentialsBand } from '@/components/home/DifferentialsBand'
@@ -16,6 +17,7 @@ export default function HomePage() {
       <LaudosBand />
       <VisitBand />
       <Testimonies />
+      <BlogBand />
       <ImpactBand />
       <ContactBand />
     </>
