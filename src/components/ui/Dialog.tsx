@@ -67,7 +67,10 @@ export function Dialog({
       className={cn(
         'w-[calc(100vw-2rem)] rounded-2xl border border-line bg-surface p-0 text-ink shadow-float',
         'backdrop:bg-veil/55 open:animate-[sheet-in_0.28s_var(--ease-out-quart)]',
-        'backdrop:animate-[fade-in_0.2s_ease-out] my-auto',
+        // A modal <dialog> centres itself through `margin: auto` against
+        // `inset: 0`. Preflight zeroes every margin, so it has to come back on
+        // BOTH axes or the dialog pins to the left edge.
+        'backdrop:animate-[fade-in_0.2s_ease-out] m-auto',
         sizes[size],
       )}
     >
