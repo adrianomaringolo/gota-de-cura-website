@@ -90,12 +90,27 @@ export function Footer() {
             </a>
             , em Campinas/SP.
           </p>
-          <Link
-            href="/admin"
-            className="shrink-0 text-white/65 transition-colors hover:text-white"
-          >
-            Área da equipe
-          </Link>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <p className="shrink-0">
+              Desenvolvido por{' '}
+              {/* noopener without noreferrer: the referrer is the point of a
+                  portfolio credit. */}
+              <a
+                href="https://adrianomaringolo.dev"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+              >
+                adrianomaringolo.dev
+              </a>
+            </p>
+            <Link
+              href="/admin"
+              className="shrink-0 text-white/65 transition-colors hover:text-white"
+            >
+              Área da equipe
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
