@@ -1,6 +1,6 @@
 'use client'
 
-import { forwardRef, useId, type ComponentProps, type ReactNode } from 'react'
+import { forwardRef, useId, useState, type ComponentProps, type ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 
 const controlStyles =
@@ -81,6 +81,67 @@ export const Input = forwardRef<
         className={cn(controlStyles, error && 'border-danger')}
         {...rest}
       />
+    </FieldShell>
+  )
+})
+
+/**
+ * A password field that can be unmasked. Worth the extra control here: the
+ * admin password is typed on a phone as often as on a keyboard, and a silent
+ * typo is indistinguishable from wrong credentials.
+ */
+export const PasswordInput = forwardRef<
+  HTMLInputElement,
+  LabelledProps & Omit<ComponentProps<'input'>, 'className' | 'type'>
+>(function PasswordInput({ label, hint, error, className, id, ...rest }, ref) {
+  const generatedId = useId()
+  const fieldId = id ?? generatedId
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <FieldShell
+      id={fieldId}
+      label={label}
+      hint={hint}
+      error={error}
+      required={rest.required}
+      className={className}
+    >
+      <div className="relative">
+        <input
+          ref={ref}
+          id={fieldId}
+          type={visible ? 'text' : 'password'}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={
+            error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined
+          }
+          className={cn(controlStyles, 'pr-12', error && 'border-danger')}
+          {...rest}
+        />
+        <button
+          type="button"
+          onClick={() => setVisible((shown) => !shown)}
+          aria-label={visible ? 'Ocultar senha' : 'Mostrar senha'}
+          aria-pressed={visible}
+          className="absolute top-1/2 right-2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-ink-muted transition-colors hover:bg-canvas-sunk hover:text-ink"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z" />
+            <circle cx="12" cy="12" r="3" />
+            {!visible && <path d="M4 20 20 4" />}
+          </svg>
+        </button>
+      </div>
     </FieldShell>
   )
 })

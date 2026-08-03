@@ -33,8 +33,8 @@ export function Footer() {
           <div>
             <Wordmark tone="light" size="md" />
             <p className="mt-6 max-w-[38ch] text-sm leading-relaxed text-white/70">
-              Óleos essenciais, hidrolatos e itens artesanais destilados na Chácara da
-              Mãe Luzia e comercializados na Loja da Morada, em Campinas (SP)
+              Óleos essenciais, hidrolatos e itens artesanais destilados na Chácara da Mãe
+              Luzia e comercializados na Loja da Morada, em Campinas (SP)
             </p>
             <SocialLinks className="mt-6" tone="light" />
           </div>

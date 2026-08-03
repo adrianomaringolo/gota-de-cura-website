@@ -2,12 +2,35 @@ import { isValid } from 'date-fns'
 
 const SP_TIMEZONE = 'America/Sao_Paulo'
 
-export const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('pt-BR', {
+/**
+ * Firestore is not schema-enforced and a few legacy products carry `price` as a
+ * string ("40"). Services normalise on read so nothing downstream has to care.
+ * A lone comma is treated as the decimal separator, which is how a price typed
+ * by hand in pt-BR arrives; thousands separators are not guessed at.
+ */
+export const toAmount = (value: unknown): number => {
+  const parsed =
+    typeof value === 'string' ? Number(value.trim().replace(',', '.')) : Number(value)
+
+  return Number.isFinite(parsed) ? parsed : 0
+}
+
+/**
+ * Coerces before guarding on purpose: `Number.isFinite` does not convert, so a
+ * price stored as the string "40" used to fall through to the 0 fallback and
+ * render as R$ 0,00. Documents are normalised on read (see `toAmount` in the
+ * services), but this is the last line of defence for every other collection
+ * still handed straight to `formatCurrency`.
+ */
+export const formatCurrency = (value: number): string => {
+  const amount = Number(value)
+
+  return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
-  }).format(Number.isFinite(value) ? value : 0)
+  }).format(Number.isFinite(amount) ? amount : 0)
+}
 
 export const formatDateAndTime = (date: Date): string =>
   isValid(date)

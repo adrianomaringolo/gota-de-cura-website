@@ -1,5 +1,6 @@
 import { collection, doc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { toAmount } from '@/lib/format'
 import type { Coupon } from '@/lib/types'
 
 const couponsRef = collection(db, 'coupons')
@@ -7,7 +8,13 @@ const couponsRef = collection(db, 'coupons')
 export const CouponsService = {
   async getActiveCoupons(): Promise<Coupon[]> {
     const snapshot = await getDocs(query(couponsRef, where('active', '==', true)))
-    return snapshot.docs.map((entry) => entry.data() as Coupon)
+    // Every stored coupon holds `discount` as a string, which `couponDiscount`
+    // then returned untouched for fixed coupons — a string reaching the money
+    // arithmetic and the currency formatter.
+    return snapshot.docs.map((entry) => {
+      const data = entry.data() as Coupon
+      return { ...data, discount: toAmount(data.discount) }
+    })
   },
 
   async addCoupon(coupon: Omit<Coupon, 'id'>): Promise<void> {

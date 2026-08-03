@@ -51,7 +51,11 @@ export function SocialLinks({
             >
               <path d={link.icon.path} />
             </svg>
-            {showHandles ? link.label : <span className="sr-only">{link.icon.title}</span>}
+            {showHandles ? (
+              link.label
+            ) : (
+              <span className="sr-only">{link.icon.title}</span>
+            )}
           </a>
         </li>
       ))}

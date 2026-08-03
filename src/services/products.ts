@@ -8,12 +8,29 @@ import {
   where,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
+import { toAmount } from '@/lib/format'
 import type { ProductItem } from '@/lib/types'
 
 const productsRef = collection(db, 'products')
 
+/**
+ * `entry.data()` is unvalidated, so the cast alone would keep claiming `price`
+ * is a number while a handful of documents hold it as a string. Coercing here
+ * means the whole app — display, cart arithmetic, order totals — sees numbers,
+ * and re-saving one of those products writes the corrected type back.
+ */
 const toItems = (snapshot: Awaited<ReturnType<typeof getDocs>>): ProductItem[] =>
-  snapshot.docs.map((entry) => entry.data() as ProductItem)
+  snapshot.docs.map((entry) => {
+    const data = entry.data() as ProductItem
+
+    return {
+      ...data,
+      price: toAmount(data.price),
+      // Left absent when absent: `oldPrice` is what drives the struck-through
+      // "was" price, so a 0 here would be a value the product never had.
+      ...(data.oldPrice === undefined ? {} : { oldPrice: toAmount(data.oldPrice) }),
+    }
+  })
 
 export const ProductsService = {
   async getProducts(): Promise<ProductItem[]> {

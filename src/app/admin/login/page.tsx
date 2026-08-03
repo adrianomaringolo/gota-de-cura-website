@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Field'
+import { Input, PasswordInput } from '@/components/ui/Field'
 import { Spinner } from '@/components/ui/Feedback'
 import { Wordmark } from '@/components/site/Wordmark'
 import { UsersService } from '@/services/users'
@@ -57,9 +57,8 @@ export default function AdminLoginPage() {
               autoFocus
               {...register('login', { required: true })}
             />
-            <Input
+            <PasswordInput
               label="Senha"
-              type="password"
               autoComplete="current-password"
               {...register('password', { required: true })}
             />
