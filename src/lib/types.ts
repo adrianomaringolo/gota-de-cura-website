@@ -130,3 +130,24 @@ export interface Order {
   statusLogs?: OrderStatusLog[]
   comments?: OrderComment[]
 }
+
+/**
+ * Blog posts are files on disk, not Firestore documents — see `src/lib/blog.ts`.
+ * `PostSummary` is everything a listing needs; `Post` adds the body.
+ */
+export interface PostSummary {
+  slug: string
+  title: string
+  excerpt: string
+  author: string
+  publishedAt: string
+  readingTime: number
+  tags: string[]
+  featured: boolean
+  image?: string
+}
+
+export interface Post extends PostSummary {
+  content: string
+  tldr: string[]
+}

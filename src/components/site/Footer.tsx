@@ -20,6 +20,7 @@ const columns = [
       { label: 'Visita guiada', href: '/visitas' },
       { label: 'Inscrição para visita', href: '/visitas/inscricao' },
       { label: 'Cromatografias', href: '/cromatografias' },
+      { label: 'Blog', href: '/blog' },
       { label: 'Sobre nós', href: '/sobre' },
     ],
   },

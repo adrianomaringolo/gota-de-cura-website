@@ -11,6 +11,7 @@ const NAV = [
   { label: 'Catálogo', href: '/#catalogo' },
   { label: 'Visitas', href: '/visitas' },
   { label: 'Cromatografias', href: '/cromatografias' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Sobre', href: '/sobre' },
   { label: 'Contato', href: '/#contato' },
 ]
