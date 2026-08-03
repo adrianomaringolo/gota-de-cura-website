@@ -14,7 +14,7 @@ export function Hero() {
           </div>
 
           <h1 className="animate-rise mt-10 max-w-[14ch] text-5xl font-semibold [animation-delay:140ms]">
-            Passe na loja e sinta o cheiro.
+            Passe na loja e sinta o aroma.
           </h1>
 
           <p className="animate-rise mt-6 max-w-[52ch] text-lg leading-relaxed text-white/75 [animation-delay:220ms]">
@@ -94,7 +94,8 @@ export function Hero() {
               Nossa loja, na José Paulino
             </span>
             <br />
-            Tudo o que sai da chácara chega aqui — e dá para cheirar antes de levar.
+            Tudo o que sai da chácara chega aqui — e dá para sentir o aroma antes de
+            levar.
           </figcaption>
         </figure>
       </div>
