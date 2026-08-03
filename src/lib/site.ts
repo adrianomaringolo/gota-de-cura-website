@@ -11,11 +11,15 @@ export const SITE = {
   photoAlbum: 'https://photos.app.goo.gl/mUkLpDGD5DUaERqR9',
   store: {
     address: 'Rua José Paulino, 1916 — Campinas, SP',
+    mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      'Rua José Paulino, 1916, Campinas - SP',
+    )}`,
     hours: [
-      ['Segunda', '9h às 13h'],
-      ['Terça a sexta', '9h às 17h'],
+      ['Segunda a sexta', '9h às 17h'],
       ['Sábado', '8h às 17h'],
     ] as const,
+    /** Compact form for tight spots like the hero. */
+    hoursShort: 'Seg a sex, 9h às 17h · Sáb, 8h às 17h',
   },
   aromatherapist: {
     name: 'Marcelo Soares Mattar',

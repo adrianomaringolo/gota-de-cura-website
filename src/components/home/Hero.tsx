@@ -1,12 +1,7 @@
 import Image from 'next/image'
 import { ButtonLink } from '@/components/ui/Button'
 import { Wordmark } from '@/components/site/Wordmark'
-
-const facts = [
-  'Destilação própria',
-  'Laudos de cromatografia',
-  'Renda revertida à Morada',
-]
+import { SITE } from '@/lib/site'
 
 export function Hero() {
   return (
@@ -18,66 +13,88 @@ export function Hero() {
             <Wordmark tone="light" size="md" withTagline />
           </div>
 
-          <h1 className="animate-rise mt-10 max-w-[15ch] text-5xl font-semibold [animation-delay:140ms]">
-            Cada gota começa num canteiro daqui.
+          <h1 className="animate-rise mt-10 max-w-[14ch] text-5xl font-semibold [animation-delay:140ms]">
+            Passe na loja e sinta o cheiro.
           </h1>
 
           <p className="animate-rise mt-6 max-w-[52ch] text-lg leading-relaxed text-white/75 [animation-delay:220ms]">
-            Óleos essenciais, hidrolatos e sabonetes destilados e feitos à mão na Chácara
-            da Mãe Luzia, em Santo Antônio de Posse. Você pode ver a planta, o alambique e
-            o laudo de cada lote.
+            Nossa loja fica em Campinas, na José Paulino. Ali você abre os frascos, sente
+            cada aroma com calma e conversa com quem destilou — todo o catálogo do site
+            está na prateleira.
           </p>
 
-          <div className="animate-rise mt-9 flex flex-wrap gap-3 [animation-delay:300ms]">
+          {/* The store's two facts that decide a visit: where and when. */}
+          {/* Stacks on small screens so both rows break the same way. */}
+          <dl className="animate-rise mt-9 space-y-3 border-y border-white/15 py-6 text-base [animation-delay:300ms]">
+            <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
+              <dt className="text-white/60">Endereço</dt>
+              <dd className="font-medium text-white">{SITE.store.address}</dd>
+            </div>
+            <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
+              <dt className="text-white/60">Horário</dt>
+              <dd className="font-medium text-white">
+                {SITE.store.hours.map(([day, hours]) => (
+                  <span key={day} className="block">
+                    {day}, {hours}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          </dl>
+
+          <div className="animate-rise mt-8 flex flex-wrap gap-3 [animation-delay:380ms]">
             <ButtonLink href="#catalogo" variant="onDark" size="lg">
               Ver o catálogo
             </ButtonLink>
-            <ButtonLink
-              href="/visitas"
-              size="lg"
-              className="border border-white/30 bg-transparent text-white hover:border-white/60 hover:bg-white/10"
+            <a
+              href={SITE.store.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/30 px-8 text-base font-medium text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/10"
             >
-              Visitar a chácara
-            </ButtonLink>
+              Como chegar
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M7 17 17 7M8 7h9v9" />
+              </svg>
+            </a>
           </div>
-
-          <ul className="animate-rise mt-12 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white/70 [animation-delay:380ms]">
-            {facts.map((fact, index) => (
-              <li key={fact} className="flex items-center gap-3">
-                {index > 0 && (
-                  <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/30" />
-                )}
-                {fact}
-              </li>
-            ))}
-          </ul>
         </div>
 
         {/* Plate ------------------------------------------------------- */}
         <figure className="relative m-0 min-h-[62svh] lg:min-h-0">
           <Image
-            src="/images/visit/photo-03.jpg"
-            alt="O alambique de cobre e aço da chácara, montado sob a varanda de parede lilás, com a horta e as colinas ao fundo."
+            src="/images/store.jpeg"
+            alt="O interior da loja da Gota de Cura: prateleiras de madeira com sprays, óleos essenciais e sabonetes, o quadro da marca na parede e a luz entrando pela janela."
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 52vw"
-            className="object-cover"
+            className="object-cover object-center"
           />
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-veil/88 via-veil/15 to-transparent lg:bg-linear-[100deg,var(--color-brand-darkest)_0%,var(--color-veil)_30%,transparent_72%]"
           />
-          {/* The still is shot in full sun; the caption needs its own floor. */}
+          {/* The shop is shot in bright daylight; the caption needs its own floor. */}
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-veil/92 to-transparent"
+            className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-veil/95 via-veil/45 to-transparent"
           />
 
           <figcaption className="absolute right-4 bottom-6 left-4 text-sm leading-relaxed text-white/85 sm:right-8 sm:left-auto sm:max-w-[28ch] sm:text-right lg:bottom-10">
             <span className="font-display text-base font-semibold text-white">
-              O alambique
+              Nossa loja, na José Paulino
             </span>
-            <br />É aqui que a planta colhida pela manhã vira óleo essencial e hidrolato.
+            <br />
+            Tudo o que sai da chácara chega aqui — e dá para cheirar antes de levar.
           </figcaption>
         </figure>
       </div>
