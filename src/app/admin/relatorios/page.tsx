@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
 import {
@@ -16,7 +15,6 @@ import { Input } from '@/components/ui/Field'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
-import { useLoggedUser } from '@/lib/hooks'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
 
@@ -26,8 +24,6 @@ const orderValue = (order: Order) => {
 }
 
 export default function AdminReportsPage() {
-  const router = useRouter()
-  const { isAdmin, resolved } = useLoggedUser()
   const [orders, setOrders] = useState<Order[] | null>(null)
   const [start, setStart] = useState('')
   const [end, setEnd] = useState('')
@@ -35,10 +31,6 @@ export default function AdminReportsPage() {
     start: '',
     end: '',
   })
-
-  useEffect(() => {
-    if (resolved && isAdmin === false) router.replace('/admin')
-  }, [resolved, isAdmin, router])
 
   useEffect(() => {
     OrdersService.getOrders()

@@ -5,30 +5,26 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { cn } from '@/lib/cn'
 import { useLoggedUser } from '@/lib/hooks'
+import { canAccessPath, visibleSections } from '@/lib/admin-nav'
 import { UsersService } from '@/services/users'
 import { Spinner } from '@/components/ui/Feedback'
-
-const NAV = [
-  { label: 'Pedidos', href: '/admin/pedidos', adminOnly: false },
-  { label: 'Produtos', href: '/admin/produtos', adminOnly: false },
-  { label: 'Gerenciamento', href: '/admin/gerenciamento', adminOnly: true },
-  { label: 'Visitas', href: '/admin/visitas', adminOnly: true },
-  { label: 'Cupons', href: '/admin/cupons', adminOnly: true },
-  { label: 'Cromatografias', href: '/admin/cromatografias', adminOnly: true },
-  { label: 'Relatórios', href: '/admin/relatorios', adminOnly: true },
-]
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const { user, resolved, isAdmin } = useLoggedUser()
+  const { user, resolved } = useLoggedUser()
   const [menuOpen, setMenuOpen] = useState(false)
 
   const isLoginPage = pathname === '/admin/login'
+  const allowed = canAccessPath(pathname, user)
 
   useEffect(() => {
-    if (resolved && !user && !isLoginPage) router.replace('/admin/login')
-  }, [resolved, user, isLoginPage, router])
+    if (!resolved || isLoginPage) return
+    if (!user) router.replace('/admin/login')
+    // The menu hiding a section is presentation; this is what actually keeps a
+    // typed URL out.
+    else if (!allowed) router.replace('/admin')
+  }, [resolved, user, allowed, isLoginPage, router])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -36,7 +32,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   if (isLoginPage) return <>{children}</>
 
-  if (!resolved || !user) {
+  if (!resolved || !user || !allowed) {
     return (
       <div className="grid min-h-screen place-items-center bg-canvas">
         <Spinner className="text-brand" />
@@ -44,7 +40,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     )
   }
 
-  const links = NAV.filter((item) => !item.adminOnly || isAdmin)
+  const links = visibleSections(user)
 
   return (
     <div className="min-h-screen bg-canvas">

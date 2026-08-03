@@ -4,57 +4,45 @@ import Link from 'next/link'
 import { AdminHeading } from '@/components/admin/AdminUI'
 import { Badge } from '@/components/ui/Feedback'
 import { useLoggedUser } from '@/lib/hooks'
+import { visibleSections } from '@/lib/admin-nav'
 
-/** `adminOnly` stays the single source of truth — this only labels it. */
 const ACCESS = {
   admin: { label: 'Admin', tone: 'brand' },
   team: { label: 'Equipe', tone: 'neutral' },
 } as const
 
-const shortcuts = [
-  {
-    href: '/admin/pedidos',
+/** Descriptions only — which sections exist, and who may see them, lives in
+ *  admin-nav.ts so the dashboard can never drift from the menu. */
+const DESCRIPTIONS: Record<string, { title: string; text: string }> = {
+  '/admin/pedidos': {
     title: 'Pedidos',
     text: 'Ver, acompanhar e mudar o status dos pedidos do site.',
-    adminOnly: false,
   },
-  {
-    href: '/admin/produtos',
+  '/admin/produtos': {
     title: 'Disponibilidade',
     text: 'Marcar produtos como disponíveis ou esgotados e anotar quantidades.',
-    adminOnly: false,
   },
-  {
-    href: '/admin/gerenciamento',
+  '/admin/gerenciamento': {
     title: 'Gerenciar produtos',
     text: 'Criar, editar e excluir produtos do catálogo.',
-    adminOnly: true,
   },
-  {
-    href: '/admin/visitas',
+  '/admin/visitas': {
     title: 'Visitas',
     text: 'Conferir inscritos por data e enviar o e-mail de agradecimento.',
-    adminOnly: true,
   },
-  {
-    href: '/admin/cupons',
+  '/admin/cupons': {
     title: 'Cupons',
     text: 'Criar cupons de desconto e vale-presente.',
-    adminOnly: true,
   },
-  {
-    href: '/admin/cromatografias',
+  '/admin/cromatografias': {
     title: 'Cromatografias',
     text: 'Publicar e editar os laudos exibidos no site.',
-    adminOnly: true,
   },
-  {
-    href: '/admin/relatorios',
+  '/admin/relatorios': {
     title: 'Relatórios',
     text: 'Receita e volume de pedidos por período.',
-    adminOnly: true,
   },
-]
+}
 
 export default function AdminHomePage() {
   const { user, isAdmin } = useLoggedUser()
@@ -65,8 +53,8 @@ export default function AdminHomePage() {
       <AdminHeading title={`Olá, ${firstName}`} description="Escolha por onde começar." />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {shortcuts
-          .filter((shortcut) => !shortcut.adminOnly || isAdmin)
+        {visibleSections(user)
+          .map((section) => ({ ...section, ...DESCRIPTIONS[section.href] }))
           .map((shortcut) => {
             const access = shortcut.adminOnly ? ACCESS.admin : ACCESS.team
 

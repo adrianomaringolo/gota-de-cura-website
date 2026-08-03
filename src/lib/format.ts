@@ -16,21 +16,17 @@ export const toAmount = (value: unknown): number => {
 }
 
 /**
- * Coerces before guarding on purpose: `Number.isFinite` does not convert, so a
+ * Goes through `toAmount` on purpose: `Number.isFinite` does not convert, so a
  * price stored as the string "40" used to fall through to the 0 fallback and
- * render as R$ 0,00. Documents are normalised on read (see `toAmount` in the
- * services), but this is the last line of defence for every other collection
- * still handed straight to `formatCurrency`.
+ * render as R$ 0,00. Services normalise on read, and sharing the coercion keeps
+ * this last line of defence from disagreeing with them.
  */
-export const formatCurrency = (value: number): string => {
-  const amount = Number(value)
-
-  return new Intl.NumberFormat('pt-BR', {
+export const formatCurrency = (value: number): string =>
+  new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
-  }).format(Number.isFinite(amount) ? amount : 0)
-}
+  }).format(toAmount(value))
 
 export const formatDateAndTime = (date: Date): string =>
   isValid(date)

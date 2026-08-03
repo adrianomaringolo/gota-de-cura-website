@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { AdminHeading, Td, Th, TableWrap } from '@/components/admin/AdminUI'
@@ -8,7 +7,6 @@ import { ProductFormDialog } from '@/components/admin/ProductFormDialog'
 import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows } from '@/components/ui/Feedback'
-import { useLoggedUser } from '@/lib/hooks'
 import { formatCurrency, formatDate } from '@/lib/format'
 import { isNewProduct } from '@/lib/products'
 import { productTypes } from '@/lib/product-types'
@@ -16,17 +14,11 @@ import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
 
 export default function AdminManagementPage() {
-  const router = useRouter()
-  const { isAdmin, resolved } = useLoggedUser()
   const [products, setProducts] = useState<ProductItem[] | null>(null)
   const [type, setType] = useState('all')
   const [editing, setEditing] = useState<ProductItem | null>(null)
   const [dialogOpen, setDialogOpen] = useState(false)
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (resolved && isAdmin === false) router.replace('/admin')
-  }, [resolved, isAdmin, router])
 
   const load = async () => setProducts(await ProductsService.getProducts())
 
