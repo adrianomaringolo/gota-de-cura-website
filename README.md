@@ -63,6 +63,29 @@ marca).
 
 Fundamentos e princípios do produto estão em `PRODUCT.md`.
 
+### SEO
+
+`robots.txt`, `sitemap.xml` e o web manifest são rotas geradas em
+`src/app/robots.ts`, `src/app/sitemap.ts` e `src/app/manifest.ts`. Os ícones
+(favicon multi-tamanho, ícones do manifest e o ícone da Apple) são derivados de
+`public/images/logos/logo-icon.png`; a imagem de compartilhamento padrão é
+`public/images/og-default.jpg` (1200×630).
+
+Os dados estruturados ficam em `src/lib/seo.ts` e são emitidos pelo componente
+`JsonLd`. `Organization` e `WebSite` vêm do layout de `(site)`, então toda página
+os carrega e as referências por `@id` resolvem; cada página acrescenta os seus
+nós (`Store` na home, `Blog`, `BlogPosting`, `BreadcrumbList`).
+
+Cada página pública declara seu próprio `alternates.canonical`. O `metadata` raiz
+**não** declara canonical de propósito: metadata é herdado, e um canonical
+definido lá faria toda página se declarar como a home.
+
+**Limitação conhecida:** as páginas de produto (`/[type]/[productId]`) buscam o
+produto no Firestore pelo cliente, então um crawler recebe o corpo vazio. O
+`<head>` é montado a partir da prateleira e do slug da URL, o que dá título,
+descrição e canonical reais — mas indexar preço, estoque e schema `Product`
+depende de mover essa busca para o servidor.
+
 ## Painel da equipe
 
 `/admin` — pedidos, disponibilidade de produtos, gerenciamento do catálogo,

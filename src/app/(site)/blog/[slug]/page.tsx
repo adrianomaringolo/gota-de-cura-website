@@ -5,9 +5,10 @@ import { notFound } from 'next/navigation'
 import { Container } from '@/components/site/Section'
 import { PostBody } from '@/components/blog/PostBody'
 import { PostCard } from '@/components/blog/PostCard'
+import { JsonLd } from '@/components/site/JsonLd'
 import { getPost, getPosts, getRelatedPosts } from '@/lib/blog'
 import { formatPostDate } from '@/lib/format'
-import { SITE } from '@/lib/site'
+import { absolute, breadcrumbSchema, graph, ORGANIZATION_ID } from '@/lib/seo'
 
 type PostPageProps = { params: Promise<{ slug: string }> }
 
@@ -31,10 +32,21 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
       title: post.title,
       description: post.excerpt,
       type: 'article',
+      url: `/blog/${post.slug}`,
       publishedTime: post.publishedAt,
+      modifiedTime: post.publishedAt,
       authors: [post.author],
       tags: post.tags,
-      images: post.image ? [post.image] : undefined,
+      // Post images vary in size, so only the fallback declares dimensions.
+      images: post.image
+        ? [{ url: post.image, alt: post.title }]
+        : [{ url: '/images/og-default.jpg', width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image ?? '/images/og-default.jpg'],
     },
   }
 }
@@ -47,26 +59,38 @@ export default async function PostPage({ params }: PostPageProps) {
 
   const related = getRelatedPosts(post.slug, post.tags)
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt,
-    keywords: post.tags.join(', '),
-    url: `${SITE.url}/blog/${post.slug}`,
-    image: post.image ? `${SITE.url}${post.image}` : undefined,
-    author: { '@type': 'Organization', name: post.author },
-    publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url },
-  }
+  const url = absolute(`/blog/${post.slug}`)
+
+  const schema = graph(
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#post`,
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.publishedAt,
+      dateModified: post.publishedAt,
+      keywords: post.tags.join(', '),
+      articleSection: post.tags[0],
+      wordCount: post.content.trim().split(/\s+/).length,
+      timeRequired: `PT${post.readingTime}M`,
+      inLanguage: 'pt-BR',
+      url,
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      isPartOf: { '@id': `${absolute('/blog')}#blog` },
+      image: post.image ? absolute(post.image) : absolute('/images/og-default.jpg'),
+      author: { '@type': 'Organization', name: post.author, url: absolute('/sobre') },
+      publisher: { '@id': ORGANIZATION_ID },
+    },
+    breadcrumbSchema([
+      { name: 'Início', path: '/' },
+      { name: 'Blog', path: '/blog' },
+      { name: post.title, path: `/blog/${post.slug}` },
+    ]),
+  )
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        // Server-rendered from our own content, never from user input.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd schema={schema} />
 
       <header className="relative overflow-hidden bg-brand-darkest text-white">
         <div
@@ -123,7 +147,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.image && (
             <Image
               src={post.image}
-              alt=""
+              alt={post.title}
               width={1200}
               height={630}
               priority

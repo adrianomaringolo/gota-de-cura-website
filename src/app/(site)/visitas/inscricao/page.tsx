@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Inscrição para a visitação',
   description:
     'Escolha a data, preencha seus dados e garanta sua vaga na visita guiada à Chácara da Mãe Luzia.',
+  alternates: { canonical: '/visitas/inscricao' },
 }
 
 export default function InscricaoPage() {

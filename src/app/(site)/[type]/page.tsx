@@ -4,7 +4,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ProductList } from '@/components/products/ProductList'
 import { Container } from '@/components/site/Section'
+import { JsonLd } from '@/components/site/JsonLd'
 import { getProductType, productTypes } from '@/lib/product-types'
+import { breadcrumbSchema, graph } from '@/lib/seo'
 
 export const dynamicParams = false
 
@@ -28,11 +30,21 @@ export async function generateMetadata({
   if (!productType) return {}
 
   const title = plainLabel(productType.typeLabel ?? productType.type)
+  const description =
+    plainLabel(productType.description).slice(0, 180) ||
+    `${title} artesanais da Gota de Cura.`
+  const image = productType.image ? `/images/categories/${productType.image}` : undefined
+
   return {
     title,
-    description:
-      plainLabel(productType.description).slice(0, 180) ||
-      `${title} artesanais da Gota de Cura.`,
+    description,
+    alternates: { canonical: `/${productType.id}` },
+    openGraph: {
+      title: `${title} artesanais`,
+      description,
+      url: `/${productType.id}`,
+      images: image ? [{ url: image, alt: title }] : undefined,
+    },
   }
 }
 
@@ -49,6 +61,15 @@ export default async function CategoryPage({
 
   return (
     <>
+      <JsonLd
+        schema={graph(
+          breadcrumbSchema([
+            { name: 'Início', path: '/' },
+            { name: title, path: `/${productType.id}` },
+          ]),
+        )}
+      />
+
       <header className="relative isolate overflow-hidden bg-brand-darkest text-white">
         {productType.areaBackground ? (
           <>

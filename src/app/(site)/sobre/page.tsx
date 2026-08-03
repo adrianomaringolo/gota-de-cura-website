@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Sobre nós',
   description:
     'A Gota de Cura nasceu em 2017, dos primeiros sabonetes artesanais. Hoje é uma equipe de voluntários que planta, destila e embala tudo na Chácara da Mãe Luzia.',
+  alternates: { canonical: '/sobre' },
+  openGraph: {
+    title: `Sobre nós · ${SITE.name}`,
+    description:
+      'Uma equipe de voluntários que planta, destila e embala tudo na Chácara da Mãe Luzia. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.',
+    url: '/sobre',
+  },
 }
 
 const values = [

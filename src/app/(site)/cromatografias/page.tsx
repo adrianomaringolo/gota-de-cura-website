@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: 'Cromatografias',
   description:
     'Laudos completos de cromatografia dos óleos essenciais e hidrolatos destilados na Chácara da Mãe Luzia.',
+  alternates: { canonical: '/cromatografias' },
+  openGraph: {
+    title: 'Cromatografias — o laudo de cada planta',
+    description:
+      'Publicamos o laudo de cromatografia completo de cada óleo essencial e hidrolato, do jeito que o laboratório entregou.',
+    url: '/cromatografias',
+  },
 }
 
 export default function CromatografiasPage() {

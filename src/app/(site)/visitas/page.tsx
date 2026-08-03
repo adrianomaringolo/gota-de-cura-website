@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   title: 'Visita guiada à Chácara da Mãe Luzia',
   description:
     'Uma manhã na chácara onde as plantas da Gota de Cura são cultivadas e destiladas: café da manhã, destilação ao vivo e visita guiada pela propriedade.',
+  alternates: { canonical: '/visitas' },
+  openGraph: {
+    title: 'Visita guiada à Chácara da Mãe Luzia',
+    description:
+      'Café da manhã, destilação ao vivo e visita guiada pela chácara onde plantamos e destilamos tudo.',
+    url: '/visitas',
+    images: [{ url: '/images/visit/photo-10.jpg', width: 1200, height: 630 }],
+  },
 }
 
 export default function VisitasPage() {
