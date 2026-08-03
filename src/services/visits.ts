@@ -31,5 +31,16 @@ export const VisitsService = {
   },
 }
 
-export const isUpcoming = (visit: Visit, now = new Date()): boolean =>
-  new Date(visit.date) > now
+/**
+ * Same trap as the date formatting: `new Date('2026-08-01')` is midnight UTC,
+ * which is 21:00 on 31/07 in São Paulo — so the date used to drop off the list
+ * three hours before its own day even started. A visit stays upcoming until its
+ * day ends locally. Brazil has had no DST since 2019, so -03:00 is fixed.
+ */
+export const isUpcoming = (visit: Visit, now = new Date()): boolean => {
+  const endOfDay = /^\d{4}-\d{2}-\d{2}$/.test(visit.date)
+    ? new Date(`${visit.date}T23:59:59-03:00`)
+    : new Date(visit.date)
+
+  return endOfDay > now
+}

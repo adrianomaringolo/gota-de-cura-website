@@ -66,34 +66,36 @@ export const formatDate = (value: unknown): string => {
     : ''
 }
 
+/** A bare calendar day, e.g. "2026-08-01" — how every visit date is stored. */
+const CALENDAR_DAY = /^\d{4}-\d{2}-\d{2}$/
+
 /**
- * Visit dates are stored as plain calendar days. Rendering them in the
- * browser's local zone shifts them a day for anyone west of São Paulo, so they
- * are always formatted in the chácara's own timezone.
+ * A visit date is a calendar day, not a moment in time, so no zone conversion
+ * can be right: `new Date('2026-08-01')` lands on midnight *UTC*, and rendering
+ * that in São Paulo (UTC-3) walks it back to 31/07. Pinning the format to UTC
+ * echoes the stored day verbatim in every browser zone. A real instant (a
+ * Firestore Timestamp, a full ISO datetime) still reads in the chácara's zone.
  */
-export const formatVisitDate = (value: unknown): string => {
+const formatVisitDay = (
+  value: unknown,
+  options: Intl.DateTimeFormatOptions,
+): string => {
   const date = toDate(value)
-  return date
-    ? new Intl.DateTimeFormat('pt-BR', {
-        timeZone: SP_TIMEZONE,
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-      }).format(date)
-    : ''
+  if (!date) return ''
+
+  const isPlainDay = typeof value === 'string' && CALENDAR_DAY.test(value.trim())
+
+  return new Intl.DateTimeFormat('pt-BR', {
+    timeZone: isPlainDay ? 'UTC' : SP_TIMEZONE,
+    ...options,
+  }).format(date)
 }
 
-export const formatVisitDateLong = (value: unknown): string => {
-  const date = toDate(value)
-  return date
-    ? new Intl.DateTimeFormat('pt-BR', {
-        timeZone: SP_TIMEZONE,
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-      }).format(date)
-    : ''
-}
+export const formatVisitDate = (value: unknown): string =>
+  formatVisitDay(value, { day: '2-digit', month: '2-digit', year: 'numeric' })
+
+export const formatVisitDateLong = (value: unknown): string =>
+  formatVisitDay(value, { day: '2-digit', month: 'long', year: 'numeric' })
 
 /** "(19) 99999-9999" as the visitor types. */
 export const maskPhone = (raw: string): string => {
