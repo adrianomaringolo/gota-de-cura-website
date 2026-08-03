@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <main className="grid min-h-screen place-items-center bg-brand-darkest px-6 py-20 text-white">
       <div className="max-w-lg text-center">
-        <Wordmark tone="light" size="md" withTagline className="justify-center" />
+        <Wordmark tone="light" size="md" className="justify-center" />
         <h1 className="mt-10 font-display text-3xl font-semibold">
           Não encontramos esta página
         </h1>

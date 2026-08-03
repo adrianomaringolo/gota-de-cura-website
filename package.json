@@ -20,6 +20,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.84.0",
     "react-hot-toast": "^2.6.0",
+    "simple-icons": "^16.28.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

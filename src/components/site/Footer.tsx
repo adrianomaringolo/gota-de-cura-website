@@ -31,10 +31,10 @@ export function Footer() {
       <div className="mx-auto max-w-[86rem] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <Wordmark tone="light" size="md" withTagline />
+            <Wordmark tone="light" size="md" />
             <p className="mt-6 max-w-[38ch] text-sm leading-relaxed text-white/70">
-              Óleos essenciais, hidrolatos e artesanato destilados e feitos à mão na
-              Chácara da Mãe Luzia, em Santo Antônio de Posse (SP).
+              Óleos essenciais, hidrolatos e itens artesanais destilados na Chácara da
+              Mãe Luzia e comercializados na Loja da Morada, em Campinas (SP)
             </p>
             <SocialLinks className="mt-6" tone="light" />
           </div>

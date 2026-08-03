@@ -10,7 +10,7 @@ export function Hero() {
         {/* Panel ------------------------------------------------------- */}
         <div className="relative z-[var(--z-raised)] flex flex-col justify-center px-4 pt-28 pb-16 sm:px-6 lg:px-14 lg:py-32 xl:pl-[max(2.5rem,calc((100vw-86rem)/2+2.5rem))]">
           <div className="animate-rise [animation-delay:60ms]">
-            <Wordmark tone="light" size="md" withTagline />
+            <Wordmark tone="light" size="md" />
           </div>
 
           <h1 className="animate-rise mt-10 max-w-[14ch] text-5xl font-semibold [animation-delay:140ms]">
