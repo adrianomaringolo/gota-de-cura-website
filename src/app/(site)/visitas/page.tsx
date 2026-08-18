@@ -72,7 +72,7 @@ export default function VisitasPage() {
       <section className="bg-canvas py-20 lg:py-24">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="rule-mark mx-auto text-3xl font-semibold text-ink">
+            <h2 className="rule-mark mx-auto text-3xl font-semibold text-ink [&::before]:mx-auto">
               Veja como é a visita
             </h2>
             <p className="mx-auto mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft">
