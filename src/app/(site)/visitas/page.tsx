@@ -5,6 +5,7 @@ import { Container } from '@/components/site/Section'
 import { PaymentTerms } from '@/components/visits/PaymentTerms'
 import { PhotoGallery } from '@/components/visits/PhotoGallery'
 import { VisitDates } from '@/components/visits/VisitDates'
+import { VisitVideo } from '@/components/visits/VisitVideo'
 import { VISIT_PRICES } from '@/lib/constants'
 import { SITE, VISITS_OPEN } from '@/lib/site'
 import { visitProgram, visitTestimonies } from '@/lib/visit-content'
@@ -70,6 +71,22 @@ export default function VisitasPage() {
 
       <section className="bg-canvas py-20 lg:py-24">
         <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="rule-mark mx-auto text-3xl font-semibold text-ink">
+              Veja como é a visita
+            </h2>
+            <p className="mx-auto mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft">
+              Um vídeo curto para você conhecer a chácara antes de vir pessoalmente.
+            </p>
+          </div>
+          <div className="mx-auto mt-10 max-w-4xl">
+            <VisitVideo />
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-canvas-sunk py-20 lg:py-24">
+        <Container>
           <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
             <div>
               <h2 className="rule-mark text-3xl font-semibold text-ink">Como é o dia</h2>
@@ -108,7 +125,7 @@ export default function VisitasPage() {
         </Container>
       </section>
 
-      <section className="bg-canvas-sunk py-20 lg:py-24">
+      <section className="bg-canvas py-20 lg:py-24">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
             <div>
@@ -142,7 +159,7 @@ export default function VisitasPage() {
         </Container>
       </section>
 
-      <section className="bg-canvas py-20 lg:py-24">
+      <section className="bg-canvas-sunk py-20 lg:py-24">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-6">
             <h2 className="rule-mark text-3xl font-semibold text-ink">
