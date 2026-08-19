@@ -19,7 +19,7 @@ Se você já segurou um frasco de óleo essencial e um borrifador de hidrolato l
 
 A forma mais comum de extrair óleo essencial é a **destilação por arraste a vapor**. Coloca-se a planta (folhas, flores ou cascas, dependendo da espécie) dentro de uma caldeira. O vapor de água atravessa o material vegetal e, no caminho, carrega consigo os compostos aromáticos voláteis que estão nas células da planta.
 
-![Alambique de destilação montado sob a varanda da chácara, usado para extrair óleo essencial e hidrolato das plantas](/images/visit/photo-03.jpg)
+![Esquema da destilação a vapor: o vaso de destilação aquece o material vegetal, o vapor carregado de aroma sobe até a câmera de condensação e se separa em óleo essencial e água perfumada (hidrolato)](/images/blog/oleos-essenciais-e-hidrolatos-diferencas/esquema-destilacao-vapor.webp)
 
 Esse vapor carregado de aroma sobe até um condensador, onde esfria e volta a virar líquido. E é aqui que a mágica da separação acontece: óleo e água não se misturam. O líquido que sai do condensador cai em um recipiente e se separa naturalmente em duas camadas, como azeite despejado sobre água.
 
