@@ -5,7 +5,7 @@ author: 'Equipe Gota de cura'
 publishedAt: '2026-08-19'
 tags: ['óleos essenciais', 'hidrolatos', 'destilação', 'aromaterapia']
 featured: false
-image: '/images/visit/photo-03.jpg'
+image: '/images/blog/oleos-essenciais-e-hidrolatos-diferencas/oleo-e-hidrolato-recem-separados.jpg'
 tldr:
   - 'Óleo essencial e hidrolato saem da mesma destilação, mas se separam por densidade: o óleo essencial é a fração lipossolúvel, concentrada; o hidrolato é a água aromática que sobra, muito mais diluída.'
   - 'Por serem concentrados, óleos essenciais quase sempre precisam de diluição antes de tocar a pele. Hidrolatos são suaves o bastante para uso direto na maioria dos casos.'
@@ -18,6 +18,8 @@ Se você já segurou um frasco de óleo essencial e um borrifador de hidrolato l
 ## Os dois vêm da mesma destilação
 
 A forma mais comum de extrair óleo essencial é a **destilação por arraste a vapor**. Coloca-se a planta (folhas, flores ou cascas, dependendo da espécie) dentro de uma caldeira. O vapor de água atravessa o material vegetal e, no caminho, carrega consigo os compostos aromáticos voláteis que estão nas células da planta.
+
+![Ramos frescos sendo colocados na caldeira de destilação, antes do vapor começar a passar pelo material vegetal](/images/blog/oleos-essenciais-e-hidrolatos-diferencas/planta-na-caldeira.jpg)
 
 ![Esquema da destilação a vapor: o vaso de destilação aquece o material vegetal, o vapor carregado de aroma sobe até a câmera de condensação e se separa em óleo essencial e água perfumada (hidrolato)](/images/blog/oleos-essenciais-e-hidrolatos-diferencas/esquema-destilacao-vapor.webp)
 
@@ -43,11 +45,13 @@ Essa diferença de concentração é o que define quase tudo o mais: como cada u
 | Vida útil aberto | Longa, se guardado ao abrigo de luz e calor | Mais curta, pois é água e pode contaminar como qualquer água |
 | Preço por volume | Alto | Baixo |
 
+![Funil de separação com óleo essencial (camada âmbar, em cima) já separado do hidrolato (camada clara, embaixo)](/images/blog/oleos-essenciais-e-hidrolatos-diferencas/separacao-oleo-e-hidrolato.jpg)
+
 Nenhuma das duas colunas é "melhor" que a outra: são ferramentas diferentes. Óleo essencial é o que você usa quando precisa de um aroma concentrado em pouca quantidade: um difusor, uma diluição corporal, um inalador pessoal. Hidrolato é o que você usa quando quer algo suave o bastante para aplicar direto e com frequência: um tônico facial, uma compressa, um borrifador de ambiente.
 
 ## Formas de uso de cada um
 
-![Visitantes sentados acompanhando a explicação sobre a destilação de óleo essencial e hidrolato](/images/visit/photo-06.jpg)
+![Guia explicando o funcionamento do alambique para o grupo de visitantes durante a destilação](/images/blog/oleos-essenciais-e-hidrolatos-diferencas/guia-explicando-a-destilacao.jpg)
 
 **Óleo essencial**, sempre pensando em diluição:
 
