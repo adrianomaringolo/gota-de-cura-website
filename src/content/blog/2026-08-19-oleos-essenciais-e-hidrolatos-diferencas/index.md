@@ -72,8 +72,14 @@ Nenhuma das duas colunas é "melhor" que a outra: são ferramentas diferentes. �
 
 Um cuidado à parte: **óleos cítricos**, como bergamota, limão e laranja, deixam a pele fotossensível por até 12 horas depois da aplicação. Usados em área que vai pegar sol, mesmo diluídos corretamente, podem causar manchas.
 
-**Hidrolato tem outro tipo de cuidado: ele é água, e água estraga.** Sem os conservantes de um cosmético industrial, um hidrolato pode desenvolver contaminação com o tempo, principalmente se exposto a calor, luz ou contato repetido com as mãos. Prefira sempre um frasco com válvula spray em vez de abrir e mergulhar os dedos, guarde ao abrigo da luz e, se notar mudança de cor, cheiro ou aparência turva, descarte.
+**Hidrolato tem outro tipo de cuidado: ele é água, e água estraga.** Sem os conservantes de um cosmético industrial, um hidrolato pode desenvolver contaminação com o tempo, principalmente se exposto a calor, luz ou contato repetido com as mãos. Prefira sempre um frasco com válvula spray em vez de abrir e mergulhar os dedos, guarde ao abrigo da luz e, se notar mudança de cor, cheiro ou aparência turva, descarte. A sugestão é guardar na geladeira: a temperatura estável evita as variações que aceleram a contaminação.
 
 Em nenhum dos dois casos vale a lógica de "é natural, então não faz mal". Concentração de compostos ativos existe nos dois, só que em proporções diferentes. É justamente por isso que sabemos exatamente o que vai dentro de cada frasco: os laudos de cromatografia de cada planta que destilamos ficam publicados na [página de cromatografias](/cromatografias).
 
 Este texto não substitui uma avaliação individual: **em caso de dúvida, consulte sempre um profissional da área** antes de iniciar qualquer uso, principalmente se você tem uma condição de saúde diagnosticada, está gestante, amamentando ou pensando em usar em crianças pequenas.
+
+## Onde encontrar
+
+- [Óleos essenciais](/oleos-essenciais)
+- [Diluições de óleos essenciais](/diluicoes-oleos-essenciais)
+- [Hidrolatos](/hidrolatos)
