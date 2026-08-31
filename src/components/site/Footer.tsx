@@ -21,6 +21,7 @@ const columns = [
       { label: 'Inscrição para visita', href: '/visitas/inscricao' },
       { label: 'Cromatografias', href: '/cromatografias' },
       { label: 'Blog', href: '/blog' },
+      { label: 'Vídeos', href: '/videos' },
       { label: 'Sobre nós', href: '/sobre' },
     ],
   },

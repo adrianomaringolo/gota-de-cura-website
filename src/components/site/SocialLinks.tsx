@@ -1,4 +1,4 @@
-import { siFacebook, siInstagram } from 'simple-icons'
+import { siFacebook, siInstagram, siYoutube } from 'simple-icons'
 
 import { cn } from '@/lib/cn'
 import { SITE } from '@/lib/site'
@@ -13,6 +13,11 @@ const links = [
     label: '@gotadecura.artesanais',
     href: SITE.facebook,
     icon: siFacebook,
+  },
+  {
+    label: 'Gota de Cura no YouTube',
+    href: SITE.youtube,
+    icon: siYoutube,
   },
 ]
 

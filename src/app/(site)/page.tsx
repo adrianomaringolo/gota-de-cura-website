@@ -7,6 +7,7 @@ import { Hero } from '@/components/home/Hero'
 import { ImpactBand } from '@/components/home/ImpactBand'
 import { LaudosBand } from '@/components/home/LaudosBand'
 import { Testimonies } from '@/components/home/Testimonies'
+import { VideosBand } from '@/components/home/VideosBand'
 import { VisitBand } from '@/components/home/VisitBand'
 import { JsonLd } from '@/components/site/JsonLd'
 import { graph, storeSchema } from '@/lib/seo'
@@ -27,6 +28,7 @@ export default function HomePage() {
       <VisitBand />
       <Testimonies />
       <BlogBand />
+      <VideosBand />
       <ImpactBand />
       <ContactBand />
     </>

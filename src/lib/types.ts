@@ -153,3 +153,23 @@ export interface Post extends PostSummary {
   content: string
   tldr: string[]
 }
+
+/**
+ * A video from the YouTube channel's public RSS feed — see
+ * `src/services/youtube.ts`. The feed carries only the last ~15 uploads.
+ */
+export interface YoutubeVideo {
+  /** YouTube video id, e.g. "4g6LPXblvuE". */
+  id: string
+  title: string
+  /** Plain-text description; may be empty. */
+  description: string
+  /** ISO 8601 publish date. */
+  publishedAt: string
+  /** Canonical watch URL. */
+  url: string
+  /** `hqdefault` thumbnail URL. */
+  thumbnail: string
+  /** View count when the feed reported one, else `null`. */
+  views: number | null
+}
