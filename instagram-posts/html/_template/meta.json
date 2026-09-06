@@ -1,0 +1,13 @@
+{
+  "title": "Template de referência",
+  "date": "2026-08-30",
+  "type": "carousel",
+  "format": "1080x1350",
+  "slides": [
+    { "file": "slide-01.html", "title": "Capa (escuro)", "description": "Slide de capa: fundo lilás escuro, headline em Petrona, eyebrow e ícone botânico" },
+    { "file": "slide-02.html", "title": "Conteúdo (claro)", "description": "Slide de desenvolvimento: rule-mark, título, lead, card e nome científico" },
+    { "file": "slide-03.html", "title": "Fecho / CTA", "description": "Slide final com gotadecura.com.br em destaque" }
+  ],
+  "caption": "Slide de referência do sistema visual. Não publicar.",
+  "hashtags": []
+}

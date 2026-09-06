@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 120px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    top: -180px; right: -160px; pointer-events: none; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 64px; line-height: 1.08; color: #503484; max-width: 15ch; }
+  .lead { font-size: 31px; line-height: 1.55; color: #54505f; margin-top: 24px; max-width: 27ch; }
+  .diagram { display: flex; align-items: center; gap: 56px; margin-top: 76px; padding-left: 20px; }
+  .legend { display: flex; flex-direction: column; gap: 56px; }
+  .row { display: flex; gap: 22px; }
+  .row .swatch { width: 26px; height: 26px; border-radius: 8px; flex: none; margin-top: 6px; }
+  .row .tag { font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5f5b68; }
+  .row .name { font-family: 'Petrona', serif; font-size: 36px; font-weight: 600; color: #211c2b; margin-top: 2px; }
+  .row .desc { font-size: 21px; line-height: 1.45; color: #54505f; margin-top: 6px; max-width: 22ch; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="rule-mark"></div>
+  <h1>Nascem juntos, na mesma destilação</h1>
+  <p class="lead">O vapor atravessa a planta, esfria e volta a virar líquido. Óleo e água não se misturam: separam em duas camadas.</p>
+
+  <div class="diagram">
+    <svg width="300" height="540" viewBox="0 0 300 540" fill="none" aria-hidden="true">
+      <defs>
+        <clipPath id="bulb">
+          <path d="M108 116 L108 84 Q108 58 150 58 Q192 58 192 84 L192 116
+                   Q262 150 262 214 Q262 306 168 452 Q150 480 132 452
+                   Q38 306 38 214 Q38 150 108 116 Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- líquidos -->
+      <g clip-path="url(#bulb)">
+        <rect x="20" y="150" width="260" height="92" fill="#e6a84b"/>
+        <rect x="20" y="242" width="260" height="260" fill="#dbe9ea"/>
+        <line x1="20" y1="242" x2="280" y2="242" stroke="#a24112" stroke-width="3" stroke-dasharray="8 7"/>
+      </g>
+
+      <!-- vidraria -->
+      <path d="M108 116 L108 84 Q108 58 150 58 Q192 58 192 84 L192 116
+               Q262 150 262 214 Q262 306 168 452 Q150 480 132 452
+               Q38 306 38 214 Q38 150 108 116 Z"
+            fill="none" stroke="#5d3b97" stroke-width="4" stroke-linejoin="round"/>
+      <!-- tampa -->
+      <rect x="132" y="40" width="36" height="20" rx="5" fill="#5d3b97"/>
+      <!-- haste e torneira -->
+      <path d="M150 468 v40" stroke="#5d3b97" stroke-width="4" stroke-linecap="round"/>
+      <rect x="126" y="488" width="48" height="16" rx="5" fill="#5d3b97"/>
+    </svg>
+
+    <div class="legend">
+      <div class="row">
+        <span class="swatch" style="background:#e6a84b"></span>
+        <div>
+          <p class="tag">Camada leve, em cima</p>
+          <p class="name">Óleo essencial</p>
+          <p class="desc">leva as substâncias lipossolúveis</p>
+        </div>
+      </div>
+      <div class="row">
+        <span class="swatch" style="background:#dbe9ea; border:1px solid #cdd9da"></span>
+        <div>
+          <p class="tag">Camada de baixo, maior</p>
+          <p class="name">Hidrolato</p>
+          <p class="desc">leva as substâncias hidrossolúveis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress"><span></span><span class="active"></span><span></span><span></span><span></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

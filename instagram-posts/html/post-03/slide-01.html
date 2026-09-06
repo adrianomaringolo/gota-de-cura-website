@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #503484; }
+
+  /* Faixa de foto à direita (~30% da largura), tratada em duotone lilás/terracota */
+  .photo { position: absolute; top: 0; right: 0; width: 330px; height: 100%;
+    object-fit: cover; object-position: 38% 62%;
+    filter: grayscale(1) contrast(1.04) brightness(1.02); }
+  .photo-duo-shadow { position: absolute; top: 0; right: 0; width: 330px; height: 100%;
+    background: #2a1a48; mix-blend-mode: lighten; }
+  .photo-duo-light { position: absolute; top: 0; right: 0; width: 330px; height: 100%;
+    background: #f1cebb; mix-blend-mode: darken; }
+  .photo-duo-warm { position: absolute; top: 0; right: 0; width: 330px; height: 100%;
+    background: linear-gradient(180deg, rgba(205,99,45,0.10) 0%, rgba(80,52,132,0.14) 100%);
+    mix-blend-mode: soft-light; }
+  .photo-fade { position: absolute; top: 0; right: 330px; width: 96px; height: 100%;
+    background: linear-gradient(90deg, #503484 0%, rgba(80,52,132,0) 100%); }
+
+  .blob { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(137,97,199,0.32) 0%, transparent 70%);
+    top: -260px; left: -240px; pointer-events: none; }
+
+  .content { position: absolute; top: 0; left: 0; width: 750px; height: 100%;
+    padding: 96px 60px 96px 88px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; z-index: 1; }
+  .logo { width: 320px; height: auto; filter: brightness(0) invert(1); }
+  .top { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .top .handle { font-size: 19px; color: rgba(255,255,255,0.8); }
+  .top .handle em { color: #dacbf9; font-style: normal; }
+
+  .icon { width: 80px; height: 80px; margin-top: 76px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 66px; line-height: 1.08; margin-top: 34px; }
+  h1 .accent { font-style: italic; font-weight: 500;
+    background: linear-gradient(#cd632d, #cd632d) left 92% / 100% 5px no-repeat;
+    padding-bottom: 4px; }
+  .lead { font-size: 29px; line-height: 1.55; color: rgba(255,255,255,0.82);
+    margin-top: 26px; max-width: 30ch; }
+  .lead strong { color: #ffffff; font-weight: 600; }
+  .note { font-size: 25px; line-height: 1.5; color: #dacbf9; margin-top: 26px; max-width: 30ch; }
+
+  .cta { display: flex; align-items: center; gap: 16px; margin-top: auto;
+    background: #ffffff; color: #503484;
+    font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 24px 34px; border-radius: 999px; align-self: flex-start;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="photo" src="cover.jpg" alt="Frascos de amostra num amostrador automático de cromatógrafo gasoso em um laboratório">
+  <div class="photo-duo-shadow"></div>
+  <div class="photo-duo-light"></div>
+  <div class="photo-duo-warm"></div>
+  <div class="photo-fade"></div>
+  <div class="blob"></div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="logo.png" alt="Gota de Cura">
+    </div>
+
+    <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#dacbf9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 5v13L9 37a4 4 0 0 0 3.5 6h23A4 4 0 0 0 39 37L29 18V5"/>
+      <path d="M16 5h16"/>
+      <path d="M14.5 30h19"/>
+      <path d="M22 24c1.5 1.5 3 1.5 4.5 0"/>
+    </svg>
+
+    <h1>O que tem dentro do frasco, <span class="accent">por escrito</span></h1>
+    <p class="lead">Cromatografia é o exame que separa e identifica cada componente de uma mistura. A gente publica o laudo <strong>inteiro</strong> de cada óleo essencial e hidrolato, do jeito que o laboratório entregou.</p>
+    <p class="note">É como você confere a procedência sem depender da nossa palavra.</p>
+
+    <div class="cta">
+      <span>gotadecura.com.br/cromatografias</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>
