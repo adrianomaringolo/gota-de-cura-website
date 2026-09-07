@@ -76,7 +76,7 @@ export function Hero() {
             alt="O interior da loja da Gota de Cura: prateleiras de madeira com sprays, óleos essenciais e sabonetes, o quadro da marca na parede e a luz entrando pela janela."
             fill
             priority
-            sizes="(max-width: 1024px) 100vw, 52vw"
+            sizes="(max-width: 1024px) 100vw, 900px"
             className="object-cover object-center"
           />
           <div

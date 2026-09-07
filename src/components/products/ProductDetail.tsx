@@ -85,7 +85,7 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
               alt={item.name}
               fill
               priority
-              sizes="(max-width: 768px) 100vw, 45vw"
+              sizes="(max-width: 768px) 100vw, 620px"
               className="object-cover"
             />
           </div>
