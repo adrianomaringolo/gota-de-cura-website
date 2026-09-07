@@ -10,13 +10,15 @@ Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Firebase
 ## Rodando localmente
 
 ```bash
-npm install
-npm run dev        # http://localhost:3000
-npm run build      # build de produção
-npm run type-check # tsc --noEmit
+pnpm install
+pnpm dev           # http://localhost:3000
+pnpm build         # build de produção
+pnpm type-check    # tsc --noEmit
 ```
 
-Node 20.9+ é necessário.
+Node 20.9+ e pnpm são necessários. A versão do pnpm está fixada no campo
+`packageManager` do `package.json` — com o Corepack habilitado
+(`corepack enable`), o pnpm certo é usado automaticamente.
 
 As variáveis de ambiente são todas opcionais — veja `.env.example`. Sem elas o
 projeto usa os mesmos valores do ambiente de produção atual.
