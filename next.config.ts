@@ -7,11 +7,15 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'firebasestorage.googleapis.com' },
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
     ],
-    // O Image Optimization da Vercel é cobrado por transformação e o catálogo,
-    // que só cresce, estourou a cota (HTTP 402). Com `unoptimized` cada <Image>
-    // serve a origem direto: arquivos de /public pela CDN estática da Vercel (não
-    // é a mesma cota) e as fotos de produto direto pelo Firebase Storage.
-    unoptimized: true,
+    // O redimensionamento é feito por um proxy externo (wsrv.nl), não pelo Image
+    // Optimization da Vercel, que é cobrado por transformação e estourou a cota
+    // (HTTP 402). Ver image-loader.ts. `deviceSizes`/`imageSizes` continuam
+    // definindo as larguras que o Next pede ao loader — mantê-los enxutos evita
+    // baixar variantes grandes à toa.
+    loader: 'custom',
+    loaderFile: './image-loader.ts',
+    deviceSizes: [640, 1200, 1920],
+    imageSizes: [128, 256],
   },
   async redirects() {
     return [
