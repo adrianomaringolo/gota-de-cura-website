@@ -6,6 +6,9 @@ export const SITE = {
     'Óleos essenciais, hidrolatos e produtos artesanais destilados na Chácara da Mãe Luzia. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.',
   instagram: 'https://www.instagram.com/gotadecura_artesanais/',
   facebook: 'https://www.facebook.com/gotadecura.artesanais',
+  youtube: 'https://www.youtube.com/channel/UCq6y4YcG2WBqZyM5Y5MhNoA',
+  /** Drives the RSS feed the `/videos` page reads — see `src/services/youtube.ts`. */
+  youtubeChannelId: 'UCq6y4YcG2WBqZyM5Y5MhNoA',
   testimonyForm:
     'https://docs.google.com/forms/d/e/1FAIpQLSetBUhLfPUyn-AAaeZFSluLuB3BEzrpEX0yirA2CPk6LklYWg/viewform',
   photoAlbum: 'https://photos.app.goo.gl/mUkLpDGD5DUaERqR9',

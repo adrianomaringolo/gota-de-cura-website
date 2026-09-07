@@ -20,7 +20,7 @@ export const organizationSchema = () => ({
   description: SITE.description,
   logo: { '@type': 'ImageObject', url: LOGO, width: 512, height: 512 },
   image: absolute('/images/og-default.jpg'),
-  sameAs: [SITE.instagram, SITE.facebook],
+  sameAs: [SITE.instagram, SITE.facebook, SITE.youtube],
   // The shop exists to fund the assistance work, which is the parent body.
   parentOrganization: {
     '@type': 'Organization',

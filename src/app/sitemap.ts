@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: url('/'), lastModified: now, changeFrequency: 'weekly', priority: 1 },
     { url: url('/sobre'), lastModified: now, changeFrequency: 'yearly', priority: 0.7 },
     { url: url('/blog'), lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: url('/videos'), lastModified: now, changeFrequency: 'weekly', priority: 0.6 },
     {
       url: url('/cromatografias'),
       lastModified: now,
