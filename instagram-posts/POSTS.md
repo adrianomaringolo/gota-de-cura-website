@@ -24,12 +24,12 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 
 - **Fonte:** post do blog `src/content/blog/2026-08-19-oleos-essenciais-e-hidrolatos-diferencas`.
 - **Slides:**
-  1. Capa — foto do funil de separação sobre a lavanda (`cover.jpg`), "Óleo essencial ou hidrolato?"
+  1. Capa — foto do funil de separação com a faixa dourada de óleo essencial sobre o hidrolato (`cover.jpg`), "Óleo essencial ou hidrolato?"
   2. Diagrama — os dois nascem juntos na destilação; óleo leva as substâncias lipossolúveis, hidrolato as hidrossolúveis
   3. Dois resultados — 60 kg de planta rendem ~500 ml de óleo e ~8 litros de hidrolato
   4. Quando usar cada um — duas colunas de formas de uso
   5. Segurança — óleo puro não vai na pele; hidrolato é água e estraga
-  6. Fecho — laudos publicados, `gotadecura.com.br`, catálogo e Morada (slide escuro)
+  6. Fecho — conhecer o básico antes de usar óleo essencial e hidrolato, CTA para `gotadecura.com.br/blog` e Morada (slide escuro)
 - **Legenda e hashtags:** em `meta.json` e no `output/post-01/caption.md` gerado.
 - **Status:** 🔵 aguardando revisão antes de publicar.
 
