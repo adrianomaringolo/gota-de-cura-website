@@ -26,7 +26,7 @@ function LinhaTile({ shelf, onOpen }: { shelf: Shelf; onOpen: () => void }) {
         alt=""
         fill
         sizes={
-          featured ? '(max-width: 640px) 100vw, 40vw' : '(max-width: 640px) 50vw, 22vw'
+          featured ? '(max-width: 640px) 100vw, 520px' : '(max-width: 640px) 50vw, 260px'
         }
         className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-quart)] group-hover:scale-[1.03] group-active:scale-[1.05]"
       />

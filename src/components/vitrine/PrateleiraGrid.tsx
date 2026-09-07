@@ -28,7 +28,7 @@ function PrateleiraCard({ item, onOpen }: { item: ProductItem; onOpen: () => voi
             src={item.image}
             alt={item.name}
             fill
-            sizes="(max-width: 640px) 50vw, 22vw"
+            sizes="(max-width: 640px) 50vw, 260px"
             className="object-cover"
           />
         ) : (

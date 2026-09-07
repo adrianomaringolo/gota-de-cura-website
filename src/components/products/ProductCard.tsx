@@ -35,7 +35,7 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
               src={item.image}
               alt={item.name}
               fill
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px"
               className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-quart)] group-hover:scale-[1.04]"
             />
           ) : (

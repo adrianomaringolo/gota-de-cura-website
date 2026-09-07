@@ -28,6 +28,9 @@ export function VitrineChrome({
         alt="Gota de Cura"
         width={415}
         height={601}
+        // Renderizado a ~30px de largura (h-11). Sem `sizes` o Next transformaria
+        // a arte a 640px+ sem ganho visual.
+        sizes="128px"
         priority
         className="h-10 w-auto shrink-0 brightness-0 invert sm:h-11"
       />

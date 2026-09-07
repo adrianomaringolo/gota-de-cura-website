@@ -35,8 +35,8 @@ export function CategoryTile({
         priority={priority}
         sizes={
           featured
-            ? '(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 50vw'
-            : '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw'
+            ? '(max-width: 640px) 100vw, (max-width: 1024px) 66vw, 680px'
+            : '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 340px'
         }
         className={cn(
           'object-cover transition-transform duration-[900ms] ease-[var(--ease-out-quart)]',

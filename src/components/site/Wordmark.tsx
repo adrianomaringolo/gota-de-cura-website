@@ -27,6 +27,9 @@ export function Wordmark({ tone = 'ink', size = 'sm', className }: WordmarkProps
         alt=""
         width={1641}
         height={535}
+        // Renderizado no máximo a ~245px de largura (h-20). Sem `sizes` o Next
+        // transformaria a arte inteira a 1920px sem ganho visual.
+        sizes="320px"
         priority
         className={cn(
           'w-auto transition-transform duration-500 ease-[var(--ease-out-quart)] group-hover:-translate-y-0.5',

@@ -47,7 +47,7 @@ export function PhotoGallery() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px"
                 className="object-cover transition-transform duration-700 ease-[var(--ease-out-quart)] group-hover:scale-105"
               />
               <span className="absolute inset-0 bg-brand-darkest/0 transition-colors duration-300 group-hover:bg-brand-darkest/25" />
@@ -95,7 +95,7 @@ export function PhotoGallery() {
                 src={visitPhotos[index].src}
                 alt={visitPhotos[index].alt}
                 fill
-                sizes="100vw"
+                sizes="(min-width: 1536px) 1400px, 100vw"
                 className="object-contain"
               />
             </div>
