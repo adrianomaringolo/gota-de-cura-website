@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 120px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    top: -180px; right: -160px; pointer-events: none; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 66px; line-height: 1.06; color: #503484; }
+  .cols { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .col { border-top: 3px solid; padding-top: 26px; }
+  .col.terra { border-color: #a24112; }
+  .col.brand { border-color: #5d3b97; }
+  .col .head { display: flex; align-items: center; gap: 14px; }
+  .col .head h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 34px; color: #211c2b; }
+  .col .note { font-size: 18px; color: #5f5b68; margin-top: 8px; }
+  .col ul { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 22px; }
+  .col li { font-size: 23px; line-height: 1.4; color: #54505f; padding-left: 30px; position: relative; }
+  .col li::before { content: ''; position: absolute; left: 0; top: 12px; width: 11px; height: 11px;
+    border-radius: 50%; }
+  .col.terra li::before { background: #e0a877; }
+  .col.brand li::before { background: #b79bde; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="rule-mark"></div>
+  <h1>Quando usar cada um</h1>
+
+  <div class="cols">
+    <div class="col terra">
+      <div class="head">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a24112" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>
+        </svg>
+        <h2>Óleo essencial</h2>
+      </div>
+      <p class="note">sempre diluído</p>
+      <ul>
+        <li>Difusor de ambiente, 20 a 30 min</li>
+        <li>Inalação seca, 1 a 2 gotas no algodão</li>
+        <li>Diluído em óleo vegetal, para a pele</li>
+      </ul>
+    </div>
+
+    <div class="col brand">
+      <div class="head">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5d3b97" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 8h4v3l1.6 2.4A2 2 0 0 1 13.9 17h-3.8a2 2 0 0 1-1.7-3.1L10 11z"/>
+          <path d="M10 8V5h4"/><path d="M14 5l3.5 1.5"/>
+          <path d="M11 20h2"/>
+        </svg>
+        <h2>Hidrolato</h2>
+      </div>
+      <p class="note">geralmente sem diluir</p>
+      <ul>
+        <li>Tônico facial, após a limpeza</li>
+        <li>Compressa sobre a pele</li>
+        <li>Borrifador de ambiente e tecidos</li>
+        <li>Finalização de cabelo em fios úmidos</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="progress"><span></span><span></span><span></span><span class="active"></span><span></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

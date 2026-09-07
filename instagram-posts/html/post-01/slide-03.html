@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 120px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    bottom: -200px; left: -160px; pointer-events: none; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 64px; line-height: 1.08; color: #503484; max-width: 15ch; }
+  .cards { margin-top: 56px; display: flex; flex-direction: column; gap: 28px; }
+  .card { background: #ffffff; border: 1px solid #dfdce6; border-radius: 24px;
+    padding: 44px 48px; box-shadow: 0 6px 20px rgba(41,25,69,0.10); }
+  .card .tag { font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5f5b68; }
+  .card .big { font-family: 'Petrona', serif; font-weight: 600; font-size: 42px; color: #211c2b; margin-top: 10px; line-height: 1.16; }
+  .card .big strong { color: #a24112; font-weight: 600; }
+  .card p { font-size: 22px; line-height: 1.5; color: #54505f; margin-top: 14px; max-width: 44ch; }
+  .card .note { font-size: 17px; color: #5f5b68; margin-top: 8px; }
+  .card.brand .big strong { color: #5d3b97; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="rule-mark"></div>
+  <h1>Dois resultados da mesma planta</h1>
+
+  <div class="cards">
+    <div class="card">
+      <p class="tag">Óleo essencial</p>
+      <p class="big">60 kg de planta <strong>→ 500 ml de óleo</strong></p>
+      <p class="note">Numa planta de rendimento excelente.</p>
+      <p>Leva as substâncias lipossolúveis. Concentrado, usa-se em gotas.</p>
+    </div>
+    <div class="card brand">
+      <p class="tag">Hidrolato</p>
+      <p class="big">60 kg de planta <strong>→ cerca de 8 litros</strong></p>
+      <p>Leva as substâncias hidrossolúveis. Suave, usa-se sem diluir.</p>
+    </div>
+  </div>
+
+  <div class="progress"><span></span><span></span><span class="active"></span><span></span><span></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

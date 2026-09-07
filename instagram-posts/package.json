@@ -1,0 +1,11 @@
+{
+  "name": "gota-de-cura-instagram-posts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "export": "node scripts/export.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^25.1.0"
+  }
+}

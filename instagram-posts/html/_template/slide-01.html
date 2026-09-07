@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* Slide escuro: a cor precisa estar no body, senão o screenshot sai branco. */
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 100px 88px; overflow: hidden; background: #503484; }
+  .accent-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: #cd632d; }
+  .blob { position: absolute; width: 720px; height: 720px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(137,97,199,0.35) 0%, transparent 70%);
+    bottom: -220px; left: -180px; pointer-events: none; }
+  .logo { width: 300px; height: auto; filter: brightness(0) invert(1); }
+  .icon { margin-top: 60px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 84px; line-height: 1.04; margin-top: 40px; max-width: 15ch; }
+  .lead { font-size: 34px; line-height: 1.55; color: rgba(255,255,255,0.75); margin-top: 32px; max-width: 22ch; }
+  .handle { position: absolute; right: 88px; bottom: 88px; font-size: 20px; color: rgba(255,255,255,0.7); }
+  .handle em { color: #dacbf9; font-style: normal; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .progress span.active { background: #dacbf9; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="accent-top"></div>
+  <div class="blob"></div>
+
+  <img class="logo" src="logo.png" alt="Gota de Cura">
+
+  <div class="icon">
+    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#dacbf9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21c-4-2-7-5-7-10a7 7 0 0 1 14 0c0 5-3 8-7 10Z"/>
+      <path d="M12 21c0-4 0-8 0-12"/>
+      <path d="M12 13c-1.6-1.6-4-1.8-4-1.8s.2 2.4 1.8 4"/>
+      <path d="M12 10c1.6-1.6 4-1.8 4-1.8s-.2 2.4-1.8 4"/>
+    </svg>
+  </div>
+
+  <h1>O que é um hidrolato?</h1>
+  <p class="lead">A água aromática que sai do mesmo alambique do óleo essencial.</p>
+
+  <div class="progress"><span class="active"></span><span></span><span></span></div>
+  <div class="handle"><em>@</em>gotadecura_artesanais</div>
+</div>
+</body>
+</html>

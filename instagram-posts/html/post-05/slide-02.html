@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 120px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    top: -180px; right: -160px; pointer-events: none; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 62px; line-height: 1.08; color: #503484; max-width: 15ch; }
+  .list { margin-top: 52px; display: flex; flex-direction: column; gap: 34px; }
+  .item { display: flex; gap: 26px; }
+  .item svg { flex: none; margin-top: 4px; }
+  .item h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 32px; color: #211c2b; }
+  .item p { font-size: 22px; line-height: 1.45; color: #54505f; margin-top: 6px; max-width: 44ch; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="rule-mark"></div>
+  <h1>Por que o óleo essencial pede cautela</h1>
+
+  <div class="list">
+    <div class="item">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a24112" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+      </svg>
+      <div>
+        <h2>Bebês e crianças pequenas</h2>
+        <p>Sistema respiratório em formação e pele mais fina, que absorve mais. Compostos como eucalipto e hortelã pedem cuidado extra.</p>
+      </div>
+    </div>
+    <div class="item">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a24112" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 21c4-3 6.5-6.2 6.5-10A6.5 6.5 0 0 0 12 4.5 6.5 6.5 0 0 0 5.5 11c0 3.8 2.5 7 6.5 10Z"/><circle cx="12" cy="10.5" r="2.2"/>
+      </svg>
+      <div>
+        <h2>Gestantes e lactantes</h2>
+        <p>Vários compostos aromáticos atravessam a placenta e passam para o leite. Para muitos óleos, faltam estudos na gravidez.</p>
+      </div>
+    </div>
+    <div class="item">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a24112" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 21c0-4 2.5-6 6-6s6 2 6 6"/><circle cx="12" cy="7" r="3.2"/><path d="M4 12l2 1M20 12l-2 1"/>
+      </svg>
+      <div>
+        <h2>Idosos</h2>
+        <p>Pele mais fina, olfato diferente e, com frequência, medicação contínua. Óleo essencial pode interagir com remédios de uso diário.</p>
+      </div>
+    </div>
+    <div class="item">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a24112" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 14c2 0 3-2 5-2s3 2 5 2 3-2 5-2"/><path d="M4 9c2 0 3-2 5-2s3 2 5 2 3-2 5-2"/><path d="M4 19c2 0 3-2 5-2s3 2 5 2 3-2 5-2"/>
+      </svg>
+      <div>
+        <h2>Pele sensível ou reativa</h2>
+        <p>Mal diluído, o óleo irrita e pode sensibilizar de forma duradoura: uma vez que o corpo reage, ele tende a reagir sempre.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress"><span></span><span class="active"></span><span></span><span></span><span></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

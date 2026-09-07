@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #291945;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #291945; }
+  .photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .scrim { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(41,25,69,0.58) 0%, rgba(41,25,69,0.12) 22%, rgba(41,25,69,0.18) 40%, rgba(41,25,69,0.80) 60%, rgba(41,25,69,0.96) 100%); }
+  .accent-top { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: #cd632d; z-index: 2; }
+  .content { position: absolute; inset: 0; padding: 96px 88px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { width: 280px; height: auto; filter: brightness(0) invert(1); }
+  .top .handle { position: static; font-size: 22px; color: rgba(255,255,255,0.82); }
+  .foot { margin-top: auto; }
+  .tag { display: inline-block; font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #291945; background: #cd632d; padding: 11px 20px; border-radius: 999px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.02em;
+    font-size: 70px; line-height: 1.07; margin-top: 28px; max-width: 18ch; }
+  h1 .paren { display: block; font-size: 50px; color: rgba(255,255,255,0.84); margin-top: 10px; }
+  .cta { display: flex; align-items: center; gap: 18px; margin-top: 46px;
+    background: #ffffff; color: #503484;
+    font-size: 36px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 30px 46px; border-radius: 999px; align-self: flex-start;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 30px; height: 30px; }
+  .handle em { color: #dacbf9; font-style: normal; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="photo" src="cover.jpg" alt="Funil de separação segurado sobre um canteiro de lavanda, com o óleo essencial dourado sobre a camada clara de hidrolato">
+  <div class="scrim"></div>
+  <div class="accent-top"></div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="logo.png" alt="Gota de Cura">
+      <span class="handle"><em>@</em>gotadecura_artesanais</span>
+    </div>
+
+    <div class="foot">
+      <span class="tag">Novo no blog</span>
+      <h1>Óleo essencial ou hidrolato: qual a diferença<span class="paren">(e quando usar cada um)</span></h1>
+      <div class="cta">
+        <span>gotadecura.com.br/blog</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
