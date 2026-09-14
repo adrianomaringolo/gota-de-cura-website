@@ -20,6 +20,7 @@ export const ADMIN_SECTIONS: AdminSection[] = [
   { label: 'Cupons', href: '/admin/cupons', adminOnly: true },
   { label: 'Cromatografias', href: '/admin/cromatografias', adminOnly: true },
   { label: 'Relatórios', href: '/admin/relatorios', adminOnly: true },
+  { label: 'Usuários', href: '/admin/usuarios', adminOnly: true },
 ]
 
 export const isAdminUser = (user?: User): boolean =>

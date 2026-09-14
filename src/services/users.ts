@@ -1,4 +1,15 @@
-import { collection, doc, getDocs, query, updateDoc, where } from 'firebase/firestore'
+import {
+  collection,
+  deleteDoc,
+  deleteField,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+  where,
+} from 'firebase/firestore'
 import md5 from 'md5'
 import { db } from '@/lib/firebase'
 import type { User } from '@/lib/types'
@@ -23,6 +34,45 @@ export type AuthResult = {
   user: IdentifiedUser
   /** The password on file is still the seeded one. */
   mustChangePassword: boolean
+}
+
+/** A row on the user-management screen — the panel's own view of an account. */
+export interface ManagedUser {
+  /** Firestore document id — the same string as `login`. */
+  id: string
+  login: string
+  name: string
+  email: string
+  /** Every stored role, `admin` included; the empty-string placeholder is dropped. */
+  roles: string[]
+  /** Carries the `admin` role, so reaches the restricted sections. */
+  isAdmin: boolean
+  /** Still on the seeded password — asked to change it on the next sign-in. */
+  usesDefaultPassword: boolean
+  /** ISO of the last password change, absent while still on the seeded one. */
+  passwordUpdatedAt?: string
+}
+
+/** What the create/edit form collects. */
+export interface UserDraft {
+  login: string
+  name: string
+  email: string
+  isAdmin: boolean
+}
+
+/** The login is the document id, so it is normalised to a safe, stable slug. */
+const LOGIN_PATTERN = /^[a-z0-9](?:[a-z0-9._-]*[a-z0-9])?$/
+
+export const normalizeLogin = (login: string): string => login.trim().toLowerCase()
+
+/** The message to show for a rejected login, or `undefined` if it passes. */
+export function validateLogin(login: string): string | undefined {
+  const value = normalizeLogin(login)
+  if (value.length < 3) return 'Use ao menos 3 caracteres.'
+  if (!LOGIN_PATTERN.test(value))
+    return 'Apenas letras minúsculas, números, ponto, hífen e sublinhado.'
+  return undefined
 }
 
 const unique = <T>(values: T[]) => [...new Set(values)]
@@ -210,5 +260,84 @@ export const UsersService = {
       // A blocked store means there was no session to drop either.
     }
     notifySessionChange()
+  },
+
+  /** Every account, for the management screen. Sorted by name on the caller. */
+  async listManagedUsers(): Promise<ManagedUser[]> {
+    const snapshot = await getDocs(query(usersRef))
+
+    return snapshot.docs.map((entry) => {
+      const raw = entry.data() as Record<string, unknown>
+      const roles = Array.isArray(raw.roles)
+        ? raw.roles.filter(
+            (role): role is string => typeof role === 'string' && role !== '',
+          )
+        : []
+
+      return {
+        id: entry.id,
+        login: typeof raw.login === 'string' ? raw.login : entry.id,
+        name: typeof raw.name === 'string' ? raw.name : '',
+        email: typeof raw.email === 'string' ? raw.email : '',
+        roles,
+        isAdmin: roles.includes('admin'),
+        usesDefaultPassword: raw.password === DEFAULT_PASSWORD_HASH,
+        passwordUpdatedAt:
+          typeof raw.passwordUpdatedAt === 'string' ? raw.passwordUpdatedAt : undefined,
+      }
+    })
+  },
+
+  /**
+   * Creates the account with the seeded password — the person sets a real one
+   * on first sign-in, through the same gate every seeded account passes.
+   */
+  async createManagedUser(draft: UserDraft): Promise<void> {
+    const login = normalizeLogin(draft.login)
+    const invalid = validateLogin(login)
+    if (invalid) throw new Error(invalid)
+
+    const ref = doc(usersRef, login)
+    if ((await getDoc(ref)).exists()) {
+      throw new Error('Já existe um usuário com esse login.')
+    }
+
+    await setDoc(ref, {
+      login,
+      name: draft.name.trim(),
+      email: draft.email.trim(),
+      roles: draft.isAdmin ? ['admin'] : [],
+      password: DEFAULT_PASSWORD_HASH,
+    })
+  },
+
+  /**
+   * Updates name, e-mail and admin access. `currentRoles` is passed back so any
+   * non-admin role the account carries survives the toggle.
+   */
+  async updateManagedUser(
+    id: string,
+    changes: { name: string; email: string; isAdmin: boolean },
+    currentRoles: string[],
+  ): Promise<void> {
+    const otherRoles = currentRoles.filter((role) => role && role !== 'admin')
+
+    await updateDoc(doc(usersRef, id), {
+      name: changes.name.trim(),
+      email: changes.email.trim(),
+      roles: changes.isAdmin ? ['admin', ...otherRoles] : otherRoles,
+    })
+  },
+
+  /** Puts the account back on the seeded password; next sign-in forces a new one. */
+  async resetManagedUserPassword(id: string): Promise<void> {
+    await updateDoc(doc(usersRef, id), {
+      password: DEFAULT_PASSWORD_HASH,
+      passwordUpdatedAt: deleteField(),
+    })
+  },
+
+  async deleteManagedUser(id: string): Promise<void> {
+    await deleteDoc(doc(usersRef, id))
   },
 }

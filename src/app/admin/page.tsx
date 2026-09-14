@@ -42,6 +42,10 @@ const DESCRIPTIONS: Record<string, { title: string; text: string }> = {
     title: 'Relatórios',
     text: 'Receita e volume de pedidos por período.',
   },
+  '/admin/usuarios': {
+    title: 'Usuários',
+    text: 'Quem acessa o painel, quem é administrador e redefinição de senha.',
+  },
 }
 
 export default function AdminHomePage() {

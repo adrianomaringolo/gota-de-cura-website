@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { CouponsService } from '@/services/coupons'
 import { CromatografiasService } from '@/services/cromatografias'
 import { TestimonyService } from '@/services/testimony'
-import { onSessionChange, UsersService } from '@/services/users'
+import { onSessionChange, UsersService, type ManagedUser } from '@/services/users'
 import { VisitsService } from '@/services/visits'
 import type { Coupon, Cromatografia, Testimony, User, Visit } from './types'
 
@@ -47,6 +47,9 @@ export const useTestimonies = () =>
 
 export const useCromatografias = () =>
   useAsyncList<Cromatografia>(() => CromatografiasService.getAll())
+
+export const useManagedUsers = () =>
+  useAsyncList<ManagedUser>(() => UsersService.listManagedUsers())
 
 /**
  * `undefined` means "still reading localStorage" — pages must not redirect on
