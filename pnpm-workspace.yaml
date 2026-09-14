@@ -2,4 +2,5 @@
 # firebase (Firestore) pulls in protobufjs; both need their build step.
 allowBuilds:
   '@firebase/util': true
+  esbuild: true
   protobufjs: true

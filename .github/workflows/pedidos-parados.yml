@@ -1,0 +1,49 @@
+name: Pedidos parados
+
+# Avisa por e-mail o responsável de cada pedido que ficou 2+ dias sem mudança
+# de status. Ver scripts/notify-stale-orders.ts.
+
+on:
+  schedule:
+    # 12:00 UTC = 09:00 em São Paulo (UTC-3).
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Só listar, sem enviar e-mail'
+        type: boolean
+        default: false
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm notify:pedidos-parados
+        env:
+          DRY_RUN: ${{ inputs.dry_run && '1' || '' }}
+          # Obrigatório: chave privada do EmailJS (Account → API keys). O EmailJS
+          # rejeita chamadas fora do browser sem ela, e é preciso habilitar
+          # "Allow EmailJS API for non-browser applications" na conta.
+          EMAILJS_PRIVATE_KEY: ${{ secrets.EMAILJS_PRIVATE_KEY }}
+          # Opcionais: só defina para usar outro serviço/template/conta.
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          # Opcionais: só defina para apontar para outro projeto Firebase.
+          NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
+          NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${{ secrets.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN }}
+          NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}
+          NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${{ secrets.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }}
+          NEXT_PUBLIC_FIREBASE_SENDER_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_SENDER_ID }}
+          NEXT_PUBLIC_FIREBASE_APP_ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_APP_ID }}

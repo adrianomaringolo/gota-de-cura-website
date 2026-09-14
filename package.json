@@ -7,7 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "notify:pedidos-parados": "tsx scripts/notify-stale-orders.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -36,6 +37,7 @@
     "@types/react-dom": "^19.2.0",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.20.3",
     "typescript": "^5.9.3"
   },
   "engines": {

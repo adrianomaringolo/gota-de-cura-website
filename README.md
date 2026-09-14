@@ -93,3 +93,30 @@ depende de mover essa busca para o servidor.
 `/admin` — pedidos, disponibilidade de produtos, gerenciamento do catálogo,
 visitas, cupons, cromatografias e relatórios. A autenticação é feita contra a
 coleção `users` do Firestore e guardada no `localStorage`.
+
+## Rotinas agendadas
+
+### Pedidos parados
+
+`scripts/notify-stale-orders.ts` varre os pedidos abertos e avisa por e-mail
+quando um deles fica **2 dias ou mais sem mudança de status** (olhando o
+`statusLogs`). O aviso vai para quem mexeu no status por último — buscando o
+e-mail na coleção `users` pelo nome — ou, se não der para identificar, para a
+lista da equipe (`orderMailList`). Enquanto o pedido seguir parado, reavisa a
+cada novo bloco de 2 dias; a marcação fica no campo `staleNotify` do próprio
+pedido e zera quando o status muda.
+
+Roda no GitHub Actions (`.github/workflows/pedidos-parados.yml`) todo dia às
+09h (São Paulo). Para funcionar, defina os secrets do repositório:
+
+- `EMAILJS_PRIVATE_KEY` — **obrigatório**. Account → API keys no EmailJS.
+  Habilite também "Allow EmailJS API for non-browser applications".
+- Firebase / EmailJS: só se o projeto usar outra conta que não os padrões do
+  código (veja `.env.example`).
+
+Rodar na mão:
+
+```bash
+DRY_RUN=1 pnpm notify:pedidos-parados   # só lista, não envia
+pnpm notify:pedidos-parados             # envia (precisa de EMAILJS_PRIVATE_KEY)
+```
