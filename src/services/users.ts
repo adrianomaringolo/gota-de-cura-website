@@ -246,6 +246,31 @@ export const UsersService = {
     }
   },
 
+  /**
+   * Re-reads the account behind a stored session. The session lives in
+   * localStorage indefinitely, so without this a password reset or a deleted
+   * account would only bite on the next manual sign-in. A failed read (offline,
+   * denied) counts as `valid` — a flaky network must not log the team out.
+   */
+  async checkSession(user: User): Promise<'valid' | 'must-change-password' | 'removed'> {
+    try {
+      let raw: Record<string, unknown> | undefined
+      if (user.id) {
+        const snapshot = await getDoc(doc(usersRef, user.id))
+        raw = snapshot.exists() ? snapshot.data() : undefined
+      } else {
+        const snapshot = await getDocs(query(usersRef, where('login', '==', user.login)))
+        raw = snapshot.docs[0]?.data()
+      }
+
+      if (!raw) return 'removed'
+      return raw.password === DEFAULT_PASSWORD_HASH ? 'must-change-password' : 'valid'
+    } catch (cause) {
+      console.error('Falha ao validar a sessão do painel', cause)
+      return 'valid'
+    }
+  },
+
   storeUser(user: User) {
     const clean = toUser(user, user.id)
     if (!clean) throw new Error('Usuário inválido.')

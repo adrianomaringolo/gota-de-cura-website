@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { cn } from '@/lib/cn'
 import { useDisclosure, useLoggedUser } from '@/lib/hooks'
 import { canAccessPath, visibleSections } from '@/lib/admin-nav'
@@ -35,13 +36,54 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     else if (!allowed) router.replace('/admin')
   }, [resolved, user, allowed, isLoginPage, router])
 
+  // Which login's session has been confirmed against Firestore. A reset
+  // password or a removed account ends the session here, on the next visit,
+  // instead of waiting for a manual sign-out.
+  const [verifiedLogin, setVerifiedLogin] = useState<string | null>(null)
+  const login = user?.login
+
+  useEffect(() => {
+    if (!login || isLoginPage) return
+    const stored = UsersService.getStoredUser()
+    if (!stored) return
+
+    let cancelled = false
+    const verify = async () => {
+      const status = await UsersService.checkSession(stored)
+      if (cancelled) return
+      if (status === 'valid') {
+        setVerifiedLogin(stored.login)
+        return
+      }
+      UsersService.signOut()
+      toast(
+        status === 'removed'
+          ? 'Seu acesso ao painel foi removido.'
+          : 'Sua senha foi redefinida. Entre com a senha padrão e crie uma nova.',
+        { duration: 8000 },
+      )
+      router.replace('/admin/login')
+    }
+
+    verify()
+    // Coming back to a tab left open counts as a new visit too.
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') verify()
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      cancelled = true
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [login, isLoginPage, router])
+
   useEffect(() => {
     setMenuOpen(false)
   }, [pathname])
 
   if (isLoginPage) return <>{children}</>
 
-  if (!resolved || !user || !allowed) {
+  if (!resolved || !user || !allowed || verifiedLogin !== user.login) {
     return (
       <div className="grid min-h-screen place-items-center bg-canvas">
         <Spinner className="text-brand" />

@@ -196,8 +196,9 @@ export default function AdminUsersPage() {
             <strong className="text-ink">
               {pending?.user.name || pending?.user.login}
             </strong>{' '}
-            volta para a senha padrão da equipe e precisa definir uma nova senha no
-            próximo acesso.
+            volta para a senha padrão da equipe. Se estiver com o painel aberto, a sessão
+            é encerrada no próximo acesso e a pessoa precisa entrar com a senha padrão e
+            criar uma nova senha antes de continuar.
           </p>
         )}
       </Dialog>
