@@ -18,6 +18,7 @@ export const organizationSchema = () => ({
   slogan: SITE.tagline,
   url: SITE.url,
   description: SITE.description,
+  email: SITE.email,
   logo: { '@type': 'ImageObject', url: LOGO, width: 512, height: 512 },
   image: absolute('/images/og-default.jpg'),
   sameAs: [SITE.instagram, SITE.facebook, SITE.youtube],

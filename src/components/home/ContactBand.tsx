@@ -31,6 +31,16 @@ export function ContactBand() {
               </div>
 
               <div>
+                <h3 className="text-sm font-semibold text-ink-muted">Fale com a gente</h3>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="mt-2 inline-block font-display text-xl break-all text-ink underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
+                >
+                  {SITE.email}
+                </a>
+              </div>
+
+              <div>
                 <h3 className="text-sm font-semibold text-ink-muted">
                   Acompanhe o dia a dia
                 </h3>

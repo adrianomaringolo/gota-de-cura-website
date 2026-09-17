@@ -7,6 +7,7 @@ export const SITE = {
   instagram: 'https://www.instagram.com/gotadecura_artesanais/',
   facebook: 'https://www.facebook.com/gotadecura.artesanais',
   youtube: 'https://www.youtube.com/channel/UCq6y4YcG2WBqZyM5Y5MhNoA',
+  email: 'contato.gotadecura@gmail.com',
   /** Drives the RSS feed the `/videos` page reads — see `src/services/youtube.ts`. */
   youtubeChannelId: 'UCq6y4YcG2WBqZyM5Y5MhNoA',
   testimonyForm:
