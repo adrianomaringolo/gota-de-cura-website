@@ -112,8 +112,13 @@ export const productTypes: ProductType[] = [
     id: 'tinturas',
     type: 'Tinturas',
     typeLabel: 'Tinturas',
-    description:
-      '<p>Tinturas são extratos alcoólicos de substâncias naturais, como ervas ou princípios ativos de plantas medicinais. Elas são preparadas pela dissolução dessas substâncias em um veículo alcoólico, sendo uma forma comum de apresentação farmacêutica. O álcool é usado para extrair os compostos desejados, tornando as tinturas uma opção eficaz para o uso medicinal.</p>',
+    description: `<p>Tinturas são extratos alcoólicos de substâncias naturais, como ervas ou princípios ativos de plantas medicinais. Elas são preparadas pela dissolução dessas substâncias em um veículo alcoólico, sendo uma forma comum de apresentação farmacêutica. O álcool é usado para extrair os compostos desejados, tornando as tinturas uma opção eficaz para o uso medicinal.</p>
+      <hr/>
+      <p>Todas as tinturas Gota de Cura são produtos artesanais feitos com plantas e ingredientes selecionados que visam manter as propriedades particulares que cada planta tem a oferecer.</p>
+      <p>Podem ser usadas como complemento a tratamentos, mas sempre com a orientação e supervisão de um fitoterapeuta ou profissional qualificado.</p>
+
+      <p>Sugestão segura para uso: diluição de 10 gotas da tintura em um copo (cerca de 300ml) de água para consumo ao longo do dia.</p>
+      <p>PARA TRATAMENTOS ESPECÍFICOS PROCURE UM PROFISSIONAL QUALIFICADO.</p>`,
     image: 'tinturas.jpg',
     mode: 'type',
   },
