@@ -6,7 +6,7 @@ import { format } from 'date-fns'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
-import { Select, Textarea } from '@/components/ui/Field'
+import { Checkbox, Select, Textarea } from '@/components/ui/Field'
 import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
@@ -183,18 +183,25 @@ const statusLabel = (status: string): string =>
 function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }) {
   const [status, setStatus] = useState(order.status)
   const [confirmOpen, setConfirmOpen] = useState(false)
+  const [notifyCustomer, setNotifyCustomer] = useState(false)
   const [comment, setComment] = useState('')
-  const [saving, setSaving] = useState<'notify' | 'silent' | null>(null)
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     setStatus(order.status)
   }, [order.status])
 
-  const confirm = async (notifyCustomer: boolean) => {
-    setSaving(notifyCustomer ? 'notify' : 'silent')
+  const openConfirm = () => {
+    setNotifyCustomer(false)
+    setComment('')
+    setConfirmOpen(true)
+  }
+
+  const confirm = async () => {
+    setSaving(true)
     try {
       await OrdersService.editOrderStatus(order, status, {
-        comment: comment.trim() || undefined,
+        comment: notifyCustomer ? comment.trim() || undefined : undefined,
         notifyCustomer,
       })
       toast.success(
@@ -205,7 +212,7 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
     } catch {
       toast.error('Não foi possível atualizar o status')
     } finally {
-      setSaving(null)
+      setSaving(false)
     }
   }
 
@@ -224,14 +231,7 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
           </option>
         ))}
       </Select>
-      <Button
-        className="mt-3 w-full"
-        onClick={() => {
-          setComment('')
-          setConfirmOpen(true)
-        }}
-        disabled={status === order.status}
-      >
+      <Button className="mt-3 w-full" onClick={openConfirm} disabled={status === order.status}>
         Salvar status
       </Button>
 
@@ -242,49 +242,37 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
         description={`De "${statusLabel(order.status)}" para "${statusLabel(status)}"`}
         footer={
           <>
-            <Button
-              variant="ghost"
-              onClick={() => setConfirmOpen(false)}
-              disabled={saving !== null}
-            >
+            <Button variant="ghost" onClick={() => setConfirmOpen(false)} disabled={saving}>
               Cancelar
             </Button>
-            <Button
-              variant="outline"
-              onClick={() => confirm(false)}
-              disabled={saving !== null}
-            >
-              {saving === 'silent' ? <Spinner className="h-4 w-4" /> : 'Salvar sem avisar'}
-            </Button>
-            <Button
-              onClick={() => confirm(true)}
-              disabled={saving !== null || !order.contactInfo.email}
-            >
-              {saving === 'notify' ? (
-                <Spinner className="h-4 w-4" />
-              ) : (
-                'Salvar e enviar e-mail'
-              )}
+            <Button onClick={confirm} disabled={saving}>
+              {saving ? <Spinner className="h-4 w-4" /> : 'Confirmar'}
             </Button>
           </>
         }
       >
-        <p className="text-sm text-ink-soft">
-          O cliente pode ser avisado por e-mail sobre essa mudança de status.
-        </p>
-        {!order.contactInfo.email && (
-          <p className="mt-2 text-sm text-warning">
-            Este pedido não tem e-mail cadastrado, então não é possível notificar o
-            cliente.
-          </p>
-        )}
+        <Checkbox
+          label="Enviar e-mail para o cliente"
+          hint={
+            order.contactInfo.email
+              ? undefined
+              : 'Este pedido não tem e-mail cadastrado, então não é possível notificar o cliente.'
+          }
+          checked={notifyCustomer}
+          disabled={!order.contactInfo.email}
+          onChange={(event) => {
+            setNotifyCustomer(event.target.checked)
+            if (!event.target.checked) setComment('')
+          }}
+        />
         <Textarea
           label="Comentário (opcional)"
           className="mt-4"
           rows={3}
+          disabled={!notifyCustomer}
           value={comment}
           onChange={(event) => setComment(event.target.value)}
-          placeholder="Alguma mensagem para o cliente ou anotação para a equipe?"
+          placeholder="Alguma mensagem para o cliente sobre essa mudança?"
         />
       </Dialog>
     </Panel>
