@@ -85,6 +85,46 @@ export const EmailSender = {
     })
   },
 
+  sendOrderStatusUpdateEmail(
+    orderNumber: number,
+    contact: ContactInfo,
+    statusLabel: string,
+    comment: string | undefined,
+    orderUrl: string,
+  ) {
+    if (!contact.email) return Promise.resolve()
+
+    return send({
+      title: `🟣 Atualização do seu pedido #${orderNumber}`,
+      html_message: `
+      <div style="max-width: 500px; margin: 0 auto; font-size: 15px; color: #333">
+        <p style="font-size: 20px; font-weight: bold">Olá, ${contact.name}!</p>
+        <p>O status do seu pedido <strong>#${orderNumber}</strong> foi atualizado para:</p>
+        <p style="font-size: 18px; font-weight: bold; color: #4c3b82; margin: 10px 0">${statusLabel}</p>
+        ${
+          comment
+            ? `<div style="background-color: #fbffc0; border-radius: 10px; padding: 15px 20px; margin: 20px 0; font-size: 14px">
+                <p style="margin: 0"><strong>Mensagem de quem está te atendendo:</strong></p>
+                <p style="margin: 6px 0 0; white-space: pre-line">${comment}</p>
+              </div>`
+            : ''
+        }
+        <p style="text-align: center; margin: 30px 0">
+          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">Ver meu pedido</a>
+        </p>
+
+        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
+          <p style="margin: 0 0 8px">Alguma dúvida sobre o pedido? Fale com a gente:</p>
+          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
+          <p style="margin: 4px 0 0">✉️ E-mail: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
+        </div>
+
+        <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>
+      </div>`,
+      mail_list: contact.email,
+    })
+  },
+
   sendNewEnrollmentEmail(
     visitDate: string,
     enrollment: EnrollmentData,

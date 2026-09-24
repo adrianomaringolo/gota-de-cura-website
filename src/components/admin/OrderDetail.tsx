@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
+import { Dialog } from '@/components/ui/Dialog'
 import { Select, Textarea } from '@/components/ui/Field'
 import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
@@ -176,24 +177,35 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   )
 }
 
+const statusLabel = (status: string): string =>
+  ORDER_STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status
+
 function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }) {
   const [status, setStatus] = useState(order.status)
-  const [saving, setSaving] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [comment, setComment] = useState('')
+  const [saving, setSaving] = useState<'notify' | 'silent' | null>(null)
 
   useEffect(() => {
     setStatus(order.status)
   }, [order.status])
 
-  const save = async () => {
-    setSaving(true)
+  const confirm = async (notifyCustomer: boolean) => {
+    setSaving(notifyCustomer ? 'notify' : 'silent')
     try {
-      await OrdersService.editOrderStatus(order, status)
-      toast.success('Status atualizado')
+      await OrdersService.editOrderStatus(order, status, {
+        comment: comment.trim() || undefined,
+        notifyCustomer,
+      })
+      toast.success(
+        notifyCustomer ? 'Status atualizado e cliente avisado' : 'Status atualizado',
+      )
+      setConfirmOpen(false)
       onSaved()
     } catch {
       toast.error('Não foi possível atualizar o status')
     } finally {
-      setSaving(false)
+      setSaving(null)
     }
   }
 
@@ -214,11 +226,67 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
       </Select>
       <Button
         className="mt-3 w-full"
-        onClick={save}
-        disabled={saving || status === order.status}
+        onClick={() => {
+          setComment('')
+          setConfirmOpen(true)
+        }}
+        disabled={status === order.status}
       >
-        {saving ? <Spinner className="h-4 w-4" /> : 'Salvar status'}
+        Salvar status
       </Button>
+
+      <Dialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title="Confirmar mudança de status"
+        description={`De "${statusLabel(order.status)}" para "${statusLabel(status)}"`}
+        footer={
+          <>
+            <Button
+              variant="ghost"
+              onClick={() => setConfirmOpen(false)}
+              disabled={saving !== null}
+            >
+              Cancelar
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => confirm(false)}
+              disabled={saving !== null}
+            >
+              {saving === 'silent' ? <Spinner className="h-4 w-4" /> : 'Salvar sem avisar'}
+            </Button>
+            <Button
+              onClick={() => confirm(true)}
+              disabled={saving !== null || !order.contactInfo.email}
+            >
+              {saving === 'notify' ? (
+                <Spinner className="h-4 w-4" />
+              ) : (
+                'Salvar e enviar e-mail'
+              )}
+            </Button>
+          </>
+        }
+      >
+        <p className="text-sm text-ink-soft">
+          O cliente pode ser avisado por e-mail sobre essa mudança de status.
+        </p>
+        {!order.contactInfo.email && (
+          <p className="mt-2 text-sm text-warning">
+            Este pedido não tem e-mail cadastrado, então não é possível notificar o
+            cliente.
+          </p>
+        )}
+        <Textarea
+          label="Comentário (opcional)"
+          className="mt-4"
+          rows={3}
+          value={comment}
+          onChange={(event) => setComment(event.target.value)}
+          placeholder="Alguma mensagem para o cliente ou anotação para a equipe?"
+        />
+      </Dialog>
     </Panel>
   )
 }

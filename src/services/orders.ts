@@ -10,7 +10,7 @@ import {
   where,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
-import { ORDER_STATUS } from '@/lib/constants'
+import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
 import { SITE } from '@/lib/site'
 import type { Cart, CartItem, ContactInfo, Coupon, Order } from '@/lib/types'
@@ -145,8 +145,13 @@ export const OrdersService = {
     return { orderNumber, orderRef: docRef.id }
   },
 
-  async editOrderStatus(order: Order, newStatus: string): Promise<void> {
+  async editOrderStatus(
+    order: Order,
+    newStatus: string,
+    options?: { comment?: string; notifyCustomer?: boolean },
+  ): Promise<void> {
     const user = UsersService.getStoredUser()
+    const comment = options?.comment
 
     await updateDoc(doc(ordersRef, order.id), {
       updatedAt: new Date().toISOString(),
@@ -160,7 +165,34 @@ export const OrdersService = {
           updatedAt: new Date().toISOString(),
         },
       ],
+      ...(comment
+        ? {
+            comments: [
+              ...(order.comments || []),
+              { userName: user?.name ?? '—', comment, createdAt: new Date().toISOString() },
+            ],
+          }
+        : {}),
     })
+
+    if (options?.notifyCustomer && order.contactInfo.email) {
+      const label =
+        ORDER_STATUS_OPTIONS.find((option) => option.value === newStatus)?.label ??
+        newStatus
+
+      // Best effort: a failed notification must not lose the saved status change.
+      try {
+        await EmailSender.sendOrderStatusUpdateEmail(
+          order.orderId,
+          order.contactInfo,
+          label,
+          comment,
+          publicOrderUrl(order.id),
+        )
+      } catch (error) {
+        console.error('Falha ao notificar o cliente sobre a mudança de status', error)
+      }
+    }
   },
 
   async addCommentToOrder(order: Order, comment: string): Promise<void> {
