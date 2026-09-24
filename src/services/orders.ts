@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  getDoc,
   getDocs,
   orderBy,
   query,
@@ -11,6 +12,7 @@ import {
 import { db } from '@/lib/firebase'
 import { ORDER_STATUS } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
+import { SITE } from '@/lib/site'
 import type { Cart, CartItem, ContactInfo, Coupon, Order } from '@/lib/types'
 import { EmailSender } from './email'
 import { orderMailList } from './maillist'
@@ -53,6 +55,13 @@ export const couponDiscount = (
     : (total * coupon.discount) / 100
 }
 
+/**
+ * The customer-facing tracking link uses the Firestore document id, not the
+ * sequential `orderId` shown in admin — the doc id is unguessable, so sharing
+ * it does not let anyone browse other people's orders.
+ */
+export const publicOrderUrl = (orderRef: string): string => `${SITE.url}/pedidos/${orderRef}`
+
 export const OrdersService = {
   async getOrders(statusToFilter = ''): Promise<Order[]> {
     const snapshot = await getDocs(
@@ -72,24 +81,32 @@ export const OrdersService = {
     return toOrder(first.id, first.data())
   },
 
+  /** Looks an order up by its Firestore document id, the token in the public tracking link. */
+  async getPublicOrder(orderRef: string): Promise<Order> {
+    const snapshot = await getDoc(doc(ordersRef, orderRef))
+    if (!snapshot.exists()) throw new Error('Pedido não encontrado')
+    return toOrder(snapshot.id, snapshot.data())
+  },
+
   async saveOrder(
     cart: Cart,
     contactInfo: ContactInfo,
     coupon?: Coupon,
-  ): Promise<number> {
+  ): Promise<{ orderNumber: number; orderRef: string }> {
     const lastOrder = (await OrdersService.getOrders()).pop()
     const orderNumber = lastOrder ? Number(lastOrder.orderId) + 1 : 0
+    const items = cart.items
+      .filter((item) => item.amount)
+      .map((item) => ({
+        id: item.id,
+        amount: item.amount,
+        name: item.name,
+        price: item.price,
+        type: item.type,
+      }))
 
-    await addDoc(ordersRef, {
-      items: cart.items
-        .filter((item) => item.amount)
-        .map((item) => ({
-          id: item.id,
-          amount: item.amount,
-          name: item.name,
-          price: item.price,
-          type: item.type,
-        })),
+    const docRef = await addDoc(ordersRef, {
+      items,
       orderId: orderNumber,
       coupon: coupon
         ? {
@@ -103,6 +120,8 @@ export const OrdersService = {
       createdAt: new Date().toISOString(),
     })
 
+    const orderUrl = publicOrderUrl(docRef.id)
+
     // Best effort: a failed notification must not lose a confirmed order.
     try {
       await EmailSender.sendNewOrderEmail(orderNumber, contactInfo.name, orderMailList)
@@ -110,7 +129,20 @@ export const OrdersService = {
       console.error('Falha ao notificar a equipe sobre o novo pedido', error)
     }
 
-    return orderNumber
+    if (contactInfo.email) {
+      try {
+        await EmailSender.sendOrderConfirmationEmail(
+          orderNumber,
+          contactInfo,
+          items,
+          orderUrl,
+        )
+      } catch (error) {
+        console.error('Falha ao enviar e-mail de confirmação ao cliente', error)
+      }
+    }
+
+    return { orderNumber, orderRef: docRef.id }
   },
 
   async editOrderStatus(order: Order, newStatus: string): Promise<void> {
