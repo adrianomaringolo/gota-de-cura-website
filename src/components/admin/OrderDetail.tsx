@@ -5,7 +5,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
-import { Select, Textarea } from '@/components/ui/Field'
+import { Dialog } from '@/components/ui/Dialog'
+import { Checkbox, Select, Textarea } from '@/components/ui/Field'
 import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
@@ -176,19 +177,37 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   )
 }
 
+const statusLabel = (status: string): string =>
+  ORDER_STATUS_OPTIONS.find((option) => option.value === status)?.label ?? status
+
 function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }) {
   const [status, setStatus] = useState(order.status)
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [notifyCustomer, setNotifyCustomer] = useState(false)
+  const [comment, setComment] = useState('')
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     setStatus(order.status)
   }, [order.status])
 
-  const save = async () => {
+  const openConfirm = () => {
+    setNotifyCustomer(false)
+    setComment('')
+    setConfirmOpen(true)
+  }
+
+  const confirm = async () => {
     setSaving(true)
     try {
-      await OrdersService.editOrderStatus(order, status)
-      toast.success('Status atualizado')
+      await OrdersService.editOrderStatus(order, status, {
+        comment: notifyCustomer ? comment.trim() || undefined : undefined,
+        notifyCustomer,
+      })
+      toast.success(
+        notifyCustomer ? 'Status atualizado e cliente avisado' : 'Status atualizado',
+      )
+      setConfirmOpen(false)
       onSaved()
     } catch {
       toast.error('Não foi possível atualizar o status')
@@ -212,13 +231,50 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
           </option>
         ))}
       </Select>
-      <Button
-        className="mt-3 w-full"
-        onClick={save}
-        disabled={saving || status === order.status}
-      >
-        {saving ? <Spinner className="h-4 w-4" /> : 'Salvar status'}
+      <Button className="mt-3 w-full" onClick={openConfirm} disabled={status === order.status}>
+        Salvar status
       </Button>
+
+      <Dialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title="Confirmar mudança de status"
+        description={`De "${statusLabel(order.status)}" para "${statusLabel(status)}"`}
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => setConfirmOpen(false)} disabled={saving}>
+              Cancelar
+            </Button>
+            <Button onClick={confirm} disabled={saving}>
+              {saving ? <Spinner className="h-4 w-4" /> : 'Confirmar'}
+            </Button>
+          </>
+        }
+      >
+        <Checkbox
+          label="Enviar e-mail para o cliente"
+          hint={
+            order.contactInfo.email
+              ? undefined
+              : 'Este pedido não tem e-mail cadastrado, então não é possível notificar o cliente.'
+          }
+          checked={notifyCustomer}
+          disabled={!order.contactInfo.email}
+          onChange={(event) => {
+            setNotifyCustomer(event.target.checked)
+            if (!event.target.checked) setComment('')
+          }}
+        />
+        <Textarea
+          label="Comentário (opcional)"
+          className="mt-4"
+          rows={3}
+          disabled={!notifyCustomer}
+          value={comment}
+          onChange={(event) => setComment(event.target.value)}
+          placeholder="Alguma mensagem para o cliente sobre essa mudança?"
+        />
+      </Dialog>
     </Panel>
   )
 }
