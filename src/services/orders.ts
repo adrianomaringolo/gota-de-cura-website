@@ -124,7 +124,12 @@ export const OrdersService = {
 
     // Best effort: a failed notification must not lose a confirmed order.
     try {
-      await EmailSender.sendNewOrderEmail(orderNumber, contactInfo.name, orderMailList)
+      await EmailSender.sendNewOrderEmail(
+        orderNumber,
+        contactInfo.name,
+        items,
+        orderMailList,
+      )
     } catch (error) {
       console.error('Falha ao notificar a equipe sobre o novo pedido', error)
     }

@@ -21,11 +21,41 @@ const send = (params: TemplateParams) =>
 
 type OrderEmailItem = { name: string; type: string; amount: number; price: number }
 
+/** The item/total table shared by every order e-mail, staff and customer alike. */
+const orderItemsTable = (items: OrderEmailItem[]) => {
+  const total = items.reduce((sum, item) => sum + item.price * item.amount, 0)
+
+  const itemRows = items
+    .map(
+      (item) => `
+      <tr>
+        <td style="padding: 6px 0">${item.amount}× ${item.name} <span style="color: #888; font-size: 13px">(${item.type})</span></td>
+        <td style="padding: 6px 0; text-align: right; white-space: nowrap">${formatCurrency(item.price * item.amount)}</td>
+      </tr>`,
+    )
+    .join('')
+
+  return `
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
+      ${itemRows}
+      <tr>
+        <td style="padding: 10px 0 0; border-top: 1px solid #ddd; font-weight: bold">Total</td>
+        <td style="padding: 10px 0 0; border-top: 1px solid #ddd; text-align: right; font-weight: bold">${formatCurrency(total)}</td>
+      </tr>
+    </table>`
+}
+
 export const EmailSender = {
-  sendNewOrderEmail(orderNumber: number, clientName: string, mailList: string[]) {
+  sendNewOrderEmail(
+    orderNumber: number,
+    clientName: string,
+    items: OrderEmailItem[],
+    mailList: string[],
+  ) {
     return send({
       title: `🟣 Novo pedido no site: #${orderNumber}`,
       html_message: `<p style="font-size: 20px">Novo pedido (#${orderNumber}) feito no Gota de Cura de&nbsp;<strong>${clientName}</strong>.</p>
+      ${orderItemsTable(items)}
       <hr>
       <p>Acesse a área de pedidos do Painel de Administrador do site Gota de Cura para ver os pedidos.
       <a style="color: #4c3b82" href="https://gotadecura.com.br/admin/pedidos" target="_blank" rel="noopener">https://gotadecura.com.br/admin/pedidos</a></p>`,
@@ -41,18 +71,6 @@ export const EmailSender = {
   ) {
     if (!contact.email) return Promise.resolve()
 
-    const total = items.reduce((sum, item) => sum + item.price * item.amount, 0)
-
-    const itemRows = items
-      .map(
-        (item) => `
-        <tr>
-          <td style="padding: 6px 0">${item.amount}× ${item.name} <span style="color: #888; font-size: 13px">(${item.type})</span></td>
-          <td style="padding: 6px 0; text-align: right; white-space: nowrap">${formatCurrency(item.price * item.amount)}</td>
-        </tr>`,
-      )
-      .join('')
-
     return send({
       title: `🟣 Recebemos seu pedido #${orderNumber}`,
       html_message: `
@@ -60,13 +78,7 @@ export const EmailSender = {
         <p style="font-size: 20px; font-weight: bold">Obrigado, ${contact.name}!</p>
         <p>Recebemos seu pedido <strong>#${orderNumber}</strong> e nossa equipe vai confirmar os produtos, a entrega e o pagamento com você. <strong>Seu pedido será atendido em até 48h.</strong></p>
 
-        <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
-          ${itemRows}
-          <tr>
-            <td style="padding: 10px 0 0; border-top: 1px solid #ddd; font-weight: bold">Total</td>
-            <td style="padding: 10px 0 0; border-top: 1px solid #ddd; text-align: right; font-weight: bold">${formatCurrency(total)}</td>
-          </tr>
-        </table>
+        ${orderItemsTable(items)}
 
         <p style="text-align: center; margin: 30px 0">
           <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">Acompanhar meu pedido</a>
