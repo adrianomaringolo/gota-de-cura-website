@@ -13,7 +13,7 @@ import { db } from '@/lib/firebase'
 import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
 import { SITE } from '@/lib/site'
-import type { Cart, CartItem, ContactInfo, Coupon, Order } from '@/lib/types'
+import type { Cart, CartItem, ContactInfo, Coupon, Order, OrderComment } from '@/lib/types'
 import { EmailSender } from './email'
 import { orderMailList } from './maillist'
 import { UsersService } from './users'
@@ -156,36 +156,20 @@ export const OrdersService = {
     options?: { comment?: string; notifyCustomer?: boolean },
   ): Promise<void> {
     const user = UsersService.getStoredUser()
+    const userName = user?.name ?? '—'
     const comment = options?.comment
+    const willNotify = Boolean(options?.notifyCustomer && order.contactInfo.email)
 
-    await updateDoc(doc(ordersRef, order.id), {
-      updatedAt: new Date().toISOString(),
-      status: newStatus,
-      statusLogs: [
-        ...(order.statusLogs || []),
-        {
-          userName: user?.name ?? '—',
-          oldStatus: order.status || '',
-          newStatus,
-          updatedAt: new Date().toISOString(),
-        },
-      ],
-      ...(comment
-        ? {
-            comments: [
-              ...(order.comments || []),
-              { userName: user?.name ?? '—', comment, createdAt: new Date().toISOString() },
-            ],
-          }
-        : {}),
-    })
+    // Logged only once the e-mail actually goes out, so the comment trail
+    // never claims a notification that failed to send.
+    const newComments: OrderComment[] = []
 
-    if (options?.notifyCustomer && order.contactInfo.email) {
+    if (willNotify) {
       const label =
         ORDER_STATUS_OPTIONS.find((option) => option.value === newStatus)?.label ??
         newStatus
 
-      // Best effort: a failed notification must not lose the saved status change.
+      // Best effort: a failed notification must not lose the status change.
       try {
         await EmailSender.sendOrderStatusUpdateEmail(
           order.orderId,
@@ -194,10 +178,34 @@ export const OrdersService = {
           comment,
           publicOrderUrl(order.id),
         )
+        newComments.push({
+          userName,
+          comment: `📧 E-mail enviado ao cliente avisando a mudança de status para "${label}".${
+            comment ? `\n\nMensagem: ${comment}` : ''
+          }`,
+          createdAt: new Date().toISOString(),
+        })
       } catch (error) {
         console.error('Falha ao notificar o cliente sobre a mudança de status', error)
       }
     }
+
+    await updateDoc(doc(ordersRef, order.id), {
+      updatedAt: new Date().toISOString(),
+      status: newStatus,
+      statusLogs: [
+        ...(order.statusLogs || []),
+        {
+          userName,
+          oldStatus: order.status || '',
+          newStatus,
+          updatedAt: new Date().toISOString(),
+        },
+      ],
+      ...(newComments.length
+        ? { comments: [...(order.comments || []), ...newComments] }
+        : {}),
+    })
   },
 
   async addCommentToOrder(order: Order, comment: string): Promise<void> {
