@@ -1,7 +1,8 @@
 import emailjs from '@emailjs/browser'
 import { VISIT_PRICES } from '@/lib/constants'
-import { formatVisitDate } from '@/lib/format'
-import type { EnrollmentData } from '@/lib/types'
+import { formatCurrency, formatVisitDate } from '@/lib/format'
+import { SITE } from '@/lib/site'
+import type { ContactInfo, EnrollmentData } from '@/lib/types'
 
 const EMAIL_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_nbvmzkk'
 const EMAIL_TEMPLATE_ID =
@@ -18,6 +19,8 @@ type TemplateParams = {
 const send = (params: TemplateParams) =>
   emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, params, EMAIL_PUBLIC_KEY)
 
+type OrderEmailItem = { name: string; type: string; amount: number; price: number }
+
 export const EmailSender = {
   sendNewOrderEmail(orderNumber: number, clientName: string, mailList: string[]) {
     return send({
@@ -27,6 +30,58 @@ export const EmailSender = {
       <p>Acesse a área de pedidos do Painel de Administrador do site Gota de Cura para ver os pedidos.
       <a style="color: #4c3b82" href="https://gotadecura.com.br/admin/pedidos" target="_blank" rel="noopener">https://gotadecura.com.br/admin/pedidos</a></p>`,
       mail_list: mailList.join(','),
+    })
+  },
+
+  sendOrderConfirmationEmail(
+    orderNumber: number,
+    contact: ContactInfo,
+    items: OrderEmailItem[],
+    orderUrl: string,
+  ) {
+    if (!contact.email) return Promise.resolve()
+
+    const total = items.reduce((sum, item) => sum + item.price * item.amount, 0)
+
+    const itemRows = items
+      .map(
+        (item) => `
+        <tr>
+          <td style="padding: 6px 0">${item.amount}× ${item.name} <span style="color: #888; font-size: 13px">(${item.type})</span></td>
+          <td style="padding: 6px 0; text-align: right; white-space: nowrap">${formatCurrency(item.price * item.amount)}</td>
+        </tr>`,
+      )
+      .join('')
+
+    return send({
+      title: `🟣 Recebemos seu pedido #${orderNumber}`,
+      html_message: `
+      <div style="max-width: 500px; margin: 0 auto; font-size: 15px; color: #333">
+        <p style="font-size: 20px; font-weight: bold">Obrigado, ${contact.name}!</p>
+        <p>Recebemos seu pedido <strong>#${orderNumber}</strong> e nossa equipe vai confirmar os produtos, a entrega e o pagamento com você. <strong>Seu pedido será atendido em até 48h.</strong></p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0">
+          ${itemRows}
+          <tr>
+            <td style="padding: 10px 0 0; border-top: 1px solid #ddd; font-weight: bold">Total</td>
+            <td style="padding: 10px 0 0; border-top: 1px solid #ddd; text-align: right; font-weight: bold">${formatCurrency(total)}</td>
+          </tr>
+        </table>
+
+        <p style="text-align: center; margin: 30px 0">
+          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">Acompanhar meu pedido</a>
+        </p>
+        <p style="font-size: 13px; color: #888; text-align: center">Ou acesse: <a style="color: #4c3b82" href="${orderUrl}" target="_blank" rel="noopener">${orderUrl}</a></p>
+
+        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
+          <p style="margin: 0 0 8px">Alguma dúvida sobre o pedido? Fale com a gente:</p>
+          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
+          <p style="margin: 4px 0 0">✉️ E-mail: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
+        </div>
+
+        <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>
+      </div>`,
+      mail_list: contact.email,
     })
   },
 

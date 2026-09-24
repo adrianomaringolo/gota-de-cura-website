@@ -33,6 +33,7 @@ export function CartFlow() {
   const [contact, setContact] = useState<ContactInfo | null>(null)
   const [coupon, setCoupon] = useState<Coupon | undefined>()
   const [orderNumber, setOrderNumber] = useState<number | null>(null)
+  const [orderRef, setOrderRef] = useState<string | null>(null)
 
   const {
     register,
@@ -48,12 +49,13 @@ export function CartFlow() {
     if (!contact) return
     setStep('saving')
     try {
-      const number = await OrdersService.saveOrder(
+      const { orderNumber: number, orderRef: ref } = await OrdersService.saveOrder(
         { items: items.filter((item) => item.amount > 0) },
         contact,
         coupon,
       )
       setOrderNumber(number)
+      setOrderRef(ref)
       clear()
       setStep('done')
     } catch (error) {
@@ -80,10 +82,24 @@ export function CartFlow() {
             {orderNumber !== null && <span className="text-brand"> #{orderNumber}</span>}
           </p>
           <p className="mx-auto mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
-            A equipe {SITE.name} vai entrar em contato pelo WhatsApp para confirmar os
-            produtos, combinar a entrega e o pagamento. Obrigado por sustentar esse
-            trabalho com a gente.
+            {contact?.email
+              ? 'Enviamos a confirmação do seu pedido por e-mail. '
+              : 'Recebemos seu pedido. '}
+            A equipe {SITE.name} vai confirmar os produtos, a entrega e o pagamento, e seu
+            pedido será atendido em até 48h.
           </p>
+
+          {orderRef && (
+            <div className="mt-6">
+              <p className="mx-auto max-w-[46ch] text-sm text-ink-muted">
+                Você pode acompanhar os detalhes do seu pedido a qualquer momento nesta
+                página:
+              </p>
+              <ButtonLink href={`/pedidos/${orderRef}`} variant="outline" className="mt-3">
+                Acompanhar meu pedido
+              </ButtonLink>
+            </div>
+          )}
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/#catalogo">Voltar ao catálogo</ButtonLink>
