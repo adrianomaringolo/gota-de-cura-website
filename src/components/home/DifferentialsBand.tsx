@@ -14,7 +14,7 @@ const items = [
   },
   {
     title: 'Trabalho voluntário',
-    text: 'Quem planta, colhe, destila, embala e atende é voluntário. Ninguém aqui tira salário do que você compra.',
+    text: 'Quem planta, colhe, destila, embala e atende é voluntário e trabalha com muito amor e carinho.',
     // Two figures
     path: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
   },
@@ -26,7 +26,7 @@ const items = [
   },
   {
     title: 'Atendimento humanizado',
-    text: 'Você conversa com quem destilou. Dúvida sobre diluição, uso ou contraindicação tem resposta de gente que conhece o produto.',
+    text: 'Você conversa com quem destilou. Dúvida sobre diluição, uso ou contraindicação tem resposta de gente que conhece o produto e está sempre disposta a te ajudar.',
     // Speech bubble
     path: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z',
   },
