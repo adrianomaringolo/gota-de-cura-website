@@ -16,9 +16,9 @@ function LinhaTile({ shelf, onOpen }: { shelf: Shelf; onOpen: () => void }) {
       className={cn(
         'group relative isolate flex overflow-hidden rounded-2xl bg-veil text-left',
         'transition-transform duration-200 ease-[var(--ease-out-quart)] active:scale-[0.98]',
-        featured
-          ? 'aspect-[16/10] sm:col-span-2 sm:aspect-[16/9]'
-          : 'aspect-[4/5] sm:aspect-square',
+        // Featured tiles take no aspect of their own: they stretch to the row
+        // height set by their neighbours, so every tile lines up.
+        featured ? 'min-h-56 sm:col-span-2' : 'aspect-[4/5] sm:aspect-square',
       )}
     >
       <Image
@@ -78,7 +78,7 @@ export function LinhaGrid({
         Toque para conhecer cada planta, ver os preços e o que temos disponível hoje.
       </p>
 
-      <div className="mt-8 grid gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,14rem),1fr))] sm:mt-10 sm:gap-4">
+      <div className="mt-8 grid auto-rows-fr gap-3 [grid-template-columns:repeat(auto-fill,minmax(min(100%,14rem),1fr))] sm:mt-10 sm:gap-4">
         {shelves.map((shelf) => (
           <LinhaTile key={shelf.type.id} shelf={shelf} onOpen={() => onOpen(shelf)} />
         ))}

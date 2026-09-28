@@ -12,7 +12,7 @@ export function Catalog() {
           className="text-brand"
         />
 
-        <div className="mt-12 grid grid-flow-dense grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-12 grid auto-rows-fr grid-flow-dense grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
           {productTypes.map((type, index) => (
             <CategoryTile key={type.id} type={type} priority={index < 4} />
           ))}

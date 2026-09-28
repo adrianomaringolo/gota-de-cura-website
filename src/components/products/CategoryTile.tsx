@@ -25,7 +25,9 @@ export function CategoryTile({
       className={cn(
         'group relative isolate flex overflow-hidden rounded-2xl bg-veil',
         'focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand',
-        featured ? 'col-span-2 aspect-[16/10] sm:aspect-[16/9]' : 'aspect-4/5',
+        // Featured tiles take no aspect of their own: they stretch to the row
+        // height set by their neighbours, so every tile lines up.
+        featured ? 'col-span-2' : 'aspect-4/5',
       )}
     >
       <Image

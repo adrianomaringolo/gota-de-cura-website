@@ -122,7 +122,7 @@ export const productTypes: ProductType[] = [
     image: 'tinturas.jpg',
     mode: 'type',
   },
-  {
+  /*{
     id: 'acessorios',
     type: 'Acessórios',
     description: '',
@@ -137,7 +137,7 @@ export const productTypes: ProductType[] = [
       '<p>Que tal dar um vale-presente para alguém querido?</p><p>Os vales podem ser usados pelo site ou na nossa loja física.</p>',
     image: 'vales.jpg',
     mode: 'type',
-  },
+  },*/
   {
     id: 'amazonia',
     type: 'Cantinho da Amazônia',
@@ -161,6 +161,18 @@ export const productTypes: ProductType[] = [
     seal: 'https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fseals%2Fseal-new.png?alt=media&token=9ad4fc11-08a0-43a9-b350-b20b57dbac92',
     areaBackground: '/images/background-china.jpg',
     mode: 'type',
+  },
+  {
+    id: 'gotinha',
+    type: 'Gotinha de Cura',
+    typeLabel: 'Gotinha de Cura',
+    featured: true,
+    description: `<p>Uma linha feita com carinho para os pequenos: bebês e crianças pequenas.</p>
+        <p>Reunimos aqui produtos suaves e seguros, pensados para acompanhar aqueles momentos de afeto e cuidado — o banho, a massagem, a hora de acalmar e de dormir.</p>
+        <p>Fórmulas delicadas, com ingredientes naturais cuidadosamente escolhidos para a pele sensível e o bem-estar das crianças.</p>`,
+    image: 'gotinha.jpg',
+    mode: 'category',
+    areaBackground: '/images/background-gotinha.jpg',
   },
 ]
 
