@@ -1,0 +1,29 @@
+{
+  "title": "Nossos diferenciais: a causa é o motivo",
+  "date": "2026-09-17",
+  "type": "carousel",
+  "template": "carrossel-educativo",
+  "format": "1080x1350",
+  "slides": [
+    { "file": "slide-01.html", "title": "Capa", "description": "Foto (duotone) dos visitantes com as voluntárias nos canteiros da chácara: 'Aqui a causa não vem anexada: ela é o motivo'" },
+    { "file": "slide-02.html", "title": "Sem fins lucrativos", "description": "Dois cards: nenhum real vira lucro de sócio; cada real vai para a assistência da Morada Espírita Prof. Lairi Hans" },
+    { "file": "slide-03.html", "title": "Trabalho voluntário", "description": "Grade 2x2 com ícones Lucide: planta e colhe, destila, embala, atende. Nota: a chácara é da Morada, o trabalho é de quem se oferece" },
+    { "file": "slide-04.html", "title": "Cuidado em todas as etapas", "description": "Lista numerada das três etapas na chácara e callout: nenhuma etapa terceirizada, ninguém entre o canteiro e o frasco" },
+    { "file": "slide-05.html", "title": "Atendimento humanizado", "description": "Dois cards: você fala com quem fez o lote; diluição, uso e contraindicação, com quem está sempre disposto a ajudar" },
+    { "file": "slide-06.html", "title": "Fecho", "description": "Slide escuro: comprar aqui vira pão na mesa de alguém, gotadecura.com.br, laudos e a Morada" }
+  ],
+  "caption": "💜 A Gota de Cura não é uma marca com uma causa social anexada. A causa é o motivo de ela existir.\n\nQuatro coisas explicam isso:\n\n🌿 Sem fins lucrativos: não há dono nem sócio para remunerar. Cada real da venda vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans, que atende famílias da periferia de Campinas desde 1980.\n\n🤲 Trabalho voluntário: quem planta, colhe, destila, embala e atende é voluntário e trabalha com muito amor e carinho.\n\n⚗️ Cuidado em todas as etapas: do plantio ao envase, tudo acontece na Chácara da Mãe Luzia. Cultivo sem agrotóxico, destilação com água de nascente, cada lote conferido antes de fechar o frasco. Nenhuma etapa terceirizada.\n\n💬 Atendimento humanizado: você conversa com quem destilou. Dúvida de diluição, de uso ou de contraindicação tem resposta de gente que conhece o produto, sempre disposta a te ajudar.\n\n🔬 E o que tem dentro do frasco está por escrito: publicamos o laudo inteiro de cada planta em gotadecura.com.br/cromatografias.\n\n👇 Passe na loja da José Paulino para sentir o aroma, ou conheça o catálogo em gotadecura.com.br (link na bio).",
+  "hashtags": [
+    "oleosessenciais",
+    "hidrolatos",
+    "aromaterapia",
+    "destilacao",
+    "feitoamao",
+    "trabalhovoluntario",
+    "semfinslucrativos",
+    "chacaradamaeluzia",
+    "moradaespirita",
+    "campinas",
+    "plantasaromaticas"
+  ]
+}

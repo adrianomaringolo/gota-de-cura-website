@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #503484; }
+
+  /* Faixa de foto à direita, em duotone lilás/terracota */
+  .photo { position: absolute; top: 0; right: 0; width: 380px; height: 100%;
+    object-fit: cover; object-position: 50% 50%;
+    filter: grayscale(1) contrast(1.05) brightness(1.02); }
+  .photo-duo-shadow { position: absolute; top: 0; right: 0; width: 380px; height: 100%;
+    background: #2a1a48; mix-blend-mode: lighten; }
+  .photo-duo-light { position: absolute; top: 0; right: 0; width: 380px; height: 100%;
+    background: #f1cebb; mix-blend-mode: darken; }
+  .photo-duo-warm { position: absolute; top: 0; right: 0; width: 380px; height: 100%;
+    background: linear-gradient(180deg, rgba(205,99,45,0.10) 0%, rgba(80,52,132,0.14) 100%);
+    mix-blend-mode: soft-light; }
+  .photo-fade { position: absolute; top: 0; right: 380px; width: 96px; height: 100%;
+    background: linear-gradient(90deg, #503484 0%, rgba(80,52,132,0) 100%); }
+
+  .blob { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(137,97,199,0.32) 0%, transparent 70%);
+    top: -260px; left: -240px; pointer-events: none; }
+
+  .content { position: absolute; top: 0; left: 0; width: 700px; height: 100%;
+    padding: 96px 34px 96px 88px; display: flex; flex-direction: column; }
+  .logo { width: 300px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 60px; line-height: 1.08; margin-top: 58px; }
+  h1 .accent { font-style: italic; font-weight: 500;
+    background: linear-gradient(#cd632d, #cd632d) left 92% / 100% 5px no-repeat;
+    padding-bottom: 4px; }
+  .lead { font-size: 27px; line-height: 1.5; color: rgba(255,255,255,0.82);
+    margin-top: 24px; max-width: 32ch; }
+
+  .list { list-style: none; margin-top: 40px; display: flex; flex-direction: column; gap: 26px; }
+  .list li { display: grid; grid-template-columns: 42px 1fr; gap: 20px; align-items: start; }
+  .list svg { width: 34px; height: 34px; color: #f0c8ae; margin-top: 4px; }
+  .list h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 32px; color: #ffffff; }
+  .list p { font-size: 22px; line-height: 1.45; color: rgba(255,255,255,0.78); margin-top: 4px; max-width: 30ch; }
+
+  .cta { display: flex; align-items: center; gap: 16px; margin-top: auto;
+    background: #ffffff; color: #503484;
+    font-size: 30px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 26px 40px; border-radius: 999px; align-self: flex-start;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="photo" src="cover.jpg" alt="Placas de madeira pintadas à mão presas ao tronco de uma palmeira na chácara, com as palavras desacelere, respire, relaxe e contemple">
+  <div class="photo-duo-shadow"></div>
+  <div class="photo-duo-light"></div>
+  <div class="photo-duo-warm"></div>
+  <div class="photo-fade"></div>
+  <div class="blob"></div>
+
+  <div class="content">
+    <img class="logo" src="logo.png" alt="Gota de Cura">
+
+    <h1>A causa não vem anexada, <span class="accent">ela é o motivo</span></h1>
+    <p class="lead">Quatro coisas explicam por que a Gota de Cura existe.</p>
+
+    <ul class="list">
+      <li>
+        <!-- Lucide: hand-heart -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16" /><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95" /><path d="m2 15 6 6" /><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91" /></svg>
+        <div>
+          <h2>Sem fins lucrativos</h2>
+          <p>Não há dono nem sócio para remunerar. Cada real vai para os trabalhos da Morada Espírita Prof. Lairi Hans.</p>
+        </div>
+      </li>
+      <li>
+        <!-- Lucide: users -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+        <div>
+          <h2>Trabalho voluntário</h2>
+          <p>Quem planta, colhe, destila, embala e atende é voluntário e trabalha com muito amor e carinho.</p>
+        </div>
+      </li>
+      <li>
+        <!-- Lucide: sprout -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /><path d="M5 21h14" /></svg>
+        <div>
+          <h2>Cuidado em todas as etapas</h2>
+          <p>Do plantio ao envase, tudo na Chácara da Mãe Luzia, sem etapa terceirizada.</p>
+        </div>
+      </li>
+      <li>
+        <!-- Lucide: message-circle -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>
+        <div>
+          <h2>Atendimento humanizado</h2>
+          <p>Você conversa com quem destilou. Estamos sempre dispostos a te ajudar.</p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="cta">
+      <span>gotadecura.com.br/sobre</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

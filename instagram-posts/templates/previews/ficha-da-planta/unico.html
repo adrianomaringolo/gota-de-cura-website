@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 88px; overflow: hidden;
+    display: flex; flex-direction: column; }
+  .blob { position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    bottom: -280px; right: -240px; pointer-events: none; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { width: 240px; height: auto; }
+  .handle { font-size: 20px; color: #5f5b68; }
+  .handle em { color: #5d3b97; font-style: normal; }
+
+  /* Mesmo arco da capa do carrossel, mais baixo para caber a ficha */
+  .arch { margin-top: 40px; width: 904px; height: 440px; border-radius: 452px 452px 28px 28px;
+    background: repeating-linear-gradient(135deg, #d9cfe6 0 3px, #eee9f4 3px 26px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 21px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #54505f; padding-top: 140px; }
+  .arch small { font-size: 18px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; margin-top: 10px; color: #5f5b68; }
+
+  .eyebrow { margin-top: 40px; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #a24112; }
+  .name { display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap; margin-top: 10px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.03em;
+    font-size: 92px; line-height: 1; color: #503484; }
+  .sci { font-family: 'Petrona', serif; font-style: italic; font-weight: 400; font-size: 36px; color: #54505f; }
+
+  .ficha { margin-top: 30px; border-bottom: 1px solid #dfdce6; }
+  .row { display: grid; grid-template-columns: 250px 1fr; align-items: baseline; gap: 20px;
+    padding: 16px 0; border-top: 1px solid #dfdce6; }
+  .row dt { font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5f5b68; }
+  .row dd { font-family: 'Petrona', serif; font-weight: 500; font-size: 30px; line-height: 1.2; color: #211c2b; }
+
+  /* CTA em slide claro: pílula sólida lilás (inverso da pílula branca dos slides escuros) */
+  .cta { display: inline-flex; align-items: center; gap: 16px; margin-top: auto; align-self: flex-start;
+    background: #503484; color: #ffffff;
+    font-size: 30px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 24px 40px; border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(41,25,69,0.28); }
+  .cta svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+  <div class="top">
+    <img class="logo" src="../_assets/logo.png" alt="Gota de Cura">
+    <span class="handle"><em>@</em>gotadecura_artesanais</span>
+  </div>
+
+  <div class="arch">Foto da planta<small>planta.jpg · planta viva ou colhida, fundo limpo</small></div>
+
+  <p class="eyebrow">Hidrolato · Novo no catálogo</p>
+  <div class="name"><h1>Nome popular</h1><span class="sci">Nome científico</span></div>
+
+  <dl class="ficha">
+    <div class="row"><dt>Parte destilada</dt><dd>Folhas, flores ou ramos</dd></div>
+    <div class="row"><dt>Colheita</dt><dd>Mês da colheita na chácara</dd></div>
+    <div class="row"><dt>Como usar</dt><dd>O uso mais comum, em poucas palavras</dd></div>
+  </dl>
+
+  <div class="cta">
+    <span>gotadecura.com.br/hidrolatos</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+  </div>
+</div>
+</body>
+</html>

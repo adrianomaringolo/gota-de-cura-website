@@ -20,6 +20,21 @@ serifa Petrona, voz artesanal e acolhedora. Não é um template genérico de "po
 
 ---
 
+## Templates
+
+Esqueletos visuais em `instagram-posts/templates/` (índice: `templates/TEMPLATES.md`, com
+previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
+
+| ID | Quando usar |
+|---|---|
+| `carrossel-educativo` | Explicar um conceito em partes (adaptação de post do blog). |
+| `chamada-blog` | Slide único anunciando post novo do blog. |
+| `destaque-faixa` | Slide único de confiança levando para uma página do site. |
+| `ficha-da-planta` | Planta do catálogo em destaque (carrossel ou único). |
+| `bastidores` | Dia ou processo da chácara, alternando cena e explicação. |
+
+---
+
 ## Tipos de post
 
 1. **Educativo** (o que é hidrolato, como ler um laudo, para que serve cada planta) — um
@@ -135,7 +150,11 @@ Via Google Fonts:
     no logo, senão ele estica e distorce.
   - Capa e fecho são slides escuros: aplique `filter: brightness(0) invert(1)` para deixar o
     logo branco sólido. Em slide claro, use o logo sem filtro.
-  - Nos slides de conteúdo **não** vai logo: a assinatura ali é o rule-mark + o handle no rodapé.
+  - Nos slides de conteúdo **não** vai logo: a assinatura ali é o rule-mark + a gota no canto.
+- **Gota** (assinatura dos slides de conteúdo do carrossel, no lugar do handle): o ícone
+  `public/images/logos/logo-icon.png`, copiado para a pasta do post como `mark.png`.
+  `position: absolute; right: 84px; bottom: 78px; width: 52px; opacity: 0.9`. Sobre foto
+  escura, `filter: brightness(0) invert(1)`.
 - **Rule-mark** (assinatura dos slides de conteúdo, uma vez por slide, acima do título): barra
   de `44px × 2px`, cor `currentColor` a `45%` de opacidade, `margin-bottom: 20px`. Espelha o
   `.rule-mark` do site.
@@ -144,8 +163,9 @@ Via Google Fonts:
   `radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%)`. A fotografia da chácara é
   que carrega a cor quando houver foto. Margens largas, não encher o slide.
 - **Handle**: `@gotadecura_artesanais`, `Archivo` 20px, `@` em `#5d3b97` (ou `#dacbf9` em slide
-  escuro). Em todos os slides, no rodapé à direita — **exceto** quando um CTA em destaque ocupa
-  o rodapé; nesse caso o handle vai ao lado do logo, no topo à direita.
+  escuro). Na capa, no fecho e no post único, no rodapé à direita. Quando um CTA em destaque
+  ocupa o rodapé, o handle vai ao lado do logo, no topo à direita. Slides de conteúdo do
+  carrossel levam a gota no lugar do handle.
 - **CTA em destaque** (chamada para blog, catálogo ou visita): botão de pílula sólido,
   `background: #ffffff`, texto `#503484` weight 700 ~34–36px, `padding: 30px 46px`,
   `border-radius: 999px`, sombra `0 12px 38px rgba(41,25,69,0.48)`, com a seta `→`. O texto do
@@ -163,8 +183,11 @@ Via Google Fonts:
 
 ## Ícones
 
-Apenas **SVG inline** em traço, estilo botânico e limpo (folha, gota, ramo, frasco, alambique).
-`stroke` `#5d3b97` ou `#a24112`, `stroke-width` 1.6–2, `fill: none`. **Nunca emojis nos slides.**
+Apenas **SVG inline** em traço, da biblioteca **Lucide** (https://lucide.dev, pacote
+`lucide-static`): copie os paths exatos, nunca desenhe à mão. Wrapper padrão da lib
+(`viewBox="0 0 24 24"`, `stroke-width="2"`, caps redondos); só tamanho e cor mudam. Úteis:
+`leaf`, `sprout`, `droplets`, `flask-conical`, `map-pin`, `clock`, `arrow-right`.
+Cor via `currentColor`: `#5d3b97`, `#a24112` ou `#dacbf9` em slide escuro. **Nunca emojis nos slides.**
 
 ---
 
@@ -246,7 +269,7 @@ Puppeteer sai em branco.
 | Formato | Diretriz |
 |---|---|
 | **Post único** (1 slide) | Tudo num slide. Frase de impacto, dado, dica curta, chamada para o blog. Leva o logo no topo (é capa e fecho ao mesmo tempo). Sem marcador de slide. |
-| **Carrossel** (3–7 slides) | Slide 1 = capa/gancho, **logo no topo**, geralmente escuro (`#503484`), precisa parar o scroll. Slides 2 a N-1 = desenvolvimento, um conceito por slide, sem logo (rule-mark + handle). Slide N = fecho/CTA, **logo no topo**, `gotadecura.com.br` grande ou convite para a visita/catálogo. |
+| **Carrossel** (3–7 slides) | Slide 1 = capa/gancho, **logo no topo**, geralmente escuro (`#503484`), precisa parar o scroll. Slides 2 a N-1 = desenvolvimento, um conceito por slide, sem logo (rule-mark + gota no canto). Slide N = fecho/CTA, **logo no topo**, `gotadecura.com.br` grande ou convite para a visita/catálogo. |
 
 ---
 
@@ -259,6 +282,7 @@ Lido por `instagram-posts/scripts/export.mjs` — o script é a autoridade sobre
   "title": "Título do post",
   "date": "YYYY-MM-DD",
   "type": "carousel | single",
+  "template": "carrossel-educativo | chamada-blog | destaque-faixa | ficha-da-planta | bastidores",
   "format": "1080x1350",
   "slides": [
     { "file": "slide-01.html", "title": "Nome do slide", "description": "O que contém" }
@@ -302,7 +326,9 @@ Emojis úteis por contexto:
 | Script de export | `node instagram-posts/scripts/export.mjs post-NN` (`--slides 1,3` para alguns) |
 | Instalar deps (uma vez) | `cd instagram-posts && npm install` |
 | Índice de posts | `instagram-posts/POSTS.md` (tabela + "Detalhes por post" + "Última atualização") |
-| Template de referência | `instagram-posts/html/_template/` |
+| Templates de post (índice + `.md` + previews) | `instagram-posts/templates/` |
+| Exportar previews dos templates | `node instagram-posts/scripts/export-templates.mjs [id]` |
+| Template de referência (legado) | `instagram-posts/html/_template/` |
 
 Se o Chrome/Chromium não for encontrado no export, definir `PUPPETEER_EXECUTABLE_PATH`
 (macOS: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`).
@@ -313,7 +339,8 @@ O próximo ID (`post-NN`) sai de olhar `instagram-posts/html/`.
 
 ## Referências no repo
 
-- `instagram-posts/html/_template/` — slide de referência com o sistema visual montado.
+- `instagram-posts/templates/TEMPLATES.md` — catálogo de templates com previews.
+- `instagram-posts/html/_template/` — slide de referência com o sistema visual montado (legado).
 - Posts anteriores em `instagram-posts/html/` — referência de layout, tom e conteúdo.
 - `PRODUCT.md` — marca, público, anti-referências, princípios de design.
 - `src/app/globals.css` — tokens de cor e tipografia canônicos.

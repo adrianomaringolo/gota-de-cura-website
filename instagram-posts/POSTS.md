@@ -2,18 +2,20 @@
 
 > Índice de todos os posts criados. **Atualize este arquivo sempre que criar, publicar ou arquivar um post.**
 >
-> Última atualização: 2026-09-06
+> Última atualização: 2026-09-18
 
 Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produção / revisão · ⚪️ rascunho
 
-| ID | Título | Data | Tipo | Slides | Status | Tema |
-|---|---|---|---|---|---|---|
-| post-01 | Óleo essencial ou hidrolato: qual a diferença | 2026-08-30 | Carrossel | 6 | 🔵 | Educativo — adaptação do 2º post do blog: mesma destilação, dois resultados, usos e segurança |
-| post-02 | Óleo essencial ou hidrolato: qual a diferença (e quando usar cada um) | 2026-08-30 | Único | 1 | 🟢 | Chamada para o post do blog, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
-| post-03 | O que tem dentro do frasco, por escrito — as cromatografias | 2026-09-06 | Único | 1 | 🟢 | Dado / confiança — o que é cromatografia e por que publicamos o laudo inteiro de cada planta, com CTA em destaque para gotadecura.com.br/cromatografias |
-| post-04 | Hidrolato para bebês, gestantes e idosos: quando ele é a escolha mais segura | 2026-09-06 | Único | 1 | 🔵 | Chamada para o post do blog, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
-| post-05 | Hidrolato para bebês, gestantes e idosos: quando ele é a escolha mais segura | 2026-09-06 | Carrossel | 6 | 🔵 | Educativo — adaptação do 3º post do blog: por que o óleo essencial pede cautela em cada grupo, onde o hidrolato muda a conta, caso a caso, cuidados de conservação e fecho com CTA |
+| ID | Título | Data | Tipo | Template | Slides | Status | Tema |
+|---|---|---|---|---|---|---|---|
+| post-01 | Óleo essencial ou hidrolato: qual a diferença | 2026-08-30 | Carrossel | `carrossel-educativo` | 6 | 🔵 | Educativo — adaptação do 2º post do blog: mesma destilação, dois resultados, usos e segurança |
+| post-02 | Óleo essencial ou hidrolato: qual a diferença (e quando usar cada um) | 2026-08-30 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
+| post-03 | O que tem dentro do frasco, por escrito — as cromatografias | 2026-09-06 | Único | `destaque-faixa` | 1 | 🟢 | Dado / confiança — o que é cromatografia e por que publicamos o laudo inteiro de cada planta, com CTA em destaque para gotadecura.com.br/cromatografias |
+| post-04 | Hidrolato para bebês, gestantes e idosos: quando ele é a escolha mais segura | 2026-09-06 | Único | `chamada-blog` | 1 | 🔵 | Chamada para o post do blog, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
+| post-05 | Hidrolato para bebês, gestantes e idosos: quando ele é a escolha mais segura | 2026-09-06 | Carrossel | `carrossel-educativo` | 6 | 🔵 | Educativo — adaptação do 3º post do blog: por que o óleo essencial pede cautela em cada grupo, onde o hidrolato muda a conta, caso a caso, cuidados de conservação e fecho com CTA |
 
+| post-06 | Nossos diferenciais: a causa é o motivo | 2026-09-17 | Carrossel | `carrossel-educativo` | 6 | 🔵 | Institucional — os quatro diferenciais da seção "Nossos diferenciais" do site: sem fins lucrativos, trabalho voluntário, cuidado em todas as etapas e atendimento humanizado |
+| post-07 | Nossos diferenciais: a causa é o motivo (slide único) | 2026-09-17 | Único | `destaque-faixa` | 1 | 🔵 | Institucional — versão em slide único do post-06: os quatro diferenciais em lista, com CTA em destaque para gotadecura.com.br/sobre |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---
@@ -67,12 +69,33 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 - **Legenda e hashtags:** em `meta.json` e no `output/post-05/caption.md`.
 - **Status:** 🔵 aguardando revisão antes de publicar.
 
+### post-06 — Nossos diferenciais
+
+- **Fonte:** seção `DifferentialsBand` da home (`src/components/home/DifferentialsBand.tsx`), com apoio de `ImpactBand` e `LaudosBand`.
+- **Slides:**
+  1. Capa — foto (duotone lilás/terracota) dos visitantes com as voluntárias nos canteiros (`public/images/visit/photo-10.jpg`, recortada), "Aqui a causa não vem anexada: ela é o motivo"
+  2. Sem fins lucrativos — dois cards: nenhum real vira lucro de sócio; cada real vai para a assistência da Morada
+  3. Trabalho voluntário — grade 2×2 com ícones Lucide (planta e colhe, destila, embala, atende)
+  4. Cuidado em todas as etapas — lista numerada das três etapas na chácara e callout de "nenhuma etapa terceirizada"
+  5. Atendimento humanizado — dois cards: você fala com quem fez o lote; diluição, uso e contraindicação
+  6. Fecho — "comprar aqui vira pão na mesa de alguém", `gotadecura.com.br`, laudos e Morada (slide escuro)
+- **Legenda e hashtags:** em `meta.json` e no `output/post-06/caption.md`.
+- **Status:** 🔵 aguardando revisão antes de publicar.
+
+### post-07 — Nossos diferenciais (slide único)
+
+- **Fonte:** mesma do post-06 (`DifferentialsBand` da home). É a versão condensada em um slide.
+- **Slide único** 1080×1350, fundo lilás (`#503484`) com faixa de foto das placas de madeira da chácara (`cover.jpg`, de `DSC_0244.JPG`) em duotone à direita, sem handle. Logo e handle no topo, título com "ela é o motivo" sublinhado em terracota, os quatro diferenciais em lista com ícones Lucide (`hand-heart`, `users`, `sprout`, `message-circle`) e CTA em destaque para `gotadecura.com.br/sobre`.
+- **Legenda e hashtags:** em `meta.json` e no `output/post-07/caption.md`.
+- **Status:** 🔵 aguardando revisão antes de publicar.
+
 ---
 
 ## Como funciona
 
 - Slides HTML versionados em `html/post-NN/` com um `meta.json`.
-- `_template/` tem um slide de referência com o sistema visual da marca.
+- `templates/` tem os esqueletos de post (`TEMPLATES.md` + um `.md` e previews por template). Cada post registra o seu em `meta.json` → `"template"`.
+- `_template/` tem um slide de referência com o sistema visual da marca (legado).
 - Nos **carrosseis**, os slides intermediários levam só a marca (a gota, `mark.png`) num canto; capa e fecho levam o lockup completo.
 - Exportar: `node scripts/export.mjs post-NN` (PNGs + `caption.md` em `output/`, que é gitignore).
 - A skill `/instagram-post` cuida de todo o fluxo. Ver `.claude/skills/instagram-post/SKILL.md`.

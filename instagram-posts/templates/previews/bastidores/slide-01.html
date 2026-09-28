@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #291945;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #291945; }
+
+  /* Foto em cor natural (sem duotone). No post real: <img class="photo" src="cena-01.jpg"> */
+  .photo { position: absolute; inset: 0;
+    background: repeating-linear-gradient(135deg, #7b6f62 0 3px, #5a5048 3px 26px); }
+  .photo-label { position: absolute; top: 420px; left: 0; right: 0; text-align: center;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.9); }
+  .photo-label small { display: block; font-size: 18px; font-weight: 500; letter-spacing: 0.06em; text-transform: none; margin-top: 10px; color: rgba(255,255,255,0.75); }
+
+  /* Scrim só nas pontas: a foto fica viva no meio */
+  .scrim { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(41,25,69,0.50) 0%, rgba(41,25,69,0) 20%, rgba(41,25,69,0) 52%, rgba(41,25,69,0.88) 84%, rgba(41,25,69,0.94) 100%); }
+  .content { position: absolute; inset: 0; padding: 96px 88px 180px; display: flex; flex-direction: column; }
+  .logo { width: 260px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+  .foot { margin-top: auto; }
+
+  .stamp { display: flex; gap: 30px; font-size: 21px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f0c8ae; }
+  .stamp span { display: inline-flex; align-items: center; gap: 10px; }
+  .stamp svg { width: 26px; height: 26px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 80px; line-height: 1.05; margin-top: 22px; max-width: 16ch; }
+
+  .handle { position: absolute; right: 88px; bottom: 88px; font-size: 20px; color: rgba(255,255,255,0.8); }
+  .handle em { color: #dacbf9; font-style: normal; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .progress span.active { background: #dacbf9; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="photo"></div>
+  <p class="photo-label">Foto da cena de abertura<small>cena-01.jpg · 1080×1350 · cor natural, sem duotone</small></p>
+  <div class="scrim"></div>
+
+  <div class="content">
+    <img class="logo" src="../_assets/logo.png" alt="Gota de Cura">
+    <div class="foot">
+      <p class="stamp">
+        <!-- Lucide: map-pin -->
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg>Lugar na chácara</span>
+        <!-- Lucide: clock -->
+        <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></svg>Hora ou dia</span>
+      </p>
+      <h1>Headline narrativa, contando o que aconteceu</h1>
+    </div>
+  </div>
+
+  <div class="progress"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+  <div class="handle"><em>@</em>gotadecura_artesanais</div>
+</div>
+</body>
+</html>
