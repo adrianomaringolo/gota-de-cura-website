@@ -3,6 +3,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  or,
   query,
   setDoc,
   where,
@@ -41,9 +42,22 @@ export const ProductsService = {
     return toItems(await getDocs(query(productsRef, where('type', '==', type))))
   },
 
+  /**
+   * A line gathers products tagged with it in `categories`, plus any whose own
+   * `type` is the line — which is what the admin form writes when a product is
+   * created straight into it.
+   */
   async getProductsByCategory(category: string): Promise<ProductItem[]> {
     return toItems(
-      await getDocs(query(productsRef, where('categories', 'array-contains', category))),
+      await getDocs(
+        query(
+          productsRef,
+          or(
+            where('categories', 'array-contains', category),
+            where('type', '==', category),
+          ),
+        ),
+      ),
     )
   },
 

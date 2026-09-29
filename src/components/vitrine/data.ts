@@ -11,12 +11,10 @@ export interface Shelf {
   items: ProductItem[]
 }
 
-/** Firestore joins category-mode shelves through an array the type doesn't declare. */
-type WithCategories = ProductItem & { categories?: string[] }
-
 const belongs = (item: ProductItem, type: ProductType) =>
   type.mode === 'category'
-    ? Boolean((item as WithCategories).categories?.includes(type.type))
+    ? item.type === type.type ||
+      Boolean(item.categories?.includes(type.type))
     : item.type === type.type
 
 const availableFirst = (a: ProductItem, b: ProductItem) =>

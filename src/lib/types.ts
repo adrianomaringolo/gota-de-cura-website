@@ -30,6 +30,8 @@ export interface ProductItem {
   optionsSet?: OptionsSetItem[]
   hidden?: boolean
   type?: string
+  /** Special lines (`mode: 'category'`) the product also belongs to. */
+  categories?: string[]
   urlName?: string
   amount?: number
   /** ISO date stamped when the product is first created; drives the "Novo" tag. */

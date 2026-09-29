@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
@@ -10,6 +10,10 @@ import { Spinner } from '@/components/ui/Feedback'
 import { productTypes } from '@/lib/product-types'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
+
+/** Special lines (Amazônia, Gotinha…) group products of any type through `categories`. */
+const lines = productTypes.filter((productType) => productType.mode === 'category')
+const isLine = (category: string) => lines.some((line) => line.type === category)
 
 type ProductForm = {
   id: string
@@ -20,6 +24,7 @@ type ProductForm = {
   description: string
   detailedDescription?: string
   image: string
+  categories: string[]
   available: boolean
   hidden: boolean
 }
@@ -33,6 +38,7 @@ const empty: ProductForm = {
   description: '',
   detailedDescription: '',
   image: '',
+  categories: [],
   available: true,
   hidden: false,
 }
@@ -53,6 +59,7 @@ export function ProductFormDialog({
     register,
     handleSubmit,
     reset,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<ProductForm>({ defaultValues: empty })
 
@@ -69,6 +76,7 @@ export function ProductFormDialog({
             description: product.description,
             detailedDescription: product.detailedDescription ?? '',
             image: product.image,
+            categories: (product.categories ?? []).filter(isLine),
             available: product.available ?? true,
             hidden: product.hidden ?? false,
           }
@@ -81,17 +89,28 @@ export function ProductFormDialog({
       // saveProduct replaces the whole document, so an edit has to carry the
       // untouched fields (urlName, categories, optionsSet, createdAt…) forward
       // instead of only what this form knows about.
+      const { oldPrice: _previousOldPrice, ...existing } = product ?? {}
+      const { oldPrice, categories, ...fields } = data
       await ProductsService.saveProduct({
-        ...product,
-        ...data,
+        ...existing,
+        ...fields,
+        // The form only owns the special lines; any other tag already on the
+        // product is carried over untouched.
+        categories: [
+          ...(product?.categories ?? []).filter((category) => !isLine(category)),
+          ...categories,
+        ],
         id: product?.id ?? data.id,
-        oldPrice: data.oldPrice || undefined,
         createdAt: product?.createdAt ?? new Date().toISOString(),
+        // Firestore rejects `undefined` values, so an empty "old price" (NaN
+        // from valueAsNumber) has to leave the key out rather than send it.
+        ...(oldPrice ? { oldPrice } : {}),
       } as ProductItem)
       toast.success(editing ? 'Produto atualizado' : 'Produto criado')
       await onSaved()
       onClose()
-    } catch {
+    } catch (error) {
+      console.error('[ProductFormDialog] Falha ao salvar o produto', error)
       toast.error('Não foi possível salvar o produto')
     }
   }
@@ -100,6 +119,7 @@ export function ProductFormDialog({
     <Dialog
       open={open}
       onClose={onClose}
+      closeOnBackdrop={false}
       size="lg"
       title={editing ? 'Editar produto' : 'Novo produto'}
       footer={
@@ -121,7 +141,9 @@ export function ProductFormDialog({
     >
       <form
         id="product-form"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(onSubmit, (formErrors) =>
+          console.error('[ProductFormDialog] Formulário inválido', formErrors),
+        )}
         className="grid gap-4 sm:grid-cols-2"
         noValidate
       >
@@ -201,6 +223,36 @@ export function ProductFormDialog({
           error={errors.image && 'Informe a URL da imagem.'}
           {...register('image', { required: true })}
         />
+
+        <fieldset className="flex flex-col gap-2 sm:col-span-2">
+          <legend className="mb-1.5 text-sm font-medium text-ink">Linhas especiais</legend>
+          <Controller
+            control={control}
+            name="categories"
+            render={({ field }) => (
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
+                {lines.map((line) => (
+                  <Checkbox
+                    key={line.id}
+                    label={line.typeLabel ?? line.type}
+                    checked={field.value.includes(line.type)}
+                    onChange={(event) =>
+                      field.onChange(
+                        event.target.checked
+                          ? [...field.value, line.type]
+                          : field.value.filter((category) => category !== line.type),
+                      )
+                    }
+                    onBlur={field.onBlur}
+                  />
+                ))}
+              </div>
+            )}
+          />
+          <p className="text-xs text-ink-muted">
+            Além da categoria, o produto também aparece nas linhas marcadas.
+          </p>
+        </fieldset>
 
         <Checkbox label="Disponível para venda" {...register('available')} />
         <Checkbox label="Ocultar do catálogo" {...register('hidden')} />

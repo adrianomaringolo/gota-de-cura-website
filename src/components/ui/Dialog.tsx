@@ -13,6 +13,8 @@ type DialogProps = {
   size?: 'sm' | 'md' | 'lg'
   /** Some flows (a successful order) must be dismissed deliberately. */
   dismissible?: boolean
+  /** Forms with unsaved input shouldn't be lost to a stray click on the backdrop. */
+  closeOnBackdrop?: boolean
 }
 
 const sizes = {
@@ -34,6 +36,7 @@ export function Dialog({
   footer,
   size = 'md',
   dismissible = true,
+  closeOnBackdrop = true,
 }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null)
 
@@ -72,7 +75,7 @@ export function Dialog({
     >
       <div
         onClick={(event) => {
-          if (dismissible && event.target === event.currentTarget) onClose()
+          if (dismissible && closeOnBackdrop && event.target === event.currentTarget) onClose()
         }}
         className="flex min-h-full items-center justify-center p-4"
       >
