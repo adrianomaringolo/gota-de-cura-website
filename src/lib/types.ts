@@ -23,7 +23,10 @@ export interface ProductItem {
   priceDiscount?: string
   oldPrice?: number
   description: string
+  /** The main photo — always `images[0]` when `images` is set. */
   image: string
+  /** Every photo of the product, main one first. Older products only have `image`. */
+  images?: string[]
   detailedDescription?: string
   available?: boolean
   seal?: string

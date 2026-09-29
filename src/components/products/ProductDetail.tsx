@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { ProductGallery } from './ProductGallery'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Button, ButtonLink } from '@/components/ui/Button'
@@ -78,18 +78,11 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
       </nav>
 
       <div className="grid gap-10 md:grid-cols-2 lg:gap-16">
-        {item.image && (
-          <div className="relative aspect-square overflow-hidden rounded-2xl bg-canvas-sunk">
-            <Image
-              src={item.image}
-              alt={item.name}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 620px"
-              className="object-cover"
-            />
-          </div>
-        )}
+        <ProductGallery
+          item={item}
+          priority
+          sizes="(max-width: 768px) 100vw, 620px"
+        />
 
         <div>
           {isNewProduct(item) && (

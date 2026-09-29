@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import { ProductGallery } from './ProductGallery'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { formatCurrency } from '@/lib/format'
@@ -45,17 +45,7 @@ export function ProductDetailDialog({
       }
     >
       <div className="grid gap-6 sm:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
-        {item.image && (
-          <div className="relative aspect-square overflow-hidden rounded-xl bg-canvas-sunk">
-            <Image
-              src={item.image}
-              alt={item.name}
-              fill
-              sizes="240px"
-              className="object-cover"
-            />
-          </div>
-        )}
+        <ProductGallery item={item} sizes="240px" />
         <div
           className="rich-text text-base"
           dangerouslySetInnerHTML={{

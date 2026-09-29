@@ -8,7 +8,8 @@ import {
   setDoc,
   where,
 } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { db, storage } from '@/lib/firebase'
 import { toAmount } from '@/lib/format'
 import type { ProductItem } from '@/lib/types'
 
@@ -71,6 +72,17 @@ export const ProductsService = {
 
   async saveProduct(product: ProductItem): Promise<void> {
     await setDoc(doc(productsRef, product.id), { ...product })
+  },
+
+  /**
+   * Stores a product photo and returns its public URL. The name is prefixed with
+   * a timestamp so two photos called `IMG_0001.jpg` never overwrite each other.
+   */
+  async uploadProductImage(file: File): Promise<string> {
+    const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-')
+    const imageRef = ref(storage, `products/${Date.now()}-${safeName}`)
+    await uploadBytes(imageRef, file, { contentType: file.type })
+    return getDownloadURL(imageRef)
   },
 
   async deleteProduct(id: string): Promise<void> {
