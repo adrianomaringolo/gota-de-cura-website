@@ -2,7 +2,7 @@
 
 > Índice de todos os posts criados. **Atualize este arquivo sempre que criar, publicar ou arquivar um post.**
 >
-> Última atualização: 2026-09-18
+> Última atualização: 2026-09-30
 
 Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produção / revisão · ⚪️ rascunho
 
@@ -16,6 +16,7 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 
 | post-06 | Nossos diferenciais: a causa é o motivo | 2026-09-17 | Carrossel | `carrossel-educativo` | 6 | 🔵 | Institucional — os quatro diferenciais da seção "Nossos diferenciais" do site: sem fins lucrativos, trabalho voluntário, cuidado em todas as etapas e atendimento humanizado |
 | post-07 | Nossos diferenciais: a causa é o motivo (slide único) | 2026-09-17 | Único | `destaque-faixa` | 1 | 🔵 | Institucional — versão em slide único do post-06: os quatro diferenciais em lista, com CTA em destaque para gotadecura.com.br/sobre |
+| post-08 | Chegou a Gotinha de Cura: nossa linha para bebês e crianças pequenas | 2026-09-30 | Único | `chamada-blog` | 1 | 🔵 | Lançamento — chamada para o post do blog sobre a linha infantil (Bom Soninho, Bem Me Quer, Sabonete Baby), com CTA em destaque para gotadecura.com.br/blog |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---
@@ -87,6 +88,13 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 - **Fonte:** mesma do post-06 (`DifferentialsBand` da home). É a versão condensada em um slide.
 - **Slide único** 1080×1350, fundo lilás (`#503484`) com faixa de foto das placas de madeira da chácara (`cover.jpg`, de `DSC_0244.JPG`) em duotone à direita, sem handle. Logo e handle no topo, título com "ela é o motivo" sublinhado em terracota, os quatro diferenciais em lista com ícones Lucide (`hand-heart`, `users`, `sprout`, `message-circle`) e CTA em destaque para `gotadecura.com.br/sobre`.
 - **Legenda e hashtags:** em `meta.json` e no `output/post-07/caption.md`.
+- **Status:** 🔵 aguardando revisão antes de publicar.
+
+### post-08 — Chegou a Gotinha de Cura
+
+- **Fonte:** post do blog `src/content/blog/2026-09-30-lancamento-gotinha-de-cura/index.md`.
+- **Slide único** 1080×1350 (`chamada-blog`): foto horizontal dos três produtos da linha (`cover.jpg`, a mesma imagem de capa do post) na metade de cima, dissolvendo no fundo `#291945`. Logo e handle no topo, selo "Novo no blog", título do post com a segunda parte em itálico `#f0c8ae`, linha de apoio com os três produtos e CTA para `gotadecura.com.br/blog`.
+- **Legenda e hashtags:** em `meta.json` e no `output/post-08/caption.md`.
 - **Status:** 🔵 aguardando revisão antes de publicar.
 
 ---

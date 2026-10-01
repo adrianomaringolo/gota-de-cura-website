@@ -171,13 +171,19 @@ export function PostBody({ content }: { content: string }) {
           ),
           // eslint-disable-next-line @next/next/no-img-element -- post images are
           // authored in markdown, so their intrinsic size is not known here.
-          img: ({ src, alt }) => (
+          // `![alt](src "half")` renders the image at half width, centred —
+          // portrait product shots would otherwise fill the whole column.
+          img: ({ src, alt, title }) => (
             <span className="my-8 block">
               <img
                 src={typeof src === 'string' ? src : undefined}
                 alt={alt ?? ''}
                 loading="lazy"
-                className="w-full rounded-2xl"
+                className={
+                  title === 'half'
+                    ? 'mx-auto w-full rounded-2xl sm:w-1/2'
+                    : 'w-full rounded-2xl'
+                }
               />
               {alt && (
                 <span className="mt-2 block text-center text-sm text-ink-muted italic">
