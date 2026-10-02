@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ProductCard } from '@/components/products/ProductCard'
 import { Container, SectionHead } from '@/components/site/Section'
+import { cn } from '@/lib/cn'
 import { isNewProduct } from '@/lib/products'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
@@ -46,12 +47,16 @@ export function LaunchesBand() {
   return (
     <section className="bg-canvas-sunk py-20 lg:py-24">
       <Container>
-        <SectionHead
-          title="Lançamentos"
-          lead="Os produtos mais recentes da chácara, cadastrados nos últimos 30 dias."
-        />
+        <SectionHead title="Lançamentos" />
 
-        <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+        <div
+          className={cn(
+            'mt-12 grid grid-cols-2 gap-4 sm:gap-5',
+            // Two columns for a thin shelf, three once there's enough to fill it —
+            // never stretch a lone product across a wide row.
+            items.length >= 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-2',
+          )}
+        >
           {items.map((item) => (
             <ProductCard key={item.id} item={item} type={item.type ?? ''} />
           ))}
