@@ -46,10 +46,7 @@ export function LaunchesBand() {
   return (
     <section className="bg-canvas-sunk py-20 lg:py-24">
       <Container>
-        <SectionHead
-          title="Lançamentos"
-          lead="Os produtos mais recentes da chácara, cadastrados nos últimos 30 dias."
-        />
+        <SectionHead title="Lançamentos" />
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {items.map((item) => (
