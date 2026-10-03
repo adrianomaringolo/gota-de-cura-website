@@ -8,7 +8,9 @@ import { cn } from '@/lib/cn'
 import { ProductsService } from '@/services/products'
 
 /**
- * The product's photos, main one first. Removing a photo only detaches it from
+ * The product's photos, in the order the product page's gallery shows them —
+ * main one first. Reorder by dragging (pointer) or with the arrow buttons
+ * (touch and keyboard). Removing a photo only detaches it from
  * the product: the file stays in Storage, so cancelling the form never leaves a
  * saved product pointing at a deleted image.
  */
@@ -23,6 +25,8 @@ export function ProductImagesField({
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
   const [uploading, setUploading] = useState(0)
+  const [dragging, setDragging] = useState<number | null>(null)
+  const [dropTarget, setDropTarget] = useState<number | null>(null)
 
   const upload = async (files: FileList | null) => {
     const selected = Array.from(files ?? []).filter((file) => file.type.startsWith('image/'))
@@ -52,8 +56,18 @@ export function ProductImagesField({
     }
   }
 
-  const makeMain = (index: number) =>
-    onChange([value[index], ...value.filter((_, i) => i !== index)])
+  const move = (from: number, to: number) => {
+    if (from === to || to < 0 || to >= value.length) return
+    const next = [...value]
+    const [moved] = next.splice(from, 1)
+    next.splice(to, 0, moved)
+    onChange(next)
+  }
+
+  const endDrag = () => {
+    setDragging(null)
+    setDropTarget(null)
+  }
 
   const remove = (index: number) => onChange(value.filter((_, i) => i !== index))
 
@@ -63,22 +77,72 @@ export function ProductImagesField({
         {value.map((src, index) => (
           <figure
             key={src}
+            draggable
+            onDragStart={(event) => {
+              event.dataTransfer.effectAllowed = 'move'
+              setDragging(index)
+            }}
+            onDragOver={(event) => {
+              if (dragging === null) return
+              event.preventDefault()
+              setDropTarget(index)
+            }}
+            onDrop={(event) => {
+              event.preventDefault()
+              if (dragging !== null) move(dragging, index)
+              endDrag()
+            }}
+            onDragEnd={endDrag}
             className={cn(
-              'group relative aspect-square overflow-hidden rounded-xl border bg-canvas-sunk',
+              'group relative aspect-square cursor-grab overflow-hidden rounded-xl border bg-canvas-sunk active:cursor-grabbing',
               index === 0 ? 'border-brand ring-2 ring-brand/30' : 'border-line',
+              dragging === index && 'opacity-40',
+              dropTarget === index && dragging !== index && 'ring-2 ring-brand',
             )}
           >
-            <Image src={src} alt="" fill sizes="180px" className="object-cover" />
-            {index === 0 && (
-              <figcaption className="absolute top-2 left-2 rounded-full bg-brand px-2.5 py-0.5 text-2xs font-bold tracking-[0.06em] text-white uppercase">
-                Principal
-              </figcaption>
+            <Image
+              src={src}
+              alt=""
+              fill
+              sizes="180px"
+              draggable={false}
+              className="pointer-events-none object-cover"
+            />
+            <figcaption
+              className={cn(
+                'absolute top-2 left-2 rounded-full px-2.5 py-0.5 text-2xs font-bold tracking-[0.06em] uppercase',
+                index === 0 ? 'bg-brand text-white' : 'bg-white/90 text-ink',
+              )}
+            >
+              {index === 0 ? 'Principal' : index + 1}
+            </figcaption>
+            {value.length > 1 && (
+              <div className="absolute top-2 right-2 flex gap-1">
+                <button
+                  type="button"
+                  onClick={() => move(index, index - 1)}
+                  disabled={index === 0}
+                  aria-label="Mover para antes"
+                  className="grid h-7 w-7 place-items-center rounded-full bg-white/90 text-ink hover:bg-white disabled:invisible"
+                >
+                  <Chevron direction="left" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => move(index, index + 1)}
+                  disabled={index === value.length - 1}
+                  aria-label="Mover para depois"
+                  className="grid h-7 w-7 place-items-center rounded-full bg-white/90 text-ink hover:bg-white disabled:invisible"
+                >
+                  <Chevron direction="right" />
+                </button>
+              </div>
             )}
             <div className="absolute inset-x-0 bottom-0 flex gap-1.5 bg-gradient-to-t from-black/60 to-transparent p-2 pt-6">
               {index > 0 && (
                 <button
                   type="button"
-                  onClick={() => makeMain(index)}
+                  onClick={() => move(index, 0)}
                   className="rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-ink hover:bg-white"
                 >
                   Tornar principal
@@ -148,9 +212,27 @@ export function ProductImagesField({
         </p>
       ) : (
         <p className="text-xs text-ink-muted">
-          A imagem principal aparece no catálogo; as outras, na página do produto.
+          A imagem principal aparece no catálogo. Na página do produto, as fotos seguem esta
+          ordem — arraste ou use as setas para reorganizar.
         </p>
       )}
     </div>
+  )
+}
+
+function Chevron({ direction }: { direction: 'left' | 'right' }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d={direction === 'left' ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'} />
+    </svg>
   )
 }
