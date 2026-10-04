@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: vitrine</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    background: #291945; color: #ffffff;
+    font-family: 'Archivo', sans-serif;
+  }
+  .stage { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background:
+      radial-gradient(ellipse 1100px 620px at 50% 66%, rgba(137,97,199,0.42) 0%, rgba(93,59,151,0.18) 45%, transparent 75%),
+      linear-gradient(180deg, #291945 0%, #34205a 62%, #3d2667 100%);
+  }
+  /* Chão da prateleira */
+  .floor { position: absolute; left: 0; right: 0; top: 862px; bottom: 0;
+    background: linear-gradient(180deg, rgba(218,203,249,0.10) 0%, rgba(41,25,69,0.0) 60%); }
+  .floor::before { content: ''; position: absolute; left: 96px; right: 96px; top: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(218,203,249,0.55) 18%, rgba(218,203,249,0.55) 82%, transparent); }
+
+  header { position: absolute; top: 76px; left: 96px; right: 96px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .logo { width: 260px; height: auto; filter: brightness(0) invert(1); }
+  .url { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 600; color: #ffffff;
+    border: 1.5px solid rgba(218,203,249,0.5); border-radius: 999px; padding: 14px 26px; }
+  .url svg { width: 22px; height: 22px; color: #dacbf9; }
+
+  .title { position: absolute; top: 196px; left: 0; right: 0; text-align: center; }
+  h1 { font-family: 'Petrona', serif; font-weight: 500; font-size: 104px; line-height: 1; letter-spacing: -0.03em; }
+  h1 em { font-style: italic; color: #dacbf9; }
+  .sub { margin: 22px auto 0; max-width: 980px; font-size: 22px; line-height: 1.5; color: rgba(255,255,255,0.76); }
+
+  /* Fileira de produtos */
+  .row { position: absolute; left: 96px; right: 96px; top: 370px; height: 492px;
+    display: flex; align-items: flex-end; justify-content: space-between; }
+  .glow { position: absolute; left: 50%; top: 360px; transform: translateX(-50%);
+    width: 1900px; height: 600px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(ellipse closest-side at 50% 55%, rgba(244,238,255,0.78) 0%, rgba(218,203,249,0.42) 38%, rgba(137,97,199,0.16) 70%, transparent 100%); }
+  .item { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .item img { display: block; height: var(--h); width: auto; position: relative; z-index: 1;
+    filter: drop-shadow(0 18px 22px rgba(15,8,28,0.45)); }
+  .item::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+    width: 120%; height: 22px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(10,5,20,0.55) 0%, transparent 70%); }
+  .stack { display: flex; flex-direction: column; align-items: center; }
+  .stack img + img { margin-top: -6px; }
+
+  /* Legendas */
+  .labels { position: absolute; left: 96px; right: 96px; top: 902px; display: flex; justify-content: space-between; }
+  .labels span { font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.78); text-align: center; line-height: 1.4; }
+
+  footer { position: absolute; left: 96px; right: 96px; bottom: 56px; display: flex; justify-content: space-between;
+    font-size: 17px; color: rgba(255,255,255,0.62); }
+  footer em { font-style: normal; color: #dacbf9; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="glow"></div>
+  <div class="floor"></div>
+
+  <header>
+    <img class="logo" src="logo.png" alt="Gota de Cura">
+    <div class="url">gotadecura.com.br
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>Tudo começa na <em>destilação</em>.</h1>
+    <p class="sub">Produtos artesanais feitos na nossa chácara: óleos essenciais e hidrolatos destilados com plantas cultivadas sem agrotóxico e água de nascente, e tudo o que criamos com eles.</p>
+  </div>
+
+  <div class="row">
+    <div class="item"><img style="--h:275px" src="../produtos-recortados/oleos-essenciais.png" alt="Óleo essencial de lavanda"></div>
+    <div class="item"><img style="--h:275px" src="../produtos-recortados/diluicoes-oleos-essenciais.png" alt="Diluição de lima da pérsia"></div>
+    <div class="item"><img style="--h:363px" src="../produtos-recortados/hidrolatos.png" alt="Hidrolato de melaleuca"></div>
+    <div class="item stack">
+      <img style="--h:165px" src="../produtos-recortados/sabonetes-argila.png" alt="Sabonete de argila roxa">
+      <img style="--h:176px" src="../produtos-recortados/sabonetes.png" alt="Sabonete de alecrim">
+    </div>
+    <div class="item"><img style="--h:308px" src="../produtos-recortados/sais.png" alt="Sais de banho de copaíba"></div>
+    <div class="item"><img style="--h:374px" src="../produtos-recortados/sprays.png" alt="Spray Alto Astral"></div>
+    <div class="item"><img style="--h:319px" src="../produtos-recortados/sprays-topicos.png" alt="Spray tópico Alívio"></div>
+    <div class="item"><img style="--h:363px" src="../produtos-recortados/colonias.png" alt="Água de colônia Raio de Sol"></div>
+    <div class="item"><img style="--h:187px" src="../produtos-recortados/pomadas.png" alt="Protetor labial"></div>
+    <div class="item"><img style="--h:275px" src="../produtos-recortados/tinturas.png" alt="Tintura de cúrcuma"></div>
+  </div>
+
+  <div class="labels" id="labels"></div>
+
+  <footer>
+    <span><em>@</em>gotadecura_artesanais</span>
+    <span>Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</span>
+  </footer>
+</div>
+<script>
+  // Cada legenda fica centralizada embaixo do produto correspondente
+  window.addEventListener("load", () => {
+  const names = ['Óleos<br>essenciais','Diluições','Hidrolatos','Sabonetes','Sais de<br>banho','Sprays','Sprays<br>tópicos','Águas de<br>colônia','Pomadas','Tinturas']
+  const box = document.getElementById('labels')
+  const base = box.getBoundingClientRect().left
+  document.querySelectorAll('.row .item').forEach((el, i) => {
+    const r = el.getBoundingClientRect()
+    const s = document.createElement('span')
+    s.innerHTML = names[i]
+    s.style.position = 'absolute'
+    s.style.left = (r.left + r.width / 2 - base) + 'px'
+    s.style.transform = 'translateX(-50%)'
+    s.style.whiteSpace = 'nowrap'
+    box.appendChild(s)
+  })
+  })
+</script>
+</body>
+</html>

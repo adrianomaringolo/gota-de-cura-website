@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: faixas</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1920px; height: 1080px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif; color: #211c2b;
+  }
+  .canvas { display: grid; grid-template-columns: 410px repeat(7, 1fr); grid-template-rows: 1fr 200px; width: 1920px; height: 1080px; }
+
+  /* Coluna da marca */
+  .brand { grid-row: 1 / 3; background: #503484; color: #ffffff; padding: 72px 52px 60px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  .brand::after { content: ''; position: absolute; width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(218,203,249,0.16) 0%, transparent 68%); bottom: -240px; left: -200px; }
+  .brand > * { position: relative; z-index: 1; }
+  .logo { width: 270px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+  .brand h1 { margin-top: auto; font-family: 'Petrona', serif; font-weight: 600; font-size: 70px; line-height: 1.02; letter-spacing: -0.025em; }
+  .brand h1 em { display: block; font-style: italic; font-weight: 400; color: #dacbf9; }
+  .brand p { margin-top: 24px; font-size: 20px; line-height: 1.6; color: rgba(255,255,255,0.8); }
+  .brand .url { margin-top: 40px; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
+    background: #ffffff; color: #503484; font-weight: 700; font-size: 21px; padding: 17px 26px; border-radius: 999px;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .brand .url svg { width: 22px; height: 22px; }
+  .brand .handle { margin-top: 22px; font-size: 17px; color: rgba(255,255,255,0.72); }
+  .brand .handle em { font-style: normal; color: #dacbf9; }
+
+  /* Faixas de produto */
+  .band { position: relative; display: flex; flex-direction: column; align-items: center; padding: 104px 8px 22px; overflow: hidden; }
+  .band .num { font-family: 'Petrona', serif; font-style: italic; font-size: 30px; color: rgba(33,28,43,0.45); }
+  .band .pic { flex: 1; width: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 36px; position: relative; }
+  .band .pic::before { content: ''; position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%);
+    width: 210px; height: 440px; border-radius: 50%; background: radial-gradient(ellipse at 50% 70%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%); }
+  .band .pic::after { content: ''; position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+    width: 170px; height: 22px; border-radius: 50%; background: radial-gradient(ellipse, rgba(41,25,69,0.28) 0%, transparent 70%); }
+  .band img { display: block; height: var(--h); width: auto; position: relative; z-index: 1;
+    filter: drop-shadow(0 14px 18px rgba(41,25,69,0.22)); }
+  .pair { display: flex; align-items: flex-end; position: relative; z-index: 1; }
+    .stack { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+  .stack img + img { margin-top: -8px; }
+  .band h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 31px; line-height: 1.08; letter-spacing: -0.015em;
+    text-align: center; color: #211c2b; min-height: 68px; display: flex; align-items: flex-start; margin-top: 26px; }
+  .band .note { margin-top: 10px; font-size: 15px; line-height: 1.4; color: #54505f; text-align: center; min-height: 42px; }
+
+  /* Faixa das linhas especiais */
+  .specials { grid-column: 2 / 9; grid-row: 2; background: #faf8fc; border-top: 1px solid #dfdce6;
+    display: flex; align-items: center; gap: 30px; padding: 0 40px; }
+  .specials .intro { width: 215px; flex-shrink: 0; }
+  .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5f5b68; }
+  .specials .intro h3 { margin-top: 10px; font-family: 'Petrona', serif; font-weight: 600; font-size: 30px; line-height: 1.08;
+    letter-spacing: -0.015em; color: #503484; }
+  .line-card { flex: 1; display: flex; align-items: center; gap: 18px; }
+  .line-card img { width: 120px; height: 120px; object-fit: cover; border-radius: 16px; flex-shrink: 0;
+    box-shadow: 0 6px 20px rgba(41,25,69,0.14); }
+  .line-card h4 { font-family: 'Petrona', serif; font-weight: 600; font-size: 22px; line-height: 1.1; color: #211c2b; }
+  .line-card p { margin-top: 8px; font-size: 15px; line-height: 1.45; color: #54505f; }
+
+  .b1 { background: #e7ddfb; }
+  .b2 { background: #d5ecdf; }
+  .b3 { background: #f6ecd8; }
+  .b4 { background: #fbdccd; }
+  .b5 { background: #fbefb9; }
+  .b6 { background: #f8d6dc; }
+  .b7 { background: #fde6c4; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <section class="brand">
+    <img class="logo" src="logo.png" alt="Gota de Cura">
+    <h1>Cada planta,<em>do cultivo ao frasco.</em></h1>
+    <p>Destilamos na chácara, com plantas cultivadas sem agrotóxico e água de nascente.</p>
+    <div class="url">gotadecura.com.br
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+  </section>
+
+  <section class="band b1">
+    <div class="num">01</div>
+    <h2>Óleos essenciais</h2>
+    <p class="note">Puros e em diluições</p>
+    <div class="pic"><div class="pair">
+      <img style="--h:285px" src="../produtos-recortados/oleos-essenciais.png" alt="Óleo essencial de lavanda">
+      <img style="--h:250px;margin-left:-22px" src="../produtos-recortados/diluicoes-oleos-essenciais.png" alt="Diluição de lima da pérsia">
+    </div></div>
+  </section>
+
+  <section class="band b2">
+    <div class="num">02</div>
+    <h2>Hidrolatos</h2>
+    <p class="note">120 ml e 1 litro</p>
+    <div class="pic"><div class="pair">
+      <img style="--h:390px" src="../produtos-recortados/hidrolatos-1l.png" alt="Hidrolato de jambolão, 1 litro">
+      <img style="--h:295px;margin-left:-48px" src="../produtos-recortados/hidrolatos.png" alt="Hidrolato de melaleuca">
+    </div></div>
+  </section>
+
+  <section class="band b3">
+    <div class="num">03</div>
+    <h2>Sabonetes</h2>
+    <p class="note">Hidrolato, argila e manteiga</p>
+    <div class="pic"><div class="stack">
+      <img style="--h:150px" src="../produtos-recortados/sabonetes-manteiga.png" alt="Sabonete de manteiga de castanha do Pará">
+      <img style="--h:150px" src="../produtos-recortados/sabonetes-argila.png" alt="Sabonete de argila roxa">
+      <img style="--h:150px" src="../produtos-recortados/sabonetes.png" alt="Sabonete de alecrim">
+    </div></div>
+  </section>
+
+  <section class="band b4">
+    <div class="num">04</div>
+    <h2>Sais de banho</h2>
+    <p class="note">Banho e escalda-pés</p>
+    <div class="pic"><img style="--h:290px" src="../produtos-recortados/sais.png" alt="Sais de banho de copaíba"></div>
+  </section>
+
+  <section class="band b5">
+    <div class="num">05</div>
+    <h2>Sprays e colônias</h2>
+    <p class="note">Sem essência sintética</p>
+    <div class="pic"><div class="pair">
+      <img style="--h:380px" src="../produtos-recortados/sprays.png" alt="Spray Alto Astral">
+      <img style="--h:340px;margin-left:-28px" src="../produtos-recortados/colonias.png" alt="Água de colônia Raio de Sol">
+    </div></div>
+  </section>
+
+  <section class="band b6">
+    <div class="num">06</div>
+    <h2>Pomadas e tópicos</h2>
+    <p class="note">Para usar na pele</p>
+    <div class="pic"><div class="pair">
+      <img style="--h:310px" src="../produtos-recortados/sprays-topicos.png" alt="Spray tópico Alívio">
+      <img style="--h:128px;margin-left:-24px" src="../produtos-recortados/pomadas.png" alt="Protetor labial">
+    </div></div>
+  </section>
+
+  <section class="band b7">
+    <div class="num">07</div>
+    <h2>Tinturas</h2>
+    <p class="note">Extratos de plantas</p>
+    <div class="pic"><img style="--h:350px" src="../produtos-recortados/tinturas.png" alt="Tintura de cúrcuma"></div>
+  </section>
+
+  <section class="specials">
+    <div class="intro">
+      <div class="eyebrow">Linhas especiais</div>
+      <h3>Coleções com história própria</h3>
+    </div>
+    <div class="line-card">
+      <img src="../../public/images/categories/amazonia.jpg" alt="Cantinho da Amazônia">
+      <div><h4>Cantinho da Amazônia</h4><p>Breu branco, cumaru, copaíba e outras preciosidades da floresta.</p></div>
+    </div>
+    <div class="line-card">
+      <img src="../../public/images/categories/mtc.jpg" alt="Medicina Tradicional Chinesa">
+      <div><h4>Medicina Tradicional Chinesa</h4><p>Produtos inspirados na tradição milenar chinesa.</p></div>
+    </div>
+    <div class="line-card">
+      <img src="../../public/images/categories/gotinha.jpg" alt="Gotinha de Cura">
+      <div><h4>Gotinha de Cura</h4><p>Uma linha suave para bebês e crianças pequenas.</p></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

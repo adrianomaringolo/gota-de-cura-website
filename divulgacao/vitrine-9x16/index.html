@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: vitrine (vertical)</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #291945; color: #ffffff;
+    font-family: 'Archivo', sans-serif;
+  }
+  .stage { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: linear-gradient(180deg, #291945 0%, #34205a 55%, #3d2667 100%); }
+
+  header { position: absolute; top: 84px; left: 0; right: 0; display: flex; justify-content: center; }
+  .logo { width: 280px; height: auto; filter: brightness(0) invert(1); }
+
+  .title { position: absolute; top: 236px; left: 72px; right: 72px; text-align: center; }
+  h1 { font-family: 'Petrona', serif; font-weight: 500; font-size: 112px; line-height: 1; letter-spacing: -0.03em; }
+  h1 em { font-style: italic; color: #dacbf9; }
+  .sub { margin: 30px auto 0; max-width: 820px; font-size: 26px; line-height: 1.5; color: rgba(255,255,255,0.78); }
+
+  /* Prateleiras */
+  .shelf { position: absolute; left: 56px; right: 56px; }
+  .shelf .glow { position: absolute; left: 50%; transform: translateX(-50%); bottom: 60px;
+    width: 1180px; height: 520px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(ellipse closest-side at 50% 58%, rgba(244,238,255,0.72) 0%, rgba(218,203,249,0.38) 38%, rgba(137,97,199,0.14) 70%, transparent 100%); }
+  .shelf .line { position: absolute; left: -56px; right: -56px; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(218,203,249,0.55) 15%, rgba(218,203,249,0.55) 85%, transparent); }
+  .shelf .floor { position: absolute; left: -56px; right: -56px; height: 90px;
+    background: linear-gradient(180deg, rgba(218,203,249,0.10) 0%, transparent 100%); }
+  .row { position: relative; display: flex; justify-content: space-around; align-items: flex-start; }
+  .item { display: flex; flex-direction: column; align-items: center; }
+  .item .pic { height: var(--pic); display: flex; align-items: flex-end; position: relative; }
+  .item .pic::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+    width: 120%; height: 22px; border-radius: 50%; background: radial-gradient(ellipse, rgba(10,5,20,0.55) 0%, transparent 70%); }
+  .item img { display: block; height: var(--h); width: auto; position: relative; z-index: 1;
+    filter: drop-shadow(0 18px 22px rgba(15,8,28,0.45)); }
+  .stack { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+  .stack img + img { margin-top: -6px; }
+  .item span { margin-top: 32px; font-size: 16px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.8); text-align: center; line-height: 1.4; white-space: nowrap; }
+
+  .s1 { top: 650px; --pic: 360px; }
+  .s1 .line, .s1 .floor { top: 360px; }
+  .s2 { top: 1150px; --pic: 360px; }
+  .s2 .line, .s2 .floor { top: 360px; }
+
+  footer { position: absolute; left: 72px; right: 72px; bottom: 76px; display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; }
+  .cta { display: inline-flex; align-items: center; gap: 12px; background: #ffffff; color: #503484; font-weight: 700; font-size: 30px;
+    padding: 22px 38px; border-radius: 999px; box-shadow: 0 12px 38px rgba(10,5,20,0.5); }
+  .cta svg { width: 28px; height: 28px; }
+  .handle { font-size: 21px; color: rgba(255,255,255,0.8); }
+  .handle em { font-style: normal; color: #dacbf9; }
+  .cause { font-size: 16px; line-height: 1.5; color: rgba(255,255,255,0.6); }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <header><img class="logo" src="logo.png" alt="Gota de Cura"></header>
+
+  <div class="title">
+    <h1>Tudo começa na <em>destilação</em>.</h1>
+    <p class="sub">Produtos artesanais feitos na nossa chácara: óleos essenciais e hidrolatos destilados com plantas cultivadas sem agrotóxico e água de nascente, e tudo o que criamos com eles.</p>
+  </div>
+
+  <div class="shelf s1">
+    <div class="glow"></div><div class="floor"></div><div class="line"></div>
+    <div class="row">
+      <div class="item"><div class="pic"><img style="--h:270px" src="../produtos-recortados/oleos-essenciais.png" alt="Óleo essencial de lavanda"></div><span>Óleos<br>essenciais</span></div>
+      <div class="item"><div class="pic"><img style="--h:270px" src="../produtos-recortados/diluicoes-oleos-essenciais.png" alt="Diluição de lima da pérsia"></div><span>Diluições</span></div>
+      <div class="item"><div class="pic"><img style="--h:350px" src="../produtos-recortados/hidrolatos.png" alt="Hidrolato de melaleuca"></div><span>Hidrolatos</span></div>
+      <div class="item"><div class="pic"><div class="stack">
+        <img style="--h:160px" src="../produtos-recortados/sabonetes-argila.png" alt="Sabonete de argila roxa">
+        <img style="--h:170px" src="../produtos-recortados/sabonetes.png" alt="Sabonete de alecrim">
+      </div></div><span>Sabonetes</span></div>
+      <div class="item"><div class="pic"><img style="--h:290px" src="../produtos-recortados/sais.png" alt="Sais de banho de copaíba"></div><span>Sais de<br>banho</span></div>
+    </div>
+  </div>
+
+  <div class="shelf s2">
+    <div class="glow"></div><div class="floor"></div><div class="line"></div>
+    <div class="row">
+      <div class="item"><div class="pic"><img style="--h:360px" src="../produtos-recortados/sprays.png" alt="Spray Alto Astral"></div><span>Sprays</span></div>
+      <div class="item"><div class="pic"><img style="--h:310px" src="../produtos-recortados/sprays-topicos.png" alt="Spray tópico Alívio"></div><span>Sprays<br>tópicos</span></div>
+      <div class="item"><div class="pic"><img style="--h:350px" src="../produtos-recortados/colonias.png" alt="Água de colônia Raio de Sol"></div><span>Águas de<br>colônia</span></div>
+      <div class="item"><div class="pic"><img style="--h:180px" src="../produtos-recortados/pomadas.png" alt="Protetor labial"></div><span>Pomadas</span></div>
+      <div class="item"><div class="pic"><img style="--h:270px" src="../produtos-recortados/tinturas.png" alt="Tintura de cúrcuma"></div><span>Tinturas</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="cta">gotadecura.com.br
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    <p class="cause">Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</p>
+  </footer>
+
+</div>
+</body>
+</html>
