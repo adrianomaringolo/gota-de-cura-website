@@ -11,9 +11,21 @@ import {
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '@/lib/firebase'
 import { toAmount } from '@/lib/format'
+import { optimizeImage } from '@/lib/optimize-image'
 import type { ProductItem } from '@/lib/types'
 
 const productsRef = collection(db, 'products')
+
+/** "Óleo de Lavanda 10ml" → "oleo-de-lavanda-10ml" */
+const toFileSlug = (text: string) =>
+  text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 60)
+    .replace(/-+$/, '')
 
 /**
  * `entry.data()` is unvalidated, so the cast alone would keep claiming `price`
@@ -78,10 +90,20 @@ export const ProductsService = {
    * Stores a product photo and returns its public URL. The name is prefixed with
    * a timestamp so two photos called `IMG_0001.jpg` never overwrite each other.
    */
-  async uploadProductImage(file: File): Promise<string> {
-    const safeName = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-')
-    const imageRef = ref(storage, `products/${Date.now()}-${safeName}`)
-    await uploadBytes(imageRef, file, { contentType: file.type })
+  /** `productName` names the file (`oleo-de-lavanda-<id>.webp`) instead of the camera's `IMG_1234`. */
+  async uploadProductImage(original: File, productName: string): Promise<string> {
+    const file = await optimizeImage(original)
+    const extension = file.name.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? 'jpg'
+    const unique = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`
+    const imageRef = ref(
+      storage,
+      `products/${toFileSlug(productName) || 'produto'}-${unique}.${extension}`,
+    )
+    // Each upload gets a unique path, so the file never changes and can be cached for good.
+    await uploadBytes(imageRef, file, {
+      contentType: file.type,
+      cacheControl: 'public, max-age=31536000, immutable',
+    })
     return getDownloadURL(imageRef)
   },
 
