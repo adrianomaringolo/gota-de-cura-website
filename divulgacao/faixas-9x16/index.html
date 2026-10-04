@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: faixas (vertical)</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif; color: #211c2b;
+  }
+  .canvas { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 430px repeat(4, 1fr) 280px; width: 1080px; height: 1920px; }
+
+  /* Cabeçalho da marca */
+  .brand { grid-column: 1 / 3; background: #503484; color: #ffffff; padding: 70px 64px 52px; position: relative; overflow: hidden; }
+  .brand::after { content: ''; position: absolute; width: 640px; height: 640px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(218,203,249,0.16) 0%, transparent 68%); bottom: -320px; right: -180px; }
+  .brand > * { position: relative; z-index: 1; }
+  .logo { display: block; width: 260px; height: auto; filter: brightness(0) invert(1); }
+  .brand h1 { margin-top: 40px; font-family: 'Petrona', serif; font-weight: 600; font-size: 70px; line-height: 1.02; letter-spacing: -0.025em; }
+  .brand h1 em { font-style: italic; font-weight: 400; color: #dacbf9; }
+  .brand p { margin-top: 20px; font-size: 23px; line-height: 1.55; color: rgba(255,255,255,0.82); max-width: 38ch; }
+
+  /* Blocos de produto */
+  .cell { position: relative; overflow: hidden; display: flex; align-items: stretch; padding: 26px 30px 22px 22px; }
+  .cell .pic { width: 250px; flex-shrink: 0; display: flex; align-items: flex-end; justify-content: center; position: relative; padding-bottom: 14px; }
+  .cell .pic::before { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    width: 250px; height: 280px; border-radius: 50%; background: radial-gradient(ellipse at 50% 68%, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 68%); }
+  .cell .pic::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+    width: 160px; height: 18px; border-radius: 50%; background: radial-gradient(ellipse, rgba(41,25,69,0.28) 0%, transparent 70%); }
+  .cell img { display: block; height: var(--h); width: auto; position: relative; z-index: 1; filter: drop-shadow(0 12px 16px rgba(41,25,69,0.22)); }
+  .pair { display: flex; align-items: flex-end; position: relative; z-index: 1; }
+  .stack { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+  .stack img + img { margin-top: -6px; }
+  .cell .txt { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-left: 14px; }
+  .cell .num { font-family: 'Petrona', serif; font-style: italic; font-size: 26px; color: rgba(33,28,43,0.45); }
+  .cell h2 { margin-top: 8px; font-family: 'Petrona', serif; font-weight: 600; font-size: 34px; line-height: 1.06; letter-spacing: -0.015em; }
+  .cell .note { margin-top: 10px; font-size: 17px; line-height: 1.4; color: #54505f; }
+
+  .b1 { background: #e7ddfb; } .b2 { background: #d5ecdf; } .b3 { background: #f6ecd8; } .b4 { background: #fbdccd; }
+  .b5 { background: #fbefb9; } .b6 { background: #f8d6dc; } .b7 { background: #fde6c4; }
+
+  /* Bloco do site */
+  .cta-cell { background: #3f2870; color: #ffffff; display: flex; flex-direction: column; justify-content: center; padding: 30px 44px; }
+  .cta-cell h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 34px; line-height: 1.1; }
+  .cta-cell h2 em { font-style: italic; font-weight: 400; color: #dacbf9; }
+  .url { margin-top: 22px; align-self: flex-start; display: inline-flex; align-items: center; gap: 10px;
+    background: #ffffff; color: #503484; font-weight: 700; font-size: 23px; padding: 16px 26px; border-radius: 999px;
+    box-shadow: 0 12px 38px rgba(20,10,40,0.5); }
+  .url svg { width: 22px; height: 22px; }
+  .handle { margin-top: 18px; font-size: 18px; color: rgba(255,255,255,0.78); }
+  .handle em { font-style: normal; color: #dacbf9; }
+
+  /* Linhas especiais */
+  .specials { grid-column: 1 / 3; background: #faf8fc; padding: 30px 56px; display: flex; flex-direction: column; justify-content: center; }
+  .eyebrow { font-size: 15px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5f5b68; }
+  .specials h3 { margin-top: 8px; font-family: 'Petrona', serif; font-weight: 600; font-size: 34px; line-height: 1.1; color: #503484; letter-spacing: -0.015em; }
+  .cards { margin-top: 24px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .line-card { display: flex; gap: 14px; align-items: flex-start; }
+  .line-card img { width: 104px; height: 104px; object-fit: cover; border-radius: 14px; flex-shrink: 0; box-shadow: 0 6px 20px rgba(41,25,69,0.14); }
+  .line-card h4 { font-family: 'Petrona', serif; font-weight: 600; font-size: 21px; line-height: 1.12; }
+  .line-card p { margin-top: 6px; font-size: 14px; line-height: 1.42; color: #54505f; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <section class="brand">
+    <img class="logo" src="logo.png" alt="Gota de Cura">
+    <h1>Cada planta, <em>do cultivo ao frasco.</em></h1>
+    <p>Destilamos na chácara, com plantas cultivadas sem agrotóxico e água de nascente.</p>
+  </section>
+
+  <section class="cell b1">
+    <div class="pic"><div class="pair">
+      <img style="--h:228px" src="../produtos-recortados/oleos-essenciais.png" alt="Óleo essencial de lavanda">
+      <img style="--h:198px;margin-left:-16px" src="../produtos-recortados/diluicoes-oleos-essenciais.png" alt="Diluição de lima da pérsia">
+    </div></div>
+    <div class="txt"><div class="num">01</div><h2>Óleos essenciais</h2><p class="note">Puros e em diluições</p></div>
+  </section>
+
+  <section class="cell b2">
+    <div class="pic"><div class="pair">
+      <img style="--h:236px" src="../produtos-recortados/hidrolatos-1l.png" alt="Hidrolato de jambolão, 1 litro">
+      <img style="--h:182px;margin-left:-22px" src="../produtos-recortados/hidrolatos.png" alt="Hidrolato de melaleuca">
+    </div></div>
+    <div class="txt"><div class="num">02</div><h2>Hidrolatos</h2><p class="note">120 ml e 1 litro</p></div>
+  </section>
+
+  <section class="cell b3">
+    <div class="pic"><div class="stack">
+      <img style="--h:108px" src="../produtos-recortados/sabonetes-argila.png" alt="Sabonete de argila roxa">
+      <img style="--h:112px" src="../produtos-recortados/sabonetes.png" alt="Sabonete de alecrim">
+    </div></div>
+    <div class="txt"><div class="num">03</div><h2>Sabonetes</h2><p class="note">Hidrolato, argila e manteiga</p></div>
+  </section>
+
+  <section class="cell b4">
+    <div class="pic"><img style="--h:215px" src="../produtos-recortados/sais.png" alt="Sais de banho de copaíba"></div>
+    <div class="txt"><div class="num">04</div><h2>Sais de banho</h2><p class="note">Banho e escalda-pés</p></div>
+  </section>
+
+  <section class="cell b5">
+    <div class="pic"><div class="pair">
+      <img style="--h:232px" src="../produtos-recortados/sprays.png" alt="Spray Alto Astral">
+      <img style="--h:208px;margin-left:-14px" src="../produtos-recortados/colonias.png" alt="Água de colônia Raio de Sol">
+    </div></div>
+    <div class="txt"><div class="num">05</div><h2>Sprays e colônias</h2><p class="note">Sem essência sintética</p></div>
+  </section>
+
+  <section class="cell b6">
+    <div class="pic"><div class="pair">
+      <img style="--h:205px" src="../produtos-recortados/sprays-topicos.png" alt="Spray tópico Alívio">
+      <img style="--h:98px;margin-left:-14px" src="../produtos-recortados/pomadas.png" alt="Protetor labial">
+    </div></div>
+    <div class="txt"><div class="num">06</div><h2>Pomadas e tópicos</h2><p class="note">Para usar na pele</p></div>
+  </section>
+
+  <section class="cell b7">
+    <div class="pic"><img style="--h:225px" src="../produtos-recortados/tinturas.png" alt="Tintura de cúrcuma"></div>
+    <div class="txt"><div class="num">07</div><h2>Tinturas</h2><p class="note">Extratos de plantas</p></div>
+  </section>
+
+  <section class="cta-cell">
+    <h2>Conheça todas as <em>nossas linhas</em></h2>
+    <div class="url">gotadecura.com.br
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+  </section>
+
+  <section class="specials">
+    <div class="eyebrow">Linhas especiais</div>
+    <h3>Coleções com história própria</h3>
+    <div class="cards">
+      <div class="line-card"><img src="../../public/images/categories/amazonia.jpg" alt="Cantinho da Amazônia">
+        <div><h4>Cantinho da Amazônia</h4><p>Breu branco, cumaru, copaíba e outras preciosidades da floresta.</p></div></div>
+      <div class="line-card"><img src="../../public/images/categories/mtc.jpg" alt="Medicina Tradicional Chinesa">
+        <div><h4>Medicina Tradicional Chinesa</h4><p>Produtos inspirados na tradição milenar chinesa.</p></div></div>
+      <div class="line-card"><img src="../../public/images/categories/gotinha.jpg" alt="Gotinha de Cura">
+        <div><h4>Gotinha de Cura</h4><p>Uma linha suave para bebês e crianças pequenas.</p></div></div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: nossas linhas (vertical)</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1920px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif; color: #211c2b;
+  }
+  .canvas { display: flex; flex-direction: column; width: 1080px; height: 1920px; }
+
+  /* Cabeçalho da marca */
+  .brand { position: relative; overflow: hidden; background: #503484; color: #ffffff; padding: 64px 64px 46px; }
+  .brand::before { content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(218,203,249,0.16) 0%, transparent 68%); bottom: -360px; right: -220px; }
+  .brand::after { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(41,25,69,0.55) 0%, transparent 70%); top: -240px; left: -200px; }
+  .brand > * { position: relative; z-index: 1; }
+  .logo { display: block; width: 270px; height: auto; filter: brightness(0) invert(1); }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px; background: currentColor; opacity: 0.45; margin-bottom: 22px; }
+  h1 { margin-top: 36px; font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em; font-size: 74px; line-height: 1.04; }
+  h1 em { font-style: italic; font-weight: 400; color: #dacbf9; }
+  .lead { font-size: 24px; line-height: 1.55; color: rgba(255,255,255,0.82); margin-top: 20px; max-width: 54ch; text-wrap: balance; }
+
+  /* Vitrine */
+  .shelf { position: relative; flex: 1; padding: 36px 64px 20px; display: flex; flex-direction: column; }
+  .eyebrow { font-size: 16px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5f5b68; }
+  .shelf h2 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.02em; font-size: 46px; line-height: 1; color: #503484; margin: 10px 0 22px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .tile { background: #ffffff; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 20px rgba(41,25,69,0.10); }
+  .tile img { width: 100%; height: 232px; object-fit: cover; display: block; }
+  .tile .label { padding: 12px 16px 14px; }
+  .tile h3 { font-family: 'Petrona', serif; font-weight: 600; font-size: 24px; line-height: 1.15; }
+  .tile p { font-size: 15px; line-height: 1.4; color: #5f5b68; margin-top: 3px; }
+
+  .special-head { margin: 26px 0 14px; display: flex; align-items: center; gap: 18px; }
+  .special-head .line { flex: 1; height: 1px; background: #dfdce6; }
+  .specials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .special { height: 138px; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 20px rgba(41,25,69,0.10); }
+  .special img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Rodapé */
+  footer { background: #503484; color: #ffffff; padding: 34px 64px 40px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+  .cta { display: inline-flex; align-items: center; gap: 12px; background: #ffffff; color: #503484; font-weight: 700; font-size: 27px;
+    padding: 20px 32px; border-radius: 999px; box-shadow: 0 12px 38px rgba(41,25,69,0.48); flex-shrink: 0; }
+  .cta svg { width: 26px; height: 26px; }
+  .foot-text { text-align: right; }
+  .handle { font-size: 21px; color: rgba(255,255,255,0.85); }
+  .handle em { font-style: normal; color: #dacbf9; }
+  .cause { margin-top: 8px; font-size: 15px; line-height: 1.45; color: rgba(255,255,255,0.7); }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <section class="brand">
+    <img class="logo" src="logo.png" alt="Gota de Cura">
+    <h1 class="rule-mark">Da chácara para o seu <em>cuidado</em>.</h1>
+    <p class="lead">Óleos essenciais e hidrolatos destilados com plantas cultivadas sem agrotóxico e água de nascente. E tudo o que fazemos com eles, à mão.</p>
+  </section>
+
+  <section class="shelf">
+    <div class="eyebrow">Catálogo artesanal</div>
+    <h2>Nossas linhas</h2>
+
+    <div class="grid">
+      <div class="tile"><img src="../../public/images/categories/oleos-essenciais.jpg" alt="Frasco de óleo essencial de lavanda">
+        <div class="label"><h3>Óleos essenciais</h3><p>Puros e em diluições</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/hidrolatos.jpg" alt="Frasco spray de hidrolato de melaleuca">
+        <div class="label"><h3>Hidrolatos</h3><p>120 ml e 1 litro</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/sabonetes.jpg" alt="Sabonete artesanal de alecrim">
+        <div class="label"><h3>Sabonetes</h3><p>Hidrolato, argila e manteiga</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/sais.jpg" alt="Pote de sais de banho de copaíba">
+        <div class="label"><h3>Sais de banho</h3><p>Banho e escalda-pés</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/sprays.jpg" alt="Spray Alto Astral">
+        <div class="label"><h3>Sprays</h3><p>Ambiente e tópicos</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/colonias.jpg" alt="Frasco de água de colônia">
+        <div class="label"><h3>Águas de colônia</h3><p>Sem essência sintética</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/pomadas.jpg" alt="Pote de pomada">
+        <div class="label"><h3>Pomadas</h3><p>Livres de conservantes</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/tinturas.jpg" alt="Frasco de tintura de cúrcuma">
+        <div class="label"><h3>Tinturas</h3><p>Extratos de plantas</p></div></div>
+      <div class="tile"><img src="../../public/images/categories/diluicoes-oleos-essenciais.jpg" alt="Frasco de diluição de lima da pérsia">
+        <div class="label"><h3>Diluições</h3><p>Prontas para a pele</p></div></div>
+    </div>
+
+    <div class="special-head"><div class="eyebrow">Linhas especiais</div><div class="line"></div></div>
+    <div class="specials">
+      <div class="special"><img src="../../public/images/categories/amazonia.jpg" alt="Cantinho da Amazônia"></div>
+      <div class="special"><img src="../../public/images/categories/mtc.jpg" alt="Medicina Tradicional Chinesa"></div>
+      <div class="special"><img src="../../public/images/categories/gotinha.jpg" alt="Gotinha de Cura"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="cta">gotadecura.com.br
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </div>
+    <div class="foot-text">
+      <div class="handle"><em>@</em>gotadecura_artesanais</div>
+      <p class="cause">Toda a renda sustenta os trabalhos assistenciais<br>da Morada Espírita Prof. Lairi Hans.</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

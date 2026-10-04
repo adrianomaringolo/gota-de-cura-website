@@ -53,6 +53,9 @@ export function Dialog({
     if (!dialog) return
 
     const handleCancel = (event: Event) => {
+      // A file input fires a bubbling `cancel` when its picker is dismissed;
+      // only the dialog's own cancel (Esc) should close it.
+      if (event.target !== dialog) return
       event.preventDefault()
       if (dismissible) onClose()
     }
