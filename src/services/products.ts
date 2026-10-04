@@ -8,13 +8,28 @@ import {
   setDoc,
   where,
 } from 'firebase/firestore'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { db, storage } from '@/lib/firebase'
 import { toAmount } from '@/lib/format'
 import { optimizeImage } from '@/lib/optimize-image'
 import type { ProductItem } from '@/lib/types'
 
 const productsRef = collection(db, 'products')
+
+const productPhotos = (product: ProductItem) => [
+  ...(product.images ?? []),
+  ...(product.image ? [product.image] : []),
+]
+
+/** Only our own uploads: photos can also be external URLs (Google Photos…). */
+const isStoredProductImage = (url: string) => {
+  try {
+    const { hostname, pathname } = new URL(url)
+    return hostname === 'firebasestorage.googleapis.com' && pathname.includes('/o/products%2F')
+  } catch {
+    return false
+  }
+}
 
 /** "Óleo de Lavanda 10ml" → "oleo-de-lavanda-10ml" */
 const toFileSlug = (text: string) =>
@@ -87,10 +102,10 @@ export const ProductsService = {
   },
 
   /**
-   * Stores a product photo and returns its public URL. The name is prefixed with
-   * a timestamp so two photos called `IMG_0001.jpg` never overwrite each other.
+   * Stores a product photo and returns its public URL. The file is named after
+   * the product (`oleo-de-lavanda-<id>.webp`) instead of the camera's
+   * `IMG_1234`, with a unique suffix so two uploads never overwrite each other.
    */
-  /** `productName` names the file (`oleo-de-lavanda-<id>.webp`) instead of the camera's `IMG_1234`. */
   async uploadProductImage(original: File, productName: string): Promise<string> {
     const file = await optimizeImage(original)
     const extension = file.name.match(/\.([a-z0-9]+)$/i)?.[1]?.toLowerCase() ?? 'jpg'
@@ -107,7 +122,41 @@ export const ProductsService = {
     return getDownloadURL(imageRef)
   },
 
+  /**
+   * Deletes product photos from Storage once no product shows them any more —
+   * older products were sometimes created by copying another one's photos, so
+   * the check runs against the whole catalogue. Only files under `products/`
+   * are touched. Never throws: a file left behind costs a few KB, while a
+   * failure here must not undo a save that already went through.
+   */
+  async deleteUnusedImages(urls: string[]): Promise<void> {
+    const candidates = [...new Set(urls)].filter(isStoredProductImage)
+    if (candidates.length === 0) return
+
+    try {
+      const inUse = new Set((await this.getProducts()).flatMap(productPhotos))
+      const results = await Promise.allSettled(
+        candidates
+          .filter((url) => !inUse.has(url))
+          .map((url) => deleteObject(ref(storage, url))),
+      )
+      results.forEach((result) => {
+        if (
+          result.status === 'rejected' &&
+          (result.reason as { code?: string })?.code !== 'storage/object-not-found'
+        ) {
+          console.error('[ProductsService] Falha ao excluir imagem', result.reason)
+        }
+      })
+    } catch (error) {
+      console.error('[ProductsService] Falha ao excluir imagens', error)
+    }
+  },
+
+  /** Removes the product and then whichever of its photos nothing else uses. */
   async deleteProduct(id: string): Promise<void> {
+    const product = await this.getProductById(id)
     await deleteDoc(doc(productsRef, id))
+    if (product) await this.deleteUnusedImages(productPhotos(product))
   },
 }

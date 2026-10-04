@@ -10,9 +10,9 @@ import { ProductsService } from '@/services/products'
 /**
  * The product's photos, in the order the product page's gallery shows them —
  * main one first. Reorder by dragging (pointer) or with the arrow buttons
- * (touch and keyboard). Removing a photo only detaches it from
- * the product: the file stays in Storage, so cancelling the form never leaves a
- * saved product pointing at a deleted image.
+ * (touch and keyboard). Removing a photo only detaches it here: the form
+ * deletes the file from Storage once the product is saved, so cancelling never
+ * leaves a saved product pointing at a deleted image.
  */
 export function ProductImagesField({
   value,

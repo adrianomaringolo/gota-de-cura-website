@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useId, useState, type KeyboardEvent } from 'react'
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react'
 import { Controller, useForm, type FieldErrors } from 'react-hook-form'
+import { format } from 'date-fns'
 import toast from 'react-hot-toast'
 import { ProductImagesField } from '@/components/admin/ProductImagesField'
 import { RichTextEditor } from '@/components/admin/RichTextEditor'
@@ -10,6 +11,7 @@ import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field'
 import { Spinner } from '@/components/ui/Feedback'
 import { cn } from '@/lib/cn'
+import { toDate } from '@/lib/format'
 import { productTypes } from '@/lib/product-types'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
@@ -17,6 +19,19 @@ import { ProductsService } from '@/services/products'
 /** Special lines (Amazônia, Gotinha…) group products of any type through `categories`. */
 const lines = productTypes.filter((productType) => productType.mode === 'category')
 const isLine = (category: string) => lines.some((line) => line.type === category)
+
+const toDay = (date: Date) => format(date, 'yyyy-MM-dd')
+
+/**
+ * The form only edits the day, so the time of `base` (the original creation, or
+ * now) is kept — and an untouched day saves the original timestamp unchanged.
+ */
+const withDay = (day: string, base: Date) => {
+  const [year, month, date] = day.split('-').map(Number)
+  const result = new Date(base)
+  if (year && month && date) result.setFullYear(year, month - 1, date)
+  return result.toISOString()
+}
 
 type ProductForm = {
   id: string
@@ -30,6 +45,8 @@ type ProductForm = {
   categories: string[]
   available: boolean
   hidden: boolean
+  /** `yyyy-MM-dd`, as the date input reads and writes it. */
+  createdAt: string
 }
 
 const empty: ProductForm = {
@@ -44,6 +61,7 @@ const empty: ProductForm = {
   categories: [],
   available: true,
   hidden: false,
+  createdAt: '',
 }
 
 const tabs = [
@@ -60,6 +78,7 @@ const fieldTab: Partial<Record<keyof ProductForm, TabId>> = {
   type: 'geral',
   name: 'geral',
   price: 'geral',
+  createdAt: 'geral',
   description: 'descricoes',
   images: 'imagens',
 }
@@ -86,10 +105,18 @@ export function ProductFormDialog({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<ProductForm>({ defaultValues: empty })
+  /** Photos uploaded since the dialog opened — already in Storage, not yet on the product. */
+  const uploadedRef = useRef(new Set<string>())
+
+  const originalImages = () => [
+    ...(product?.images ?? []),
+    ...(product?.image ? [product.image] : []),
+  ]
 
   useEffect(() => {
     if (!open) return
     setTab('geral')
+    uploadedRef.current = new Set()
     reset(
       product
         ? {
@@ -108,8 +135,9 @@ export function ProductFormDialog({
             categories: (product.categories ?? []).filter(isLine),
             available: product.available ?? true,
             hidden: product.hidden ?? false,
+            createdAt: toDay(toDate(product.createdAt) ?? new Date()),
           }
-        : empty,
+        : { ...empty, createdAt: toDay(new Date()) },
     )
   }, [open, product, reset])
 
@@ -119,7 +147,8 @@ export function ProductFormDialog({
       // untouched fields (urlName, categories, optionsSet, createdAt…) forward
       // instead of only what this form knows about.
       const { oldPrice: _previousOldPrice, ...existing } = product ?? {}
-      const { oldPrice, categories, images, ...fields } = data
+      const { oldPrice, categories, images, createdAt, ...fields } = data
+      const originalCreatedAt = toDate(product?.createdAt)
       await ProductsService.saveProduct({
         ...existing,
         ...fields,
@@ -134,11 +163,22 @@ export function ProductFormDialog({
           ...categories,
         ],
         id: product?.id ?? data.id,
-        createdAt: product?.createdAt ?? new Date().toISOString(),
+        createdAt:
+          originalCreatedAt && createdAt === toDay(originalCreatedAt)
+            ? product!.createdAt
+            : withDay(createdAt, originalCreatedAt ?? new Date()),
         // Firestore rejects `undefined` values, so an empty "old price" (NaN
         // from valueAsNumber) has to leave the key out rather than send it.
         ...(oldPrice ? { oldPrice } : {}),
       } as ProductItem)
+      // Photos removed in this edit (and uploads that didn't make the cut) are
+      // only deleted now, so cancelling never leaves the product pointing at a
+      // file that's gone.
+      const discarded = [...originalImages(), ...uploadedRef.current].filter(
+        (url) => !images.includes(url),
+      )
+      uploadedRef.current = new Set()
+      void ProductsService.deleteUnusedImages(discarded)
       toast.success(editing ? 'Produto atualizado' : 'Produto criado')
       await onSaved()
       onClose()
@@ -146,6 +186,13 @@ export function ProductFormDialog({
       console.error('[ProductFormDialog] Falha ao salvar o produto', error)
       toast.error('Não foi possível salvar o produto')
     }
+  }
+
+  /** Closing without saving drops the photos uploaded in the meantime. */
+  const cancel = () => {
+    void ProductsService.deleteUnusedImages([...uploadedRef.current])
+    uploadedRef.current = new Set()
+    onClose()
   }
 
   const onInvalid = (formErrors: FieldErrors<ProductForm>) => {
@@ -174,13 +221,13 @@ export function ProductFormDialog({
   return (
     <Dialog
       open={open}
-      onClose={onClose}
+      onClose={cancel}
       closeOnBackdrop={false}
       size="lg"
       title={editing ? 'Editar produto' : 'Novo produto'}
       footer={
         <>
-          <Button variant="ghost" onClick={onClose} disabled={isSubmitting}>
+          <Button variant="ghost" onClick={cancel} disabled={isSubmitting}>
             Cancelar
           </Button>
           <Button form="product-form" type="submit" disabled={isSubmitting}>
@@ -294,6 +341,14 @@ export function ProductFormDialog({
             hint="Preenchido só quando o produto está em promoção."
             {...register('oldPrice', { valueAsNumber: true })}
           />
+          <Input
+            label="Data de criação"
+            type="date"
+            required
+            hint="Ordena os lançamentos e mantém o selo “Novo” por um mês."
+            error={errors.createdAt && 'Informe a data de criação.'}
+            {...register('createdAt', { required: true })}
+          />
 
           <fieldset className="flex flex-col gap-2 sm:col-span-2">
             <legend className="mb-1.5 text-sm font-medium text-ink">Linhas especiais</legend>
@@ -371,7 +426,13 @@ export function ProductFormDialog({
             render={({ field }) => (
               <ProductImagesField
                 value={field.value}
-                onChange={field.onChange}
+                onChange={(images) => {
+                  const known = new Set([...originalImages(), ...field.value])
+                  images
+                    .filter((url) => !known.has(url))
+                    .forEach((url) => uploadedRef.current.add(url))
+                  field.onChange(images)
+                }}
                 productName={watch('name')}
                 error={errors.images && 'Adicione ao menos uma imagem.'}
               />
