@@ -17,10 +17,13 @@ import { ProductsService } from '@/services/products'
 export function ProductImagesField({
   value,
   onChange,
+  productName,
   error,
 }: {
   value: string[]
   onChange: (images: string[]) => void
+  /** Names the uploaded files after the product. */
+  productName: string
   error?: string
 }) {
   const inputRef = useRef<HTMLInputElement>(null)
@@ -34,7 +37,7 @@ export function ProductImagesField({
 
     setUploading(selected.length)
     const results = await Promise.allSettled(
-      selected.map((file) => ProductsService.uploadProductImage(file)),
+      selected.map((file) => ProductsService.uploadProductImage(file, productName)),
     )
     setUploading(0)
 

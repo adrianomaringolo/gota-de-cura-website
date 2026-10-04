@@ -83,6 +83,7 @@ export function ProductFormDialog({
     handleSubmit,
     reset,
     control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ProductForm>({ defaultValues: empty })
 
@@ -371,6 +372,7 @@ export function ProductFormDialog({
               <ProductImagesField
                 value={field.value}
                 onChange={field.onChange}
+                productName={watch('name')}
                 error={errors.images && 'Adicione ao menos uma imagem.'}
               />
             )}
