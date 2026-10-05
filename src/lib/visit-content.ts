@@ -4,6 +4,22 @@ export const visitPhotos = [
     alt: 'Placa de madeira pintada à mão com o nome Chácara da Mãe Luzia.',
   },
   {
+    src: '/images/visit/photo-13.jpg',
+    alt: 'A placa da Chácara da Mãe Luzia emoldurada pelas primaveras brancas do portão.',
+  },
+  {
+    src: '/images/visit/photo-23.jpg',
+    alt: 'O lago com chafariz no amanhecer, com o sol atravessando as árvores.',
+  },
+  {
+    src: '/images/visit/photo-09.jpg',
+    alt: 'A mesa do café da manhã servido aos visitantes, com toalhas de lavanda.',
+  },
+  {
+    src: '/images/visit/photo-20.jpg',
+    alt: 'Pães, ovos mexidos e toalhas de crochê na mesa do café da manhã.',
+  },
+  {
     src: '/images/visit/photo-03.jpg',
     alt: 'O alambique de destilação montado sob a varanda, com a mata ao fundo.',
   },
@@ -12,20 +28,56 @@ export const visitPhotos = [
     alt: 'Visitantes sentados acompanhando a explicação sobre a destilação.',
   },
   {
-    src: '/images/visit/photo-05.jpg',
-    alt: 'Canteiros de alface e couve plantados na terra vermelha da chácara.',
+    src: '/images/visit/photo-18.jpg',
+    alt: 'Demonstração do destilador de inox, com os visitantes acompanhando de perto.',
+  },
+  {
+    src: '/images/visit/photo-16.jpg',
+    alt: 'Visitantes sentados à sombra de uma árvore durante uma conversa sobre as plantas.',
+  },
+  {
+    src: '/images/visit/photo-26.jpg',
+    alt: 'Visitantes sob a tenda no gramado, com a piscina e a horta ao fundo.',
   },
   {
     src: '/images/visit/photo-10.jpg',
     alt: 'Grupo de visitantes caminhando entre os canteiros de citronela.',
   },
   {
+    src: '/images/visit/photo-15.jpg',
+    alt: 'Grupo de visitantes reunido entre as plantas, ouvindo a explicação do guia.',
+  },
+  {
+    src: '/images/visit/photo-21.jpg',
+    alt: 'Visitantes de capa de chuva conhecendo os pés de citros floridos.',
+  },
+  {
+    src: '/images/visit/photo-05.jpg',
+    alt: 'Canteiros de alface e couve plantados na terra vermelha da chácara.',
+  },
+  {
+    src: '/images/visit/photo-14.jpg',
+    alt: 'Canteiros de alface sendo irrigados, com um pé de lavanda em primeiro plano.',
+  },
+  {
+    src: '/images/visit/photo-24.jpg',
+    alt: 'Uma árvore grande e frondosa sobre os canteiros recém-plantados.',
+  },
+  {
     src: '/images/visit/photo-02.jpg',
     alt: 'Detalhe do cultivo de plantas aromáticas da chácara.',
   },
   {
-    src: '/images/visit/photo-09.jpg',
-    alt: 'A mesa do café da manhã servido aos visitantes, com toalhas de lavanda.',
+    src: '/images/visit/photo-25.jpg',
+    alt: 'As galinhas soltas no galinheiro da chácara.',
+  },
+  {
+    src: '/images/visit/photo-22.jpg',
+    alt: 'Ninfeia branca aberta entre as folhas no lago da chácara.',
+  },
+  {
+    src: '/images/visit/photo-27.jpg',
+    alt: 'Roda de conversa no gramado, à beira do lago.',
   },
   {
     src: '/images/visit/photo-12.jpg',
@@ -44,8 +96,16 @@ export const visitPhotos = [
     alt: 'Artesanato feito pelas voluntárias da Morada, à venda no dia da visita.',
   },
   {
+    src: '/images/visit/photo-17.jpg',
+    alt: 'A varanda com o bazar de artesanato montado para o dia da visita.',
+  },
+  {
     src: '/images/visit/photo-11.jpg',
     alt: 'Vista geral da propriedade durante a visita guiada.',
+  },
+  {
+    src: '/images/visit/photo-19.jpg',
+    alt: 'Foto de grupo dos visitantes com seus certificados, na escada da varanda.',
   },
 ]
 
