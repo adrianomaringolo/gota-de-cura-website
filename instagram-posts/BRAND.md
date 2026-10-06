@@ -28,9 +28,11 @@ previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
 | ID | Quando usar |
 |---|---|
 | `carrossel-educativo` | Explicar um conceito em partes (adaptação de post do blog). |
+| `lista-ilustrada` | Lista de 3 a 5 itens do mesmo tipo, um por slide, com ícone grande. |
 | `chamada-blog` | Slide único anunciando post novo do blog. |
 | `destaque-faixa` | Slide único de confiança levando para uma página do site. |
 | `ficha-da-planta` | Planta do catálogo em destaque (carrossel ou único). |
+| `ficha-do-produto` | Produto pronto que não é uma planta só (sabonete, pomada, Gotinha). |
 | `bastidores` | Dia ou processo da chácara, alternando cena e explicação. |
 
 ---

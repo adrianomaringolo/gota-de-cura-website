@@ -1,0 +1,16 @@
+{
+  "title": "Melaleuca (tea tree): ficha da planta",
+  "date": "2026-10-04",
+  "type": "carousel",
+  "template": "ficha-da-planta",
+  "format": "1080x1350",
+  "slides": [
+    { "file": "slide-01.html", "title": "Capa", "description": "Arco com a foto da ramos de melaleuca de perto, com a fileira ao fundo (planta.jpg, de _image-gallery/melaleuca-tea-tree/melaleuca-4.JPG reduzida para 2400px), eyebrow 'Óleo essencial e hidrolato · Na prateleira', 'Melaleuca', Melaleuca alternifolia · tea tree" },
+    { "file": "slide-02.html", "title": "De onde vem", "description": "Ficha de 6 linhas: nome científico, família (mirtáceas), origem (leste da Austrália), parte destilada, destilação, aroma" },
+    { "file": "slide-03.html", "title": "O que o laudo mostra", "description": "Três compostos principais da cromatografia com porcentagem e barra (gama-terpineno 29,3%, terpinen-4-ol 28,9%, alfa-terpineno 12,8%) e callout do 1,8-cineol abaixo de 2%" },
+    { "file": "slide-04.html", "title": "Como usar", "description": "Duas colunas do mesmo peso: hidrolato direto (tônico, couro cabeludo, pés) e óleo essencial diluído (pele, espinha, difusor). Nota de segurança: não ingerir, tóxico para gatos e cães" },
+    { "file": "slide-05.html", "title": "Fecho", "description": "Fundo lilás: a árvore que solta a própria casca, renovação e desprendimento, CTA gotadecura.com.br/blog, laudo e Morada" }
+  ],
+  "caption": "🌿 Esfregue um raminho de melaleuca entre os dedos e o cheiro vem fresco, terroso, um pouco canforado. Muita gente conhece esse aroma como tea tree, sem saber de onde ele vem.\n\nA Melaleuca alternifolia nasceu na beira dos rios do leste da Austrália. Os povos aborígenes já usavam as folhas muito antes de qualquer laboratório. Aqui na chácara, ela cresce em fileiras altas e vai direto dos canteiros para o alambique ⚗️\n\nNo carrossel:\n🌱 de onde ela vem\n🔬 o que a cromatografia do nosso óleo mostra\n💧 como usar o hidrolato (direto na pele) e o óleo essencial (sempre diluído)\n\n⚠️ O óleo essencial não se ingere e é tóxico para gatos e cães. Na dúvida, fale com um profissional.\n\nO texto completo, com a história da planta, a tabela do laudo e os cuidados, está no blog. Link na bio 👇\n\n💜 Toda a renda da Gota de Cura sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+  "hashtags": ["melaleuca", "teatree", "oleoessencial", "hidrolato", "oleosessenciais", "hidrolatos", "aromaterapia", "cromatografia", "artesanal", "semagrotoxico", "gotadecura"]
+}

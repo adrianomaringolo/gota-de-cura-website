@@ -128,4 +128,4 @@ quebra em duas linhas.
 
 ## Posts de referência
 
-Nenhum ainda. O primeiro post que usar este template vira a referência.
+- `post-11` — Melaleuca (tea tree): carrossel de 5 slides com o slide do laudo (componentes com porcentagem e barra) e ficha de 6 linhas.

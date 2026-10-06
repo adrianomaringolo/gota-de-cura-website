@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  /* Tudo centralizado nos dois eixos. O bloco de texto tem altura fixa (título de até 2
+     linhas + descrição de até 3), então o grupo tem sempre a mesma altura e o disco não
+     muda de lugar de um item para outro. */
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 150px 96px 170px; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .text { height: 360px; display: flex; flex-direction: column; align-items: center; }
+  .blob { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    top: -220px; right: -240px; pointer-events: none; }
+  .warm .blob { background: radial-gradient(circle, rgba(205,99,45,0.10) 0%, transparent 70%); }
+
+  .count { position: absolute; top: 96px; left: 0; right: 0; text-align: center; font-family: 'Petrona', serif; font-weight: 600;
+    font-size: 30px; color: #5d3b97; letter-spacing: 0.02em; }
+  .count span { color: #b8b3c2; font-weight: 500; }
+  .warm .count { color: #a24112; }
+
+  /* O ícone é o herói do slide: disco de 380px, ícone Lucide de 176px */
+  .disc { width: 380px; height: 380px; border-radius: 50%; background: #f3ecff;
+    display: grid; place-items: center; color: #5d3b97;
+    box-shadow: inset 0 0 0 2px #dacbf9; }
+  .warm .disc { background: #fbeee6; color: #a24112; box-shadow: inset 0 0 0 2px #f0c8ae; }
+  .disc svg { width: 176px; height: 176px; }
+  /* Variante ilustração: PNG com fundo transparente, sem disco. Caixa fixa para não mexer no layout. */
+  .art { width: 600px; height: 440px; object-fit: contain; }
+  .art + .rule-mark { margin-top: 44px; }
+
+  .rule-mark { color: #5d3b97; margin-top: 64px; }
+  .warm .rule-mark { color: #a24112; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin: 0 auto 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 84px; line-height: 1.04; color: #503484; max-width: 14ch; }
+  .desc { font-size: 34px; line-height: 1.55; color: #54505f; margin-top: 26px; max-width: 30ch; }
+
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+  <p class="count">01 <span>/ 05</span></p>
+
+  <img class="art" src="valor-responsabilidade.png" alt="Mãos em concha segurando um coração rosa">
+
+  <div class="rule-mark"></div>
+  <div class="text">
+    <h1>Responsabilidade social</h1>
+    <p class="desc">Toda a renda das vendas vai para os trabalhos assistenciais da Morada, em Campinas.</p>
+  </div>
+
+  <div class="progress"><span></span><span></span><span class="active"></span><span></span><span></span><span></span><span></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

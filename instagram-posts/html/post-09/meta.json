@@ -1,0 +1,30 @@
+{
+  "title": "Os valores da Gota de Cura",
+  "date": "2026-10-04",
+  "type": "carousel",
+  "template": "carrossel-educativo",
+  "format": "1080x1350",
+  "slides": [
+    { "file": "slide-01.html", "title": "Capa", "description": "Foto da loja (cor natural): prateleiras com frascos, sabonetes no balcão. 'Cinco valores que vêm antes do frasco'" },
+    { "file": "slide-02.html", "title": "Responsabilidade social", "description": "Cards empilhados: toda a renda das vendas → vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans" },
+    { "file": "slide-03.html", "title": "Sustentabilidade", "description": "Grade 2x2 com ícones Lucide: ingredientes naturais, água de nascente, adubação natural, energia limpa. Nota: sem agrotóxico em nenhum canteiro" },
+    { "file": "slide-04.html", "title": "Qualidade", "description": "Duas colunas: o que você não lê aqui (promessa de cura, efeito milagroso, selo sem explicação) x o que encontra (cromatografia, laudo inteiro, linguagem de leigo)" },
+    { "file": "slide-05.html", "title": "Transparência", "description": "Lista O quê / Onde / Como / Quem: catálogo, Chácara da Mãe Luzia, blog e visitas, voluntários" },
+    { "file": "slide-06.html", "title": "Inovação", "description": "Diagrama de fluxo ideia → teste → catálogo; nota sobre a Gotinha de Cura como novidade mais recente" },
+    { "file": "slide-07.html", "title": "Fecho", "description": "Slide escuro: 'Cinco valores, um mesmo motivo', gotadecura.com.br/sobre, laudos e a Morada" }
+  ],
+  "caption": "💜 Antes de qualquer frasco chegar à prateleira, ele passa por cinco valores. São eles que guiam a Gota de Cura do canteiro ao balcão da loja.\n\n🤲 Responsabilidade social: toda a renda das vendas vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans, em Campinas.\n\n🌿 Sustentabilidade: ingredientes naturais, água de nascente, adubação natural e energia limpa. Sem agrotóxico em nenhum canteiro.\n\n🔬 Qualidade: comprovada por laudo, não por promessa. A cromatografia de cada planta está publicada inteira em gotadecura.com.br/cromatografias.\n\n📖 Transparência: o que tem em cada produto, onde e como ele foi feito, e quem fez. Tudo dito com clareza.\n\n🧪 Inovação: receitas e processos novos são testados antes de virarem catálogo. A novidade mais recente é a Gotinha de Cura, nossa linha para bebês e crianças pequenas.\n\n👇 Conheça a nossa história em gotadecura.com.br/sobre (link na bio). Qual desses valores mais combina com você? Conte nos comentários 💬",
+  "hashtags": [
+    "gotadecura",
+    "hidrolatos",
+    "oleosessenciais",
+    "aromaterapia",
+    "feitoamao",
+    "semagrotoxico",
+    "sustentabilidade",
+    "trabalhovoluntario",
+    "moradaespirita",
+    "campinas",
+    "chacaradamaeluzia"
+  ]
+}

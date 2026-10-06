@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 88px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; }
+  .blob { position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    bottom: -260px; right: -220px; pointer-events: none; }
+  .logo { width: 240px; height: auto; align-self: flex-start; }
+
+  .arch { margin-top: 44px; width: 904px; height: 620px; border-radius: 452px 452px 28px 28px;
+    object-fit: cover; object-position: 50% 50%; display: block; }
+
+  .eyebrow { margin-top: 48px; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #a24112; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.03em;
+    font-size: 108px; line-height: 1; color: #503484; margin-top: 14px; }
+  .sci { font-family: 'Petrona', serif; font-style: italic; font-weight: 400; font-size: 42px; color: #54505f; margin-top: 12px; }
+  .sci span { font-style: normal; color: #5f5b68; }
+
+  .handle { position: absolute; right: 88px; bottom: 88px; font-size: 20px; color: #5f5b68; }
+  .handle em { color: #5d3b97; font-style: normal; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+  <img class="logo" src="logo.png" alt="Gota de Cura">
+
+  <img class="arch" src="planta.jpg" alt="Ramos de melaleuca de perto, com as folhas finas em forma de agulha e a fileira das árvores ao fundo.">
+
+  <p class="eyebrow">Óleo essencial e hidrolato · Na prateleira</p>
+  <h1>Melaleuca</h1>
+  <p class="sci">Melaleuca alternifolia <span>· tea tree</span></p>
+
+  <div class="progress"><span class="active"></span><span></span><span></span><span></span><span></span></div>
+  <div class="handle"><em>@</em>gotadecura_artesanais</div>
+</div>
+</body>
+</html>

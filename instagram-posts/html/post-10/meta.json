@@ -1,0 +1,64 @@
+{
+  "title": "Os valores da Gota de Cura (lista ilustrada)",
+  "date": "2026-10-04",
+  "postedAt": "2026-10-05",
+  "status": "postado",
+  "type": "carousel",
+  "template": "lista-ilustrada",
+  "format": "1080x1350",
+  "slides": [
+    {
+      "file": "slide-01.html",
+      "title": "Capa",
+      "description": "Foto do banner da Morada com o campo de lavanda: chip 'Cinco valores', 'O que guia a Gota de Cura'"
+    },
+    {
+      "file": "slide-02.html",
+      "title": "Muitas mãos",
+      "description": "Frase de abertura em fundo lilás claro: 'Tudo aqui é feito por muitas mãos', voluntários que plantam, destilam, embalam e atendem"
+    },
+    {
+      "file": "slide-03.html",
+      "title": "Responsabilidade social",
+      "description": "Ilustração (valor-responsabilidade.png) de mãos segurando o símbolo do valor; Toda a renda das vendas vai para os trabalhos assistenciais da Morada, em Campinas."
+    },
+    {
+      "file": "slide-04.html",
+      "title": "Sustentabilidade",
+      "description": "Ilustração (valor-sustentabilidade.png) de mãos segurando o símbolo do valor; Água de nascente, adubação natural e energia limpa. Nenhum agrotóxico nos canteiros."
+    },
+    {
+      "file": "slide-05.html",
+      "title": "Qualidade",
+      "description": "Ilustração (valor-qualidade.png) de mãos segurando o símbolo do valor; Pureza comprovada por laudo, não por promessa. A cromatografia de cada planta está no site."
+    },
+    {
+      "file": "slide-06.html",
+      "title": "Transparência",
+      "description": "Ilustração (valor-transparencia.png) de mãos segurando o símbolo do valor; Informação clara sobre o que tem em cada produto e como ele foi feito."
+    },
+    {
+      "file": "slide-07.html",
+      "title": "Inovação",
+      "description": "Ilustração (valor-inovacao.png) de mãos segurando o símbolo do valor; Novas receitas e processos, sempre testados antes de virarem catálogo."
+    },
+    {
+      "file": "slide-08.html",
+      "title": "Fecho",
+      "description": "Slide escuro: 'Valores que você leva para casa', gotadecura.com.br/sobre"
+    }
+  ],
+  "caption": "💜 Tudo aqui é feito por muitas mãos: voluntários que plantam, destilam, embalam e atendem. E são cinco valores que guiam essas mãos 👉\n\n🤲 Responsabilidade social: toda a renda vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans, em Campinas.\n🌿 Sustentabilidade: água de nascente, adubação natural, energia limpa e nenhum agrotóxico nos canteiros.\n✅ Qualidade: comprovada por laudo, não por promessa.\n👀 Transparência: você sabe o que tem em cada produto e como ele foi feito.\n💡 Inovação: toda receita nova é testada antes de chegar ao catálogo.\n\n👇 Conheça a nossa história em gotadecura.com.br/sobre (link na bio). Qual desses valores você leva para casa? Conte nos comentários 💬",
+  "hashtags": [
+    "gotadecura",
+    "hidrolatos",
+    "oleosessenciais",
+    "aromaterapia",
+    "feitoamao",
+    "semagrotoxico",
+    "sustentabilidade",
+    "trabalhovoluntario",
+    "moradaespirita",
+    "campinas"
+  ]
+}

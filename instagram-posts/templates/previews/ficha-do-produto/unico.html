@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; }
+
+  /* Mesma foto sangrada da capa do carrossel, mais baixa para caber os usos */
+  .photo { position: absolute; top: 0; left: 0; width: 1080px; height: 660px;
+    background: repeating-linear-gradient(135deg, #b9a9d3 0 3px, #d9cfe6 3px 26px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; padding-top: 60px;
+    font-size: 22px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #291945; }
+  .photo small { display: block; font-size: 18px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; margin-top: 10px; color: #3a2a57; }
+  .scrim { position: absolute; top: 0; left: 0; right: 0; height: 280px;
+    background: linear-gradient(180deg, rgba(41,25,69,0.55) 0%, rgba(41,25,69,0) 100%); }
+  .top { position: absolute; top: 80px; left: 88px; right: 88px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { width: 240px; height: auto; filter: brightness(0) invert(1); }
+  .handle { font-size: 20px; color: rgba(255,255,255,0.9); }
+  .handle em { color: #dacbf9; font-style: normal; }
+
+  .panel { position: absolute; top: 660px; left: 0; right: 0; bottom: 0; padding: 52px 88px 88px;
+    border-top: 5px solid #5d3b97; display: flex; flex-direction: column; }
+  .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #a24112; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.03em;
+    font-size: 80px; line-height: 1; color: #503484; margin-top: 12px; }
+  .sub { font-size: 26px; line-height: 1.5; color: #54505f; margin-top: 14px; }
+  .sub b { font-weight: 600; color: #211c2b; }
+
+  .uses { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 18px; }
+  .uses li { display: flex; align-items: center; gap: 20px; font-size: 28px; line-height: 1.35; color: #211c2b; }
+  .num { width: 44px; height: 44px; flex: none; border-radius: 50%; background: #503484; color: #ffffff;
+    display: grid; place-items: center; font-family: 'Petrona', serif; font-weight: 600; font-size: 23px; }
+
+  .cta { display: inline-flex; align-items: center; gap: 16px; margin-top: auto; align-self: flex-start;
+    background: #503484; color: #ffffff;
+    font-size: 30px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 24px 40px; border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(41,25,69,0.28); }
+  .cta svg { width: 28px; height: 28px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="photo">Foto do produto<small>produto.jpg · o produto real, sem fundo poluído · mín. 1200 px de largura</small></div>
+  <div class="scrim"></div>
+  <div class="top">
+    <img class="logo" src="../_assets/logo.png" alt="Gota de Cura">
+    <span class="handle"><em>@</em>gotadecura_artesanais</span>
+  </div>
+
+  <div class="panel">
+    <p class="eyebrow">Categoria · Linha ou novidade</p>
+    <h1>Nome do produto</h1>
+    <p class="sub"><b>Tamanho</b> · Frase curta que diz o que o produto é.</p>
+
+    <ol class="uses">
+      <li><span class="num">1</span>Forma de uso em poucas palavras</li>
+      <li><span class="num">2</span>Segunda forma de uso</li>
+      <li><span class="num">3</span>Terceira forma de uso</li>
+    </ol>
+
+    <div class="cta">
+      <span>gotadecura.com.br/categoria</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+    </div>
+  </div>
+</div>
+</body>
+</html>

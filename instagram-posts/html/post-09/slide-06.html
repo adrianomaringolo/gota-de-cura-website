@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 120px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%); pointer-events: none; }
+  .blob.tr { top: -180px; right: -160px; }
+  .blob.bl { bottom: -200px; left: -170px; }
+  .count { font-size: 16px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #5f5b68; margin-bottom: 18px; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 64px; line-height: 1.08; color: #503484; max-width: 16ch; }
+  .lead { font-size: 32px; line-height: 1.55; color: #54505f; margin-top: 24px; max-width: 32ch; }
+  .note { font-family: 'Petrona', serif; font-style: italic; font-size: 32px; line-height: 1.35; color: #503484; margin-top: 52px; max-width: 32ch; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+  .flow { margin-top: 64px; display: grid; grid-template-columns: 1fr 48px 1fr 48px 1fr; align-items: start; gap: 12px; }
+  .step { text-align: center; }
+  .disc { width: 128px; height: 128px; margin: 0 auto; border-radius: 50%; background: #f3ecff;
+    display: grid; place-items: center; color: #5d3b97; }
+  .step.warm .disc { background: #fbeee6; color: #a24112; }
+  .step.final .disc { background: #503484; color: #ffffff; }
+  .disc svg { width: 52px; height: 52px; }
+  .step h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 38px; color: #211c2b; margin-top: 24px; }
+  .step p { font-size: 23px; line-height: 1.45; color: #54505f; margin-top: 10px; }
+  .link { color: #8961c7; margin-top: 40px; }
+  .link svg { width: 48px; height: 48px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob tr"></div>
+
+  <p class="count">Valor 5 de 5</p>
+  <div class="rule-mark"></div>
+  <h1>Inovação</h1>
+  <p class="lead">Novas receitas e processos, sempre testados antes de virarem catálogo.</p>
+
+  <div class="flow">
+    <div class="step">
+      <div class="disc"><!-- Lucide: lightbulb -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></div>
+      <h2>Ideia</h2>
+      <p>Uma receita ou um processo novo.</p>
+    </div>
+    <span class="link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
+    <div class="step warm">
+      <div class="disc"><!-- Lucide: flask-conical -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /><path d="M6.453 15h11.094" /><path d="M8.5 2h7" /></svg></div>
+      <h2>Teste</h2>
+      <p>Feito e usado antes de ir à venda.</p>
+    </div>
+    <span class="link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg></span>
+    <div class="step final">
+      <div class="disc"><!-- Lucide: store -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></svg></div>
+      <h2>Catálogo</h2>
+      <p>Só então chega à loja e ao site.</p>
+    </div>
+  </div>
+
+  <p class="note">A novidade mais recente é a Gotinha de Cura, linha para bebês e crianças pequenas.</p>
+
+  <div class="progress"><span></span><span></span><span></span><span></span><span></span><span class="active"></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

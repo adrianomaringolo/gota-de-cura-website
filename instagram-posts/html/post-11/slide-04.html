@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #faf8fc;
+    font-family: 'Archivo', sans-serif;
+    color: #211c2b;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 110px 88px 180px; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 620px; height: 620px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(93,59,151,0.10) 0%, transparent 70%);
+    top: -180px; right: -160px; pointer-events: none; }
+  .rule-mark { color: #5d3b97; }
+  .rule-mark::before { content: ''; display: block; width: 44px; height: 2px;
+    background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 64px; line-height: 1.08; color: #503484; }
+
+  .cols { margin-top: 56px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .col { background: #ffffff; border: 1px solid #dfdce6; border-radius: 24px; padding: 44px 36px 48px;
+    box-shadow: 0 6px 20px rgba(41,25,69,0.10); }
+  .col-head { display: flex; align-items: center; gap: 14px; padding-bottom: 22px; border-bottom: 2px solid #dacbf9; }
+  .col-head svg { width: 36px; height: 36px; color: #5d3b97; flex: none; }
+  .col.oil .col-head svg { color: #a24112; }
+  .col-head h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 36px; color: #211c2b; }
+  .col-head p { font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5f5b68; margin-top: 4px; }
+  .col ul { list-style: none; margin-top: 30px; display: flex; flex-direction: column; gap: 26px; }
+  .col li { position: relative; padding-left: 26px; font-size: 26px; line-height: 1.45; color: #54505f; }
+  .col li b { font-weight: 600; color: #211c2b; }
+  .col li::before { content: ''; position: absolute; left: 0; top: 15px; width: 9px; height: 9px; border-radius: 50%; background: #8961c7; }
+  .col.oil li::before { background: #cd632d; }
+
+  .note { font-family: 'Petrona', serif; font-style: italic; font-size: 30px; line-height: 1.4; color: #503484; margin-top: 48px; max-width: 46ch; }
+
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="rule-mark"></div>
+  <h1>Como usar</h1>
+
+  <div class="cols">
+    <div class="col">
+      <div class="col-head">
+        <!-- Lucide: droplets -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg>
+        <div><h2>Hidrolato</h2><p>Direto, sem diluir</p></div>
+      </div>
+      <ul>
+        <li><b>Tônico facial</b> para pele oleosa, depois da limpeza.</li>
+        <li><b>Couro cabeludo</b>, borrifado nas raízes depois de lavar.</li>
+        <li><b>Pés</b>, depois do banho e antes de calçar.</li>
+      </ul>
+    </div>
+    <div class="col oil">
+      <div class="col-head">
+        <!-- Lucide: leaf -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20a10 10 0 0010-10 25.9 25.9 0 00-1.04-7.281 1 1 0 00-1.755-.325C15.833 5.5 13 5.5 9.8 6.1A7 7 0 0011 20" /><path d="M2 21a5 5 0 012.911-4.544C7.613 15.212 8.351 15.24 11 13" /></svg>
+        <div><h2>Óleo essencial</h2><p>Sempre diluído</p></div>
+      </div>
+      <ul>
+        <li><b>Na pele</b>, 1 a 2 gotas em 5 ml de óleo vegetal.</li>
+        <li><b>Na espinha</b>, até 5% em gel, com cotonete.</li>
+        <li><b>No difusor</b>, 3 a 5 gotas por 20 a 30 minutos.</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="note">O óleo essencial não se ingere e é tóxico para gatos e cães. Na dúvida, fale com um profissional.</p>
+
+  <div class="progress"><span></span><span></span><span></span><span class="active"></span><span></span></div>
+  <img class="mark" src="mark.png" alt="">
+</div>
+</body>
+</html>

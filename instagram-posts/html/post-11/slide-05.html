@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; padding: 100px 88px 180px;
+    overflow: hidden; background: #503484; display: flex; flex-direction: column; justify-content: center; }
+  .blob { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(137,97,199,0.34) 0%, transparent 70%);
+    top: -260px; right: -220px; pointer-events: none; }
+  .logo { width: 270px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); margin-bottom: 52px; }
+  .plant { font-family: 'Petrona', serif; font-style: italic; font-size: 34px; color: #dacbf9; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 64px; line-height: 1.08; max-width: 18ch; margin-top: 14px; }
+  .lead { font-size: 30px; line-height: 1.55; color: rgba(255,255,255,0.75); margin-top: 26px; max-width: 34ch; }
+  .cta { display: inline-flex; align-items: center; gap: 18px; margin-top: 52px; align-self: flex-start;
+    background: #ffffff; color: #503484;
+    font-size: 34px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 28px 44px; border-radius: 999px;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 30px; height: 30px; }
+  .sub { font-size: 25px; line-height: 1.55; color: rgba(255,255,255,0.75); margin-top: 34px; max-width: 44ch; }
+  .sub b { color: #ffffff; font-weight: 600; }
+  .handle { position: absolute; right: 88px; bottom: 88px; font-size: 20px; color: rgba(255,255,255,0.75); }
+  .handle em { color: #dacbf9; font-style: normal; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .progress span.active { background: #dacbf9; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <img class="logo" src="logo.png" alt="Gota de Cura">
+  <p class="plant">Melaleuca · Melaleuca alternifolia</p>
+  <h1>Uma árvore que solta a própria casca para se refazer.</h1>
+  <p class="lead">Na aromaterapia, a melaleuca é associada à renovação e ao desprendimento.</p>
+  <div class="cta">
+    <span>gotadecura.com.br/blog</span>
+    <!-- Lucide: arrow-right -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+  </div>
+  <p class="sub">O texto completo está no blog e o laudo inteiro, em <b>/cromatografias</b>. A renda sustenta os trabalhos da Morada Espírita Prof. Lairi Hans.</p>
+
+  <div class="progress"><span></span><span></span><span></span><span></span><span class="active"></span></div>
+  <div class="handle"><em>@</em>gotadecura_artesanais</div>
+</div>
+</body>
+</html>

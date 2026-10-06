@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #291945;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #291945; }
+  /* Foto horizontal (fileira de melaleucas contra o céu): ocupa a parte de cima e se dissolve no fundo. */
+  .photo { position: absolute; top: 0; left: 0; width: 100%; height: 820px; object-fit: cover; object-position: 50% 40%;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+            mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%); }
+  .scrim { position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(41,25,69,0.62) 0%, rgba(41,25,69,0.10) 18%, rgba(41,25,69,0.0) 32%, rgba(41,25,69,0.35) 48%, rgba(41,25,69,0.92) 58%, rgba(41,25,69,1) 100%); }
+  .content { position: absolute; inset: 0; padding: 96px 88px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { width: 300px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+  .handle { font-size: 22px; color: rgba(255,255,255,0.86); }
+  .handle em { font-style: normal; color: #dacbf9; }
+  .foot { margin-top: auto; }
+  .tag { display: inline-block; font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #291945; background: #cd632d; padding: 11px 20px; border-radius: 999px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 70px; line-height: 1.06; margin-top: 30px; max-width: 24ch; }
+  h1 em { display: block; font-style: italic; font-weight: 500; font-size: 50px; line-height: 1.15; color: #f0c8ae; margin-top: 12px; }
+  .cta { display: flex; align-items: center; gap: 18px; margin-top: 48px;
+    background: #ffffff; color: #503484;
+    font-size: 36px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 30px 46px; border-radius: 999px; align-self: flex-start; width: fit-content;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 30px; height: 30px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="photo" src="cover.jpg" alt="Fileira de melaleucas altas na chácara, contra o céu azul">
+  <div class="scrim"></div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="logo.png" alt="Gota de Cura">
+      <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    </div>
+
+    <div class="foot">
+      <span class="tag">Novo no blog</span>
+      <h1>Melaleuca (tea tree):<em>origem, propriedades e como usar o óleo essencial e o hidrolato</em></h1>
+      <div class="cta">
+        <span>gotadecura.com.br/blog</span>
+        <!-- Lucide: arrow-right -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
