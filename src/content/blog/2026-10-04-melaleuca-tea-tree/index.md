@@ -1,6 +1,6 @@
 ---
 title: 'Melaleuca (tea tree): origem, propriedades e como usar o óleo essencial e o hidrolato'
-excerpt: 'Da beira dos rios do leste da Austrália para os kits de primeiros socorros e daí para o nosso alambique: a melaleuca é uma das plantas aromáticas mais estudadas que existem. Conheça a origem dela, o que a cromatografia do nosso óleo mostra, os usos do óleo essencial e do hidrolato no corpo e nas emoções, e os cuidados que não podem faltar.'
+excerpt: 'Da beira dos rios do leste da Austrália para os kits de primeiros socorros e daí para a nossa destilaria: a melaleuca é uma das plantas aromáticas mais estudadas que existem. Conheça a origem dela, o que a cromatografia do nosso óleo mostra, os usos do óleo essencial e do hidrolato no corpo e nas emoções, e os cuidados que não podem faltar.'
 author: 'Equipe Gota de cura'
 publishedAt: '2026-10-04'
 tags: ['melaleuca', 'tea tree', 'óleos essenciais', 'hidrolatos', 'cromatografia', 'aromaterapia']
@@ -31,9 +31,9 @@ A ciência só chegou nos **anos 1920**, quando o químico australiano Arthur Pe
 
 ![Flores brancas e felpudas da melaleuca, em cachos, entre as folhas finas da planta](/images/blog/melaleuca-tea-tree/flores.jpg)
 
-Aqui na chácara, a melaleuca se adaptou bem ao clima e cresce em fileiras altas. As folhas e os ramos finos são colhidos e levados direto para o alambique, onde passam pela destilação por arraste a vapor.
+Aqui na chácara, a melaleuca se adaptou bem ao clima e cresce em fileiras altas. As folhas e os ramos finos são colhidos e levados direto para a destilaria, onde passam pela destilação por arraste a vapor.
 
-![Cesto de vime cheio de ramos frescos de melaleuca, ao lado da caldeira do alambique, pronto para a destilação](/images/blog/melaleuca-tea-tree/ramos-para-destilar.jpg)
+![Cesto de vime cheio de ramos frescos de melaleuca, ao lado da caldeira da destilaria, pronto para a destilação](/images/blog/melaleuca-tea-tree/ramos-para-destilar.jpg)
 
 ## O que a cromatografia mostra
 
