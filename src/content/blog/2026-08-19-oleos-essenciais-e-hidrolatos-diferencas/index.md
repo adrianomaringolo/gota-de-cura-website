@@ -7,7 +7,7 @@ tags: ['óleos essenciais', 'hidrolatos', 'destilação', 'aromaterapia']
 featured: false
 image: '/images/blog/oleos-essenciais-e-hidrolatos-diferencas/oleo-e-hidrolato-recem-separados.jpg'
 tldr:
-  - 'Óleo essencial e hidrolato saem da mesma destilação, mas se separam por densidade: o óleo essencial é a fração lipossolúvel, concentrada; o hidrolato é a água aromática que sobra, muito mais diluída.'
+  - 'Óleo essencial e hidrolato saem da mesma destilação, mas se separam por densidade: o óleo essencial é a fração lipossolúvel, concentrada; o hidrolato é a fração hidrossolúvel, uma água aromática muito mais diluída.'
   - 'Por serem concentrados, óleos essenciais quase sempre precisam de diluição antes de tocar a pele. Hidrolatos são suaves o bastante para uso direto na maioria dos casos.'
   - 'Nenhum dos dois é "só cheiro". Óleo essencial mal diluído pode irritar ou sensibilizar a pele; hidrolato sem os cuidados de conservação certos pode estragar.'
   - 'Em caso de dúvida sobre uso, diluição ou contraindicação, consulte sempre um profissional da área antes de começar.'
@@ -28,7 +28,7 @@ Esse vapor carregado de aroma sobe até um condensador, onde esfria e volta a vi
 - A camada mais leve, que sobe para cima, é o **óleo essencial**: a fração lipossolúvel, concentrada, com o aroma da planta em estado puro.
 - A camada de baixo, muito maior em volume, é o **hidrolato** (também chamado de água floral ou água aromática): água que ficou impregnada com traços solúveis dos mesmos compostos, em concentração muito menor.
 
-Na prática, para produzir um único litro de óleo essencial de lavanda são necessários, em média, mais de cem quilos de flores. O hidrolato é o volume de água que sobra de todo esse processo, também carregado de propriedades da planta, só que muito mais diluído. É por isso que o óleo essencial custa mais: ele é o resultado concentrado de uma quantidade enorme de matéria-prima, enquanto o hidrolato é gerado em volume maior e naturalmente já vem diluído.
+Na prática, para produzir um único litro de óleo essencial de lavanda são necessários, em média, mais de cem quilos de flores. O hidrolato sai da mesma destilação em volume bem maior, carregado das substâncias hidrossolúveis da planta, só que muito mais diluído. É por isso que o óleo essencial custa mais: ele é o resultado concentrado de uma quantidade enorme de matéria-prima, enquanto o hidrolato é gerado em volume maior e naturalmente já vem diluído.
 
 Se quiser ver esse processo de perto, com a caldeira, o vapor e a separação das duas camadas acontecendo ao vivo, [organizamos visitas guiadas](/visitas) à chácara onde plantamos e destilamos.
 
