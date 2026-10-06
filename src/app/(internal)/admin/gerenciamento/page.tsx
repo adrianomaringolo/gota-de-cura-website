@@ -116,6 +116,12 @@ export default function AdminManagementPage() {
                 <Td className="text-ink-soft">{product.type}</Td>
                 <Td className="text-right tabular-nums">
                   {formatCurrency(product.price)}
+                  {Boolean(product.oldPrice) && (
+                    <span className="block text-xs text-ink-muted line-through">
+                      <span className="sr-only">Preço antigo: </span>
+                      {formatCurrency(product.oldPrice ?? 0)}
+                    </span>
+                  )}
                 </Td>
                 <Td>
                   <div className="flex flex-wrap gap-1.5">
