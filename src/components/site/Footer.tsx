@@ -1,33 +1,39 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { SITE } from '@/lib/site'
 import { Wordmark } from './Wordmark'
 import { SocialLinks } from './SocialLinks'
 
+/** Labels are keys in the `footer` namespace. */
 const columns = [
   {
-    title: 'Catálogo',
+    title: 'catalog',
     links: [
-      { label: 'Todos os produtos', href: '/#catalogo' },
-      { label: 'Óleos essenciais', href: '/oleos-essenciais' },
-      { label: 'Hidrolatos', href: '/hidrolatos' },
-      { label: 'Sabonetes artesanais', href: '/sabonetes' },
-      { label: 'Vale-presente', href: '/vales' },
+      { label: 'allProducts', href: '/#catalogo' },
+      { label: 'essentialOils', href: '/oleos-essenciais' },
+      { label: 'hydrosols', href: '/hidrolatos' },
+      { label: 'soaps', href: '/sabonetes' },
+      { label: 'giftCard', href: '/vales' },
     ],
   },
   {
-    title: 'A chácara',
+    title: 'farm',
     links: [
-      { label: 'Visita guiada', href: '/visitas' },
-      { label: 'Inscrição para visita', href: '/visitas/inscricao' },
-      { label: 'Cromatografias', href: '/cromatografias' },
-      { label: 'Blog', href: '/blog' },
-      { label: 'Vídeos', href: '/videos' },
-      { label: 'Sobre nós', href: '/sobre' },
+      { label: 'guidedVisit', href: '/visitas' },
+      { label: 'visitSignup', href: '/visitas/inscricao' },
+      { label: 'chromatographies', href: '/cromatografias' },
+      { label: 'blog', href: '/blog' },
+      { label: 'videos', href: '/videos' },
+      { label: 'about', href: '/sobre' },
     ],
   },
-]
+] as const
 
 export function Footer() {
+  const t = useTranslations('footer')
+  const store = useTranslations('store')
+
   return (
     <footer className="bg-brand-darkest text-white">
       <div className="mx-auto max-w-[86rem] px-4 py-16 sm:px-6 lg:px-10 lg:py-20">
@@ -35,16 +41,15 @@ export function Footer() {
           <div>
             <Wordmark tone="light" size="md" />
             <p className="mt-6 max-w-[38ch] text-sm leading-relaxed text-white/70">
-              Óleos essenciais, hidrolatos e itens artesanais destilados na Chácara da Mãe
-              Luzia e comercializados na Loja da Morada, em Campinas (SP)
+              {t('blurb')}
             </p>
             <SocialLinks className="mt-6" tone="light" />
           </div>
 
           {columns.map((column) => (
-            <nav key={column.title} aria-label={column.title}>
+            <nav key={column.title} aria-label={t(column.title)}>
               <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/70 uppercase">
-                {column.title}
+                {t(column.title)}
               </h2>
               <ul className="mt-4 space-y-2.5">
                 {column.links.map((link) => (
@@ -53,7 +58,7 @@ export function Footer() {
                       href={link.href}
                       className="text-sm text-white/80 transition-colors hover:text-white"
                     >
-                      {link.label}
+                      {t(link.label)}
                     </Link>
                   </li>
                 ))}
@@ -63,7 +68,7 @@ export function Footer() {
 
           <div>
             <h2 className="font-sans text-2xs font-bold tracking-[0.14em] text-white/70 uppercase">
-              Loja física
+              {t('store')}
             </h2>
             <address className="mt-4 text-sm leading-relaxed text-white/80 not-italic">
               {SITE.store.address}
@@ -71,8 +76,8 @@ export function Footer() {
             <dl className="mt-4 space-y-1 text-sm text-white/70">
               {SITE.store.hours.map(([day, hours]) => (
                 <div key={day} className="flex justify-between gap-4">
-                  <dt>{day}</dt>
-                  <dd className="text-white/90 tabular-nums">{hours}</dd>
+                  <dt>{store(day)}</dt>
+                  <dd className="text-white/90 tabular-nums">{store(hours)}</dd>
                 </div>
               ))}
             </dl>
@@ -81,20 +86,23 @@ export function Footer() {
 
         <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-8 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[62ch]">
-            Toda a renda é revertida para os trabalhos assistenciais da{' '}
-            <a
-              href={SITE.morada.site}
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
-            >
-              {SITE.morada.name}
-            </a>
-            , em Campinas/SP.
+            {t.rich('proceeds', {
+              name: SITE.morada.name,
+              link: (chunks) => (
+                <a
+                  href={SITE.morada.site}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <p className="shrink-0">
-              Desenvolvido por{' '}
+              {t('builtBy')}{' '}
               {/* noopener without noreferrer: the referrer is the point of a
                   portfolio credit. */}
               <a
@@ -106,12 +114,13 @@ export function Footer() {
                 adrianomaringolo.dev
               </a>
             </p>
-            <Link
+            {/* The panel has no `/en` twin, so this one link skips the locale prefix. */}
+            <NextLink
               href="/admin"
               className="shrink-0 text-white/65 transition-colors hover:text-white"
             >
-              Área da equipe
-            </Link>
+              {t('staffArea')}
+            </NextLink>
           </div>
         </div>
       </div>

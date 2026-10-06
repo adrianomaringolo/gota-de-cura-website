@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { siFacebook, siInstagram, siYoutube } from 'simple-icons'
 
 import { cn } from '@/lib/cn'
@@ -15,7 +16,8 @@ const links = [
     icon: siFacebook,
   },
   {
-    label: 'Gota de Cura no YouTube',
+    // A message key: the only label that is words rather than a handle.
+    label: 'youtube',
     href: SITE.youtube,
     icon: siYoutube,
   },
@@ -30,6 +32,7 @@ export function SocialLinks({
   tone?: 'ink' | 'light'
   showHandles?: boolean
 }) {
+  const t = useTranslations('social')
   const light = tone === 'light'
 
   return (
@@ -57,7 +60,11 @@ export function SocialLinks({
               <path d={link.icon.path} />
             </svg>
             {showHandles ? (
-              link.label
+              link.label === 'youtube' ? (
+                t('youtube', { name: SITE.name })
+              ) : (
+                link.label
+              )
             ) : (
               <span className="sr-only">{link.icon.title}</span>
             )}

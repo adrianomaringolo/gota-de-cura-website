@@ -13,6 +13,19 @@ const CONTENT_DIR = path.join(process.cwd(), 'src/content/blog')
  */
 const DATE_PREFIX = /^\d{4}-\d{2}-\d{2}-/
 
+/**
+ * Each folder holds `index.md` (Portuguese) and, once translated, `index.en.md`
+ * beside it, sharing the folder's images and slug. A post with no file for a
+ * language simply does not exist in that language: it is left out of that
+ * listing, and its page there is a 404.
+ */
+const fileFor = (locale: string) => (locale === 'en' ? 'index.en.md' : 'index.md')
+
+const DEFAULT_AUTHOR: Record<string, string> = {
+  'pt-BR': 'Equipe Gota de Cura',
+  en: 'The Gota de Cura team',
+}
+
 /** Roughly 200 words a minute, floored at one so nothing reads "0 min". */
 const readingTime = (content: string): number =>
   Math.max(1, Math.round(content.trim().split(/\s+/).length / 200))
@@ -26,14 +39,13 @@ const entries = (): Entry[] => {
     .readdirSync(CONTENT_DIR)
     .filter(
       (name) =>
-        !name.startsWith('_') &&
-        fs.statSync(path.join(CONTENT_DIR, name)).isDirectory(),
+        !name.startsWith('_') && fs.statSync(path.join(CONTENT_DIR, name)).isDirectory(),
     )
     .map((dir) => ({ slug: dir.replace(DATE_PREFIX, ''), dir }))
 }
 
-const read = (dir: string) => {
-  const file = path.join(CONTENT_DIR, dir, 'index.md')
+const read = (dir: string, locale: string) => {
+  const file = path.join(CONTENT_DIR, dir, fileFor(locale))
   if (!fs.existsSync(file)) return null
 
   const { data, content } = matter(fs.readFileSync(file, 'utf-8'))
@@ -44,11 +56,12 @@ const toSummary = (
   slug: string,
   data: Record<string, unknown>,
   content: string,
+  locale: string,
 ): PostSummary => ({
   slug,
   title: (data.title as string) ?? slug,
   excerpt: (data.excerpt as string) ?? '',
-  author: (data.author as string) ?? 'Equipe Gota de Cura',
+  author: (data.author as string) ?? DEFAULT_AUTHOR[locale] ?? DEFAULT_AUTHOR['pt-BR'],
   publishedAt: (data.publishedAt as string) ?? '',
   readingTime: (data.readingTime as number) || readingTime(content),
   tags: (data.tags as string[]) ?? [],
@@ -56,41 +69,51 @@ const toSummary = (
   image: data.image as string | undefined,
 })
 
-export const getPosts = (): PostSummary[] =>
+export const getPosts = (locale = 'pt-BR'): PostSummary[] =>
   entries()
     .map(({ slug, dir }) => {
-      const file = read(dir)
-      return file ? toSummary(slug, file.data, file.content) : null
+      const file = read(dir, locale)
+      return file ? toSummary(slug, file.data, file.content, locale) : null
     })
     .filter((post): post is PostSummary => post !== null)
     // Newest first. Plain string comparison is safe and timezone-proof for
     // `YYYY-MM-DD`, where lexical order is chronological order.
     .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
 
-export const getPost = (slug: string): Post | undefined => {
+export const getPost = (slug: string, locale = 'pt-BR'): Post | undefined => {
   const entry = entries().find((candidate) => candidate.slug === slug)
   if (!entry) return undefined
 
-  const file = read(entry.dir)
+  const file = read(entry.dir, locale)
   if (!file) return undefined
 
   return {
-    ...toSummary(slug, file.data, file.content),
+    ...toSummary(slug, file.data, file.content, locale),
     content: file.content,
     tldr: (file.data.tldr as string[]) ?? [],
   }
 }
 
-export const getFeaturedPosts = (): PostSummary[] =>
-  getPosts().filter((post) => post.featured)
+/** The languages a post has been written in — what its `hreflang` links list. */
+export const getPostLocales = (slug: string, locales: readonly string[]): string[] => {
+  const entry = entries().find((candidate) => candidate.slug === slug)
+  if (!entry) return []
+  return locales.filter((locale) =>
+    fs.existsSync(path.join(CONTENT_DIR, entry.dir, fileFor(locale))),
+  )
+}
+
+export const getFeaturedPosts = (locale = 'pt-BR'): PostSummary[] =>
+  getPosts(locale).filter((post) => post.featured)
 
 /** Posts sharing at least one tag, most recent first. */
 export const getRelatedPosts = (
   slug: string,
   tags: string[],
+  locale = 'pt-BR',
   limit = 3,
 ): PostSummary[] =>
-  getPosts()
+  getPosts(locale)
     .filter((post) => post.slug !== slug)
     .filter((post) => post.tags.some((tag) => tags.includes(tag)))
     .slice(0, limit)

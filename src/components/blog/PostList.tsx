@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import { cn } from '@/lib/cn'
 import type { PostSummary } from '@/lib/types'
@@ -8,6 +9,7 @@ import { EmptyState } from '@/components/ui/Feedback'
 import { PostCard } from './PostCard'
 
 export function PostList({ posts }: { posts: PostSummary[] }) {
+  const t = useTranslations('postList')
   const [selected, setSelected] = useState<string | null>(null)
 
   // Tags ordered by how much they are actually used, so the filter row leads
@@ -34,7 +36,7 @@ export function PostList({ posts }: { posts: PostSummary[] }) {
     <section className="bg-canvas py-16 lg:py-20">
       <Container>
         {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por assunto">
+          <div className="flex flex-wrap gap-2" role="group" aria-label={t('filter')}>
             {[null, ...tags].map((tag) => {
               const active = selected === tag
 
@@ -52,8 +54,13 @@ export function PostList({ posts }: { posts: PostSummary[] }) {
                       : 'bg-brand-tint text-brand hover:bg-brand-soft',
                   )}
                 >
-                  {tag ?? 'Todos'}
-                  <span className={cn('tabular-nums', active ? 'text-white/60' : 'opacity-50')}>
+                  {tag ?? t('all')}
+                  <span
+                    className={cn(
+                      'tabular-nums',
+                      active ? 'text-white/60' : 'opacity-50',
+                    )}
+                  >
                     {tag ? counts.get(tag) : posts.length}
                   </span>
                 </button>
@@ -63,7 +70,12 @@ export function PostList({ posts }: { posts: PostSummary[] }) {
         )}
 
         {filtered.length > 0 ? (
-          <ul className={cn('divide-y divide-line border-y border-line', tags.length > 0 && 'mt-10')}>
+          <ul
+            className={cn(
+              'divide-y divide-line border-y border-line',
+              tags.length > 0 && 'mt-10',
+            )}
+          >
             {filtered.map((post, index) => (
               <li key={post.slug}>
                 <PostCard post={post} index={index} />
@@ -73,11 +85,9 @@ export function PostList({ posts }: { posts: PostSummary[] }) {
         ) : (
           <EmptyState
             className={tags.length > 0 ? 'mt-10' : undefined}
-            title="Nada por aqui ainda"
+            title={t('emptyTitle')}
           >
-            {selected
-              ? 'Nenhum texto com esse assunto por enquanto. Experimente outro filtro.'
-              : 'Os primeiros textos estão sendo escritos. Volte em breve.'}
+            {selected ? t('emptyFiltered') : t('emptyBody')}
           </EmptyState>
         )}
       </Container>

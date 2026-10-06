@@ -9,11 +9,20 @@ export interface ProductType {
   /** Featured categories claim more room in the catalogue grid. */
   featured?: boolean
   areaBackground?: string
+  /** English label and description; `type` itself is a data key and never changes. */
+  en?: { label: string; description: string }
 }
 
 export interface OptionsSetItem {
   name: string
   values: string[] | string
+}
+
+/** The visitor-facing text of a product in one extra language. */
+export interface ProductTranslation {
+  name?: string
+  description?: string
+  detailedDescription?: string
 }
 
 export interface ProductItem {
@@ -39,11 +48,24 @@ export interface ProductItem {
   amount?: number
   /** ISO date stamped when the product is first created; drives the "Novo" tag. */
   createdAt?: string
+  /**
+   * Text in languages other than Portuguese. The top-level fields stay the
+   * Portuguese source — the team works in it and orders are recorded in it —
+   * and any field missing here falls back to them. See `localizeProduct`.
+   */
+  translations?: { en?: ProductTranslation }
 }
 
 export interface CartItem extends ProductItem {
   amount: number
   type: string
+  /** Chosen options, already folded into `name` as "Name (a, b)". */
+  variants?: string[]
+  /**
+   * On a saved order: the line's name as the customer read it, when they
+   * ordered in a language other than Portuguese. `name` stays Portuguese.
+   */
+  localizedName?: string
 }
 
 export interface Cart {
@@ -88,6 +110,8 @@ export interface EnrollmentData {
   email: string
   companions: string[]
   lastVisit: string
+  /** The site language the visitor signed up in; absent means Portuguese. */
+  locale?: string
 }
 
 export interface Visit {
@@ -136,6 +160,8 @@ export interface Order {
   coupon?: { number: string; discount: number; discountType: 'percentage' | 'fixed' } | ''
   statusLogs?: OrderStatusLog[]
   comments?: OrderComment[]
+  /** The site language the order was placed in; absent means Portuguese. */
+  locale?: string
 }
 
 /**

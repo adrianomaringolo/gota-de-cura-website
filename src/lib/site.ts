@@ -18,12 +18,14 @@ export const SITE = {
     mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       'Rua José Paulino, 1916, Campinas - SP',
     )}`,
+    /**
+     * Message keys in the `store` namespace — `[days, hours]` per row — so each
+     * language words the timetable its own way.
+     */
     hours: [
-      ['Segunda a sexta', '9h às 17h'],
-      ['Sábado', '8h às 17h'],
+      ['weekdays', 'weekdayHours'],
+      ['saturday', 'saturdayHours'],
     ] as const,
-    /** Compact form for tight spots like the hero. */
-    hoursShort: 'Seg a sex, 9h às 17h · Sáb, 8h às 17h',
   },
   aromatherapist: {
     name: 'Marcelo Soares Mattar',

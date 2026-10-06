@@ -34,6 +34,24 @@ export const ORDER_STATUS_OPTIONS: { value: string; label: string }[] = [
   { value: ORDER_STATUS.CANCELADO, label: 'Cancelado' },
 ]
 
+/** What a customer who ordered in English reads for each status. */
+export const ORDER_STATUS_LABELS_EN: Record<string, string> = {
+  [ORDER_STATUS.EM_ESPERA]: 'Waiting',
+  [ORDER_STATUS.EM_ANDAMENTO]: 'In progress',
+  [ORDER_STATUS.APROVADO]: 'Approved',
+  [ORDER_STATUS.PAGO]: 'Paid',
+  [ORDER_STATUS.SEPARADO]: 'Packed/shipped',
+  [ORDER_STATUS.EM_FINALIZACAO]: 'Being finalized',
+  [ORDER_STATUS.FINALIZADO]: 'Completed',
+  [ORDER_STATUS.CANCELADO]: 'Canceled',
+}
+
+/** A status label in `locale`, falling back to the raw value for unknown ones. */
+export const orderStatusLabel = (status: string, locale = 'pt-BR'): string =>
+  (locale === 'en'
+    ? ORDER_STATUS_LABELS_EN[status]
+    : ORDER_STATUS_OPTIONS.find((option) => option.value === status)?.label) ?? status
+
 export const CROMATOGRAFIA_LABELS: Record<string, string> = {
   'oleo-essencial': 'Óleos essenciais',
   hidrolato: 'Hidrolatos',

@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -8,8 +8,11 @@ import { Button, ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/site/Section'
 import { EmptyState, Spinner } from '@/components/ui/Feedback'
 import { Input, Textarea } from '@/components/ui/Field'
+import { Link } from '@/i18n/navigation'
 import { useCart } from '@/lib/cart-context'
 import { formatCurrency, maskPhone, maskZipcode } from '@/lib/format'
+import { typeDisplayName } from '@/lib/product-types'
+import { cartLineName } from '@/lib/products'
 import { SITE } from '@/lib/site'
 import type { ContactInfo, Coupon } from '@/lib/types'
 import { couponDiscount, OrdersService } from '@/services/orders'
@@ -28,6 +31,9 @@ const stepIndex: Record<Step, number> = {
 }
 
 export function CartFlow() {
+  const t = useTranslations('checkout')
+  const locale = useLocale()
+  const money = (value: number) => formatCurrency(value, locale)
   const { items, total, count, ready, clear } = useCart()
   const [step, setStep] = useState<Step>('items')
   const [contact, setContact] = useState<ContactInfo | null>(null)
@@ -53,6 +59,7 @@ export function CartFlow() {
         { items: items.filter((item) => item.amount > 0) },
         contact,
         coupon,
+        locale,
       )
       setOrderNumber(number)
       setOrderRef(ref)
@@ -60,7 +67,7 @@ export function CartFlow() {
       setStep('done')
     } catch (error) {
       console.error(error)
-      toast.error('Não conseguimos enviar seu pedido. Tente novamente em instantes.')
+      toast.error(t('sendError'))
       setStep('review')
     }
   }
@@ -78,38 +85,38 @@ export function CartFlow() {
       <Container className="max-w-2xl pt-32 pb-24 lg:pt-40">
         <div className="rounded-2xl border border-line bg-surface p-8 text-center sm:p-12">
           <p className="font-display text-2xl font-semibold text-ink">
-            Pedido enviado
+            {t('sent')}
             {orderNumber !== null && <span className="text-brand"> #{orderNumber}</span>}
           </p>
           <p className="mx-auto mt-4 max-w-[46ch] text-base leading-relaxed text-ink-soft">
-            {contact?.email
-              ? 'Enviamos a confirmação do seu pedido por e-mail. '
-              : 'Recebemos seu pedido. '}
-            A equipe {SITE.name} vai confirmar os produtos, a entrega e o pagamento, e seu
-            pedido será atendido em até 48h.
+            {contact?.email ? t('sentByEmail') : t('received')}{' '}
+            {t('sentNext', { name: SITE.name })}
           </p>
 
           {orderRef && (
             <div className="mt-6">
               <p className="mx-auto max-w-[46ch] text-sm text-ink-muted">
-                Você pode acompanhar os detalhes do seu pedido a qualquer momento nesta
-                página:
+                {t('trackHint')}
               </p>
-              <ButtonLink href={`/pedidos/${orderRef}`} variant="outline" className="mt-3">
-                Acompanhar meu pedido
+              <ButtonLink
+                href={`/pedidos/${orderRef}`}
+                variant="outline"
+                className="mt-3"
+              >
+                {t('track')}
               </ButtonLink>
             </div>
           )}
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <ButtonLink href="/#catalogo">Voltar ao catálogo</ButtonLink>
+            <ButtonLink href="/#catalogo">{t('backToCatalog')}</ButtonLink>
             <a
               href={SITE.testimonyForm}
               target="_blank"
               rel="noreferrer"
               className="inline-flex h-11 items-center rounded-full border border-brand/35 px-6 text-sm font-medium text-brand transition-colors hover:border-brand hover:bg-brand-tint"
             >
-              Deixar um depoimento
+              {t('testimony')}
             </a>
           </div>
         </div>
@@ -120,13 +127,12 @@ export function CartFlow() {
   if (count === 0) {
     return (
       <Container className="max-w-2xl pt-32 pb-24 lg:pt-40">
-        <h1 className="mb-8 text-3xl font-semibold text-ink">Meu pedido</h1>
+        <h1 className="mb-8 text-3xl font-semibold text-ink">{t('title')}</h1>
         <EmptyState
-          title="Seu pedido ainda está vazio"
-          action={<ButtonLink href="/#catalogo">Ver o catálogo</ButtonLink>}
+          title={t('emptyTitle')}
+          action={<ButtonLink href="/#catalogo">{t('seeCatalog')}</ButtonLink>}
         >
-          Escolha os produtos nas prateleiras e eles aparecem aqui para você revisar antes
-          de enviar.
+          {t('emptyBody')}
         </EmptyState>
       </Container>
     )
@@ -134,10 +140,9 @@ export function CartFlow() {
 
   return (
     <Container className="max-w-4xl pt-32 pb-24 lg:pt-40">
-      <h1 className="text-3xl font-semibold text-ink">Meu pedido</h1>
+      <h1 className="text-3xl font-semibold text-ink">{t('title')}</h1>
       <p className="mt-3 max-w-[62ch] text-base leading-relaxed text-ink-soft">
-        Este é um pedido de reserva. Depois de enviá-lo, nossa equipe confirma a
-        disponibilidade de cada item e combina o pagamento e a entrega com você.
+        {t('intro')}
       </p>
 
       <div className="mt-8 border-y border-line py-4">
@@ -153,10 +158,10 @@ export function CartFlow() {
               href="/#catalogo"
               className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
             >
-              Continuar escolhendo
+              {t('keepShopping')}
             </Link>
             <p className="font-display text-2xl font-semibold text-ink tabular-nums">
-              Total {formatCurrency(total)}
+              {t('total')} {money(total)}
             </p>
           </div>
 
@@ -165,13 +170,13 @@ export function CartFlow() {
               variant="ghost"
               onClick={() => {
                 clear()
-                toast.success('Pedido esvaziado')
+                toast.success(t('emptied'))
               }}
             >
-              Esvaziar
+              {t('empty')}
             </Button>
             <Button size="lg" onClick={() => setStep('contact')}>
-              Preencher meus dados
+              {t('fillDetails')}
             </Button>
           </div>
         </section>
@@ -188,21 +193,21 @@ export function CartFlow() {
         >
           <div className="grid gap-5 sm:grid-cols-2">
             <Input
-              label="Nome completo"
+              label={t('name')}
               required
               autoComplete="name"
-              error={errors.name && 'Precisamos do seu nome completo.'}
+              error={errors.name && t('nameError')}
               className="sm:col-span-2"
               {...register('name', { required: true, minLength: 3 })}
             />
             <Input
-              label="Celular (WhatsApp)"
+              label={t('phone')}
               required
               inputMode="tel"
               autoComplete="tel"
               placeholder="(19) 99999-9999"
-              hint="É por aqui que a equipe fala com você."
-              error={errors.phone && 'Informe um celular com DDD.'}
+              hint={t('phoneHint')}
+              error={errors.phone && t('phoneError')}
               {...register('phone', {
                 required: true,
                 pattern: /^\(\d{2}\)\s\d{4,5}-\d{4}$/,
@@ -210,26 +215,26 @@ export function CartFlow() {
               })}
             />
             <Input
-              label="E-mail"
+              label={t('email')}
               type="email"
               autoComplete="email"
-              error={errors.email && 'Confira o e-mail digitado.'}
+              error={errors.email && t('emailError')}
               {...register('email', { pattern: /^\S+@\S+\.\S+$/ })}
             />
             <Input
-              label="Cidade"
+              label={t('city')}
               required
               autoComplete="address-level2"
-              error={errors.city && 'Informe sua cidade.'}
+              error={errors.city && t('cityError')}
               {...register('city', { required: true })}
             />
             <Input
-              label="CEP"
+              label={t('zipcode')}
               required
               inputMode="numeric"
               autoComplete="postal-code"
               placeholder="13024-000"
-              error={errors.zipcode && 'Informe um CEP válido.'}
+              error={errors.zipcode && t('zipcodeError')}
               {...register('zipcode', {
                 required: true,
                 pattern: /^\d{5}-?\d{3}$/,
@@ -237,20 +242,20 @@ export function CartFlow() {
               })}
             />
             <Textarea
-              label="Observações"
+              label={t('notes')}
               rows={4}
               className="sm:col-span-2"
-              placeholder="Algum recado sobre o pedido, entrega ou embalagem?"
+              placeholder={t('notesPlaceholder')}
               {...register('observations')}
             />
           </div>
 
           <div className="mt-8 flex flex-wrap justify-between gap-3">
             <Button type="button" variant="ghost" onClick={() => setStep('items')}>
-              Voltar aos produtos
+              {t('backToProducts')}
             </Button>
             <Button type="submit" size="lg">
-              Revisar pedido
+              {t('review')}
             </Button>
           </div>
         </form>
@@ -260,23 +265,25 @@ export function CartFlow() {
         <section className="mt-10 space-y-8">
           <div className="rounded-2xl border border-line bg-surface p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="font-display text-xl font-semibold text-ink">Seus dados</h2>
+              <h2 className="font-display text-xl font-semibold text-ink">
+                {t('yourDetails')}
+              </h2>
               <button
                 type="button"
                 onClick={() => setStep('contact')}
                 className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
               >
-                Corrigir
+                {t('edit')}
               </button>
             </div>
             <dl className="mt-4 grid gap-x-8 gap-y-2 text-base sm:grid-cols-2">
               {[
-                ['Nome', contact.name],
-                ['Celular', contact.phone],
-                ['E-mail', contact.email || '—'],
-                ['Cidade', contact.city],
-                ['CEP', contact.zipcode],
-                ['Observações', contact.observations || '—'],
+                [t('summaryName'), contact.name],
+                [t('summaryPhone'), contact.phone],
+                [t('email'), contact.email || '—'],
+                [t('city'), contact.city],
+                [t('zipcode'), contact.zipcode],
+                [t('notes'), contact.observations || '—'],
               ].map(([label, value]) => (
                 <div key={label} className="flex gap-2">
                   <dt className="shrink-0 text-ink-muted">{label}:</dt>
@@ -287,7 +294,9 @@ export function CartFlow() {
           </div>
 
           <div className="rounded-2xl border border-line bg-surface p-6">
-            <h2 className="font-display text-xl font-semibold text-ink">Produtos</h2>
+            <h2 className="font-display text-xl font-semibold text-ink">
+              {t('products')}
+            </h2>
             <ul className="mt-4 divide-y divide-line border-y border-line">
               {items
                 .filter((item) => item.amount > 0)
@@ -297,11 +306,13 @@ export function CartFlow() {
                       {item.amount}×
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="text-ink">{item.name}</span>
-                      <span className="block text-sm text-ink-muted">{item.type}</span>
+                      <span className="text-ink">{cartLineName(item, locale)}</span>
+                      <span className="block text-sm text-ink-muted">
+                        {typeDisplayName(item.type, locale)}
+                      </span>
                     </span>
                     <span className="shrink-0 font-medium text-ink tabular-nums">
-                      {formatCurrency(item.price * item.amount)}
+                      {money(item.price * item.amount)}
                     </span>
                   </li>
                 ))}
@@ -313,28 +324,28 @@ export function CartFlow() {
 
             <dl className="mt-6 space-y-2 border-t border-line pt-4 text-base">
               <div className="flex justify-between">
-                <dt className="text-ink-soft">Subtotal</dt>
-                <dd className="text-ink tabular-nums">{formatCurrency(total)}</dd>
+                <dt className="text-ink-soft">{t('subtotal')}</dt>
+                <dd className="text-ink tabular-nums">{money(total)}</dd>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between text-positive">
                   <dt>
-                    Desconto
+                    {t('discount')}
                     {coupon?.discountType === 'percentage' && ` (${coupon.discount}%)`}
                   </dt>
-                  <dd className="tabular-nums">− {formatCurrency(discount)}</dd>
+                  <dd className="tabular-nums">− {money(discount)}</dd>
                 </div>
               )}
               <div className="flex items-baseline justify-between border-t border-line pt-3">
-                <dt className="font-display text-lg font-semibold text-ink">Total</dt>
+                <dt className="font-display text-lg font-semibold text-ink">
+                  {t('total')}
+                </dt>
                 <dd className="font-display text-2xl font-semibold text-ink tabular-nums">
-                  {formatCurrency(payable)}
+                  {money(payable)}
                 </dd>
               </div>
             </dl>
-            <p className="mt-3 text-sm text-ink-muted">
-              O frete, quando houver, é combinado à parte com a equipe.
-            </p>
+            <p className="mt-3 text-sm text-ink-muted">{t('shipping')}</p>
           </div>
 
           <div className="flex flex-wrap justify-between gap-3">
@@ -344,15 +355,15 @@ export function CartFlow() {
               onClick={() => setStep('contact')}
               disabled={step === 'saving'}
             >
-              Voltar
+              {t('back')}
             </Button>
             <Button size="lg" onClick={submitOrder} disabled={step === 'saving'}>
               {step === 'saving' ? (
                 <>
-                  <Spinner className="h-4 w-4" /> Enviando…
+                  <Spinner className="h-4 w-4" /> {t('sending')}
                 </>
               ) : (
-                'Confirmar pedido'
+                t('confirm')
               )}
             </Button>
           </div>

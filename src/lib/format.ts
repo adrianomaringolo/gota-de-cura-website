@@ -1,4 +1,5 @@
 import { isValid } from 'date-fns'
+import { intlLocale } from './i18n'
 
 const SP_TIMEZONE = 'America/Sao_Paulo'
 
@@ -21,16 +22,16 @@ export const toAmount = (value: unknown): number => {
  * render as R$ 0,00. Services normalise on read, and sharing the coercion keeps
  * this last line of defence from disagreeing with them.
  */
-export const formatCurrency = (value: number): string =>
-  new Intl.NumberFormat('pt-BR', {
+export const formatCurrency = (value: number, locale = 'pt-BR'): string =>
+  new Intl.NumberFormat(intlLocale(locale), {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
   }).format(toAmount(value))
 
-export const formatDateAndTime = (date: Date): string =>
+export const formatDateAndTime = (date: Date, locale = 'pt-BR'): string =>
   isValid(date)
-    ? new Intl.DateTimeFormat('pt-BR', {
+    ? new Intl.DateTimeFormat(intlLocale(locale), {
         year: '2-digit',
         month: '2-digit',
         day: '2-digit',
@@ -39,9 +40,12 @@ export const formatDateAndTime = (date: Date): string =>
       }).format(date)
     : ''
 
-export const formatMonthAndYear = (date: Date): string =>
+export const formatMonthAndYear = (date: Date, locale = 'pt-BR'): string =>
   isValid(date)
-    ? new Intl.DateTimeFormat('pt-BR', { year: 'numeric', month: 'long' }).format(date)
+    ? new Intl.DateTimeFormat(intlLocale(locale), {
+        year: 'numeric',
+        month: 'long',
+      }).format(date)
     : ''
 
 /** Accepts ISO strings, epoch numbers, Dates and Firestore Timestamps alike. */
@@ -55,10 +59,10 @@ export const toDate = (value: unknown): Date | null => {
   return isValid(parsed) ? parsed : null
 }
 
-export const formatDate = (value: unknown): string => {
+export const formatDate = (value: unknown, locale = 'pt-BR'): string => {
   const date = toDate(value)
   return date
-    ? new Intl.DateTimeFormat('pt-BR', {
+    ? new Intl.DateTimeFormat(intlLocale(locale), {
         year: '2-digit',
         month: '2-digit',
         day: '2-digit',
@@ -79,31 +83,32 @@ const CALENDAR_DAY = /^\d{4}-\d{2}-\d{2}$/
 export const formatCalendarDay = (
   value: unknown,
   options: Intl.DateTimeFormatOptions,
+  locale = 'pt-BR',
 ): string => {
   const date = toDate(value)
   if (!date) return ''
 
   const isPlainDay = typeof value === 'string' && CALENDAR_DAY.test(value.trim())
 
-  return new Intl.DateTimeFormat('pt-BR', {
+  return new Intl.DateTimeFormat(intlLocale(locale), {
     timeZone: isPlainDay ? 'UTC' : SP_TIMEZONE,
     ...options,
   }).format(date)
 }
 
-export const formatVisitDate = (value: unknown): string =>
-  formatCalendarDay(value, { day: '2-digit', month: '2-digit', year: 'numeric' })
+export const formatVisitDate = (value: unknown, locale = 'pt-BR'): string =>
+  formatCalendarDay(value, { day: '2-digit', month: '2-digit', year: 'numeric' }, locale)
 
-export const formatVisitDateLong = (value: unknown): string =>
-  formatCalendarDay(value, { day: '2-digit', month: 'long', year: 'numeric' })
+export const formatVisitDateLong = (value: unknown, locale = 'pt-BR'): string =>
+  formatCalendarDay(value, { day: '2-digit', month: 'long', year: 'numeric' }, locale)
 
-/** "2 de agosto de 2026" — the byline date on a blog post. */
-export const formatPostDate = (value: unknown): string =>
-  formatCalendarDay(value, { day: 'numeric', month: 'long', year: 'numeric' })
+/** "2 de agosto de 2026" / "August 2, 2026" — the byline date on a blog post. */
+export const formatPostDate = (value: unknown, locale = 'pt-BR'): string =>
+  formatCalendarDay(value, { day: 'numeric', month: 'long', year: 'numeric' }, locale)
 
-/** "ago 2026" — the compact form used in post listings. */
-export const formatPostDateShort = (value: unknown): string =>
-  formatCalendarDay(value, { month: 'short', year: 'numeric' })
+/** "ago 2026" / "Aug 2026" — the compact form used in post listings. */
+export const formatPostDateShort = (value: unknown, locale = 'pt-BR'): string =>
+  formatCalendarDay(value, { month: 'short', year: 'numeric' }, locale)
 
 /** "(19) 99999-9999" as the visitor types. */
 export const maskPhone = (raw: string): string => {

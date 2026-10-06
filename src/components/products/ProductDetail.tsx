@@ -1,23 +1,31 @@
 'use client'
 
 import { ProductGallery } from './ProductGallery'
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Button, ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/site/Section'
 import { EmptyState } from '@/components/ui/Feedback'
 import { useCart } from '@/lib/cart-context'
 import { formatCurrency } from '@/lib/format'
-import { isNewProduct } from '@/lib/products'
-import { getProductType } from '@/lib/product-types'
+import { Link } from '@/i18n/navigation'
+import { isNewProduct, localizeProduct } from '@/lib/products'
+import { getProductType, shelfName, typeDisplayName } from '@/lib/product-types'
 import type { ProductItem } from '@/lib/types'
 import { ProductsService } from '@/services/products'
 
 export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: string }) {
+  const t = useTranslations('product')
+  const locale = useLocale()
   const { addItem } = useCart()
   const [item, setItem] = useState<ProductItem | null | undefined>(undefined)
   const productType = getProductType(typeId)
-  const typeLabel = productType?.type ?? item?.type ?? ''
+  // The Portuguese name is the key the cart and the order record…
+  const typeKey = productType?.type ?? item?.type ?? ''
+  // …and this is what the visitor reads.
+  const typeLabel = productType
+    ? shelfName(productType, locale)
+    : typeDisplayName(typeKey, locale)
 
   useEffect(() => {
     let cancelled = false
@@ -52,22 +60,26 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
     return (
       <Container className="py-32">
         <EmptyState
-          title="Não encontramos este produto"
+          title={t('notFoundTitle')}
           action={
-            <ButtonLink href={`/${typeId}`}>Ver a prateleira {typeLabel}</ButtonLink>
+            <ButtonLink href={`/${typeId}`}>
+              {t('seeShelf', { shelf: typeLabel })}
+            </ButtonLink>
           }
         >
-          Ele pode ter saído do catálogo ou mudado de endereço.
+          {t('notFoundBody')}
         </EmptyState>
       </Container>
     )
   }
 
+  const shown = localizeProduct(item, locale)
+
   return (
     <Container className="pt-32 pb-20 lg:pt-40">
-      <nav aria-label="Trilha" className="mb-8 text-sm text-ink-muted">
+      <nav aria-label={t('breadcrumb')} className="mb-8 text-sm text-ink-muted">
         <Link href="/#catalogo" className="transition-colors hover:text-brand">
-          Catálogo
+          {t('catalog')}
         </Link>
         <span className="mx-2 text-line-strong" aria-hidden="true">
           /
@@ -78,24 +90,20 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
       </nav>
 
       <div className="grid gap-10 md:grid-cols-2 lg:gap-16">
-        <ProductGallery
-          item={item}
-          priority
-          sizes="(max-width: 768px) 100vw, 620px"
-        />
+        <ProductGallery item={shown} priority sizes="(max-width: 768px) 100vw, 620px" />
 
         <div>
           {isNewProduct(item) && (
             <span className="mb-3 inline-block rounded-full bg-brand px-3 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase">
-              Novo
+              {t('new')}
             </span>
           )}
-          <h1 className="text-3xl font-semibold text-ink">{item.name}</h1>
+          <h1 className="text-3xl font-semibold text-ink">{shown.name}</h1>
 
-          {item.description && (
+          {shown.description && (
             <p
               className="mt-4 max-w-[58ch] text-lg leading-relaxed text-ink-soft"
-              dangerouslySetInnerHTML={{ __html: item.description }}
+              dangerouslySetInnerHTML={{ __html: shown.description }}
             />
           )}
 
@@ -105,28 +113,26 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
                 <p className="flex items-baseline gap-2">
                   {Boolean(item.oldPrice) && (
                     <span className="text-base text-ink-muted line-through">
-                      {formatCurrency(item.oldPrice ?? 0)}
+                      {formatCurrency(item.oldPrice ?? 0, locale)}
                     </span>
                   )}
                   <span className="font-display text-3xl font-semibold text-ink tabular-nums">
-                    {formatCurrency(item.price)}
+                    {formatCurrency(item.price, locale)}
                   </span>
                 </p>
-                <Button size="lg" onClick={() => addItem(item, typeLabel)}>
-                  Adicionar ao pedido
+                <Button size="lg" onClick={() => addItem(item, typeKey)}>
+                  {t('addToOrder')}
                 </Button>
               </>
             ) : (
-              <p className="text-lg font-medium text-ink-soft">
-                Esgotado no momento — volte em breve.
-              </p>
+              <p className="text-lg font-medium text-ink-soft">{t('soldOutLong')}</p>
             )}
           </div>
 
-          {item.detailedDescription && (
+          {shown.detailedDescription && (
             <div
               className="rich-text mt-8"
-              dangerouslySetInnerHTML={{ __html: item.detailedDescription }}
+              dangerouslySetInnerHTML={{ __html: shown.detailedDescription }}
             />
           )}
         </div>

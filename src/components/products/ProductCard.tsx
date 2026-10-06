@@ -1,18 +1,23 @@
 'use client'
 
 import Image from 'next/image'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { Badge } from '@/components/ui/Feedback'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/lib/cart-context'
 import { formatCurrency } from '@/lib/format'
-import { isNewProduct } from '@/lib/products'
+import { isNewProduct, localizeProduct } from '@/lib/products'
 import type { ProductItem } from '@/lib/types'
 import { OptionsDialog } from './OptionsDialog'
 import { ProductDetailDialog } from './ProductDetailDialog'
 
 export function ProductCard({ item, type }: { item: ProductItem; type: string }) {
+  const t = useTranslations('product')
+  const locale = useLocale()
+  // What the card shows; `item` itself is what goes into the cart.
+  const shown = localizeProduct(item, locale)
   const { addItem } = useCart()
   const [detailOpen, setDetailOpen] = useState(false)
   const [optionsOpen, setOptionsOpen] = useState(false)
@@ -33,45 +38,45 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
           {item.image ? (
             <Image
               src={item.image}
-              alt={item.name}
+              alt={shown.name}
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px"
               className="object-cover transition-transform duration-[900ms] ease-[var(--ease-out-quart)] group-hover:scale-[1.04]"
             />
           ) : (
             <div className="grid h-full place-items-center text-sm text-ink-muted">
-              sem foto
+              {t('noPhoto')}
             </div>
           )}
 
           {isNew && (
             <span className="absolute top-3 left-3 rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
-              Novo
+              {t('new')}
             </span>
           )}
 
           {item.priceDiscount && (
             <span className="absolute top-3 right-3 rounded-full bg-terra px-3 py-1.5 text-sm font-bold text-white">
-              {item.priceDiscount} OFF
+              {t('discount', { value: item.priceDiscount })}
             </span>
           )}
 
           {!item.available && (
             <span className="absolute inset-x-0 bottom-0 bg-ink/85 py-2 text-center text-sm font-medium text-white">
-              Esgotado no momento
+              {t('soldOut')}
             </span>
           )}
         </div>
 
         <div className="flex flex-1 flex-col p-5">
           <h3 className="font-display text-lg leading-snug font-semibold text-ink">
-            {item.name}
+            {shown.name}
           </h3>
 
-          {item.description && (
+          {shown.description && (
             <p
               className="mt-2 line-clamp-3 text-sm leading-relaxed text-ink-soft"
-              dangerouslySetInnerHTML={{ __html: item.description }}
+              dangerouslySetInnerHTML={{ __html: shown.description }}
             />
           )}
 
@@ -81,7 +86,7 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
             <p className="flex items-baseline gap-2">
               {onSale && (
                 <span className="text-sm text-ink-muted line-through">
-                  {formatCurrency(item.oldPrice ?? 0)}
+                  {formatCurrency(item.oldPrice ?? 0, locale)}
                 </span>
               )}
               <span
@@ -90,17 +95,17 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
                   onSale ? 'text-terra' : 'text-ink',
                 )}
               >
-                {formatCurrency(item.price)}
+                {formatCurrency(item.price, locale)}
               </span>
             </p>
           ) : (
-            <Badge tone="neutral">Indisponível</Badge>
+            <Badge tone="neutral">{t('unavailable')}</Badge>
           )}
 
           <div className="mt-4 flex flex-wrap gap-2">
             {item.available && (
               <Button size="sm" onClick={handleOrder} className="flex-1">
-                {hasOptions ? 'Montar kit' : 'Adicionar'}
+                {hasOptions ? t('buildKit') : t('add')}
               </Button>
             )}
             {item.detailedDescription && (
@@ -110,7 +115,7 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
                 onClick={() => setDetailOpen(true)}
                 className={item.available ? '' : 'flex-1'}
               >
-                Saiba mais
+                {t('learnMore')}
               </Button>
             )}
           </div>

@@ -1,19 +1,23 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { Container } from '@/components/site/Section'
 import { SocialLinks } from '@/components/site/SocialLinks'
 import { SITE } from '@/lib/site'
 
 export function ContactBand() {
+  const t = useTranslations('contact')
+  const store = useTranslations('store')
+
   return (
     <section id="contato" className="scroll-mt-24 bg-canvas py-20 lg:py-28">
       <Container>
         <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
-            <h2 className="rule-mark text-3xl font-semibold text-ink">Onde nos achar</h2>
+            <h2 className="rule-mark text-3xl font-semibold text-ink">{t('title')}</h2>
 
             <div className="mt-8 space-y-8">
               <div>
-                <h3 className="text-sm font-semibold text-ink-muted">Loja física</h3>
+                <h3 className="text-sm font-semibold text-ink-muted">{t('store')}</h3>
                 <address className="mt-2 font-display text-xl text-ink not-italic">
                   {SITE.store.address}
                 </address>
@@ -23,15 +27,17 @@ export function ContactBand() {
                       key={day}
                       className="flex items-baseline justify-between gap-4 border-b border-line pb-1.5"
                     >
-                      <dt className="text-ink-soft">{day}</dt>
-                      <dd className="font-medium text-ink tabular-nums">{hours}</dd>
+                      <dt className="text-ink-soft">{store(day)}</dt>
+                      <dd className="font-medium text-ink tabular-nums">
+                        {store(hours)}
+                      </dd>
                     </div>
                   ))}
                 </dl>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-ink-muted">Fale com a gente</h3>
+                <h3 className="text-sm font-semibold text-ink-muted">{t('talk')}</h3>
                 <a
                   href={`mailto:${SITE.email}`}
                   className="mt-2 inline-block font-display text-xl break-all text-ink underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
@@ -41,9 +47,7 @@ export function ContactBand() {
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-ink-muted">
-                  Acompanhe o dia a dia
-                </h3>
+                <h3 className="text-sm font-semibold text-ink-muted">{t('follow')}</h3>
                 <SocialLinks className="mt-3" showHandles />
               </div>
             </div>
@@ -58,22 +62,19 @@ export function ContactBand() {
             >
               <Image
                 src={SITE.aromatherapist.seal}
-                alt={`Certificação CertAroma de ${SITE.aromatherapist.name}`}
+                alt={t('sealAlt', { name: SITE.aromatherapist.name })}
                 fill
                 sizes="160px"
                 className="object-cover"
               />
             </a>
             <div>
-              <h3 className="text-sm font-semibold text-brand">
-                Aromaterapeuta responsável
-              </h3>
+              <h3 className="text-sm font-semibold text-brand">{t('aromatherapist')}</h3>
               <p className="mt-1 font-display text-2xl text-ink">
                 {SITE.aromatherapist.name}
               </p>
               <p className="mt-2 text-base leading-relaxed text-ink-soft">
-                {SITE.aromatherapist.credential}. Responsável técnico pelas fórmulas e
-                pela destilação de tudo o que sai da chácara.
+                {t('aromatherapistBio', { credential: SITE.aromatherapist.credential })}
               </p>
               <a
                 href={SITE.aromatherapist.link}
@@ -81,7 +82,7 @@ export function ContactBand() {
                 rel="noreferrer"
                 className="mt-3 inline-block text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
               >
-                Ver a certificação
+                {t('seeCertification')}
               </a>
             </div>
           </div>

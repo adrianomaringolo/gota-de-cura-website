@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Field'
@@ -14,6 +15,7 @@ export function CouponBox({
   applied?: Coupon
   onApply: (coupon: Coupon | undefined) => void
 }) {
+  const t = useTranslations('coupon')
   const { data: coupons } = useCoupons()
   const [open, setOpen] = useState(false)
   const [code, setCode] = useState('')
@@ -25,7 +27,7 @@ export function CouponBox({
     )
 
     if (!match) {
-      setError('Esse código não é válido ou já expirou.')
+      setError(t('invalid'))
       onApply(undefined)
       return
     }
@@ -38,7 +40,10 @@ export function CouponBox({
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-positive-tint px-4 py-3">
         <p className="text-sm text-ink">
-          Cupom <strong className="font-semibold">{applied.code}</strong> aplicado.
+          {t.rich('applied', {
+            code: applied.code,
+            strong: (chunks) => <strong className="font-semibold">{chunks}</strong>,
+          })}
         </p>
         <button
           type="button"
@@ -48,7 +53,7 @@ export function CouponBox({
           }}
           className="text-sm font-medium text-ink-soft underline underline-offset-4 transition-colors hover:text-ink"
         >
-          Remover
+          {t('remove')}
         </button>
       </div>
     )
@@ -61,7 +66,7 @@ export function CouponBox({
         onClick={() => setOpen(true)}
         className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
       >
-        Tenho um cupom ou vale-presente
+        {t('open')}
       </button>
     )
   }
@@ -70,10 +75,10 @@ export function CouponBox({
     <div className="rounded-xl border border-line p-4">
       <div className="flex flex-wrap items-end gap-3">
         <Input
-          label="Código"
+          label={t('code')}
           value={code}
           error={error || undefined}
-          placeholder="Ex.: VISITA10"
+          placeholder={t('placeholder')}
           autoFocus
           onChange={(event) =>
             setCode(event.target.value.replace(/[^a-zA-Z0-9-]/g, '').toUpperCase())
@@ -93,7 +98,7 @@ export function CouponBox({
           disabled={!code}
           className="mb-0.5"
         >
-          Aplicar
+          {t('apply')}
         </Button>
       </div>
     </div>

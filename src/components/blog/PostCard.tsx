@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { formatPostDateShort } from '@/lib/format'
 import type { PostSummary } from '@/lib/types'
 
@@ -8,6 +9,9 @@ import type { PostSummary } from '@/lib/types'
  * the excerpt earn its space instead of being clipped to fit a grid cell.
  */
 export function PostCard({ post, index = 0 }: { post: PostSummary; index?: number }) {
+  const t = useTranslations('post')
+  const locale = useLocale()
+
   return (
     <Link href={`/blog/${post.slug}`} className="group flex items-start gap-4 py-6">
       <span className="w-6 shrink-0 pt-1 text-sm text-ink-muted/50 tabular-nums select-none">
@@ -34,7 +38,8 @@ export function PostCard({ post, index = 0 }: { post: PostSummary; index?: numbe
           {post.excerpt}
         </p>
         <p className="mt-2 text-xs text-ink-muted">
-          {formatPostDateShort(post.publishedAt)} · {post.readingTime} min de leitura
+          {formatPostDateShort(post.publishedAt, locale)} ·{' '}
+          {t('readingTime', { minutes: post.readingTime })}
           {post.tags.length > 0 && <> · {post.tags.slice(0, 2).join(' · ')}</>}
         </p>
       </div>

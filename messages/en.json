@@ -1,0 +1,561 @@
+{
+  "meta": {
+    "defaultTitle": "{name} — handcrafted essential oils and hydrosols",
+    "description": "Essential oils, hydrosols and handcrafted goods distilled at Chácara da Mãe Luzia, a small farm in Brazil. Every real of income supports the charitable work of Morada Espírita Prof. Lairi Hans.",
+    "keywords": "essential oils, hydrosols, aromatherapy, handmade soaps, handcrafted products, small-batch distillation, Campinas, Brazil",
+    "ogImageAlt": "The {name} shop with essential oils, hydrosols and handmade soaps",
+    "tagline": "Caring with love"
+  },
+  "notFound": {
+    "title": "We couldn’t find this page",
+    "body": "The address may have moved. Head back to the catalog and we’ll show you what’s fresh out of the still.",
+    "home": "Home page",
+    "catalog": "See the catalog"
+  },
+  "header": {
+    "skipToContent": "Skip to content",
+    "mainNav": "Main",
+    "mainNavMobile": "Main (mobile)",
+    "nav": {
+      "catalog": "Catalog",
+      "visits": "Visits",
+      "chromatographies": "Lab reports",
+      "blog": "Blog",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menu": "Menu",
+    "cart": "My order",
+    "cartWithCount": "My order, {count, plural, one {# item} other {# items}}",
+    "language": "Language"
+  },
+  "footer": {
+    "catalog": "Catalog",
+    "allProducts": "All products",
+    "essentialOils": "Essential oils",
+    "hydrosols": "Hydrosols",
+    "soaps": "Handmade soaps",
+    "giftCard": "Gift card",
+    "farm": "The farm",
+    "guidedVisit": "Guided visit",
+    "visitSignup": "Sign up for a visit",
+    "chromatographies": "Lab reports",
+    "blog": "Blog",
+    "videos": "Videos",
+    "about": "About us",
+    "blurb": "Essential oils, hydrosols and handcrafted goods distilled at Chácara da Mãe Luzia and sold at the Morada shop in Campinas, São Paulo, Brazil",
+    "store": "Visit the shop",
+    "proceeds": "All proceeds go to the charitable work of <link>{name}</link> in Campinas, Brazil.",
+    "builtBy": "Built by",
+    "staffArea": "Staff area"
+  },
+  "store": {
+    "weekdays": "Monday to Friday",
+    "saturday": "Saturday",
+    "weekdayHours": "9 am to 5 pm",
+    "saturdayHours": "8 am to 5 pm",
+    "hoursShort": "Mon–Fri, 9 am–5 pm · Sat, 8 am–5 pm"
+  },
+  "common": {
+    "homeLink": "{name} — home page"
+  },
+  "hero": {
+    "title": "Drop by the shop and take in the aroma.",
+    "lead": "Our shop is on Rua José Paulino in Campinas. Open the bottles, take your time with each aroma and talk to the people who distilled it — everything in the online catalog is on the shelves.",
+    "address": "Address",
+    "hours": "Hours",
+    "seeCatalog": "See the catalog",
+    "directions": "Get directions",
+    "photoAlt": "Inside the Gota de Cura shop: wooden shelves with sprays, essential oils and soaps, the brand's sign on the wall and daylight coming through the window.",
+    "captionTitle": "Our shop on Rua José Paulino",
+    "caption": "Everything that leaves the farm ends up here — and you can smell it before you take it home."
+  },
+  "catalog": {
+    "title": "The catalog",
+    "lead": "Seventeen shelves, from floral waters to clay soaps. Each one opens the full list with price, description and availability.",
+    "specialLine": "Special line"
+  },
+  "product": {
+    "noPhoto": "no photo",
+    "new": "New",
+    "discount": "{value} OFF",
+    "soldOut": "Currently sold out",
+    "unavailable": "Unavailable",
+    "buildKit": "Build a kit",
+    "add": "Add",
+    "learnMore": "Learn more",
+    "close": "Close",
+    "cancel": "Cancel",
+    "addWithPrice": "Add · {price}",
+    "addToOrder": "Add to order",
+    "kitPrompt": "Choose what goes in the kit.",
+    "selectPlaceholder": "— select —",
+    "notFoundTitle": "We couldn't find this product",
+    "notFoundBody": "It may have left the catalog or moved to a new address.",
+    "seeShelf": "See the {shelf} shelf",
+    "breadcrumb": "Breadcrumb",
+    "catalog": "Catalog",
+    "soldOutLong": "Currently sold out — check back soon.",
+    "photoOf": "View photo {index} of {total}"
+  },
+  "productList": {
+    "emptyTitle": "No products on this shelf yet",
+    "emptyBody": "We're still preparing this line. In the meantime, have a look at the others — or reach out to us on Instagram.",
+    "count": "{count, plural, one {# product} other {# products}}",
+    "soldOutCount": "{count} currently sold out"
+  },
+  "launches": {
+    "title": "New arrivals"
+  },
+  "differentials": {
+    "title": "What sets us apart",
+    "lead": "Gota de Cura is not a brand with a social cause attached. The cause is the reason it exists.",
+    "nonProfit": {
+      "title": "Non-profit",
+      "text": "There is no owner or partner to pay. Every real from each sale goes to the charitable work of {morada}."
+    },
+    "volunteers": {
+      "title": "Run by volunteers",
+      "text": "The people who plant, harvest, distill, bottle and serve you are volunteers, and they do it with a great deal of love and care."
+    },
+    "care": {
+      "title": "Care at every step",
+      "text": "From planting to bottling, everything happens at Chácara da Mãe Luzia. No step is outsourced, and there is no middleman between the garden bed and the bottle."
+    },
+    "service": {
+      "title": "A personal touch",
+      "text": "You talk to the people who distilled it. Questions about dilution, use or contraindications are answered by people who know the product and are always glad to help."
+    }
+  },
+  "laudos": {
+    "title": "What's inside the bottle, in writing",
+    "lead": "Chromatography is the lab test that separates and identifies every component of a mixture. We send our essential oils and hydrosols to the lab and publish the full report — not a summary.",
+    "body": "It's the simplest way to check what came out of the still without having to take our word for it.",
+    "seeAll": "See all reports",
+    "empty": "The reports are being prepared and will appear here as soon as they come back from the lab.",
+    "more": "and {count, plural, one {# more report} other {# more reports}}",
+    "seeFullList": "see the full list"
+  },
+  "chromatography": {
+    "types": {
+      "oleo-essencial": "Essential oils",
+      "hidrolato": "Hydrosols"
+    },
+    "emptyTitle": "The reports are on their way",
+    "emptyBody": "As soon as the results come back from the lab, they appear here — always in full.",
+    "count": "{count, plural, one {# report} other {# reports}}",
+    "notes": {
+      "oleo-essencial": "Concentrated extracts obtained by steam distillation.",
+      "hidrolato": "The aromatic water that comes out alongside the oil, in the same distillation."
+    }
+  },
+  "visitPrices": {
+    "free": "free"
+  },
+  "visitBand": {
+    "photo1Alt": "A group of visitors seated under the farm's lilac porch, watching an aromatic plant being distilled.",
+    "photo2Alt": "A hand-painted wooden sign reading Chácara da Mãe Luzia, surrounded by ceramic flowers.",
+    "title": "Come see the plant before it becomes oil",
+    "lead": "A morning at Chácara da Mãe Luzia, 40 minutes from Campinas: a homemade breakfast, the distillation of an aromatic plant from start to finish and a walk around the farm — vegetable garden, henhouse and flower beds, pesticide-free and watered from a natural spring.",
+    "duration": "Duration",
+    "durationValue": "8 am to noon, sharp",
+    "where": "Where",
+    "whereValue": "Santo Antônio de Posse, near Holambra (São Paulo state)",
+    "price": "Price",
+    "perPerson": "{price} per person",
+    "childPrices": "{child} ages 8 to 14 · {free} up to age 7",
+    "nextDates": "Upcoming dates",
+    "limited": "limited spots",
+    "signUp": "Save my spot",
+    "howItWorks": "See how it works"
+  },
+  "blogBand": {
+    "title": "Take your time reading",
+    "all": "All articles",
+    "readingTime": "{minutes} min read",
+    "minutes": "{minutes} min"
+  },
+  "testimonies": {
+    "title": "From those who have visited",
+    "leave": "Share your experience",
+    "previous": "Previous testimonials",
+    "next": "Next testimonials",
+    "stripLabel": "Testimonials from people who have visited the farm"
+  },
+  "videosBand": {
+    "title": "The farm on video",
+    "lead": "From the garden bed to the distillery, and the plants in our catalog introduced one by one by our aromatherapist. Videos are in Portuguese.",
+    "all": "See all videos"
+  },
+  "impact": {
+    "title": "What we earn here puts bread on someone's table",
+    "lead": "Gota de Cura has no owner and no partners. All income from sales goes to <strong>{name}</strong> and its work supporting families on the outskirts of Campinas, carried on since 1980.",
+    "body": "The farm belongs to the Morada. The people who plant, harvest, distill and bottle are all volunteers.",
+    "website": "Website"
+  },
+  "contact": {
+    "title": "Where to find us",
+    "store": "Our shop",
+    "talk": "Get in touch",
+    "follow": "Follow along",
+    "sealAlt": "CertAroma certification of {name}",
+    "aromatherapist": "Our aromatherapist",
+    "aromatherapistBio": "{credential}. Technically responsible for the formulas and the distillation of everything that leaves the farm.",
+    "seeCertification": "See the certification"
+  },
+  "social": {
+    "youtube": "{name} on YouTube"
+  },
+  "shelf": {
+    "fallbackDescription": "Handcrafted {title} from Gota de Cura.",
+    "ogTitle": "Handcrafted {title}",
+    "home": "Home",
+    "breadcrumb": "Breadcrumb",
+    "catalog": "Catalog",
+    "back": "Back to the catalog"
+  },
+  "productPage": {
+    "fallbackShelf": "Product",
+    "description": "{name}: handcrafted {shelf} from Gota de Cura, distilled at Chácara da Mãe Luzia. All income supports the charitable work of Morada Espírita Prof. Lairi Hans."
+  },
+  "blog": {
+    "description": "Aromatherapy in practice, life at Chácara da Mãe Luzia and how each essential oil travels from the garden bed to the bottle.",
+    "title": "Come learn with us",
+    "lead": "Aromatherapy without mysticism or empty promises: what we grow, how we distill and what each oil really does.",
+    "schemaName": "Gota de Cura Blog",
+    "home": "Home"
+  },
+  "post": {
+    "notFoundTitle": "This article isn't here",
+    "notFoundLead": "The address may have changed, or the article hasn't been published yet.",
+    "seeAll": "See all articles",
+    "all": "All articles",
+    "home": "Home",
+    "readingTime": "{minutes} min read",
+    "summary": "In short",
+    "related": "Read next",
+    "untranslated": "This article hasn't been translated into English yet, so it appears below in Portuguese.",
+    "toc": "In this article"
+  },
+  "postList": {
+    "filter": "Filter by topic",
+    "all": "All",
+    "emptyTitle": "Nothing here yet",
+    "emptyFiltered": "No articles on this topic yet. Try another filter.",
+    "emptyBody": "The first articles are being written. Check back soon."
+  },
+  "ui": {
+    "close": "Close",
+    "loading": "Loading"
+  },
+  "videos": {
+    "views": "{count, plural, one {# view} other {# views}}",
+    "watch": "Watch: {title}",
+    "channel": "See the YouTube channel",
+    "openChannel": "Open the YouTube channel",
+    "errorTitle": "The videos didn't load just now",
+    "errorBody": "Try reloading the page in a moment, or watch them directly on our channel."
+  },
+  "chromatographyPage": {
+    "title": "Chromatography reports",
+    "description": "Full chromatography reports for the essential oils and hydrosols distilled at Chácara da Mãe Luzia.",
+    "ogTitle": "Chromatography — the lab report for every plant",
+    "ogDescription": "We publish the full chromatography report for every essential oil and hydrosol, exactly as the lab delivered it.",
+    "lead": "Chromatography is the lab test that separates and identifies every component of a mixture. We publish the full report for every essential oil and hydrosol — exactly as the lab delivered it.",
+    "hint": "Click any plant to open its report as a PDF (in Portuguese)."
+  },
+  "videosPage": {
+    "metaTitle": "Videos",
+    "title": "Our videos",
+    "description": "Videos from Chácara da Mãe Luzia: the plants in our beds, the distillation process and conversations about aromatherapy with our aromatherapist.",
+    "lead": "A walk around the farm in motion: the plants, the distillery and conversations about what each oil really does. The videos are in Portuguese.",
+    "schemaName": "Gota de Cura videos",
+    "home": "Home"
+  },
+  "about": {
+    "metaTitle": "About us",
+    "description": "Gota de Cura was born in 2017 from a first batch of handmade soaps. Today it is a team of volunteers who grow, distill and bottle everything at Chácara da Mãe Luzia.",
+    "ogDescription": "A team of volunteers who grow, distill and bottle everything at Chácara da Mãe Luzia. All income supports the charitable work of Morada Espírita Prof. Lairi Hans.",
+    "title": "It started with a bar of soap",
+    "lead": "Gota de Cura was born in 2017, on the initiative of our aromatherapist Marcelo Mattar. Today it is a large team of volunteers — and a catalog that keeps on growing.",
+    "story1": "It all began with our first handmade soaps, made with fine vegetable oils — mostly extra-virgin olive oil — and enriched with rosemary and lavender essential oils. From the start they had something special: instead of water, organic tea tree hydrosol.",
+    "story2": "New recipes followed, and new therapeutic aromas, always with quality essential oils. Over time, Marcelo began distilling the aromatic plants himself, by hand, to make our own essential oils and hydrosols.",
+    "story3": "After the soaps came energizing sprays, bath salts, hydrosols, essential oils, tinctures and balms. We have never lost our purpose: to share the therapeutic and vibrational properties of plants through our products, with all income going to the charitable work of {morada}.",
+    "photoAlt": "Vegetable beds planted in the farm's red soil, with palm trees in the background.",
+    "photoCaption": "The garden beds at Chácara da Mãe Luzia, in Santo Antônio de Posse.",
+    "mission": "Mission",
+    "missionText": "To offer well-being and quality of life through aromatherapy products, promoting physical, mental, emotional and spiritual balance.",
+    "vision": "Vision",
+    "visionText": "To be a reference in aromatherapy products for their therapeutic and vibrational quality, with practices grounded in sustainability and respect for nature and for one another.",
+    "valuesTitle": "Our values",
+    "values": {
+      "socialResponsibility": {
+        "title": "Social responsibility",
+        "text": "All income from sales goes to the charitable work of Morada Espírita Prof. Lairi Hans in Campinas."
+      },
+      "sustainability": {
+        "title": "Sustainability",
+        "text": "Natural ingredients, spring water, natural fertilizer and clean energy. No pesticides in any of our beds."
+      },
+      "quality": {
+        "title": "Quality",
+        "text": "Purity and therapeutic effectiveness proven by lab reports, not by promises."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "text": "Clear information about what is in each product and how it was made."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "text": "New recipes and processes, always tested before they join the catalog."
+      }
+    },
+    "cta": "Want to see up close how each drop is made?",
+    "visitFarm": "Visit the farm",
+    "seeReports": "See the lab reports"
+  },
+  "visitPhotos": {
+    "photo-01": "A hand-painted wooden sign reading Chácara da Mãe Luzia.",
+    "photo-13": "The Chácara da Mãe Luzia sign framed by the white bougainvillea over the gate.",
+    "photo-23": "The pond and its fountain at sunrise, with the sun shining through the trees.",
+    "photo-09": "The breakfast table set for visitors, with lavender tablecloths.",
+    "photo-20": "Bread, scrambled eggs and crocheted cloths on the breakfast table.",
+    "photo-03": "The distillation still set up under the porch, with the woods behind it.",
+    "photo-06": "Visitors seated, following the explanation of the distillation.",
+    "photo-18": "A demonstration of the stainless-steel still, with visitors watching closely.",
+    "photo-16": "Visitors sitting in the shade of a tree during a talk about the plants.",
+    "photo-26": "Visitors under the tent on the lawn, with the pool and the vegetable garden behind.",
+    "photo-10": "A group of visitors walking between the citronella beds.",
+    "photo-15": "A group of visitors gathered among the plants, listening to the guide.",
+    "photo-21": "Visitors in raincoats looking at the flowering citrus trees.",
+    "photo-05": "Lettuce and kale beds planted in the farm's red soil.",
+    "photo-14": "Lettuce beds being watered, with a lavender plant in the foreground.",
+    "photo-24": "A large, leafy tree over freshly planted beds.",
+    "photo-02": "A close-up of the aromatic plants grown at the farm.",
+    "photo-25": "Free-range hens in the farm's henhouse.",
+    "photo-22": "A white water lily open among the leaves on the farm's pond.",
+    "photo-27": "A conversation circle on the lawn by the pond.",
+    "photo-12": "The Morada Espírita Prof. Lairi Hans banner at the farm's entrance.",
+    "photo-04": "A corner of the farm set up to welcome visitors.",
+    "photo-07": "Gota de Cura products on display on visit day.",
+    "photo-08": "Handicrafts made by the Morada's volunteers, for sale on visit day.",
+    "photo-17": "The porch with the handicraft bazaar set up for visit day.",
+    "photo-11": "A view of the property during the guided visit.",
+    "photo-19": "Group photo of the visitors with their certificates on the porch steps."
+  },
+  "visitProgram": {
+    "breakfast": {
+      "time": "8 am",
+      "title": "Breakfast at the farm",
+      "text": "We welcome everyone with a breakfast made right there, from what the vegetable garden and our free-range hens provide."
+    },
+    "distillation": {
+      "time": "9 am",
+      "title": "Distillation, start to finish",
+      "text": "We follow the distillation of a freshly harvested aromatic plant: the boiler, the steam, and the separation of the essential oil from the hydrosol."
+    },
+    "walk": {
+      "time": "10:30 am",
+      "title": "A walk around the property",
+      "text": "Garden beds, orchard, henhouse and spring. No pesticides, natural fertilizer and clean energy."
+    },
+    "closing": {
+      "time": "12 pm",
+      "title": "Wrapping up",
+      "text": "A final snack, and a table with Gota de Cura products and handicrafts made by the Morada's volunteers."
+    }
+  },
+  "gallery": {
+    "close": "Close gallery",
+    "position": "{index} of {total}",
+    "previous": "Previous photo",
+    "next": "Next photo"
+  },
+  "visitDates": {
+    "none": "There are no open dates right now. New dates are announced first on our Instagram."
+  },
+  "visitVideo": {
+    "title": "Promotional video of the visit to Chácara da Mãe Luzia",
+    "play": "Watch the visit video",
+    "preview": "Preview of the promotional video of the visit to Chácara da Mãe Luzia"
+  },
+  "paymentTerms": {
+    "before": {
+      "title": "Before the day",
+      "schedule": "The program starts at 8 am sharp and ends at noon.",
+      "travel": "Each participant arranges their own transportation. Once the group is full, we send directions for getting there.",
+      "prices": "Prices: {adult} for ages 15 and up, {child} for ages 8 to 14, {free} up to age 7."
+    },
+    "payment": {
+      "title": "Payment",
+      "arranged": "Payment is arranged directly with the Gota de Cura team.",
+      "confirmed": "Your spot is only guaranteed once it is confirmed and the fee is paid."
+    },
+    "cancellation": {
+      "title": "Cancellations and refunds",
+      "fourteenDays": "Up to 14 days before: 50% refund by bank transfer.",
+      "sevenDays": "Up to 7 days before: 50% refund as a gift card for the website or the shop (shipping not included).",
+      "lastWeek": "Less than 7 days before: no refund, no transfer to a future date and no exchange for products."
+    }
+  },
+  "visits": {
+    "metaTitle": "Guided visit to Chácara da Mãe Luzia",
+    "description": "A morning at the farm where Gota de Cura's plants are grown and distilled: breakfast, a live distillation and a guided walk around the property.",
+    "ogDescription": "Breakfast, a live distillation and a guided walk around the farm where we grow and distill everything.",
+    "title": "A morning at Chácara da Mãe Luzia",
+    "lead": "This is where we grow, harvest and distill everything that becomes essential oil and hydrosol. The visit is open to anyone who wants to see the whole process up close — aromatherapists or not.",
+    "languageNote": "Please note: the visit is guided in Portuguese.",
+    "nextDates": "Upcoming dates",
+    "signUp": "Save my spot",
+    "videoTitle": "See what the visit is like",
+    "videoLead": "A short video so you can get to know the farm before coming in person.",
+    "dayTitle": "How the day goes",
+    "dayBody": "The property belongs to {morada}, an institution founded in Campinas in 1980. It is in Santo Antônio de Posse, near Holambra, about 40 minutes from Campinas. Everything produced there exists to support the Morada's charitable work.",
+    "dayLength": "Four unhurried hours, from 8 am to noon.",
+    "pricesTitle": "Prices and terms",
+    "adults": "Ages 15 and up",
+    "children": "Ages 8 to 14",
+    "little": "Up to age 7",
+    "limited": "Spots are limited — each group is kept small on purpose.",
+    "galleryTitle": "Inside the farm",
+    "album": "See the full album",
+    "testimoniesTitle": "What past visitors say",
+    "visitedOn": "Visited on {date}",
+    "ctaTitle": "Want to see it up close?",
+    "cta": "Sign up"
+  },
+  "enrollment": {
+    "metaTitle": "Sign up for a visit",
+    "description": "Pick a date, fill in your details and save your spot on the guided visit to Chácara da Mãe Luzia.",
+    "saveError": "We couldn't save your sign-up. Please try again.",
+    "intro": "This is a pre-registration. Once you send it, a volunteer will contact you on WhatsApp to confirm your spot and arrange payment.",
+    "step1": "Choose a date",
+    "noDates": "There are no open dates right now. Follow our Instagram — new dates are announced there first.",
+    "dateError": "Choose one of the available dates.",
+    "step2": "Your contact details",
+    "name": "Full name",
+    "nameError": "Please enter your full name.",
+    "phone": "Mobile (WhatsApp)",
+    "phoneHint": "A Brazilian mobile number with area code. Double-check it: it's how we'll reach you.",
+    "phoneError": "Enter a mobile number with its area code.",
+    "email": "Email",
+    "emailError": "Please check the email address.",
+    "step3": "Companions",
+    "step3Hint": "Each companion takes up one spot. Enter each person's full name.",
+    "companion": "Companion {number}",
+    "companionError": "Enter the full name.",
+    "removeCompanion": "Remove companion {number}",
+    "addCompanion": "Add a companion",
+    "step4": "Have you visited before?",
+    "step4Hint": "Optional — it helps us plan the group's program.",
+    "lastVisit": "Month and year of your last visit, and which plant was distilled",
+    "lastVisitPlaceholder": "E.g. October 2024, lavender",
+    "agree": "I have read and agree to the <terms>payment and refund</terms> terms",
+    "back": "Back",
+    "review": "Review and send",
+    "confirmTitle": "Confirm your sign-up",
+    "confirmDescription": "Once you send it, our team will contact you on WhatsApp.",
+    "edit": "Edit",
+    "sending": "Sending…",
+    "confirm": "Confirm sign-up",
+    "checkPhone": "Check your mobile number in particular — it's our only way to reach you.",
+    "summaryDate": "Date",
+    "summaryName": "Name",
+    "summaryPhone": "Mobile",
+    "doneTitle": "Sign-up received",
+    "doneBack": "Back to the visit page",
+    "doneBody": "Your pre-registration has been recorded. One of our volunteers will contact you on WhatsApp to confirm your spot and arrange payment.",
+    "doneEmail": "We've also sent you an email with all the details. See you soon!",
+    "termsTitle": "Payment and refunds",
+    "gotIt": "Got it"
+  },
+  "cart": {
+    "metaTitle": "My order",
+    "description": "Review the products you chose and send your reservation. The Gota de Cura team will then confirm availability and payment.",
+    "steps": {
+      "order": "My order",
+      "details": "My details",
+      "confirmation": "Confirmation"
+    },
+    "decrease": "Decrease {name}",
+    "increase": "Increase {name}",
+    "quantity": "Quantity of {name}",
+    "remove": "Remove {name} from the order",
+    "added": "{name} was added to your order"
+  },
+  "order": {
+    "metaTitle": "My order",
+    "description": "Follow the details and status of your Gota de Cura order."
+  },
+  "coupon": {
+    "invalid": "This code isn't valid or has expired.",
+    "applied": "Coupon <strong>{code}</strong> applied.",
+    "remove": "Remove",
+    "open": "I have a coupon or gift card",
+    "code": "Code",
+    "placeholder": "E.g. VISITA10",
+    "apply": "Apply"
+  },
+  "checkout": {
+    "sendError": "We couldn't send your order. Please try again in a moment.",
+    "sent": "Order sent",
+    "sentByEmail": "We've emailed you a confirmation of your order.",
+    "received": "We've received your order.",
+    "sentNext": "The {name} team will confirm the products, delivery and payment with you, and your order will be handled within 48 hours.",
+    "trackHint": "You can follow your order's details at any time on this page:",
+    "track": "Track my order",
+    "backToCatalog": "Back to the catalog",
+    "testimony": "Leave a testimonial",
+    "title": "My order",
+    "emptyTitle": "Your order is still empty",
+    "seeCatalog": "See the catalog",
+    "emptyBody": "Pick products from the shelves and they'll show up here for you to review before sending.",
+    "intro": "This is a reservation request. Once you send it, our team will confirm each item's availability and arrange payment and delivery with you. We currently only deliver within Brazil.",
+    "keepShopping": "Keep browsing",
+    "total": "Total",
+    "emptied": "Order cleared",
+    "empty": "Clear",
+    "fillDetails": "Enter my details",
+    "name": "Full name",
+    "nameError": "We need your full name.",
+    "phone": "Mobile (WhatsApp)",
+    "phoneHint": "A Brazilian mobile number with area code — it's how our team will reach you.",
+    "phoneError": "Enter a mobile number with its area code.",
+    "email": "Email",
+    "emailError": "Please check the email address.",
+    "city": "City",
+    "cityError": "Please enter your city.",
+    "zipcode": "CEP (postal code)",
+    "zipcodeError": "Enter a valid Brazilian CEP.",
+    "notes": "Notes",
+    "notesPlaceholder": "Anything we should know about the order, delivery or packaging?",
+    "backToProducts": "Back to products",
+    "review": "Review order",
+    "yourDetails": "Your details",
+    "edit": "Edit",
+    "summaryName": "Name",
+    "summaryPhone": "Mobile",
+    "products": "Products",
+    "subtotal": "Subtotal",
+    "discount": "Discount",
+    "shipping": "Shipping, if any, is arranged separately with our team.",
+    "back": "Back",
+    "sending": "Sending…",
+    "confirm": "Confirm order"
+  },
+  "orderStatus": {
+    "notFoundTitle": "Order not found",
+    "home": "Back to home",
+    "notFoundBody": "Check that the link is complete, or reach out to us on <instagram>Instagram</instagram>.",
+    "title": "Order #{number}",
+    "placedOn": "Placed on {date}",
+    "greeting": "Hello, <strong>{name}</strong>! Your order will be handled within 48 hours. If you have any questions, reach out to us on <instagram>Instagram</instagram> or by email at <mail>{email}</mail>.",
+    "products": "Products",
+    "subtotal": "Subtotal",
+    "coupon": "Coupon {code}",
+    "total": "Total",
+    "history": "History"
+  }
+}

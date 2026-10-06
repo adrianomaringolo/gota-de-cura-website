@@ -1,9 +1,11 @@
-import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { Container, SectionHead } from '@/components/site/Section'
 import { VideoCard } from '@/components/videos/VideoCard'
+import { Link } from '@/i18n/navigation'
 import { getChannelVideos } from '@/services/youtube'
 
 export async function VideosBand() {
+  const t = await getTranslations('videosBand')
   const videos = await getChannelVideos(3)
 
   if (videos.length === 0) return null
@@ -12,14 +14,14 @@ export async function VideosBand() {
     <section className="bg-canvas py-20 lg:py-24">
       <Container>
         <SectionHead
-          title="A chácara em vídeo"
-          lead="Do canteiro à destilaria, e as plantas do catálogo apresentadas uma a uma pelo nosso aromaterapeuta."
+          title={t('title')}
+          lead={t('lead')}
           aside={
             <Link
               href="/videos"
               className="group inline-flex items-center gap-2 text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
             >
-              Ver todos os vídeos
+              {t('all')}
               <svg
                 viewBox="0 0 24 24"
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"

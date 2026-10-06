@@ -54,6 +54,27 @@ O **carrinho** vive no `localStorage` (chave `cart`) e é exposto pelo
 `CartProvider` em `src/lib/cart-context.tsx`. Os preços são revalidados contra o
 Firestore a cada carregamento.
 
+### Idiomas (pt-BR e inglês)
+
+O site público existe em português (sem prefixo, URLs de sempre) e em inglês
+(`/en/...`), com [next-intl](https://next-intl.dev). O painel (`/admin`) e a
+vitrine (`/vitrine`) ficam só em português, fora do segmento `[locale]`, no grupo
+`src/app/(internal)`.
+
+- **Textos da interface:** `messages/pt-BR.json` e `messages/en.json`, com as
+  mesmas chaves. Componente client que usa um namespace novo precisa dele em
+  `src/i18n/client-messages.ts`, que é a lista do que vai para o navegador.
+- **Prateleiras:** o campo `en` de cada tipo em `src/lib/product-types.ts`. O
+  `type` em português continua sendo a chave dos produtos no Firestore.
+- **Produtos:** `translations.en` no documento do produto, editado na aba
+  "Inglês" do formulário do painel. Campo vazio mostra o português. Para gerar
+  um primeiro rascunho com a API do Claude: `pnpm translate:produtos`, revisar
+  `scripts/out/products-en.json` e gravar com `pnpm translate:produtos --apply`.
+- **Blog:** `index.en.md` ao lado do `index.md` de cada post. Post sem tradução
+  aparece em `/en` com um aviso, em português e fora do índice de busca.
+- **Pedidos e inscrições** guardam o idioma do cliente (`locale`): o e-mail e a
+  página do pedido saem no idioma dele, e a equipe vê o aviso no painel.
+
 ### Design
 
 O sistema visual está inteiro em `src/app/globals.css`, em OKLCH. A estratégia

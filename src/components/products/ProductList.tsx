@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { EmptyState } from '@/components/ui/Feedback'
 import { ProductsService } from '@/services/products'
@@ -7,6 +8,7 @@ import type { ProductItem, ProductType } from '@/lib/types'
 import { ProductCard } from './ProductCard'
 
 export function ProductList({ productType }: { productType: ProductType }) {
+  const t = useTranslations('productList')
   const [items, setItems] = useState<ProductItem[] | null>(null)
 
   useEffect(() => {
@@ -55,12 +57,7 @@ export function ProductList({ productType }: { productType: ProductType }) {
   }
 
   if (items.length === 0) {
-    return (
-      <EmptyState title="Ainda não há produtos nesta prateleira">
-        Estamos preparando esta linha. Enquanto isso, dê uma olhada nas outras — ou fale
-        com a gente pelo Instagram.
-      </EmptyState>
-    )
+    return <EmptyState title={t('emptyTitle')}>{t('emptyBody')}</EmptyState>
   }
 
   const available = items.filter((item) => item.available)
@@ -70,8 +67,8 @@ export function ProductList({ productType }: { productType: ProductType }) {
   return (
     <>
       <p className="mb-6 text-sm text-ink-muted">
-        {items.length} {items.length === 1 ? 'produto' : 'produtos'}
-        {soldOut.length > 0 && ` · ${soldOut.length} esgotado(s) no momento`}
+        {t('count', { count: items.length })}
+        {soldOut.length > 0 && ` · ${t('soldOutCount', { count: soldOut.length })}`}
       </p>
       <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
         {ordered.map((item) => (

@@ -1,6 +1,7 @@
 import emailjs from '@emailjs/browser'
-import { VISIT_PRICES } from '@/lib/constants'
+import { VISIT_PRICES, VISIT_PRICES_NUMERIC } from '@/lib/constants'
 import { formatCurrency, formatVisitDate } from '@/lib/format'
+import { typeDisplayName } from '@/lib/product-types'
 import { SITE } from '@/lib/site'
 import type { ContactInfo, EnrollmentData } from '@/lib/types'
 
@@ -19,18 +20,38 @@ type TemplateParams = {
 const send = (params: TemplateParams) =>
   emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, params, EMAIL_PUBLIC_KEY)
 
-type OrderEmailItem = { name: string; type: string; amount: number; price: number }
+type OrderEmailItem = {
+  name: string
+  /** The name as the customer read it, when they ordered in another language. */
+  localizedName?: string
+  type: string
+  amount: number
+  price: number
+}
+
+/**
+ * Customer-facing e-mails go out in the language the customer used on the site.
+ * Staff e-mails are always Portuguese — the team's language — and just flag the
+ * customer's language when it is not Portuguese.
+ */
+const isEnglish = (locale?: string) => locale === 'en'
+
+/** Shown to the team next to a customer who used the site in English. */
+const languageFlag = (locale?: string) =>
+  isEnglish(locale) ? ' <span style="color: #b45309">(cliente em inglês)</span>' : ''
 
 /** The item/total table shared by every order e-mail, staff and customer alike. */
-const orderItemsTable = (items: OrderEmailItem[]) => {
+const orderItemsTable = (items: OrderEmailItem[], locale = 'pt-BR') => {
   const total = items.reduce((sum, item) => sum + item.price * item.amount, 0)
+  const name = (item: OrderEmailItem) =>
+    isEnglish(locale) ? (item.localizedName ?? item.name) : item.name
 
   const itemRows = items
     .map(
       (item) => `
       <tr>
-        <td style="padding: 6px 0">${item.amount}× ${item.name} <span style="color: #888; font-size: 13px">(${item.type})</span></td>
-        <td style="padding: 6px 0; text-align: right; white-space: nowrap">${formatCurrency(item.price * item.amount)}</td>
+        <td style="padding: 6px 0">${item.amount}× ${name(item)} <span style="color: #888; font-size: 13px">(${typeDisplayName(item.type, locale)})</span></td>
+        <td style="padding: 6px 0; text-align: right; white-space: nowrap">${formatCurrency(item.price * item.amount, locale)}</td>
       </tr>`,
     )
     .join('')
@@ -40,10 +61,74 @@ const orderItemsTable = (items: OrderEmailItem[]) => {
       ${itemRows}
       <tr>
         <td style="padding: 10px 0 0; border-top: 1px solid #ddd; font-weight: bold">Total</td>
-        <td style="padding: 10px 0 0; border-top: 1px solid #ddd; text-align: right; font-weight: bold">${formatCurrency(total)}</td>
+        <td style="padding: 10px 0 0; border-top: 1px solid #ddd; text-align: right; font-weight: bold">${formatCurrency(total, locale)}</td>
       </tr>
     </table>`
 }
+
+/** The "questions? talk to us" box and sign-off that close every customer e-mail. */
+const customerFooter = (locale?: string) =>
+  isEnglish(locale)
+    ? `
+        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
+          <p style="margin: 0 0 8px">Any questions about your order? Get in touch:</p>
+          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
+          <p style="margin: 4px 0 0">✉️ Email: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
+        </div>
+
+        <p style="margin-top: 30px">With love,<br/>The Gota de Cura team</p>`
+    : `
+        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
+          <p style="margin: 0 0 8px">Alguma dúvida sobre o pedido? Fale com a gente:</p>
+          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
+          <p style="margin: 4px 0 0">✉️ E-mail: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
+        </div>
+
+        <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>`
+
+const visitPrice = (value: number) => (value ? formatCurrency(value, 'en') : 'free')
+
+/** English twin of `sendEnrollmentGreetingEmail`, for sign-ups made on `/en`. */
+const sendEnrollmentGreetingEmailEn = (visitorName: string, mailList: string[]) =>
+  send({
+    title: `🪻 ${visitorName}, you're signed up`,
+    html_message: `
+      <div style="font-size: 18px">
+      <p style="font-weight:bold;font-size:22px">${visitorName}, thank you for signing up! 🎉</p>
+      <p>We'll be delighted to welcome you to Chácara da Mãe Luzia — your visit will make our garden beds even more fragrant!</p>
+      <p style="font-weight: bold">One of our volunteers will contact you soon to arrange the details. Please note that the visit is guided in Portuguese.</p>
+      <p>In the meantime, to learn more about the visit and see photos and testimonials from past visitors, go to <a href="${SITE.url}/en/visitas">gotadecura.com.br/en/visitas</a> and follow us on <a href="${SITE.instagram}">Instagram</a>!</p>
+      <p style="background-color: #fbffc0; padding: 20px; border-radius: 20px; font-size: 14px; margin-top: 50px; font-style: italic; text-align: left">
+      <b>Important:</b><br/><br/>
+      ⚠️ The program starts at 8 am sharp and ends at noon.<br/><br/>
+      ⚠️ Everyone arranges their own transportation. Once the group is full, we'll send more details and directions.<br/><br/>
+      ⚠️ The price is ${visitPrice(VISIT_PRICES_NUMERIC.ADULT)} per person aged 15 and up / ${visitPrice(VISIT_PRICES_NUMERIC.CHILD)} per person aged 8 to 14 / ${visitPrice(VISIT_PRICES_NUMERIC.FREE)} up to age 7.</p>
+      <hr/>
+      <div style="font-size: 14px; text-align: left">
+        <h4>About payment:</h4>
+        <p>
+          ⚠️ Payment is arranged with the Gota de Cura team. Your spot is guaranteed
+          once it is confirmed and the fee is paid.
+        </p>
+
+        <p><b>Cancellations and refunds:</b></p>
+        <p>
+          ⚠️ Up to 14 days before the event: <b>50% refund</b> by bank transfer.
+        </p>
+
+        <p>
+          ⚠️ Up to 7 days before the event: <b>50% refund</b> as a gift card for
+          products on the website or in the shop (shipping not included).
+        </p>
+
+        <p>
+          ⚠️ Less than 7 days before the event:
+          <u> no refund, no transfer to a future event and no exchange for products.</u>
+        </p>
+      </div>
+      <p style="margin-top: 50px">Kind regards,<br/>The Gota de Cura team</p></div>`,
+    mail_list: mailList.join(','),
+  })
 
 export const EmailSender = {
   sendNewOrderEmail(
@@ -51,10 +136,11 @@ export const EmailSender = {
     clientName: string,
     items: OrderEmailItem[],
     mailList: string[],
+    customerLocale?: string,
   ) {
     return send({
       title: `🟣 Novo pedido no site: #${orderNumber}`,
-      html_message: `<p style="font-size: 20px">Novo pedido (#${orderNumber}) feito no Gota de Cura de&nbsp;<strong>${clientName}</strong>.</p>
+      html_message: `<p style="font-size: 20px">Novo pedido (#${orderNumber}) feito no Gota de Cura de&nbsp;<strong>${clientName}</strong>${languageFlag(customerLocale)}.</p>
       ${orderItemsTable(items)}
       <hr>
       <p>Acesse a área de pedidos do Painel de Administrador do site Gota de Cura para ver os pedidos.
@@ -68,30 +154,32 @@ export const EmailSender = {
     contact: ContactInfo,
     items: OrderEmailItem[],
     orderUrl: string,
+    locale = 'pt-BR',
   ) {
     if (!contact.email) return Promise.resolve()
+    const en = isEnglish(locale)
 
     return send({
-      title: `🟣 Recebemos seu pedido #${orderNumber}`,
+      title: en
+        ? `🟣 We've received your order #${orderNumber}`
+        : `🟣 Recebemos seu pedido #${orderNumber}`,
       html_message: `
       <div style="max-width: 500px; margin: 0 auto; font-size: 15px; color: #333">
-        <p style="font-size: 20px; font-weight: bold">Obrigado, ${contact.name}!</p>
-        <p>Recebemos seu pedido <strong>#${orderNumber}</strong> e nossa equipe vai confirmar os produtos, a entrega e o pagamento com você. <strong>Seu pedido será atendido em até 48h.</strong></p>
+        ${
+          en
+            ? `<p style="font-size: 20px; font-weight: bold">Thank you, ${contact.name}!</p>
+        <p>We've received your order <strong>#${orderNumber}</strong>, and our team will confirm the products, delivery and payment with you. <strong>Your order will be handled within 48 hours.</strong></p>`
+            : `<p style="font-size: 20px; font-weight: bold">Obrigado, ${contact.name}!</p>
+        <p>Recebemos seu pedido <strong>#${orderNumber}</strong> e nossa equipe vai confirmar os produtos, a entrega e o pagamento com você. <strong>Seu pedido será atendido em até 48h.</strong></p>`
+        }
 
-        ${orderItemsTable(items)}
+        ${orderItemsTable(items, locale)}
 
         <p style="text-align: center; margin: 30px 0">
-          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">Acompanhar meu pedido</a>
+          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">${en ? 'Track my order' : 'Acompanhar meu pedido'}</a>
         </p>
-        <p style="font-size: 13px; color: #888; text-align: center">Ou acesse: <a style="color: #4c3b82" href="${orderUrl}" target="_blank" rel="noopener">${orderUrl}</a></p>
-
-        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
-          <p style="margin: 0 0 8px">Alguma dúvida sobre o pedido? Fale com a gente:</p>
-          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
-          <p style="margin: 4px 0 0">✉️ E-mail: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
-        </div>
-
-        <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>
+        <p style="font-size: 13px; color: #888; text-align: center">${en ? 'Or go to' : 'Ou acesse'}: <a style="color: #4c3b82" href="${orderUrl}" target="_blank" rel="noopener">${orderUrl}</a></p>
+        ${customerFooter(locale)}
       </div>`,
       mail_list: contact.email,
     })
@@ -103,35 +191,36 @@ export const EmailSender = {
     statusLabel: string,
     comment: string | undefined,
     orderUrl: string,
+    locale = 'pt-BR',
   ) {
     if (!contact.email) return Promise.resolve()
+    const en = isEnglish(locale)
 
     return send({
-      title: `🟣 Atualização do seu pedido #${orderNumber}`,
+      title: en
+        ? `🟣 An update on your order #${orderNumber}`
+        : `🟣 Atualização do seu pedido #${orderNumber}`,
       html_message: `
       <div style="max-width: 500px; margin: 0 auto; font-size: 15px; color: #333">
-        <p style="font-size: 20px; font-weight: bold">Olá, ${contact.name}!</p>
-        <p>O status do seu pedido <strong>#${orderNumber}</strong> foi atualizado para:</p>
+        <p style="font-size: 20px; font-weight: bold">${en ? 'Hello' : 'Olá'}, ${contact.name}!</p>
+        <p>${
+          en
+            ? `The status of your order <strong>#${orderNumber}</strong> has been updated to:`
+            : `O status do seu pedido <strong>#${orderNumber}</strong> foi atualizado para:`
+        }</p>
         <p style="font-size: 18px; font-weight: bold; color: #4c3b82; margin: 10px 0">${statusLabel}</p>
         ${
           comment
             ? `<div style="background-color: #fbffc0; border-radius: 10px; padding: 15px 20px; margin: 20px 0; font-size: 14px">
-                <p style="margin: 0"><strong>Mensagem de quem está te atendendo:</strong></p>
+                <p style="margin: 0"><strong>${en ? 'A message from the person helping you:' : 'Mensagem de quem está te atendendo:'}</strong></p>
                 <p style="margin: 6px 0 0; white-space: pre-line">${comment}</p>
               </div>`
             : ''
         }
         <p style="text-align: center; margin: 30px 0">
-          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">Ver meu pedido</a>
+          <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">${en ? 'View my order' : 'Ver meu pedido'}</a>
         </p>
-
-        <div style="background-color: #eee; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px">
-          <p style="margin: 0 0 8px">Alguma dúvida sobre o pedido? Fale com a gente:</p>
-          <p style="margin: 0">📷 Instagram: <a style="color: #4c3b82" href="${SITE.instagram}" target="_blank" rel="noopener">@gotadecura_artesanais</a></p>
-          <p style="margin: 4px 0 0">✉️ E-mail: <a style="color: #4c3b82" href="mailto:${SITE.email}">${SITE.email}</a></p>
-        </div>
-
-        <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>
+        ${customerFooter(locale)}
       </div>`,
       mail_list: contact.email,
     })
@@ -147,7 +236,7 @@ export const EmailSender = {
       html_message: `<p style="font-size: 20px;margin-bottom: 20px;font-weight: bold">Nova inscrição para visitação realizada pelo site!</p>
 
       <p><b>Data</b>: ${formatVisitDate(visitDate)}</p>
-      <p><b>Nome</b>: ${enrollment.name}</p>
+      <p><b>Nome</b>: ${enrollment.name}${languageFlag(enrollment.locale)}</p>
       <p><b>Celular</b>: ${enrollment.cellphone}</p>
       <p><b>Email</b>: ${enrollment.email}</p>
       <p><b>Acompanhantes</b>: ${(enrollment.companions ?? []).join(', ') || '—'}</p>
@@ -159,7 +248,9 @@ export const EmailSender = {
     })
   },
 
-  sendEnrollmentGreetingEmail(visitorName: string, mailList: string[]) {
+  sendEnrollmentGreetingEmail(visitorName: string, mailList: string[], locale = 'pt-BR') {
+    if (isEnglish(locale)) return sendEnrollmentGreetingEmailEn(visitorName, mailList)
+
     return send({
       title: `🪻 ${visitorName}, sua inscrição foi realizada`,
       html_message: `

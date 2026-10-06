@@ -8,7 +8,9 @@ import {
   useMemo,
   useState,
 } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import toast from 'react-hot-toast'
+import { cartLineName } from './products'
 import { ProductsService } from '@/services/products'
 import type { CartItem, ProductItem } from './types'
 
@@ -46,6 +48,8 @@ const writeStoredCart = (items: CartItem[]) => {
 }
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  const t = useTranslations('cart')
+  const locale = useLocale()
   const [items, setItems] = useState<CartItem[]>([])
   const [ready, setReady] = useState(false)
 
@@ -56,7 +60,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
     if (stored.length === 0) return
 
-    // Prices can change between visits; the cart always shows today's price.
+    // Prices and wording can change between visits; the cart always shows
+    // today's price and translations.
     let cancelled = false
     ProductsService.getProducts()
       .then((products) => {
@@ -64,7 +69,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setItems((current) => {
           const refreshed = current.map((item) => {
             const product = products.find((candidate) => candidate.id === item.id)
-            return product ? { ...item, price: product.price } : item
+            return product
+              ? { ...item, price: product.price, translations: product.translations }
+              : item
           })
           writeStoredCart(refreshed)
           return refreshed
@@ -98,14 +105,28 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           ? current.map((line) =>
               line.id === lineId ? { ...line, amount: line.amount + 1 } : line,
             )
-          : [...current, { ...item, id: lineId, name, type, amount: 1 }]
+          : [
+              ...current,
+              {
+                ...item,
+                id: lineId,
+                name,
+                type,
+                amount: 1,
+                ...(variantSuffix?.length && { variants: variantSuffix }),
+              },
+            ]
         writeStoredCart(next)
         return next
       })
 
-      toast.success(`${name} foi para o seu pedido`)
+      const shown = cartLineName(
+        { ...item, name, type, amount: 1, variants: variantSuffix },
+        locale,
+      )
+      toast.success(t('added', { name: shown }))
     },
-    [],
+    [t, locale],
   )
 
   const setAmount = useCallback((id: string, amount: number) => {

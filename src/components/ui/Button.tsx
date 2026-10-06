@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import type { ComponentProps, ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 

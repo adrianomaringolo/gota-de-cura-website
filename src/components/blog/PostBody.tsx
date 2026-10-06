@@ -1,4 +1,5 @@
 import GithubSlugger from 'github-slugger'
+import { useTranslations } from 'next-intl'
 import { Children, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -34,6 +35,7 @@ const textOf = (children: ReactNode): string =>
     .join('')
 
 export function PostBody({ content }: { content: string }) {
+  const t = useTranslations('post')
   const headings = extractHeadings(content)
 
   // A plain lookup, not a live slugger call from inside the renderers: a
@@ -46,11 +48,11 @@ export function PostBody({ content }: { content: string }) {
     <>
       {headings.length > 0 && (
         <nav
-          aria-label="Neste texto"
+          aria-label={t('toc')}
           className="mb-10 rounded-2xl border border-line bg-canvas-sunk px-6 py-5"
         >
           <p className="text-2xs font-bold tracking-[0.14em] text-ink-muted uppercase">
-            Neste texto
+            {t('toc')}
           </p>
           <ul className="mt-3 space-y-2 text-sm">
             {headings.map((heading) => (
@@ -156,7 +158,9 @@ export function PostBody({ content }: { content: string }) {
           ),
           table: ({ children }) => (
             <div className="mb-6 overflow-x-auto rounded-xl border border-line">
-              <table className="w-full border-collapse text-left text-sm">{children}</table>
+              <table className="w-full border-collapse text-left text-sm">
+                {children}
+              </table>
             </div>
           ),
           th: ({ children }) => (
