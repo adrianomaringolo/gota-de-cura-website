@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { Container } from '@/components/site/Section'
 import { EmptyState } from '@/components/ui/Feedback'
 import { SITE } from '@/lib/site'
@@ -5,6 +6,7 @@ import type { YoutubeVideo } from '@/lib/types'
 import { VideoCard } from './VideoCard'
 
 export function VideoGrid({ videos }: { videos: YoutubeVideo[] }) {
+  const t = useTranslations('videos')
   const [lead, ...rest] = videos
 
   return (
@@ -33,7 +35,7 @@ export function VideoGrid({ videos }: { videos: YoutubeVideo[] }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-brand-deep"
               >
-                Ver o canal no YouTube
+                {t('channel')}
                 <svg
                   viewBox="0 0 24 24"
                   className="h-4 w-4"
@@ -51,7 +53,7 @@ export function VideoGrid({ videos }: { videos: YoutubeVideo[] }) {
           </>
         ) : (
           <EmptyState
-            title="Os vídeos não carregaram agora"
+            title={t('errorTitle')}
             action={
               <a
                 href={SITE.youtube}
@@ -59,11 +61,11 @@ export function VideoGrid({ videos }: { videos: YoutubeVideo[] }) {
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-6 py-3 text-sm font-medium text-white transition-colors duration-200 hover:bg-brand-deep"
               >
-                Abrir o canal no YouTube
+                {t('openChannel')}
               </a>
             }
           >
-            Tente recarregar a página em instantes, ou assista direto no nosso canal.
+            {t('errorBody')}
           </EmptyState>
         )}
       </Container>

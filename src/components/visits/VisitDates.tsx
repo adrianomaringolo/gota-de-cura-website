@@ -1,5 +1,6 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 import { useVisits } from '@/lib/hooks'
 import { formatVisitDateLong } from '@/lib/format'
@@ -12,6 +13,8 @@ export function VisitDates({
   tone?: 'ink' | 'light'
   className?: string
 }) {
+  const t = useTranslations('visitDates')
+  const locale = useLocale()
   const { data, loading } = useVisits()
   const light = tone === 'light'
   const upcoming = data.filter((visit) => isUpcoming(visit))
@@ -38,8 +41,7 @@ export function VisitDates({
       <p
         className={cn('text-base', light ? 'text-white/70' : 'text-ink-soft', className)}
       >
-        Não há datas abertas no momento. As próximas são anunciadas primeiro no nosso
-        Instagram.
+        {t('none')}
       </p>
     )
   }
@@ -54,7 +56,7 @@ export function VisitDates({
             light ? 'bg-white/10 text-white' : 'bg-brand-tint text-brand',
           )}
         >
-          {formatVisitDateLong(visit.date)}
+          {formatVisitDateLong(visit.date, locale)}
         </li>
       ))}
     </ul>

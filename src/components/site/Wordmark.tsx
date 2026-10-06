@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/cn'
 import { SITE } from '@/lib/site'
 
@@ -16,10 +17,12 @@ type WordmarkProps = {
  * to solid white.
  */
 export function Wordmark({ tone = 'ink', size = 'sm', className }: WordmarkProps) {
+  const t = useTranslations('common')
+
   return (
     <Link
       href="/"
-      aria-label={`${SITE.name} — página inicial`}
+      aria-label={t('homeLink', { name: SITE.name })}
       className={cn('group inline-flex items-center', className)}
     >
       <Image

@@ -1,7 +1,15 @@
 import type { NextConfig } from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  experimental: {
+    // `[locale]` and `(internal)` are separate root layouts, so a URL that
+    // matches no route at all needs a 404 of its own — see app/global-not-found.tsx.
+    globalNotFound: true,
+  },
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'firebasestorage.googleapis.com' },
@@ -39,4 +47,4 @@ const nextConfig: NextConfig = {
   },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)

@@ -10,10 +10,19 @@ import {
   where,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
-import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
+import { ORDER_STATUS, orderStatusLabel } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
+import { localizedPath } from '@/lib/i18n'
+import { cartLineName } from '@/lib/products'
 import { SITE } from '@/lib/site'
-import type { Cart, CartItem, ContactInfo, Coupon, Order, OrderComment } from '@/lib/types'
+import type {
+  Cart,
+  CartItem,
+  ContactInfo,
+  Coupon,
+  Order,
+  OrderComment,
+} from '@/lib/types'
 import { EmailSender } from './email'
 import { orderMailList } from './maillist'
 import { UsersService } from './users'
@@ -60,7 +69,8 @@ export const couponDiscount = (
  * sequential `orderId` shown in admin — the doc id is unguessable, so sharing
  * it does not let anyone browse other people's orders.
  */
-export const publicOrderUrl = (orderRef: string): string => `${SITE.url}/pedidos/${orderRef}`
+export const publicOrderUrl = (orderRef: string, locale = 'pt-BR'): string =>
+  `${SITE.url}${localizedPath(`/pedidos/${orderRef}`, locale)}`
 
 export const OrdersService = {
   async getOrders(statusToFilter = ''): Promise<Order[]> {
@@ -92,18 +102,24 @@ export const OrdersService = {
     cart: Cart,
     contactInfo: ContactInfo,
     coupon?: Coupon,
+    locale = 'pt-BR',
   ): Promise<{ orderNumber: number; orderRef: string }> {
     const lastOrder = (await OrdersService.getOrders()).pop()
     const orderNumber = lastOrder ? Number(lastOrder.orderId) + 1 : 0
     const items = cart.items
       .filter((item) => item.amount)
-      .map((item) => ({
-        id: item.id,
-        amount: item.amount,
-        name: item.name,
-        price: item.price,
-        type: item.type,
-      }))
+      .map((item) => {
+        // The team reads `name` in Portuguese; the customer's own wording rides along.
+        const localizedName = cartLineName(item, locale)
+        return {
+          id: item.id,
+          amount: item.amount,
+          name: item.name,
+          price: item.price,
+          type: item.type,
+          ...(localizedName !== item.name && { localizedName }),
+        }
+      })
 
     const docRef = await addDoc(ordersRef, {
       items,
@@ -118,9 +134,10 @@ export const OrdersService = {
       contactInfo,
       status: ORDER_STATUS.EM_ESPERA,
       createdAt: new Date().toISOString(),
+      locale,
     })
 
-    const orderUrl = publicOrderUrl(docRef.id)
+    const orderUrl = publicOrderUrl(docRef.id, locale)
 
     // Best effort: a failed notification must not lose a confirmed order.
     try {
@@ -129,6 +146,7 @@ export const OrdersService = {
         contactInfo.name,
         items,
         orderMailList,
+        locale,
       )
     } catch (error) {
       console.error('Falha ao notificar a equipe sobre o novo pedido', error)
@@ -141,6 +159,7 @@ export const OrdersService = {
           contactInfo,
           items,
           orderUrl,
+          locale,
         )
       } catch (error) {
         console.error('Falha ao enviar e-mail de confirmação ao cliente', error)
@@ -165,18 +184,18 @@ export const OrdersService = {
     const newComments: OrderComment[] = []
 
     if (willNotify) {
-      const label =
-        ORDER_STATUS_OPTIONS.find((option) => option.value === newStatus)?.label ??
-        newStatus
+      const label = orderStatusLabel(newStatus)
+      const customerLocale = order.locale ?? 'pt-BR'
 
       // Best effort: a failed notification must not lose the status change.
       try {
         await EmailSender.sendOrderStatusUpdateEmail(
           order.orderId,
           order.contactInfo,
-          label,
+          orderStatusLabel(newStatus, customerLocale),
           comment,
-          publicOrderUrl(order.id),
+          publicOrderUrl(order.id, customerLocale),
+          customerLocale,
         )
         newComments.push({
           userName,

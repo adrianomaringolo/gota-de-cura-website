@@ -1,10 +1,12 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Select } from '@/components/ui/Field'
 import { useCart } from '@/lib/cart-context'
+import { localizeProduct } from '@/lib/products'
 import type { ProductItem } from '@/lib/types'
 
 const readValues = (values: string[] | string) =>
@@ -23,6 +25,8 @@ export function OptionsDialog({
   open: boolean
   onClose: () => void
 }) {
+  const t = useTranslations('product')
+  const locale = useLocale()
   const { addItem } = useCart()
   const options = item.optionsSet ?? []
   const [selected, setSelected] = useState<string[]>([])
@@ -42,15 +46,15 @@ export function OptionsDialog({
     <Dialog
       open={open}
       onClose={onClose}
-      title={item.name}
-      description="Escolha o que vai dentro do kit."
+      title={localizeProduct(item, locale).name}
+      description={t('kitPrompt')}
       footer={
         <>
           <Button variant="ghost" onClick={onClose}>
-            Cancelar
+            {t('cancel')}
           </Button>
           <Button onClick={confirm} disabled={!complete}>
-            Adicionar ao pedido
+            {t('addToOrder')}
           </Button>
         </>
       }
@@ -68,7 +72,7 @@ export function OptionsDialog({
             }}
           >
             <option value="" disabled>
-              — selecione —
+              {t('selectPlaceholder')}
             </option>
             {readValues(option.values).map((value) => (
               <option key={value} value={value}>

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useEffect, useRef, type ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 
@@ -38,6 +39,7 @@ export function Dialog({
   dismissible = true,
   closeOnBackdrop = true,
 }: DialogProps) {
+  const t = useTranslations('ui')
   const ref = useRef<HTMLDialogElement>(null)
 
   useEffect(() => {
@@ -78,7 +80,8 @@ export function Dialog({
     >
       <div
         onClick={(event) => {
-          if (dismissible && closeOnBackdrop && event.target === event.currentTarget) onClose()
+          if (dismissible && closeOnBackdrop && event.target === event.currentTarget)
+            onClose()
         }}
         className="flex min-h-full items-center justify-center p-4"
       >
@@ -106,7 +109,7 @@ export function Dialog({
                 <button
                   type="button"
                   onClick={onClose}
-                  aria-label="Fechar"
+                  aria-label={t('close')}
                   className="-mt-1 -mr-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-ink-muted transition-colors hover:bg-canvas-sunk hover:text-ink"
                 >
                   <svg

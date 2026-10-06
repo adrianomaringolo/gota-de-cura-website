@@ -1,22 +1,23 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
+import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from '@/lib/cn'
 import { useCart } from '@/lib/cart-context'
 import { Wordmark } from './Wordmark'
 
 const NAV = [
-  { label: 'Catálogo', href: '/#catalogo' },
-  { label: 'Visitas', href: '/visitas' },
-  { label: 'Cromatografias', href: '/cromatografias' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Sobre', href: '/sobre' },
-  { label: 'Contato', href: '/#contato' },
-]
+  { key: 'catalog', href: '/#catalogo' },
+  { key: 'visits', href: '/visitas' },
+  { key: 'chromatographies', href: '/cromatografias' },
+  { key: 'blog', href: '/blog' },
+  { key: 'about', href: '/sobre' },
+  { key: 'contact', href: '/#contato' },
+] as const
 
 export function Header() {
+  const t = useTranslations('header')
   const pathname = usePathname()
   const { count, ready } = useCart()
   const [scrolled, setScrolled] = useState(false)
@@ -50,7 +51,7 @@ export function Header() {
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[var(--z-tooltip)] focus:rounded-full focus:bg-brand focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-white"
       >
-        Pular para o conteúdo
+        {t('skipToContent')}
       </a>
 
       <header
@@ -66,7 +67,7 @@ export function Header() {
         <div className="mx-auto flex h-18 max-w-[86rem] items-center gap-6 px-4 sm:px-6 lg:px-10">
           <Wordmark />
 
-          <nav aria-label="Principal" className="ml-auto hidden lg:block">
+          <nav aria-label={t('mainNav')} className="ml-auto hidden lg:block">
             <ul className="flex items-center gap-1">
               {NAV.map((item) => (
                 <li key={item.href}>
@@ -80,7 +81,7 @@ export function Header() {
                         : 'text-ink-soft hover:text-brand',
                     )}
                   >
-                    {item.label}
+                    {t(`nav.${item.key}`)}
                     <span
                       className={cn(
                         'absolute inset-x-4 -bottom-px h-0.5 origin-center scale-x-0 rounded-full bg-brand',
@@ -96,12 +97,13 @@ export function Header() {
           </nav>
 
           <div className="ml-auto flex items-center gap-1 lg:ml-0">
+            <LanguageSwitch className="hidden lg:inline-flex" />
             <CartButton count={ready ? count : 0} />
 
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
-              aria-label="Abrir menu"
+              aria-label={t('openMenu')}
               aria-expanded={menuOpen}
               className="grid h-11 w-11 place-items-center rounded-full text-brand transition-colors hover:bg-brand-tint lg:hidden"
             >
@@ -127,11 +129,13 @@ export function Header() {
 }
 
 function CartButton({ count }: { count: number }) {
+  const t = useTranslations('header')
+
   return (
     <Link
       href="/carrinho"
       className="relative grid h-11 w-11 place-items-center rounded-full text-brand transition-colors hover:bg-brand-tint"
-      aria-label={count > 0 ? `Meu pedido, ${count} itens` : 'Meu pedido'}
+      aria-label={count > 0 ? t('cartWithCount', { count }) : t('cart')}
     >
       <svg
         viewBox="0 0 24 24"
@@ -155,7 +159,68 @@ function CartButton({ count }: { count: number }) {
   )
 }
 
+/**
+ * Swaps the language and keeps the visitor on the same page. Each option is
+ * labelled in its own language, so it reads right whichever one is active.
+ */
+function LanguageSwitch({
+  tone = 'ink',
+  className,
+}: {
+  tone?: 'ink' | 'light'
+  className?: string
+}) {
+  const t = useTranslations('header')
+  const locale = useLocale()
+  const pathname = usePathname()
+
+  return (
+    <nav
+      aria-label={t('language')}
+      className={cn(
+        'items-center gap-0.5 rounded-full p-0.5 text-xs font-bold tracking-[0.08em]',
+        tone === 'ink' ? 'border border-line' : 'border border-white/25',
+        className,
+      )}
+    >
+      {LANGUAGES.map((language) => {
+        const current = language.locale === locale
+        return (
+          <Link
+            key={language.locale}
+            href={pathname}
+            locale={language.locale}
+            lang={language.locale}
+            hrefLang={language.locale}
+            aria-current={current ? 'true' : undefined}
+            aria-label={language.name}
+            className={cn(
+              'rounded-full px-2.5 py-1.5 transition-colors',
+              current
+                ? tone === 'ink'
+                  ? 'bg-brand text-white'
+                  : 'bg-white text-brand-darkest'
+                : tone === 'ink'
+                  ? 'text-ink-soft hover:text-brand'
+                  : 'text-white/70 hover:text-white',
+            )}
+          >
+            {language.short}
+          </Link>
+        )
+      })}
+    </nav>
+  )
+}
+
+const LANGUAGES = [
+  { locale: 'pt-BR', short: 'PT', name: 'Português' },
+  { locale: 'en', short: 'EN', name: 'English' },
+] as const
+
 function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const t = useTranslations('header')
+
   return (
     <div
       className={cn(
@@ -175,7 +240,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
       <div
         role="dialog"
         aria-modal={open}
-        aria-label="Menu"
+        aria-label={t('menu')}
         className={cn(
           'absolute inset-y-0 right-0 flex w-[min(22rem,88vw)] flex-col bg-brand-darkest',
           'transition-transform duration-400 ease-[var(--ease-out-expo)]',
@@ -187,7 +252,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
           <button
             type="button"
             onClick={onClose}
-            aria-label="Fechar menu"
+            aria-label={t('closeMenu')}
             className="grid h-11 w-11 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             tabIndex={open ? 0 : -1}
           >
@@ -205,7 +270,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
           </button>
         </div>
 
-        <nav aria-label="Principal (móvel)" className="flex-1 overflow-y-auto px-6 py-4">
+        <nav aria-label={t('mainNavMobile')} className="flex-1 overflow-y-auto px-6 py-4">
           <ul className="flex flex-col">
             {NAV.map((item, index) => (
               <li key={item.href} className="border-b border-white/12">
@@ -218,7 +283,7 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
                     transitionDelay: open ? `${index * 25}ms` : '0ms',
                   }}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`)}
                 </Link>
               </li>
             ))}
@@ -229,11 +294,15 @@ function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => void })
                 tabIndex={open ? 0 : -1}
                 className="block py-4 font-display text-2xl text-white transition-[padding-left,color] duration-200 hover:pl-2 hover:text-brand-soft"
               >
-                Meu pedido
+                {t('cart')}
               </Link>
             </li>
           </ul>
         </nav>
+
+        <div className="px-6 pb-4">
+          <LanguageSwitch tone="light" className="inline-flex" />
+        </div>
 
         <p className="px-6 pb-8 text-sm text-white/60">
           Chácara da Mãe Luzia

@@ -1,8 +1,12 @@
+import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
-const STEPS = ['Meu pedido', 'Meus dados', 'Confirmação'] as const
+/** Keys under `cart.steps`. */
+const STEPS = ['order', 'details', 'confirmation'] as const
 
 export function Stepper({ current }: { current: number }) {
+  const t = useTranslations('cart.steps')
+
   return (
     <ol className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
       {STEPS.map((label, index) => {
@@ -51,7 +55,7 @@ export function Stepper({ current }: { current: number }) {
                   index + 1
                 )}
               </span>
-              {label}
+              {t(label)}
             </span>
           </li>
         )

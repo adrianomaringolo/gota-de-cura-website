@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -9,6 +9,7 @@ import { Container } from '@/components/site/Section'
 import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Input, RadioChip } from '@/components/ui/Field'
 import { Spinner } from '@/components/ui/Feedback'
+import { useRouter } from '@/i18n/navigation'
 import { useVisits } from '@/lib/hooks'
 import { formatVisitDateLong, maskPhone } from '@/lib/format'
 import type { EnrollmentData } from '@/lib/types'
@@ -58,6 +59,8 @@ function Step({
 }
 
 export function EnrollmentForm() {
+  const t = useTranslations('enrollment')
+  const locale = useLocale()
   const router = useRouter()
   const { data: visits, loading } = useVisits()
   const upcoming = visits.filter((visit) => isUpcoming(visit))
@@ -92,6 +95,7 @@ export function EnrollmentForm() {
       email: values.email,
       companions: values.companions.map((companion) => companion.name).filter(Boolean),
       lastVisit: values.lastVisit,
+      ...(locale !== 'pt-BR' && { locale }),
     }
 
     try {
@@ -103,15 +107,17 @@ export function EnrollmentForm() {
         enrollment,
         visitMailList,
       ).catch(() => undefined)
-      void EmailSender.sendEnrollmentGreetingEmail(enrollment.name.split(' ')[0], [
-        enrollment.email,
-      ]).catch(() => undefined)
+      void EmailSender.sendEnrollmentGreetingEmail(
+        enrollment.name.split(' ')[0],
+        [enrollment.email],
+        locale,
+      ).catch(() => undefined)
 
       setConfirming(false)
       setDone(true)
     } catch (error) {
       console.error(error)
-      toast.error('Não conseguimos salvar sua inscrição. Tente novamente.')
+      toast.error(t('saveError'))
     } finally {
       setSaving(false)
     }
@@ -121,10 +127,9 @@ export function EnrollmentForm() {
 
   return (
     <Container className="max-w-3xl pt-32 pb-24 lg:pt-40">
-      <h1 className="text-3xl font-semibold text-ink">Inscrição para a visitação</h1>
+      <h1 className="text-3xl font-semibold text-ink">{t('metaTitle')}</h1>
       <p className="mt-4 max-w-[60ch] text-base leading-relaxed text-ink-soft">
-        Esta é uma pré-inscrição. Depois de enviá-la, um voluntário entra em contato pelo
-        WhatsApp para confirmar sua vaga e combinar o pagamento.
+        {t('intro')}
       </p>
 
       <form
@@ -132,7 +137,7 @@ export function EnrollmentForm() {
         onSubmit={handleSubmit(() => setConfirming(true))}
         noValidate
       >
-        <Step number={1} title="Escolha a data">
+        <Step number={1} title={t('step1')}>
           {loading ? (
             <div className="flex gap-2" aria-hidden="true">
               {Array.from({ length: 2 }).map((_, index) => (
@@ -144,8 +149,7 @@ export function EnrollmentForm() {
             </div>
           ) : upcoming.length === 0 ? (
             <p className="rounded-xl bg-warning-tint px-4 py-3 text-base text-ink">
-              Não há datas abertas no momento. Acompanhe nosso Instagram — as próximas são
-              anunciadas por lá primeiro.
+              {t('noDates')}
             </p>
           ) : (
             <>
@@ -154,38 +158,38 @@ export function EnrollmentForm() {
                   <RadioChip
                     key={visit.id ?? visit.date}
                     value={visit.date}
-                    label={formatVisitDateLong(visit.date)}
+                    label={formatVisitDateLong(visit.date, locale)}
                     {...register('visitDate', { required: true })}
                   />
                 ))}
               </div>
               {errors.visitDate && (
                 <p role="alert" className="mt-2 text-xs font-medium text-danger">
-                  Escolha uma das datas disponíveis.
+                  {t('dateError')}
                 </p>
               )}
             </>
           )}
         </Step>
 
-        <Step number={2} title="Seus dados de contato">
+        <Step number={2} title={t('step2')}>
           <div className="grid gap-5 sm:grid-cols-2">
             <Input
-              label="Nome completo"
+              label={t('name')}
               required
               autoComplete="name"
               className="sm:col-span-2"
-              error={errors.name && 'Informe seu nome completo.'}
+              error={errors.name && t('nameError')}
               {...register('name', { required: true, minLength: 3 })}
             />
             <Input
-              label="Celular (WhatsApp)"
+              label={t('phone')}
               required
               inputMode="tel"
               autoComplete="tel"
               placeholder="(19) 99999-9999"
-              hint="Confira o número: é por ele que falamos com você."
-              error={errors.cellphone && 'Informe um celular com DDD.'}
+              hint={t('phoneHint')}
+              error={errors.cellphone && t('phoneError')}
               {...register('cellphone', {
                 required: true,
                 pattern: /^\(\d{2}\)\s\d{4,5}-\d{4}$/,
@@ -193,38 +197,32 @@ export function EnrollmentForm() {
               })}
             />
             <Input
-              label="E-mail"
+              label={t('email')}
               type="email"
               required
               autoComplete="email"
-              error={errors.email && 'Confira o e-mail digitado.'}
+              error={errors.email && t('emailError')}
               {...register('email', { required: true, pattern: /^\S+@\S+\.\S+$/ })}
             />
           </div>
         </Step>
 
-        <Step
-          number={3}
-          title="Acompanhantes"
-          hint="Cada acompanhante ocupa uma vaga. Preencha o nome completo de cada um."
-        >
+        <Step number={3} title={t('step3')} hint={t('step3Hint')}>
           {fields.length > 0 && (
             <ul className="mb-4 space-y-3">
               {fields.map((field, index) => (
                 <li key={field.id} className="flex items-end gap-2">
                   <Input
-                    label={`Acompanhante ${index + 1}`}
+                    label={t('companion', { number: index + 1 })}
                     className="flex-1"
-                    error={
-                      errors.companions?.[index]?.name && 'Preencha o nome completo.'
-                    }
+                    error={errors.companions?.[index]?.name && t('companionError')}
                     {...register(`companions.${index}.name` as const, { required: true })}
                   />
                   <button
                     type="button"
                     onClick={() => remove(index)}
                     className="mb-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-ink-muted transition-colors hover:bg-danger-tint hover:text-danger"
-                    aria-label={`Remover acompanhante ${index + 1}`}
+                    aria-label={t('removeCompanion', { number: index + 1 })}
                   >
                     <svg
                       viewBox="0 0 24 24"
@@ -244,45 +242,40 @@ export function EnrollmentForm() {
           )}
 
           <Button type="button" variant="outline" onClick={() => append({ name: '' })}>
-            Adicionar acompanhante
+            {t('addCompanion')}
           </Button>
         </Step>
 
-        <Step
-          number={4}
-          title="Já esteve aqui antes?"
-          hint="Opcional — nos ajuda a preparar o roteiro do grupo."
-        >
+        <Step number={4} title={t('step4')} hint={t('step4Hint')}>
           <Input
-            label="Mês e ano da última visita e qual planta foi destilada"
-            placeholder="Ex.: outubro de 2024, lavanda"
+            label={t('lastVisit')}
+            placeholder={t('lastVisitPlaceholder')}
             {...register('lastVisit')}
           />
         </Step>
 
         <div className="border-t border-line pt-8">
           <Checkbox
-            label={
-              <>
-                Li e concordo com as regras de{' '}
+            label={t.rich('agree', {
+              terms: (chunks) => (
                 <button
                   type="button"
                   onClick={() => setTermsOpen(true)}
                   className="text-brand underline decoration-brand/40 underline-offset-4 hover:decoration-brand"
                 >
-                  pagamento e reembolso
+                  {chunks}
                 </button>
-              </>
-            }
+              ),
+            })}
             {...register('agreed', { required: true })}
           />
 
           <div className="mt-8 flex flex-wrap justify-end gap-3">
             <ButtonLink href="/visitas" variant="ghost">
-              Voltar
+              {t('back')}
             </ButtonLink>
             <Button type="submit" size="lg" disabled={!agreed || upcoming.length === 0}>
-              Revisar e enviar
+              {t('review')}
             </Button>
           </div>
         </div>
@@ -291,8 +284,8 @@ export function EnrollmentForm() {
       <Dialog
         open={confirming}
         onClose={() => setConfirming(false)}
-        title="Confirme sua inscrição"
-        description="Depois de enviar, a equipe entra em contato pelo WhatsApp."
+        title={t('confirmTitle')}
+        description={t('confirmDescription')}
         footer={
           <>
             <Button
@@ -300,32 +293,32 @@ export function EnrollmentForm() {
               onClick={() => setConfirming(false)}
               disabled={saving}
             >
-              Corrigir
+              {t('edit')}
             </Button>
             <Button onClick={submit} disabled={saving}>
               {saving ? (
                 <>
-                  <Spinner className="h-4 w-4" /> Enviando…
+                  <Spinner className="h-4 w-4" /> {t('sending')}
                 </>
               ) : (
-                'Confirmar inscrição'
+                t('confirm')
               )}
             </Button>
           </>
         }
       >
         <p className="rounded-xl bg-warning-tint px-4 py-3 text-sm text-ink">
-          Confira principalmente o celular — é o nosso único meio de contato com você.
+          {t('checkPhone')}
         </p>
 
         <dl className="mt-5 space-y-2 text-base">
           {[
-            ['Data', formatVisitDateLong(values.visitDate)],
-            ['Nome', values.name],
-            ['Celular', values.cellphone],
-            ['E-mail', values.email],
+            [t('summaryDate'), formatVisitDateLong(values.visitDate, locale)],
+            [t('summaryName'), values.name],
+            [t('summaryPhone'), values.cellphone],
+            [t('email'), values.email],
             [
-              'Acompanhantes',
+              t('step3'),
               values.companions?.map((companion) => companion.name).join(', ') || '—',
             ],
           ].map(([label, value]) => (
@@ -340,26 +333,19 @@ export function EnrollmentForm() {
       <Dialog
         open={done}
         onClose={() => router.push('/visitas')}
-        title="Inscrição recebida"
+        title={t('doneTitle')}
         dismissible={false}
-        footer={
-          <Button onClick={() => router.push('/visitas')}>Voltar para a visitação</Button>
-        }
+        footer={<Button onClick={() => router.push('/visitas')}>{t('doneBack')}</Button>}
       >
-        <p className="text-base leading-relaxed text-ink-soft">
-          Sua pré-inscrição foi registrada. Um dos nossos voluntários vai falar com você
-          pelo WhatsApp para confirmar a vaga e acertar o pagamento.
-        </p>
-        <p className="mt-3 text-base leading-relaxed text-ink-soft">
-          Enviamos também um e-mail com todas as orientações. Até logo!
-        </p>
+        <p className="text-base leading-relaxed text-ink-soft">{t('doneBody')}</p>
+        <p className="mt-3 text-base leading-relaxed text-ink-soft">{t('doneEmail')}</p>
       </Dialog>
 
       <Dialog
         open={termsOpen}
         onClose={() => setTermsOpen(false)}
-        title="Pagamento e reembolso"
-        footer={<Button onClick={() => setTermsOpen(false)}>Entendi</Button>}
+        title={t('termsTitle')}
+        footer={<Button onClick={() => setTermsOpen(false)}>{t('gotIt')}</Button>}
       >
         <PaymentTerms />
       </Dialog>

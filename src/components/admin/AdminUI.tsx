@@ -124,7 +124,8 @@ const STATUS_META: Record<
   [ORDER_STATUS.CANCELADO]: { label: 'Cancelado', tone: 'neutral' },
 }
 
-export function StatusTag({ status }: { status: string }) {
+/** `label` overrides the Portuguese one — the public order page passes a translation. */
+export function StatusTag({ status, label }: { status: string; label?: string }) {
   const meta = STATUS_META[status] ?? { label: 'Finalizado', tone: 'positive' as const }
-  return <Badge tone={meta.tone}>{meta.label}</Badge>
+  return <Badge tone={meta.tone}>{label ?? meta.label}</Badge>
 }

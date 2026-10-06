@@ -1,11 +1,14 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
 import { Container, SectionHead } from '@/components/site/Section'
+import { Link } from '@/i18n/navigation'
 import { getPosts } from '@/lib/blog'
 import { formatPostDateShort } from '@/lib/format'
 
 export function BlogBand() {
-  const posts = getPosts()
+  const t = useTranslations('blogBand')
+  const locale = useLocale()
+  const posts = getPosts(locale)
 
   if (posts.length === 0) return null
 
@@ -16,13 +19,13 @@ export function BlogBand() {
     <section className="bg-canvas-sunk py-20 lg:py-24">
       <Container>
         <SectionHead
-          title="Para ler com calma"
+          title={t('title')}
           aside={
             <Link
               href="/blog"
               className="group inline-flex items-center gap-2 text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
             >
-              Todos os textos
+              {t('all')}
               <svg
                 viewBox="0 0 24 24"
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -76,7 +79,8 @@ export function BlogBand() {
                 {lead.excerpt}
               </p>
               <p className="mt-3 text-sm text-ink-muted">
-                {formatPostDateShort(lead.publishedAt)} · {lead.readingTime} min de leitura
+                {formatPostDateShort(lead.publishedAt, locale)} ·{' '}
+                {t('readingTime', { minutes: lead.readingTime })}
               </p>
             </div>
           </Link>
@@ -102,7 +106,8 @@ export function BlogBand() {
                         {post.title}
                       </h4>
                       <p className="mt-1 text-sm text-ink-muted">
-                        {formatPostDateShort(post.publishedAt)} · {post.readingTime} min
+                        {formatPostDateShort(post.publishedAt, locale)} ·{' '}
+                        {t('minutes', { minutes: post.readingTime })}
                       </p>
                     </div>
                   </Link>

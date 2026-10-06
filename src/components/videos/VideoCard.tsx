@@ -1,11 +1,10 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 import { formatPostDate } from '@/lib/format'
 import type { YoutubeVideo } from '@/lib/types'
-
-const viewsFormatter = new Intl.NumberFormat('pt-BR')
 
 /**
  * A lazy YouTube card: the thumbnail is a plain image until the visitor clicks,
@@ -19,11 +18,13 @@ export function VideoCard({
   video: YoutubeVideo
   featured?: boolean
 }) {
+  const t = useTranslations('videos')
+  const locale = useLocale()
   const [playing, setPlaying] = useState(false)
 
   const meta = [
-    video.publishedAt && formatPostDate(video.publishedAt),
-    video.views !== null && `${viewsFormatter.format(video.views)} visualizações`,
+    video.publishedAt && formatPostDate(video.publishedAt, locale),
+    video.views !== null && t('views', { count: video.views }),
   ].filter(Boolean)
 
   return (
@@ -42,7 +43,7 @@ export function VideoCard({
             type="button"
             onClick={() => setPlaying(true)}
             className="absolute inset-0 h-full w-full"
-            aria-label={`Assistir: ${video.title}`}
+            aria-label={t('watch', { title: video.title })}
           >
             {/* YouTube's hqdefault is 4:3 with black bars baked in; a slight
                 scale crops them out of the 16:9 frame. */}

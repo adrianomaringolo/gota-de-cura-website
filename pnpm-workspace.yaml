@@ -2,5 +2,9 @@
 # firebase (Firestore) pulls in protobufjs; both need their build step.
 allowBuilds:
   '@firebase/util': true
+  # Pulled in by next-intl for its optional message extractor, which this
+  # project does not use — no native build needed.
+  '@parcel/watcher': false
+  '@swc/core': false
   esbuild: true
   protobufjs: true

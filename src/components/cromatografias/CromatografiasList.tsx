@@ -1,52 +1,40 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
-import { CROMATOGRAFIA_LABELS } from '@/lib/constants'
 import { useCromatografias } from '@/lib/hooks'
 import type { Cromatografia, CromatografiaType } from '@/lib/types'
 import { CromatografiasService } from '@/services/cromatografias'
 
-const GROUPS: { type: CromatografiaType; note: string }[] = [
-  {
-    type: 'oleo-essencial',
-    note: 'Extratos concentrados obtidos por destilação a vapor.',
-  },
-  {
-    type: 'hidrolato',
-    note: 'A água aromática que sai junto do óleo, na mesma destilação.',
-  },
-]
+/** Each group's heading and note live under `chromatography.types` / `.notes`. */
+const GROUPS: CromatografiaType[] = ['oleo-essencial', 'hidrolato']
 
 export function CromatografiasList() {
+  const t = useTranslations('chromatography')
   const { data, loading } = useCromatografias()
 
   if (loading) return <LoadingRows rows={6} />
 
   if (data.length === 0) {
-    return (
-      <EmptyState title="Os laudos estão a caminho">
-        Assim que os resultados voltam do laboratório, eles aparecem aqui — sempre
-        completos.
-      </EmptyState>
-    )
+    return <EmptyState title={t('emptyTitle')}>{t('emptyBody')}</EmptyState>
   }
 
   return (
     <div className="space-y-16">
-      {GROUPS.map((group) => {
-        const items = data.filter((item) => item.type === group.type)
+      {GROUPS.map((type) => {
+        const items = data.filter((item) => item.type === type)
         if (items.length === 0) return null
 
         return (
-          <section key={group.type}>
+          <section key={type}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 border-b border-line-strong pb-4">
               <h2 className="font-display text-2xl font-semibold text-ink">
-                {CROMATOGRAFIA_LABELS[group.type]}
+                {t(`types.${type}`)}
                 <span className="ml-3 font-sans text-sm font-normal text-ink-muted tabular-nums">
-                  {items.length} {items.length === 1 ? 'laudo' : 'laudos'}
+                  {t('count', { count: items.length })}
                 </span>
               </h2>
-              <p className="text-sm text-ink-soft">{group.note}</p>
+              <p className="text-sm text-ink-soft">{t(`notes.${type}`)}</p>
             </div>
 
             <ul className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">

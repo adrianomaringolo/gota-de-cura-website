@@ -1,11 +1,14 @@
+import { useTranslations } from 'next-intl'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 
 export function Spinner({ className }: { className?: string }) {
+  const t = useTranslations('ui')
+
   return (
     <span
       role="status"
-      aria-label="Carregando"
+      aria-label={t('loading')}
       className={cn(
         'inline-block h-5 w-5 animate-spin rounded-full border-2 border-current',
         'border-r-transparent align-[-0.125em]',

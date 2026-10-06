@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Select, Textarea } from '@/components/ui/Field'
-import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
+import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
 import type { Order } from '@/lib/types'
@@ -63,6 +63,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               Pedido #{order.orderId}
             </h1>
             <StatusTag status={order.status} />
+            {order.locale === 'en' && <Badge tone="lab">Cliente em inglês</Badge>}
           </div>
 
           <p className="mt-3 font-display text-xl text-ink">{order.contactInfo.name}</p>
@@ -231,7 +232,11 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
           </option>
         ))}
       </Select>
-      <Button className="mt-3 w-full" onClick={openConfirm} disabled={status === order.status}>
+      <Button
+        className="mt-3 w-full"
+        onClick={openConfirm}
+        disabled={status === order.status}
+      >
         Salvar status
       </Button>
 
@@ -242,7 +247,11 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
         description={`De "${statusLabel(order.status)}" para "${statusLabel(status)}"`}
         footer={
           <>
-            <Button variant="ghost" onClick={() => setConfirmOpen(false)} disabled={saving}>
+            <Button
+              variant="ghost"
+              onClick={() => setConfirmOpen(false)}
+              disabled={saving}
+            >
               Cancelar
             </Button>
             <Button onClick={confirm} disabled={saving}>

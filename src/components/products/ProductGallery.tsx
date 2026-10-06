@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { cn } from '@/lib/cn'
 import type { ProductItem } from '@/lib/types'
@@ -17,6 +18,7 @@ export function ProductGallery({
   priority?: boolean
   className?: string
 }) {
+  const t = useTranslations('product')
   const photos = item.images?.length ? item.images : item.image ? [item.image] : []
   const [current, setCurrent] = useState(0)
 
@@ -44,11 +46,13 @@ export function ProductGallery({
               key={src}
               type="button"
               onClick={() => setCurrent(index)}
-              aria-label={`Ver foto ${index + 1} de ${photos.length}`}
+              aria-label={t('photoOf', { index: index + 1, total: photos.length })}
               aria-current={src === shown ? 'true' : undefined}
               className={cn(
                 'relative aspect-square overflow-hidden rounded-lg border-2 bg-canvas-sunk transition-colors',
-                src === shown ? 'border-brand' : 'border-transparent hover:border-line-strong',
+                src === shown
+                  ? 'border-brand'
+                  : 'border-transparent hover:border-line-strong',
               )}
             >
               <Image src={src} alt="" fill sizes="96px" className="object-cover" />

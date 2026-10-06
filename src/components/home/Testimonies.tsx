@@ -1,5 +1,6 @@
 'use client'
 
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Container, SectionHead } from '@/components/site/Section'
 import { useTestimonies } from '@/lib/hooks'
@@ -7,11 +8,13 @@ import { formatMonthAndYear } from '@/lib/format'
 import { SITE } from '@/lib/site'
 
 const ARROWS = [
-  { label: 'Depoimentos anteriores', delta: -1, path: 'M15 6l-6 6 6 6' },
-  { label: 'Próximos depoimentos', delta: 1, path: 'M9 6l6 6-6 6' },
+  { label: 'previous', delta: -1, path: 'M15 6l-6 6 6 6' },
+  { label: 'next', delta: 1, path: 'M9 6l6 6-6 6' },
 ] as const
 
 export function Testimonies() {
+  const t = useTranslations('testimonies')
+  const locale = useLocale()
   const { data, loading } = useTestimonies()
   const stripRef = useRef<HTMLDivElement>(null)
   // Both true means "nothing to scroll", so the arrows stay hidden until a
@@ -64,7 +67,7 @@ export function Testimonies() {
     <section id="depoimentos" className="scroll-mt-24 bg-canvas py-20 lg:py-24">
       <Container>
         <SectionHead
-          title="Quem já esteve aqui"
+          title={t('title')}
           aside={
             <div className="flex items-center gap-5">
               <a
@@ -73,7 +76,7 @@ export function Testimonies() {
                 rel="noreferrer"
                 className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
               >
-                Deixar meu depoimento
+                {t('leave')}
               </a>
               {scrollable && (
                 <div className="flex items-center gap-2">
@@ -81,7 +84,7 @@ export function Testimonies() {
                     <button
                       key={arrow.label}
                       type="button"
-                      aria-label={arrow.label}
+                      aria-label={t(arrow.label)}
                       onClick={() => step(arrow.delta)}
                       disabled={arrow.delta < 0 ? edges.atStart : edges.atEnd}
                       className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface text-brand transition-colors duration-200 hover:bg-brand-tint disabled:pointer-events-none disabled:opacity-35"
@@ -113,7 +116,7 @@ export function Testimonies() {
       <div
         ref={stripRef}
         role="group"
-        aria-label="Depoimentos de quem já esteve na chácara"
+        aria-label={t('stripLabel')}
         tabIndex={0}
         className="mt-10 snap-strip mx-auto max-w-[86rem] gap-4 px-4 pb-4 sm:px-6 lg:px-10"
       >
@@ -131,7 +134,11 @@ export function Testimonies() {
                 key={`${testimony.name}-${index}`}
                 className="flex w-[min(28rem,84vw)] flex-col rounded-2xl border border-line bg-surface p-7"
               >
-                <blockquote className="flex-1 text-base leading-relaxed text-ink-soft">
+                {/* Testimonies are quoted as written — always in Portuguese. */}
+                <blockquote
+                  lang="pt-BR"
+                  className="flex-1 text-base leading-relaxed text-ink-soft"
+                >
                   <p className="line-clamp-[9]">{testimony.message}</p>
                 </blockquote>
                 <figcaption className="mt-6 border-t border-line pt-4">
@@ -140,7 +147,7 @@ export function Testimonies() {
                   </span>
                   <span className="text-sm text-ink-muted">
                     {testimony.city && <>{testimony.city} · </>}
-                    {formatMonthAndYear(new Date(testimony.sentAt))}
+                    {formatMonthAndYear(new Date(testimony.sentAt), locale)}
                   </span>
                 </figcaption>
               </figure>

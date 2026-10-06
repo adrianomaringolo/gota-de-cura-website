@@ -1,9 +1,13 @@
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { ButtonLink } from '@/components/ui/Button'
 import { Wordmark } from '@/components/site/Wordmark'
 import { SITE } from '@/lib/site'
 
 export function Hero() {
+  const t = useTranslations('hero')
+  const store = useTranslations('store')
+
   return (
     <section className="relative bg-brand-darkest text-white">
       <div className="grid lg:min-h-[calc(100svh-0px)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
@@ -14,28 +18,26 @@ export function Hero() {
           </div>
 
           <h1 className="animate-rise mt-10 max-w-[14ch] text-5xl font-semibold [animation-delay:140ms]">
-            Passe na loja e sinta o aroma.
+            {t('title')}
           </h1>
 
           <p className="animate-rise mt-6 max-w-[52ch] text-lg leading-relaxed text-white/75 [animation-delay:220ms]">
-            Nossa loja fica em Campinas, na José Paulino. Ali você abre os frascos, sente
-            cada aroma com calma e conversa com quem destilou — todo o catálogo do site
-            está na prateleira.
+            {t('lead')}
           </p>
 
           {/* The store's two facts that decide a visit: where and when. */}
           {/* Stacks on small screens so both rows break the same way. */}
           <dl className="animate-rise mt-9 space-y-3 border-y border-white/15 py-6 text-base [animation-delay:300ms]">
             <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
-              <dt className="text-white/60">Endereço</dt>
+              <dt className="text-white/60">{t('address')}</dt>
               <dd className="font-medium text-white">{SITE.store.address}</dd>
             </div>
             <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
-              <dt className="text-white/60">Horário</dt>
+              <dt className="text-white/60">{t('hours')}</dt>
               <dd className="font-medium text-white">
                 {SITE.store.hours.map(([day, hours]) => (
                   <span key={day} className="block">
-                    {day}, {hours}
+                    {store(day)}, {store(hours)}
                   </span>
                 ))}
               </dd>
@@ -44,7 +46,7 @@ export function Hero() {
 
           <div className="animate-rise mt-8 flex flex-wrap gap-3 [animation-delay:380ms]">
             <ButtonLink href="#catalogo" variant="onDark" size="lg">
-              Ver o catálogo
+              {t('seeCatalog')}
             </ButtonLink>
             <a
               href={SITE.store.mapsUrl}
@@ -52,7 +54,7 @@ export function Hero() {
               rel="noreferrer"
               className="inline-flex h-14 items-center justify-center gap-2 rounded-full border border-white/30 px-8 text-base font-medium text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/10"
             >
-              Como chegar
+              {t('directions')}
               <svg
                 viewBox="0 0 24 24"
                 className="h-4 w-4"
@@ -73,7 +75,7 @@ export function Hero() {
         <figure className="relative m-0 min-h-[62svh] lg:min-h-0">
           <Image
             src="/images/store.jpeg"
-            alt="O interior da loja da Gota de Cura: prateleiras de madeira com sprays, óleos essenciais e sabonetes, o quadro da marca na parede e a luz entrando pela janela."
+            alt={t('photoAlt')}
             fill
             priority
             sizes="(max-width: 1024px) 100vw, 900px"
@@ -91,11 +93,10 @@ export function Hero() {
 
           <figcaption className="absolute right-4 bottom-6 left-4 text-sm leading-relaxed text-white/85 sm:right-8 sm:left-auto sm:max-w-[28ch] sm:text-right lg:bottom-10">
             <span className="font-display text-base font-semibold text-white">
-              Nossa loja, na José Paulino
+              {t('captionTitle')}
             </span>
             <br />
-            Tudo o que sai da chácara chega aqui — e dá para sentir o aroma antes de
-            levar.
+            {t('caption')}
           </figcaption>
         </figure>
       </div>

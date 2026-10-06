@@ -1,12 +1,14 @@
 'use client'
 
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/site/Section'
+import { Link } from '@/i18n/navigation'
 import { useCromatografias } from '@/lib/hooks'
-import { CROMATOGRAFIA_LABELS } from '@/lib/constants'
 
 export function LaudosBand() {
+  const t = useTranslations('laudos')
+  const types = useTranslations('chromatography.types')
   const { data, loading } = useCromatografias()
   const preview = data.slice(0, 6)
 
@@ -15,21 +17,12 @@ export function LaudosBand() {
       <Container>
         <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <div className="max-w-[46ch]">
-            <h2 className="rule-mark text-3xl font-semibold">
-              O que tem dentro do vidro, por escrito
-            </h2>
-            <p className="mt-5 text-lg leading-relaxed text-white/75">
-              Cromatografia é o exame que separa e identifica cada componente de uma
-              mistura. Mandamos nossos óleos essenciais e hidrolatos para o laboratório e
-              publicamos o laudo inteiro — não um resumo.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-white/75">
-              É a forma mais simples de você conferir, sem depender da nossa palavra, o
-              que saiu do alambique.
-            </p>
+            <h2 className="rule-mark text-3xl font-semibold">{t('title')}</h2>
+            <p className="mt-5 text-lg leading-relaxed text-white/75">{t('lead')}</p>
+            <p className="mt-4 text-base leading-relaxed text-white/75">{t('body')}</p>
 
             <ButtonLink href="/cromatografias" variant="onDark" className="mt-8">
-              Ver todos os laudos
+              {t('seeAll')}
             </ButtonLink>
           </div>
 
@@ -46,8 +39,7 @@ export function LaudosBand() {
               </ul>
             ) : preview.length === 0 ? (
               <p className="rounded-2xl border border-dashed border-white/25 px-6 py-10 text-center text-white/75">
-                Os laudos estão sendo preparados e aparecem aqui assim que saem do
-                laboratório.
+                {t('empty')}
               </p>
             ) : (
               <ul className="divide-y divide-white/12 border-y border-white/12">
@@ -68,7 +60,7 @@ export function LaudosBand() {
                         </span>
                       </span>
                       <span className="hidden shrink-0 text-2xs font-semibold tracking-[0.1em] text-white/80 uppercase sm:block">
-                        {CROMATOGRAFIA_LABELS[item.type] ?? item.type}
+                        {types.has(item.type) ? types(item.type) : item.type}
                       </span>
                       <svg
                         viewBox="0 0 24 24"
@@ -90,13 +82,12 @@ export function LaudosBand() {
 
             {data.length > preview.length && (
               <p className="mt-4 text-sm text-white/75">
-                e mais {data.length - preview.length}{' '}
-                {data.length - preview.length === 1 ? 'laudo' : 'laudos'} —{' '}
+                {t('more', { count: data.length - preview.length })} —{' '}
                 <Link
                   href="/cromatografias"
                   className="text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
                 >
-                  ver a lista completa
+                  {t('seeFullList')}
                 </Link>
               </p>
             )}

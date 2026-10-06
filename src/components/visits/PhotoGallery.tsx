@@ -1,10 +1,13 @@
 'use client'
 
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { visitPhotos } from '@/lib/visit-content'
 
 export function PhotoGallery() {
+  const t = useTranslations('gallery')
+  const alt = useTranslations('visitPhotos')
   const [index, setIndex] = useState<number | null>(null)
   const open = index !== null
 
@@ -45,7 +48,7 @@ export function PhotoGallery() {
             >
               <Image
                 src={photo.src}
-                alt={photo.alt}
+                alt={alt(photo.id)}
                 fill
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 320px"
                 className="object-cover transition-transform duration-700 ease-[var(--ease-out-quart)] group-hover:scale-105"
@@ -60,7 +63,7 @@ export function PhotoGallery() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={visitPhotos[index].alt}
+          aria-label={alt(visitPhotos[index].id)}
           className="fixed inset-0 z-[var(--z-modal)] flex flex-col bg-veil/97 animate-[fade-in_0.2s_ease-out]"
           onClick={() => setIndex(null)}
         >
@@ -68,7 +71,7 @@ export function PhotoGallery() {
             <button
               type="button"
               onClick={() => setIndex(null)}
-              aria-label="Fechar galeria"
+              aria-label={t('close')}
               autoFocus
               className="grid h-11 w-11 place-items-center rounded-full text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
@@ -93,23 +96,23 @@ export function PhotoGallery() {
             <div className="relative min-h-0 flex-1">
               <Image
                 src={visitPhotos[index].src}
-                alt={visitPhotos[index].alt}
+                alt={alt(visitPhotos[index].id)}
                 fill
                 sizes="(min-width: 1536px) 1400px, 100vw"
                 className="object-contain"
               />
             </div>
             <figcaption className="px-6 py-5 text-center text-sm text-white/70">
-              {visitPhotos[index].alt}
+              {alt(visitPhotos[index].id)}
               <span className="mt-1 block text-white/45 tabular-nums">
-                {index + 1} de {visitPhotos.length}
+                {t('position', { index: index + 1, total: visitPhotos.length })}
               </span>
             </figcaption>
           </figure>
 
           {[
-            { label: 'Foto anterior', delta: -1, side: 'left-3', path: 'M15 6l-6 6 6 6' },
-            { label: 'Próxima foto', delta: 1, side: 'right-3', path: 'M9 6l6 6-6 6' },
+            { label: t('previous'), delta: -1, side: 'left-3', path: 'M15 6l-6 6 6 6' },
+            { label: t('next'), delta: 1, side: 'right-3', path: 'M9 6l6 6-6 6' },
           ].map((control) => (
             <button
               key={control.label}

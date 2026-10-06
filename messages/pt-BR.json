@@ -1,0 +1,561 @@
+{
+  "meta": {
+    "defaultTitle": "{name} — óleos essenciais e hidrolatos artesanais",
+    "description": "Óleos essenciais, hidrolatos e produtos artesanais destilados na Chácara da Mãe Luzia. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+    "keywords": "óleos essenciais, hidrolatos, aromaterapia, sabonetes artesanais, produtos artesanais, destilação artesanal, Campinas",
+    "ogImageAlt": "Loja da {name} com óleos essenciais, hidrolatos e sabonetes artesanais",
+    "tagline": "Cuidando com amor"
+  },
+  "notFound": {
+    "title": "Não encontramos esta página",
+    "body": "O endereço pode ter mudado de lugar. Volte ao catálogo e a gente te mostra o que está saindo do alambique.",
+    "home": "Página inicial",
+    "catalog": "Ver o catálogo"
+  },
+  "header": {
+    "skipToContent": "Pular para o conteúdo",
+    "mainNav": "Principal",
+    "mainNavMobile": "Principal (móvel)",
+    "nav": {
+      "catalog": "Catálogo",
+      "visits": "Visitas",
+      "chromatographies": "Cromatografias",
+      "blog": "Blog",
+      "about": "Sobre",
+      "contact": "Contato"
+    },
+    "openMenu": "Abrir menu",
+    "closeMenu": "Fechar menu",
+    "menu": "Menu",
+    "cart": "Meu pedido",
+    "cartWithCount": "Meu pedido, {count, plural, one {# item} other {# itens}}",
+    "language": "Idioma"
+  },
+  "footer": {
+    "catalog": "Catálogo",
+    "allProducts": "Todos os produtos",
+    "essentialOils": "Óleos essenciais",
+    "hydrosols": "Hidrolatos",
+    "soaps": "Sabonetes artesanais",
+    "giftCard": "Vale-presente",
+    "farm": "A chácara",
+    "guidedVisit": "Visita guiada",
+    "visitSignup": "Inscrição para visita",
+    "chromatographies": "Cromatografias",
+    "blog": "Blog",
+    "videos": "Vídeos",
+    "about": "Sobre nós",
+    "blurb": "Óleos essenciais, hidrolatos e itens artesanais destilados na Chácara da Mãe Luzia e comercializados na Loja da Morada, em Campinas (SP)",
+    "store": "Loja física",
+    "proceeds": "Toda a renda é revertida para os trabalhos assistenciais da <link>{name}</link>, em Campinas/SP.",
+    "builtBy": "Desenvolvido por",
+    "staffArea": "Área da equipe"
+  },
+  "store": {
+    "weekdays": "Segunda a sexta",
+    "saturday": "Sábado",
+    "weekdayHours": "9h às 17h",
+    "saturdayHours": "8h às 17h",
+    "hoursShort": "Seg a sex, 9h às 17h · Sáb, 8h às 17h"
+  },
+  "common": {
+    "homeLink": "{name} — página inicial"
+  },
+  "hero": {
+    "title": "Passe na loja e sinta o aroma.",
+    "lead": "Nossa loja fica em Campinas, na José Paulino. Ali você abre os frascos, sente cada aroma com calma e conversa com quem destilou — todo o catálogo do site está na prateleira.",
+    "address": "Endereço",
+    "hours": "Horário",
+    "seeCatalog": "Ver o catálogo",
+    "directions": "Como chegar",
+    "photoAlt": "O interior da loja da Gota de Cura: prateleiras de madeira com sprays, óleos essenciais e sabonetes, o quadro da marca na parede e a luz entrando pela janela.",
+    "captionTitle": "Nossa loja, na José Paulino",
+    "caption": "Tudo o que sai da chácara chega aqui — e dá para sentir o aroma antes de levar."
+  },
+  "catalog": {
+    "title": "O catálogo",
+    "lead": "Dezessete prateleiras, das águas florais aos sabonetes de argila. Cada uma abre a lista completa com preço, descrição e disponibilidade.",
+    "specialLine": "Linha especial"
+  },
+  "product": {
+    "noPhoto": "sem foto",
+    "new": "Novo",
+    "discount": "{value} OFF",
+    "soldOut": "Esgotado no momento",
+    "unavailable": "Indisponível",
+    "buildKit": "Montar kit",
+    "add": "Adicionar",
+    "learnMore": "Saiba mais",
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "addWithPrice": "Adicionar · {price}",
+    "addToOrder": "Adicionar ao pedido",
+    "kitPrompt": "Escolha o que vai dentro do kit.",
+    "selectPlaceholder": "— selecione —",
+    "notFoundTitle": "Não encontramos este produto",
+    "notFoundBody": "Ele pode ter saído do catálogo ou mudado de endereço.",
+    "seeShelf": "Ver a prateleira {shelf}",
+    "breadcrumb": "Trilha",
+    "catalog": "Catálogo",
+    "soldOutLong": "Esgotado no momento — volte em breve.",
+    "photoOf": "Ver foto {index} de {total}"
+  },
+  "productList": {
+    "emptyTitle": "Ainda não há produtos nesta prateleira",
+    "emptyBody": "Estamos preparando esta linha. Enquanto isso, dê uma olhada nas outras — ou fale com a gente pelo Instagram.",
+    "count": "{count, plural, one {# produto} other {# produtos}}",
+    "soldOutCount": "{count, plural, one {# esgotado no momento} other {# esgotados no momento}}"
+  },
+  "launches": {
+    "title": "Lançamentos"
+  },
+  "differentials": {
+    "title": "Nossos diferenciais",
+    "lead": "A Gota de Cura não é uma marca com causa social anexada. A causa é o motivo de ela existir.",
+    "nonProfit": {
+      "title": "Sem fins lucrativos",
+      "text": "Não há dono nem sócio para remunerar. Cada real da venda vai para os trabalhos assistenciais da {morada}."
+    },
+    "volunteers": {
+      "title": "Trabalho voluntário",
+      "text": "Quem planta, colhe, destila, embala e atende é voluntário e trabalha com muito amor e carinho."
+    },
+    "care": {
+      "title": "Cuidado em todas as etapas",
+      "text": "Do plantio ao envase, tudo acontece na Chácara da Mãe Luzia. Sem terceirizar nenhuma etapa e sem intermediário entre o canteiro e o frasco."
+    },
+    "service": {
+      "title": "Atendimento humanizado",
+      "text": "Você conversa com quem destilou. Dúvida sobre diluição, uso ou contraindicação tem resposta de gente que conhece o produto e está sempre disposta a te ajudar."
+    }
+  },
+  "laudos": {
+    "title": "O que tem dentro do vidro, por escrito",
+    "lead": "Cromatografia é o exame que separa e identifica cada componente de uma mistura. Mandamos nossos óleos essenciais e hidrolatos para o laboratório e publicamos o laudo inteiro — não um resumo.",
+    "body": "É a forma mais simples de você conferir, sem depender da nossa palavra, o que saiu do alambique.",
+    "seeAll": "Ver todos os laudos",
+    "empty": "Os laudos estão sendo preparados e aparecem aqui assim que saem do laboratório.",
+    "more": "e mais {count, plural, one {# laudo} other {# laudos}}",
+    "seeFullList": "ver a lista completa"
+  },
+  "chromatography": {
+    "types": {
+      "oleo-essencial": "Óleos essenciais",
+      "hidrolato": "Hidrolatos"
+    },
+    "emptyTitle": "Os laudos estão a caminho",
+    "emptyBody": "Assim que os resultados voltam do laboratório, eles aparecem aqui — sempre completos.",
+    "count": "{count, plural, one {# laudo} other {# laudos}}",
+    "notes": {
+      "oleo-essencial": "Extratos concentrados obtidos por destilação a vapor.",
+      "hidrolato": "A água aromática que sai junto do óleo, na mesma destilação."
+    }
+  },
+  "visitPrices": {
+    "free": "isento"
+  },
+  "visitBand": {
+    "photo1Alt": "Grupo de visitantes sentado sob a varanda lilás da chácara acompanhando a destilação de uma planta aromática.",
+    "photo2Alt": "Placa de madeira pintada à mão com o nome Chácara da Mãe Luzia, cercada de flores de cerâmica.",
+    "title": "Venha ver a planta antes de virar óleo",
+    "lead": "Uma manhã na Chácara da Mãe Luzia, a 40 minutos de Campinas: café da manhã feito na casa, a destilação de uma planta aromática do começo ao fim e uma volta pela propriedade — horta, galinheiro e canteiros, sem agrotóxico e regados com água de nascente.",
+    "duration": "Duração",
+    "durationValue": "Das 8h às 12h, pontualmente",
+    "where": "Onde",
+    "whereValue": "Santo Antônio de Posse, perto de Holambra",
+    "price": "Valor",
+    "perPerson": "{price} por pessoa",
+    "childPrices": "{child} de 8 a 14 anos · {free} até 7 anos",
+    "nextDates": "Próximas datas",
+    "limited": "vagas limitadas",
+    "signUp": "Garantir minha vaga",
+    "howItWorks": "Ver como funciona"
+  },
+  "blogBand": {
+    "title": "Para ler com calma",
+    "all": "Todos os textos",
+    "readingTime": "{minutes} min de leitura",
+    "minutes": "{minutes} min"
+  },
+  "testimonies": {
+    "title": "Quem já esteve aqui",
+    "leave": "Deixar meu depoimento",
+    "previous": "Depoimentos anteriores",
+    "next": "Próximos depoimentos",
+    "stripLabel": "Depoimentos de quem já esteve na chácara"
+  },
+  "videosBand": {
+    "title": "A chácara em vídeo",
+    "lead": "Do canteiro à destilaria, e as plantas do catálogo apresentadas uma a uma pelo nosso aromaterapeuta.",
+    "all": "Ver todos os vídeos"
+  },
+  "impact": {
+    "title": "O lucro daqui vira pão na mesa de alguém",
+    "lead": "A Gota de Cura não tem dono nem sócios. Toda a renda das vendas é revertida para a <strong>{name}</strong> e para o seu trabalho de assistência às famílias da periferia de Campinas, mantido desde 1980.",
+    "body": "A chácara é da Morada. Quem planta, colhe, destila e embala são voluntários.",
+    "website": "Site"
+  },
+  "contact": {
+    "title": "Onde nos achar",
+    "store": "Loja física",
+    "talk": "Fale com a gente",
+    "follow": "Acompanhe o dia a dia",
+    "sealAlt": "Certificação CertAroma de {name}",
+    "aromatherapist": "Aromaterapeuta responsável",
+    "aromatherapistBio": "{credential}. Responsável técnico pelas fórmulas e pela destilação de tudo o que sai da chácara.",
+    "seeCertification": "Ver a certificação"
+  },
+  "social": {
+    "youtube": "{name} no YouTube"
+  },
+  "shelf": {
+    "fallbackDescription": "{title} artesanais da Gota de Cura.",
+    "ogTitle": "{title} artesanais",
+    "home": "Início",
+    "breadcrumb": "Trilha",
+    "catalog": "Catálogo",
+    "back": "Voltar para o catálogo"
+  },
+  "productPage": {
+    "fallbackShelf": "Produto",
+    "description": "{name}: {shelf} artesanal da Gota de Cura, destilado na Chácara da Mãe Luzia. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans."
+  },
+  "blog": {
+    "description": "Aromaterapia na prática, o que acontece na Chácara da Mãe Luzia e como cada óleo essencial sai do canteiro para o frasco.",
+    "title": "Venha aprender com a gente",
+    "lead": "Aromaterapia sem misticismo e sem promessa: o que plantamos, como destilamos e o que cada óleo faz de verdade.",
+    "schemaName": "Blog da Gota de Cura",
+    "home": "Início"
+  },
+  "post": {
+    "notFoundTitle": "Este texto não está aqui",
+    "notFoundLead": "O endereço pode ter mudado ou o texto ainda não foi publicado.",
+    "seeAll": "Ver todos os textos",
+    "all": "Todos os textos",
+    "home": "Início",
+    "readingTime": "{minutes} min de leitura",
+    "summary": "Em resumo",
+    "related": "Para ler depois",
+    "untranslated": "Este texto ainda não tem versão em português.",
+    "toc": "Neste texto"
+  },
+  "postList": {
+    "filter": "Filtrar por assunto",
+    "all": "Todos",
+    "emptyTitle": "Nada por aqui ainda",
+    "emptyFiltered": "Nenhum texto com esse assunto por enquanto. Experimente outro filtro.",
+    "emptyBody": "Os primeiros textos estão sendo escritos. Volte em breve."
+  },
+  "ui": {
+    "close": "Fechar",
+    "loading": "Carregando"
+  },
+  "videos": {
+    "views": "{count, plural, one {# visualização} other {# visualizações}}",
+    "watch": "Assistir: {title}",
+    "channel": "Ver o canal no YouTube",
+    "openChannel": "Abrir o canal no YouTube",
+    "errorTitle": "Os vídeos não carregaram agora",
+    "errorBody": "Tente recarregar a página em instantes, ou assista direto no nosso canal."
+  },
+  "chromatographyPage": {
+    "title": "Cromatografias",
+    "description": "Laudos completos de cromatografia dos óleos essenciais e hidrolatos destilados na Chácara da Mãe Luzia.",
+    "ogTitle": "Cromatografias — o laudo de cada planta",
+    "ogDescription": "Publicamos o laudo de cromatografia completo de cada óleo essencial e hidrolato, do jeito que o laboratório entregou.",
+    "lead": "Cromatografia é o exame que separa e identifica cada componente de uma mistura. Publicamos o laudo completo de cada óleo essencial e hidrolato — do jeito que o laboratório entregou.",
+    "hint": "Clique em qualquer planta para abrir o PDF do laudo."
+  },
+  "videosPage": {
+    "metaTitle": "Vídeos",
+    "title": "Nossos vídeos",
+    "description": "Vídeos da Chácara da Mãe Luzia: as plantas do canteiro, o processo de destilação e conversas sobre aromaterapia com o nosso aromaterapeuta.",
+    "lead": "Um passeio pela chácara em movimento: as plantas, a destilaria e conversas sobre o que cada óleo faz de verdade.",
+    "schemaName": "Vídeos da Gota de Cura",
+    "home": "Início"
+  },
+  "about": {
+    "metaTitle": "Sobre nós",
+    "description": "A Gota de Cura nasceu em 2017, dos primeiros sabonetes artesanais. Hoje é uma equipe de voluntários que planta, destila e embala tudo na Chácara da Mãe Luzia.",
+    "ogDescription": "Uma equipe de voluntários que planta, destila e embala tudo na Chácara da Mãe Luzia. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+    "title": "Começou com um sabonete",
+    "lead": "A marca Gota de Cura nasceu em 2017, da iniciativa do nosso aromaterapeuta Marcelo Mattar. Hoje é uma equipe grande de voluntários — e um catálogo que não para de crescer.",
+    "story1": "Tudo começou com os primeiros sabonetes artesanais feitos com óleos vegetais nobres, predominando o azeite de oliva extra virgem, enriquecidos com óleos essenciais de alecrim e lavanda. Desde o início eles já tinham um diferencial: no lugar da água, hidrolato orgânico de melaleuca.",
+    "story2": "Vieram novas receitas, novos aromas terapêuticos, sempre com óleos essenciais de qualidade. Com o tempo, o Marcelo começou a destilar ele mesmo, de forma artesanal, as plantas aromáticas para obter os próprios óleos essenciais e hidrolatos.",
+    "story3": "Depois dos sabonetes vieram os sprays energéticos, os sais de banho, os hidrolatos, os óleos essenciais, as tinturas, as pomadas. Nunca perdemos o propósito: levar as propriedades terapêuticas e vibracionais das plantas através dos nossos produtos, com toda a renda revertida aos trabalhos assistenciais da {morada}.",
+    "photoAlt": "Canteiros de hortaliças plantados na terra vermelha da chácara, com palmeiras ao fundo.",
+    "photoCaption": "Os canteiros da Chácara da Mãe Luzia, em Santo Antônio de Posse.",
+    "mission": "Missão",
+    "missionText": "Proporcionar bem-estar e qualidade de vida através de produtos para aromaterapia, promovendo o equilíbrio físico, mental, emocional e espiritual.",
+    "vision": "Visão",
+    "visionText": "Ser referência em produtos para aromaterapia pela qualidade terapêutica e vibracional, com práticas voltadas à sustentabilidade e ao respeito à natureza e ao próximo.",
+    "valuesTitle": "Nossos valores",
+    "values": {
+      "socialResponsibility": {
+        "title": "Responsabilidade social",
+        "text": "Toda a renda da comercialização vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans, em Campinas."
+      },
+      "sustainability": {
+        "title": "Sustentabilidade",
+        "text": "Ingredientes naturais, água de nascente, adubação natural e energia limpa. Sem agrotóxico em nenhum canteiro."
+      },
+      "quality": {
+        "title": "Qualidade",
+        "text": "Pureza e eficácia terapêutica comprovadas por laudo, não por promessa."
+      },
+      "transparency": {
+        "title": "Transparência",
+        "text": "Informação clara sobre o que tem em cada produto e como ele foi feito."
+      },
+      "innovation": {
+        "title": "Inovação",
+        "text": "Novas receitas e processos, sempre testados antes de virarem catálogo."
+      }
+    },
+    "cta": "Quer ver de perto como cada gota é feita?",
+    "visitFarm": "Conhecer a chácara",
+    "seeReports": "Ver os laudos"
+  },
+  "visitPhotos": {
+    "photo-01": "Placa de madeira pintada à mão com o nome Chácara da Mãe Luzia.",
+    "photo-13": "A placa da Chácara da Mãe Luzia emoldurada pelas primaveras brancas do portão.",
+    "photo-23": "O lago com chafariz no amanhecer, com o sol atravessando as árvores.",
+    "photo-09": "A mesa do café da manhã servido aos visitantes, com toalhas de lavanda.",
+    "photo-20": "Pães, ovos mexidos e toalhas de crochê na mesa do café da manhã.",
+    "photo-03": "O alambique de destilação montado sob a varanda, com a mata ao fundo.",
+    "photo-06": "Visitantes sentados acompanhando a explicação sobre a destilação.",
+    "photo-18": "Demonstração do destilador de inox, com os visitantes acompanhando de perto.",
+    "photo-16": "Visitantes sentados à sombra de uma árvore durante uma conversa sobre as plantas.",
+    "photo-26": "Visitantes sob a tenda no gramado, com a piscina e a horta ao fundo.",
+    "photo-10": "Grupo de visitantes caminhando entre os canteiros de citronela.",
+    "photo-15": "Grupo de visitantes reunido entre as plantas, ouvindo a explicação do guia.",
+    "photo-21": "Visitantes de capa de chuva conhecendo os pés de citros floridos.",
+    "photo-05": "Canteiros de alface e couve plantados na terra vermelha da chácara.",
+    "photo-14": "Canteiros de alface sendo irrigados, com um pé de lavanda em primeiro plano.",
+    "photo-24": "Uma árvore grande e frondosa sobre os canteiros recém-plantados.",
+    "photo-02": "Detalhe do cultivo de plantas aromáticas da chácara.",
+    "photo-25": "As galinhas soltas no galinheiro da chácara.",
+    "photo-22": "Ninfeia branca aberta entre as folhas no lago da chácara.",
+    "photo-27": "Roda de conversa no gramado, à beira do lago.",
+    "photo-12": "Banner da Morada Espírita Prof. Lairi Hans na entrada da chácara.",
+    "photo-04": "Cantinho da chácara preparado para receber os visitantes.",
+    "photo-07": "Produtos Gota de Cura expostos no dia da visitação.",
+    "photo-08": "Artesanato feito pelas voluntárias da Morada, à venda no dia da visita.",
+    "photo-17": "A varanda com o bazar de artesanato montado para o dia da visita.",
+    "photo-11": "Vista geral da propriedade durante a visita guiada.",
+    "photo-19": "Foto de grupo dos visitantes com seus certificados, na escada da varanda."
+  },
+  "visitProgram": {
+    "breakfast": {
+      "time": "8h",
+      "title": "Café da manhã na chácara",
+      "text": "Recebemos todo mundo com um café preparado ali mesmo, com o que a horta e as galinhas caipiras dão."
+    },
+    "distillation": {
+      "time": "9h",
+      "title": "Destilação, do começo ao fim",
+      "text": "Acompanhamos a destilação de uma planta aromática colhida na hora: a caldeira, o vapor, a separação do óleo essencial e do hidrolato."
+    },
+    "walk": {
+      "time": "10h30",
+      "title": "Volta pela propriedade",
+      "text": "Canteiros, pomar, galinheiro e nascente. Sem agrotóxico, com adubo natural e energia limpa."
+    },
+    "closing": {
+      "time": "12h",
+      "title": "Encerramento",
+      "text": "Um lanche final e a mesa com os produtos Gota de Cura e o artesanato feito pelas voluntárias da Morada."
+    }
+  },
+  "gallery": {
+    "close": "Fechar galeria",
+    "position": "{index} de {total}",
+    "previous": "Foto anterior",
+    "next": "Próxima foto"
+  },
+  "visitDates": {
+    "none": "Não há datas abertas no momento. As próximas são anunciadas primeiro no nosso Instagram."
+  },
+  "visitVideo": {
+    "title": "Vídeo promocional da visita à Chácara da Mãe Luzia",
+    "play": "Assistir ao vídeo da visita",
+    "preview": "Prévia do vídeo promocional da visita à Chácara da Mãe Luzia"
+  },
+  "paymentTerms": {
+    "before": {
+      "title": "Antes do dia",
+      "schedule": "A programação começa pontualmente às 8h e termina às 12h.",
+      "travel": "O deslocamento é por conta de cada participante. Depois que o grupo fecha, enviamos as orientações de chegada.",
+      "prices": "Valores: {adult} acima de 15 anos, {child} de 8 a 14 anos, {free} até 7 anos."
+    },
+    "payment": {
+      "title": "Pagamento",
+      "arranged": "O pagamento é combinado diretamente com a equipe Gota de Cura.",
+      "confirmed": "A vaga só é garantida após a confirmação e o pagamento da taxa."
+    },
+    "cancellation": {
+      "title": "Desistência e reembolso",
+      "fourteenDays": "Até 14 dias antes: reembolso de 50% do valor por transferência bancária.",
+      "sevenDays": "Até 7 dias antes: reembolso de 50% em vale-presente para o site ou a loja (frete não incluso).",
+      "lastWeek": "Com menos de 7 dias: não há reembolso, reserva para datas futuras nem troca por produtos."
+    }
+  },
+  "visits": {
+    "metaTitle": "Visita guiada à Chácara da Mãe Luzia",
+    "description": "Uma manhã na chácara onde as plantas da Gota de Cura são cultivadas e destiladas: café da manhã, destilação ao vivo e visita guiada pela propriedade.",
+    "ogDescription": "Café da manhã, destilação ao vivo e visita guiada pela chácara onde plantamos e destilamos tudo.",
+    "title": "Uma manhã na Chácara da Mãe Luzia",
+    "lead": "É aqui que plantamos, colhemos e destilamos tudo o que vira óleo essencial e hidrolato. A visita é aberta a quem quiser ver o processo inteiro de perto — aromaterapeutas ou não.",
+    "languageNote": "",
+    "nextDates": "Próximas datas",
+    "signUp": "Garantir minha vaga",
+    "videoTitle": "Veja como é a visita",
+    "videoLead": "Um vídeo curto para você conhecer a chácara antes de vir pessoalmente.",
+    "dayTitle": "Como é o dia",
+    "dayBody": "A propriedade é da {morada}, instituição fundada em Campinas em 1980. Fica em Santo Antônio de Posse, perto de Holambra, a cerca de 40 minutos de Campinas. Tudo o que se produz ali existe para sustentar os trabalhos assistenciais da Morada.",
+    "dayLength": "São quatro horas de programação, das 8h às 12h, sem pressa.",
+    "pricesTitle": "Valores e combinados",
+    "adults": "Acima de 15 anos",
+    "children": "De 8 a 14 anos",
+    "little": "Até 7 anos",
+    "limited": "As vagas são limitadas — cada grupo é pequeno de propósito.",
+    "galleryTitle": "A chácara por dentro",
+    "album": "Ver o álbum completo",
+    "testimoniesTitle": "O que dizem quem já veio",
+    "visitedOn": "Visitação de {date}",
+    "ctaTitle": "Quer conhecer de perto?",
+    "cta": "Fazer minha inscrição"
+  },
+  "enrollment": {
+    "metaTitle": "Inscrição para a visitação",
+    "description": "Escolha a data, preencha seus dados e garanta sua vaga na visita guiada à Chácara da Mãe Luzia.",
+    "saveError": "Não conseguimos salvar sua inscrição. Tente novamente.",
+    "intro": "Esta é uma pré-inscrição. Depois de enviá-la, um voluntário entra em contato pelo WhatsApp para confirmar sua vaga e combinar o pagamento.",
+    "step1": "Escolha a data",
+    "noDates": "Não há datas abertas no momento. Acompanhe nosso Instagram — as próximas são anunciadas por lá primeiro.",
+    "dateError": "Escolha uma das datas disponíveis.",
+    "step2": "Seus dados de contato",
+    "name": "Nome completo",
+    "nameError": "Informe seu nome completo.",
+    "phone": "Celular (WhatsApp)",
+    "phoneHint": "Confira o número: é por ele que falamos com você.",
+    "phoneError": "Informe um celular com DDD.",
+    "email": "E-mail",
+    "emailError": "Confira o e-mail digitado.",
+    "step3": "Acompanhantes",
+    "step3Hint": "Cada acompanhante ocupa uma vaga. Preencha o nome completo de cada um.",
+    "companion": "Acompanhante {number}",
+    "companionError": "Preencha o nome completo.",
+    "removeCompanion": "Remover acompanhante {number}",
+    "addCompanion": "Adicionar acompanhante",
+    "step4": "Já esteve aqui antes?",
+    "step4Hint": "Opcional — nos ajuda a preparar o roteiro do grupo.",
+    "lastVisit": "Mês e ano da última visita e qual planta foi destilada",
+    "lastVisitPlaceholder": "Ex.: outubro de 2024, lavanda",
+    "agree": "Li e concordo com as regras de <terms>pagamento e reembolso</terms>",
+    "back": "Voltar",
+    "review": "Revisar e enviar",
+    "confirmTitle": "Confirme sua inscrição",
+    "confirmDescription": "Depois de enviar, a equipe entra em contato pelo WhatsApp.",
+    "edit": "Corrigir",
+    "sending": "Enviando…",
+    "confirm": "Confirmar inscrição",
+    "checkPhone": "Confira principalmente o celular — é o nosso único meio de contato com você.",
+    "summaryDate": "Data",
+    "summaryName": "Nome",
+    "summaryPhone": "Celular",
+    "doneTitle": "Inscrição recebida",
+    "doneBack": "Voltar para a visitação",
+    "doneBody": "Sua pré-inscrição foi registrada. Um dos nossos voluntários vai falar com você pelo WhatsApp para confirmar a vaga e acertar o pagamento.",
+    "doneEmail": "Enviamos também um e-mail com todas as orientações. Até logo!",
+    "termsTitle": "Pagamento e reembolso",
+    "gotIt": "Entendi"
+  },
+  "cart": {
+    "metaTitle": "Meu pedido",
+    "description": "Revise os produtos escolhidos e envie sua reserva. A equipe Gota de Cura confirma disponibilidade e pagamento em seguida.",
+    "steps": {
+      "order": "Meu pedido",
+      "details": "Meus dados",
+      "confirmation": "Confirmação"
+    },
+    "decrease": "Diminuir {name}",
+    "increase": "Aumentar {name}",
+    "quantity": "Quantidade de {name}",
+    "remove": "Remover {name} do pedido",
+    "added": "{name} foi para o seu pedido"
+  },
+  "order": {
+    "metaTitle": "Meu pedido",
+    "description": "Acompanhe os detalhes e o status do seu pedido Gota de Cura."
+  },
+  "coupon": {
+    "invalid": "Esse código não é válido ou já expirou.",
+    "applied": "Cupom <strong>{code}</strong> aplicado.",
+    "remove": "Remover",
+    "open": "Tenho um cupom ou vale-presente",
+    "code": "Código",
+    "placeholder": "Ex.: VISITA10",
+    "apply": "Aplicar"
+  },
+  "checkout": {
+    "sendError": "Não conseguimos enviar seu pedido. Tente novamente em instantes.",
+    "sent": "Pedido enviado",
+    "sentByEmail": "Enviamos a confirmação do seu pedido por e-mail.",
+    "received": "Recebemos seu pedido.",
+    "sentNext": "A equipe {name} vai confirmar os produtos, a entrega e o pagamento, e seu pedido será atendido em até 48h.",
+    "trackHint": "Você pode acompanhar os detalhes do seu pedido a qualquer momento nesta página:",
+    "track": "Acompanhar meu pedido",
+    "backToCatalog": "Voltar ao catálogo",
+    "testimony": "Deixar um depoimento",
+    "title": "Meu pedido",
+    "emptyTitle": "Seu pedido ainda está vazio",
+    "seeCatalog": "Ver o catálogo",
+    "emptyBody": "Escolha os produtos nas prateleiras e eles aparecem aqui para você revisar antes de enviar.",
+    "intro": "Este é um pedido de reserva. Depois de enviá-lo, nossa equipe confirma a disponibilidade de cada item e combina o pagamento e a entrega com você.",
+    "keepShopping": "Continuar escolhendo",
+    "total": "Total",
+    "emptied": "Pedido esvaziado",
+    "empty": "Esvaziar",
+    "fillDetails": "Preencher meus dados",
+    "name": "Nome completo",
+    "nameError": "Precisamos do seu nome completo.",
+    "phone": "Celular (WhatsApp)",
+    "phoneHint": "É por aqui que a equipe fala com você.",
+    "phoneError": "Informe um celular com DDD.",
+    "email": "E-mail",
+    "emailError": "Confira o e-mail digitado.",
+    "city": "Cidade",
+    "cityError": "Informe sua cidade.",
+    "zipcode": "CEP",
+    "zipcodeError": "Informe um CEP válido.",
+    "notes": "Observações",
+    "notesPlaceholder": "Algum recado sobre o pedido, entrega ou embalagem?",
+    "backToProducts": "Voltar aos produtos",
+    "review": "Revisar pedido",
+    "yourDetails": "Seus dados",
+    "edit": "Corrigir",
+    "summaryName": "Nome",
+    "summaryPhone": "Celular",
+    "products": "Produtos",
+    "subtotal": "Subtotal",
+    "discount": "Desconto",
+    "shipping": "O frete, quando houver, é combinado à parte com a equipe.",
+    "back": "Voltar",
+    "sending": "Enviando…",
+    "confirm": "Confirmar pedido"
+  },
+  "orderStatus": {
+    "notFoundTitle": "Pedido não encontrado",
+    "home": "Voltar ao início",
+    "notFoundBody": "Confira se o link está completo, ou fale com a gente pelo <instagram>Instagram</instagram>.",
+    "title": "Pedido #{number}",
+    "placedOn": "Feito em {date}",
+    "greeting": "Olá, <strong>{name}</strong>! Seu pedido será atendido em até 48h. Qualquer dúvida, fale com a gente pelo <instagram>Instagram</instagram> ou pelo e-mail <mail>{email}</mail>.",
+    "products": "Produtos",
+    "subtotal": "Subtotal",
+    "coupon": "Cupom {code}",
+    "total": "Total",
+    "history": "Histórico"
+  }
+}

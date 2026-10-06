@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 import { ProductCard } from '@/components/products/ProductCard'
 import { Container, SectionHead } from '@/components/site/Section'
@@ -17,6 +18,7 @@ const MAX_ITEMS = 8
  * to show, so an ordinary week never leaves an empty band on the homepage.
  */
 export function LaunchesBand() {
+  const t = useTranslations('launches')
   const [items, setItems] = useState<ProductItem[] | null>(null)
 
   useEffect(() => {
@@ -47,7 +49,7 @@ export function LaunchesBand() {
   return (
     <section className="bg-canvas-sunk py-20 lg:py-24">
       <Container>
-        <SectionHead title="Lançamentos" />
+        <SectionHead title={t('title')} />
 
         <div
           className={cn(

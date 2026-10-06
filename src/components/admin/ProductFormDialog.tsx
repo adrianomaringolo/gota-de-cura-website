@@ -13,7 +13,7 @@ import { Spinner } from '@/components/ui/Feedback'
 import { cn } from '@/lib/cn'
 import { toDate } from '@/lib/format'
 import { productTypes } from '@/lib/product-types'
-import type { ProductItem } from '@/lib/types'
+import type { ProductItem, ProductTranslation } from '@/lib/types'
 import { ProductsService } from '@/services/products'
 
 /** Special lines (Amazônia, Gotinha…) group products of any type through `categories`. */
@@ -47,6 +47,8 @@ type ProductForm = {
   hidden: boolean
   /** `yyyy-MM-dd`, as the date input reads and writes it. */
   createdAt: string
+  /** The English version shown on `/en`; any field left empty falls back to Portuguese. */
+  en: Required<ProductTranslation>
 }
 
 const empty: ProductForm = {
@@ -62,11 +64,23 @@ const empty: ProductForm = {
   available: true,
   hidden: false,
   createdAt: '',
+  en: { name: '', description: '', detailedDescription: '' },
 }
+
+/** Only the filled-in fields — Firestore rejects `undefined`, and blanks mean "use the Portuguese". */
+const filledTranslation = (en: ProductForm['en']): ProductTranslation | undefined => {
+  const entries = Object.entries(en).filter(([, value]) => value?.trim())
+  return entries.length ? (Object.fromEntries(entries) as ProductTranslation) : undefined
+}
+
+/** Plain text of a rich-text field, to tell an empty editor (`<p></p>`) from real content. */
+const hasText = (html: string | undefined) =>
+  Boolean(html?.replace(/<[^>]*>/g, '').trim())
 
 const tabs = [
   { id: 'geral', label: 'Título e valores' },
   { id: 'descricoes', label: 'Descrições' },
+  { id: 'ingles', label: 'Inglês' },
   { id: 'imagens', label: 'Imagens' },
 ] as const
 
@@ -136,6 +150,11 @@ export function ProductFormDialog({
             available: product.available ?? true,
             hidden: product.hidden ?? false,
             createdAt: toDay(toDate(product.createdAt) ?? new Date()),
+            en: {
+              name: product.translations?.en?.name ?? '',
+              description: product.translations?.en?.description ?? '',
+              detailedDescription: product.translations?.en?.detailedDescription ?? '',
+            },
           }
         : { ...empty, createdAt: toDay(new Date()) },
     )
@@ -146,8 +165,21 @@ export function ProductFormDialog({
       // saveProduct replaces the whole document, so an edit has to carry the
       // untouched fields (urlName, categories, optionsSet, createdAt…) forward
       // instead of only what this form knows about.
-      const { oldPrice: _previousOldPrice, ...existing } = product ?? {}
-      const { oldPrice, categories, images, createdAt, ...fields } = data
+      const {
+        oldPrice: _previousOldPrice,
+        translations: previousTranslations,
+        ...existing
+      } = product ?? {}
+      const { oldPrice, categories, images, createdAt, en, ...fields } = data
+      const english = filledTranslation({
+        ...en,
+        // The editor leaves `<p></p>` behind when cleared.
+        detailedDescription: hasText(en.detailedDescription)
+          ? en.detailedDescription
+          : '',
+      })
+      const translations = { ...previousTranslations, en: english }
+      if (!english) delete translations.en
       const originalCreatedAt = toDate(product?.createdAt)
       await ProductsService.saveProduct({
         ...existing,
@@ -170,6 +202,7 @@ export function ProductFormDialog({
         // Firestore rejects `undefined` values, so an empty "old price" (NaN
         // from valueAsNumber) has to leave the key out rather than send it.
         ...(oldPrice ? { oldPrice } : {}),
+        ...(Object.keys(translations).length ? { translations } : {}),
       } as ProductItem)
       // Photos removed in this edit (and uploads that didn't make the cut) are
       // only deleted now, so cancelling never leaves the product pointing at a
@@ -269,7 +302,10 @@ export function ProductFormDialog({
             >
               {candidate.label}
               {tabHasError(candidate.id) && (
-                <span className="h-2 w-2 rounded-full bg-danger" aria-label="(com erro)" />
+                <span
+                  className="h-2 w-2 rounded-full bg-danger"
+                  aria-label="(com erro)"
+                />
               )}
             </button>
           )
@@ -277,11 +313,7 @@ export function ProductFormDialog({
       </div>
 
       {/* Every panel stays mounted (just hidden) so switching tabs keeps what was typed. */}
-      <form
-        id="product-form"
-        onSubmit={handleSubmit(onSubmit, onInvalid)}
-        noValidate
-      >
+      <form id="product-form" onSubmit={handleSubmit(onSubmit, onInvalid)} noValidate>
         <div
           id={`${tabsId}-geral-panel`}
           role="tabpanel"
@@ -351,7 +383,9 @@ export function ProductFormDialog({
           />
 
           <fieldset className="flex flex-col gap-2 sm:col-span-2">
-            <legend className="mb-1.5 text-sm font-medium text-ink">Linhas especiais</legend>
+            <legend className="mb-1.5 text-sm font-medium text-ink">
+              Linhas especiais
+            </legend>
             <Controller
               control={control}
               name="categories"
@@ -406,6 +440,40 @@ export function ProductFormDialog({
               <RichTextEditor
                 label="Descrição detalhada"
                 hint="Aparece na janela “Saiba mais” e na página do produto."
+                value={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        </div>
+
+        <div
+          id={`${tabsId}-ingles-panel`}
+          role="tabpanel"
+          aria-labelledby={`${tabsId}-ingles-tab`}
+          hidden={tab !== 'ingles'}
+          className="grid gap-4"
+        >
+          <p className="rounded-xl bg-brand-tint px-4 py-3 text-sm text-ink-soft">
+            O que aparece para quem navega o site em inglês. Campo vazio mostra o texto em
+            português no lugar — o pedido e este painel continuam sempre em português.
+          </p>
+          <Input
+            label="Nome em inglês"
+            placeholder={watch('name')}
+            {...register('en.name')}
+          />
+          <Textarea
+            label="Descrição curta em inglês"
+            rows={3}
+            {...register('en.description')}
+          />
+          <Controller
+            control={control}
+            name="en.detailedDescription"
+            render={({ field }) => (
+              <RichTextEditor
+                label="Descrição detalhada em inglês"
                 value={field.value}
                 onChange={field.onChange}
               />

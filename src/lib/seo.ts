@@ -74,7 +74,7 @@ export const websiteSchema = () => ({
   url: SITE.url,
   name: SITE.name,
   description: SITE.description,
-  inLanguage: 'pt-BR',
+  inLanguage: ['pt-BR', 'en-US'],
   publisher: { '@id': ORGANIZATION_ID },
 })
 

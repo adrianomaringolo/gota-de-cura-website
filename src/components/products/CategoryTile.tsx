@@ -1,14 +1,9 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { cn } from '@/lib/cn'
+import { shelfName } from '@/lib/product-types'
 import type { ProductType } from '@/lib/types'
-
-/** Category labels carry a <br/> and a <small> for the two hydrosol sizes. */
-const plainLabel = (type: ProductType) =>
-  (type.typeLabel ?? type.type)
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
 
 export function CategoryTile({
   type,
@@ -17,6 +12,8 @@ export function CategoryTile({
   type: ProductType
   priority?: boolean
 }) {
+  const t = useTranslations('catalog')
+  const locale = useLocale()
   const featured = Boolean(type.featured)
 
   return (
@@ -62,10 +59,10 @@ export function CategoryTile({
             featured ? 'text-2xl' : 'text-lg leading-tight',
           )}
         >
-          {plainLabel(type)}
+          {shelfName(type, locale)}
           {featured && (
             <span className="mt-1 block font-sans text-sm font-normal text-white/70">
-              Linha especial
+              {t('specialLine')}
             </span>
           )}
         </h3>

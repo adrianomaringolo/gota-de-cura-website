@@ -15,6 +15,10 @@ export const productTypes: ProductType[] = [
       `,
     image: 'hidrolatos.jpg',
     mode: 'type',
+    en: {
+      label: 'Hydrosols<br/><small>120 ml</small>',
+      description: `<p><b>Hydrosols</b>, also called floral waters, are the other product of the distillation that extracts essential oils. The steam that passes through the plant carries many of its components with it, and when it turns back into liquid it becomes the hydrosol. Our standard bottle holds <b>120 ml</b>.</p>`,
+    },
   },
   {
     id: 'oleos-essenciais',
@@ -24,6 +28,10 @@ export const productTypes: ProductType[] = [
       `,
     image: 'oleos-essenciais.jpg',
     mode: 'type',
+    en: {
+      label: 'Essential oils',
+      description: `<p><b>Essential oils</b> are highly concentrated natural extracts, obtained mostly by steam distillation or cold pressing of flowers, plants and fruits. Their concentration gives them therapeutic properties and many benefits — and it is also why they should never be applied undiluted to the skin. Use them in aromatherapy, in personal or room diffusers, or diluted in a carrier oil. They are entirely natural, with no artificial colors and no chemical additives.</p>`,
+    },
   },
   {
     id: 'diluicoes-oleos-essenciais',
@@ -32,6 +40,10 @@ export const productTypes: ProductType[] = [
       '<p>As diluições de óleos essenciais são óleos vegetais (TCM) que servem para diluir os óleos essenciais, tornando-os seguros para uso na pele. São óleos vegetais puros, sem adição de conservantes ou corantes.</p><p>Nossas diluições são a 2% (duas gotas de óleo essencial para cada 5ml de diluição).</p>',
     image: 'diluicoes-oleos-essenciais.jpg',
     mode: 'type',
+    en: {
+      label: 'Dilutions',
+      description: `<p>Our dilutions are a carrier oil (MCT) blended with essential oil, which makes the essential oil safe to use on the skin. Pure vegetable oils, with no preservatives or artificial colors.</p><p>All our dilutions are at 2% (two drops of essential oil for every 5 ml).</p>`,
+    },
   },
   {
     id: 'sabonetes',
@@ -40,6 +52,11 @@ export const productTypes: ProductType[] = [
       <p>Ao invés de água, usamos hidrolatos na confecção dos nossos sabonetes. Hidrolatos orgânicos destilados na chácara da Morada (melaleuca, lavanda, immortelle e os demais que destilamos)!</p>`,
     image: 'sabonetes.jpg',
     mode: 'type',
+    en: {
+      label: 'Handmade soaps',
+      description: `<p>Vegetable oils and essential oils.</p>
+      <p>Instead of water, we make our soaps with hydrosols — organic hydrosols distilled at the Morada farm (tea tree, lavender, immortelle and the others we distill)!</p>`,
+    },
   },
   {
     id: 'sabonetes-argila',
@@ -49,6 +66,12 @@ export const productTypes: ProductType[] = [
       <p>Essa linha vem trazer a propriedade das argilas naturais. Enriquecidos com as argilas verde, vermelha, roxa, amarela, branca e preta.</p>`,
     image: 'sabonetes-argila.jpg',
     mode: 'type',
+    en: {
+      label: 'Clay soaps',
+      description: `<p>Made with the classic vegetable oils, but without essential oils.</p>
+      <p>A line scented only by the oils themselves, led by the aroma of extra-virgin olive oil.</p>
+      <p>What this line brings is the goodness of natural clays: green, red, purple, yellow, white and black.</p>`,
+    },
   },
   {
     id: 'sabonetes-manteiga',
@@ -57,6 +80,11 @@ export const productTypes: ProductType[] = [
       <p>Ao invés de água, usamos hidrolatos na confecção dos nossos sabonetes. Hidrolatos orgânicos destilados na chácara da Morada (melaleuca, lavanda, immortelle e os demais que destilamos)!</p>`,
     image: 'sabonetes-manteiga.jpg',
     mode: 'type',
+    en: {
+      label: 'Butter soaps',
+      description: `<p>Made with extra-virgin olive oil, each soap is carefully crafted for a truly special skincare moment.</p>
+      <p>Instead of water, we make our soaps with hydrosols — organic hydrosols distilled at the Morada farm (tea tree, lavender, immortelle and the others we distill)!</p>`,
+    },
   },
   {
     id: 'hidrolatos-1l',
@@ -67,6 +95,10 @@ export const productTypes: ProductType[] = [
       `,
     image: 'hidrolatos-1l.jpg',
     mode: 'type',
+    en: {
+      label: 'Hydrosols<br/><small>1 liter</small>',
+      description: `<p><b>Hydrosols</b>, also called floral waters, are the other product of the distillation that extracts essential oils. The steam that passes through the plant carries many of its components with it, and when it turns back into liquid it becomes the hydrosol.</p>`,
+    },
   },
   {
     id: 'sais',
@@ -75,6 +107,10 @@ export const productTypes: ProductType[] = [
       '<p>O uso de sais de banho e escalda-pés são muito relaxantes e terapêuticos. Ao deixar seus pés de molho numa água morna com sal, você vai sentir o alívio do estresse do dia a dia e das tensões acumuladas.</p><p>Aliando o aroma e o poder terapêutico dos óleos essenciais a esses sais, você verá os efeitos tranquilizantes ainda mais potencializados e ainda vai aproveitar das propriedades específicas que cada planta tem a oferecer.</p>',
     image: 'sais.jpg',
     mode: 'type',
+    en: {
+      label: 'Bath salts',
+      description: `<p>Bath salts and foot soaks are deeply relaxing and therapeutic. Rest your feet in warm, salted water and feel the stress of the day and the tension you carry start to ease.</p><p>Paired with the aroma and therapeutic power of essential oils, the calming effect grows even stronger — and you also enjoy the particular properties each plant has to offer.</p>`,
+    },
   },
   {
     id: 'sprays',
@@ -83,6 +119,10 @@ export const productTypes: ProductType[] = [
       '<p>Produtos feitos à base de óleos essenciais e álcool de cereais. Livre de essências sintéticas.</p>',
     image: 'sprays.jpg',
     mode: 'type',
+    en: {
+      label: 'Sprays',
+      description: `<p>Made with essential oils and grain alcohol. No synthetic fragrances.</p>`,
+    },
   },
   {
     id: 'sprays-topicos',
@@ -90,6 +130,10 @@ export const productTypes: ProductType[] = [
     description: `<p>Sprays naturais para uso sobre a pele.</p>`,
     image: 'sprays-topicos.jpg',
     mode: 'type',
+    en: {
+      label: 'Topical sprays',
+      description: `<p>Natural sprays for use on the skin.</p>`,
+    },
   },
   {
     id: 'pomadas',
@@ -98,6 +142,10 @@ export const productTypes: ProductType[] = [
       '<p>Pomadas de uso tópico confeccionadas com óleos vegetais e óleos essenciais. Livre de conservantes.</p>',
     image: 'pomadas.jpg',
     mode: 'type',
+    en: {
+      label: 'Balms',
+      description: `<p>Balms for topical use, made with vegetable oils and essential oils. No preservatives.</p>`,
+    },
   },
   {
     id: 'colonias',
@@ -107,6 +155,10 @@ export const productTypes: ProductType[] = [
       '<p>Produtos feitos à base de óleos essenciais e álcool de cereais. Livre de essências sintéticas.</p>',
     image: 'colonias.jpg',
     mode: 'type',
+    en: {
+      label: 'Eaux de Cologne',
+      description: `<p>Made with essential oils and grain alcohol. No synthetic fragrances.</p>`,
+    },
   },
   {
     id: 'tinturas',
@@ -121,6 +173,16 @@ export const productTypes: ProductType[] = [
       <p>PARA TRATAMENTOS ESPECÍFICOS PROCURE UM PROFISSIONAL QUALIFICADO.</p>`,
     image: 'tinturas.jpg',
     mode: 'type',
+    en: {
+      label: 'Tinctures',
+      description: `<p>Tinctures are alcohol extracts of natural substances, such as herbs or the active compounds of medicinal plants. They are made by dissolving those substances in alcohol, a common way of preparing herbal remedies: the alcohol draws out the desired compounds, which makes tinctures an effective option for medicinal use.</p>
+      <hr/>
+      <p>Every Gota de Cura tincture is handmade from carefully chosen plants and ingredients, to keep the particular properties each plant has to offer.</p>
+      <p>They can complement a treatment, but always under the guidance and supervision of a herbalist or other qualified professional.</p>
+
+      <p>A safe suggestion for use: dilute 10 drops of tincture in a glass of water (about 300 ml) and drink it over the course of the day.</p>
+      <p>FOR SPECIFIC TREATMENTS, CONSULT A QUALIFIED PROFESSIONAL.</p>`,
+    },
   },
   /*{
     id: 'acessorios',
@@ -150,6 +212,13 @@ export const productTypes: ProductType[] = [
     image: 'amazonia.jpg',
     mode: 'category',
     areaBackground: '/images/background-amazonia.jpg',
+    en: {
+      label: 'Amazon Corner',
+      description: `<p>A space devoted to the wisdom, strength and enchantment of the rainforest.</p>
+        <p>Here we gather carefully chosen products that carry the essence of Amazonian plants — made with respect for the people, the lands and the nature that inspire them.</p>
+        <p>Hydrosols, essential oils, tinctures and soaps that bring the energy of breu branco, cumaru, copaíba, rosewood, açaí and other treasures of the forest.</p>
+        <p>More than aromas, they are living expressions of healing, ancestry and presence. A deep connection with the forest — in touch, in scent, in care.</p>`,
+    },
   },
   {
     id: 'mtc',
@@ -161,6 +230,10 @@ export const productTypes: ProductType[] = [
     seal: 'https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fseals%2Fseal-new.png?alt=media&token=9ad4fc11-08a0-43a9-b350-b20b57dbac92',
     areaBackground: '/images/background-china.jpg',
     mode: 'type',
+    en: {
+      label: 'Traditional Chinese Medicine',
+      description: `<p>Traditional Chinese Medicine (TCM) is an ancient therapeutic system that seeks the energetic balance of the body (Qi) through a holistic approach. It draws on techniques such as acupuncture, herbal medicine, cupping, diet therapy and Tui Na massage to treat imbalances, focusing on prevention and on relieving pain, stress and chronic illness.</p>`,
+    },
   },
   {
     id: 'gotinha',
@@ -173,9 +246,48 @@ export const productTypes: ProductType[] = [
     image: 'gotinha.jpg',
     mode: 'category',
     areaBackground: '/images/background-gotinha.jpg',
+    en: {
+      label: 'Gotinha de Cura',
+      description: `<p>A line made with love for the little ones: babies and young children.</p>
+        <p>Gentle, safe products designed for those moments of affection and care — bath time, massage, settling down and bedtime.</p>
+        <p>Delicate formulas with natural ingredients chosen with care for sensitive skin and children's well-being.</p>`,
+    },
   },
 ]
 
 export const getProductType = (id: string) => productTypes.find((t) => t.id === id)
+
+/** Category labels carry a <br/> and a <small> for the two hydrosol sizes. */
+export const plainLabel = (raw: string) =>
+  raw
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+/**
+ * The shelf as a visitor in `locale` sees it. Only the words change: `type`
+ * stays the Portuguese name, because that is the key products are filed under
+ * in Firestore.
+ */
+export const localizeProductType = (type: ProductType, locale: string): ProductType =>
+  locale === 'en' && type.en
+    ? { ...type, typeLabel: type.en.label, description: type.en.description }
+    : type
+
+/** Plain display name of a shelf, e.g. "Hidrolatos 120ml" or "Hydrosols 120 ml". */
+export const shelfName = (type: ProductType, locale: string): string => {
+  const localized = localizeProductType(type, locale)
+  return plainLabel(localized.typeLabel ?? localized.type)
+}
+
+/**
+ * Cart lines, orders and Firestore products only hold the shelf's Portuguese
+ * `type`. This turns it back into the visitor's language, and echoes it as is
+ * when it names no current shelf (legacy values such as "Vales").
+ */
+export const typeDisplayName = (type: string, locale: string): string => {
+  const shelf = productTypes.find((candidate) => candidate.type === type)
+  return shelf ? shelfName(shelf, locale) : type
+}
 
 export const productTypeIds = () => productTypes.map((t) => ({ type: t.id }))
