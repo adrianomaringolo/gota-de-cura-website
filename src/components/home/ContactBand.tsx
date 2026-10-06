@@ -19,7 +19,7 @@ export function ContactBand() {
               <div>
                 <h3 className="text-sm font-semibold text-ink-muted">{t('store')}</h3>
                 <address className="mt-2 font-display text-xl text-ink not-italic">
-                  {SITE.store.address}
+                  {store('address')}
                 </address>
                 <dl className="mt-4 max-w-sm space-y-1.5 text-base">
                   {SITE.store.hours.map(([day, hours]) => (

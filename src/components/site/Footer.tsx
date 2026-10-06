@@ -71,7 +71,7 @@ export function Footer() {
               {t('store')}
             </h2>
             <address className="mt-4 text-sm leading-relaxed text-white/80 not-italic">
-              {SITE.store.address}
+              {store('address')}
             </address>
             <dl className="mt-4 space-y-1 text-sm text-white/70">
               {SITE.store.hours.map(([day, hours]) => (

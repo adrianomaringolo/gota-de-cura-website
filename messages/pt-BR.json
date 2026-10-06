@@ -56,7 +56,8 @@
     "saturday": "Sábado",
     "weekdayHours": "9h às 17h",
     "saturdayHours": "8h às 17h",
-    "hoursShort": "Seg a sex, 9h às 17h · Sáb, 8h às 17h"
+    "hoursShort": "Seg a sex, 9h às 17h · Sáb, 8h às 17h",
+    "address": "Rua José Paulino, 1916 — Campinas, SP"
   },
   "common": {
     "homeLink": "{name} — página inicial"

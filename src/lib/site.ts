@@ -14,6 +14,7 @@ export const SITE = {
     'https://docs.google.com/forms/d/e/1FAIpQLSetBUhLfPUyn-AAaeZFSluLuB3BEzrpEX0yirA2CPk6LklYWg/viewform',
   photoAlbum: 'https://photos.app.goo.gl/mUkLpDGD5DUaERqR9',
   store: {
+    /** The official address, as Maps and schema.org want it. Pages show the translated `store.address` message. */
     address: 'Rua José Paulino, 1916 — Campinas, SP',
     mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       'Rua José Paulino, 1916, Campinas - SP',

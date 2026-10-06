@@ -56,20 +56,21 @@
     "saturday": "Saturday",
     "weekdayHours": "9 am to 5 pm",
     "saturdayHours": "8 am to 5 pm",
-    "hoursShort": "Mon–Fri, 9 am–5 pm · Sat, 8 am–5 pm"
+    "hoursShort": "Mon–Fri, 9 am–5 pm · Sat, 8 am–5 pm",
+    "address": "1916 José Paulino Street — Campinas, SP"
   },
   "common": {
     "homeLink": "{name} — home page"
   },
   "hero": {
     "title": "Drop by the shop and take in the aroma.",
-    "lead": "Our shop is on Rua José Paulino in Campinas. Open the bottles, take your time with each aroma and talk to the people who distilled it — everything in the online catalog is on the shelves.",
+    "lead": "Our shop is on José Paulino Street in Campinas. Open the bottles, take your time with each aroma and talk to the people who distilled it — everything in the online catalog is on the shelves.",
     "address": "Address",
     "hours": "Hours",
     "seeCatalog": "See the catalog",
     "directions": "Get directions",
     "photoAlt": "Inside the Gota de Cura shop: wooden shelves with sprays, essential oils and soaps, the brand's sign on the wall and daylight coming through the window.",
-    "captionTitle": "Our shop on Rua José Paulino",
+    "captionTitle": "Our shop on José Paulino Street",
     "caption": "Everything that leaves the farm ends up here — and you can smell it before you take it home."
   },
   "catalog": {

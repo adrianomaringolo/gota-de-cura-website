@@ -30,7 +30,7 @@ export function Hero() {
           <dl className="animate-rise mt-9 space-y-3 border-y border-white/15 py-6 text-base [animation-delay:300ms]">
             <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
               <dt className="text-white/60">{t('address')}</dt>
-              <dd className="font-medium text-white">{SITE.store.address}</dd>
+              <dd className="font-medium text-white">{store('address')}</dd>
             </div>
             <div className="grid gap-x-3 sm:grid-cols-[5rem_minmax(0,1fr)]">
               <dt className="text-white/60">{t('hours')}</dt>
