@@ -10,13 +10,13 @@ Documento de trabalho. Reúne:
 
 | # | Título curto | Status |
 | --- | --- | --- |
-| 1 | Hidrolato para bebês, gestantes e idosos | ✍️ Escrito — rascunho na branch `claude/blog-hidrolato-publicos-sensiveis`, aguardando revisão/publicação |
-| 2 | Guia de usos do hidrolato no dia a dia | 💡 Ideia |
+| 1 | Hidrolato para bebês, gestantes e idosos | ✅ Publicado em 2026-09-06 |
+| 2 | Guia de usos do hidrolato no dia a dia | ✍️ Escrito em 2026-10-15 (`2026-10-15-guia-de-usos-do-hidrolato`), aguardando revisão visual |
 | 3 | Por que a planta oferece mais hidrolato que óleo essencial | 💡 Ideia |
 | 4 | Hidrolato e pele | 💡 Ideia |
 | 5 | Como guardar hidrolato em casa | 💡 Ideia |
 | 6 | A tradição sutil dos hidrolatos (aura, chacras) | ⏸️ Aguardando decisão de tom |
-| 7 | Hidrolato de melaleuca | 💡 Ideia |
+| 7 | Hidrolato de melaleuca | ✅ Publicado em 2026-10-04 (post de perfil completo da melaleuca) |
 | 8 | Quando quase não sai óleo essencial | 💡 Ideia |
 
 ---

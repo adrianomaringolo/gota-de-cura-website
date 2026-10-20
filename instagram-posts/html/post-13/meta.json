@@ -1,0 +1,30 @@
+{
+  "title": "Agora o site também fala inglês",
+  "date": "2026-10-06",
+  "plannedAt": "2026-10-08",
+  "postedAt": "2026-10-08",
+  "status": "postado",
+  "type": "single",
+  "template": "novidade-do-site",
+  "format": "1080x1350",
+  "slides": [
+    {
+      "file": "slide-01.html",
+      "title": "Novidade no site",
+      "description": "Fundo #503484. Logo e handle no topo; dois cartões brancos inclinados com as bandeiras simplificadas do Brasil (PT · Português) e dos EUA (EN · English); selo 'Novidade no site', título com 'inglês' sublinhado em terracota, apoio e CTA gotadecura.com.br/en"
+    }
+  ],
+  "caption": "🌎 Novidade no site: agora a Gota de Cura também fala inglês!\n\nO catálogo, os textos do blog, os laudos de cromatografia e a visita à chácara ganharam versão em inglês 💜\n\n🌿 Tem alguém de fora que você queria apresentar aos nossos óleos essenciais e hidrolatos? Agora dá para mandar o link e deixar que eles conheçam a chácara, a destilação e o cuidado por trás de cada frasco.\n\n👇 gotadecura.com.br/en (link na bio)\n\n💜 Toda a renda da Gota de Cura sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+  "hashtags": [
+    "gotadecura",
+    "oleosessenciais",
+    "hidrolatos",
+    "aromaterapia",
+    "essentialoils",
+    "hydrosols",
+    "aromatherapy",
+    "artesanal",
+    "campinas",
+    "novidade"
+  ]
+}

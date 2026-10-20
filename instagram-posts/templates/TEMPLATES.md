@@ -24,6 +24,7 @@ Cada template tem um `.md` nesta pasta e previews em `previews/<id>/`.
 | [`destaque-faixa`](destaque-faixa.md) | Destaque com faixa de foto | Único | Exige foto (faixa) | Uma afirmação de confiança que leva para uma página do site (laudos, sem agrotóxico, água de nascente). |
 | [`ficha-da-planta`](ficha-da-planta.md) | Ficha da planta | Carrossel 4–5 **ou** único | Exige foto da planta | Lançamento ou apresentação de uma planta do catálogo, com nome popular e científico em destaque. |
 | [`ficha-do-produto`](ficha-do-produto.md) | Ficha do produto | Carrossel 4–5 **ou** único | Exige foto do produto | Apresentar um produto pronto que não é uma planta só (sabonete, pomada, spray, Gotinha), com o que é e como usar. |
+| [`novidade-do-site`](novidade-do-site.md) | Novidade do site | Único | Não usa foto: cartões ilustrados | Anunciar uma mudança no próprio site (idioma novo, página ou função nova), mostrada com 1 a 3 cartões gráficos. |
 | [`bastidores`](bastidores.md) | Bastidores da chácara | Carrossel 4–7 | Exige 2+ fotos | Contar um dia ou um processo da chácara (destilação, colheita, visita), alternando cena e explicação. |
 
 ---
@@ -42,6 +43,10 @@ Cada template tem um `.md` nesta pasta e previews em `previews/<id>/`.
 |---|---|---|
 | ![](previews/ficha-do-produto/slide-01.png) | ![](previews/ficha-do-produto/unico.png) | ![](previews/lista-ilustrada/slide-02.png) |
 
+| `novidade-do-site` |
+|---|
+| ![](previews/novidade-do-site/slide-01.png) |
+
 ---
 
 ## Sugestão automática
@@ -56,6 +61,7 @@ Sinais no pedido que apontam para um template. É só **sugestão**: a skill sem
 | "cromatografia", "laudo", "sem agrotóxico", "água de nascente", "procedência", link para página do site que não é o blog | `destaque-faixa` |
 | nome de planta + "lançamento", "novo no catálogo", "lote", "apresentar o hidrolato de…" | `ficha-da-planta` |
 | nome de produto (sabonete, pomada, spray, sais, colônia, tintura, kit, Gotinha) + "lançamento", "conheça", "como usar", "presente" | `ficha-do-produto` |
+| "novidade no site", "agora o site tem…", "site em inglês", "página nova", "função nova", "lançamos no site" | `novidade-do-site` |
 | "bastidores", "dia de destilação", "colheita", "visita guiada", "como é feito", fotos da chácara | `bastidores` |
 
 Empate comum: **tema educativo sobre uma planta específica**. Se o foco é *o que é e como

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1080px; height: 1350px; overflow: hidden;
+    background: #503484;
+    font-family: 'Archivo', sans-serif;
+    color: #ffffff;
+  }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #503484; }
+  .blob { position: absolute; width: 900px; height: 900px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(218,203,249,0.16) 0%, transparent 68%);
+    top: 60px; left: 90px; pointer-events: none; }
+  .content { position: absolute; inset: 0; padding: 96px 88px; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .logo { width: 300px; height: auto; align-self: flex-start; filter: brightness(0) invert(1); }
+  .handle { font-size: 22px; color: rgba(255,255,255,0.86); }
+  .handle em { font-style: normal; color: #dacbf9; }
+
+  /* Ilustração: os dois idiomas como cartões, lado a lado, como no seletor do site. */
+  .cards { position: relative; height: 480px; margin-top: 40px; }
+  .card { position: absolute; top: 14px; width: 420px; padding: 22px 22px 24px;
+    background: #ffffff; border-radius: 30px;
+    box-shadow: 0 22px 54px rgba(25,14,44,0.45); }
+  .card.pt { left: 10px; transform: rotate(-6deg); }
+  .card.en { left: 450px; top: 34px; transform: rotate(5deg); }
+  .flag { display: block; width: 100%; border-radius: 16px; overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(33,28,43,0.08); }
+  .flag img { display: block; width: 100%; height: 262px; object-fit: cover; }
+  .hatch { height: 262px; border-radius: 16px; display: grid; place-items: center; text-align: center;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #5f5b68;
+    background: repeating-linear-gradient(45deg, #f1eef6 0 14px, #e4dfee 14px 28px); padding: 0 24px; }
+  .label { display: flex; align-items: baseline; gap: 16px; margin-top: 16px; padding: 0 6px; }
+  .code { font-family: 'Petrona', serif; font-weight: 600; font-size: 64px; line-height: 1;
+    letter-spacing: -0.02em; color: #503484; }
+  .name { font-size: 25px; font-weight: 500; color: #54505f; }
+
+  .foot { margin-top: auto; }
+  .tag { display: inline-block; font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #291945; background: #cd632d; padding: 11px 20px; border-radius: 999px; }
+  h1 { font-family: 'Petrona', serif; font-weight: 600; letter-spacing: -0.022em;
+    font-size: 92px; line-height: 1.02; margin-top: 26px; max-width: 16ch; }
+  h1 em { font-style: italic; font-weight: 500;
+    background: linear-gradient(#cd632d, #cd632d) left 92% / 100% 5px no-repeat; padding-bottom: 4px; }
+  .lead { font-size: 29px; line-height: 1.55; color: rgba(255,255,255,0.82); margin-top: 22px; max-width: 904px; }
+  .lead strong { color: #ffffff; font-weight: 600; }
+  .cta { display: flex; align-items: center; gap: 18px; margin-top: 44px;
+    background: #ffffff; color: #503484;
+    font-size: 36px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 30px 46px; border-radius: 999px; align-self: flex-start; width: fit-content;
+    box-shadow: 0 12px 38px rgba(41,25,69,0.48); }
+  .cta svg { width: 30px; height: 30px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+
+  <div class="content">
+    <div class="top">
+      <img class="logo" src="../../../assets/logos/logo.png" alt="Gota de Cura">
+      <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    </div>
+
+    <div class="cards" aria-hidden="true">
+      <div class="card pt">
+        <div class="hatch">Ilustração do cartão 1<br>asset de assets/images/</div>
+        <div class="label"><span class="code">AA</span><span class="name">Rótulo curto</span></div>
+      </div>
+      <div class="card en">
+        <div class="hatch">Ilustração do cartão 2<br>asset de assets/images/</div>
+        <div class="label"><span class="code">BB</span><span class="name">Rótulo curto</span></div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <span class="tag">Novidade no site</span>
+      <h1>Headline que anuncia a <em>novidade</em>.</h1>
+      <p class="lead">Frase de apoio que diz o que mudou e para quem, em até duas linhas.</p>
+      <div class="cta">
+        <span>gotadecura.com.br/pagina</span>
+        <!-- Lucide: arrow-right -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

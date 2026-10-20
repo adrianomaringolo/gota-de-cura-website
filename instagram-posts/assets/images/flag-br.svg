@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 14" role="img" aria-label="Bandeira do Brasil (simplificada)">
+  <!-- Proporções oficiais 20×14; sem a faixa e as estrelas, de propósito. -->
+  <rect width="20" height="14" fill="#009B3A"/>
+  <path d="M10 1.7 18.3 7 10 12.3 1.7 7Z" fill="#FEDF00"/>
+  <circle cx="10" cy="7" r="3.5" fill="#002776"/>
+</svg>

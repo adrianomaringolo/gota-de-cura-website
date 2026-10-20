@@ -33,6 +33,7 @@ previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
 | `destaque-faixa` | Slide único de confiança levando para uma página do site. |
 | `ficha-da-planta` | Planta do catálogo em destaque (carrossel ou único). |
 | `ficha-do-produto` | Produto pronto que não é uma planta só (sabonete, pomada, Gotinha). |
+| `novidade-do-site` | Slide único anunciando uma novidade do site, com ilustração em cartões. |
 | `bastidores` | Dia ou processo da chácara, alternando cena e explicação. |
 
 ---
@@ -144,8 +145,9 @@ Via Google Fonts:
 ## Elementos de marca
 
 - **Logo** (obrigatório na capa e no slide final, e só nesses dois): o lockup completo
-  `public/images/logos/logo.png` (gota + "gota de cura" + "Cuidando com amor", 1641×535). Copie
-  para a pasta do post como `logo.png` e referencie relativo, do mesmo jeito que a foto de capa.
+  `assets/logos/logo.png` (gota + "gota de cura" + "Cuidando com amor", 1641×535), na pasta de
+  assets compartilhados. Referencie por path relativo (`../../assets/logos/logo.png` a partir de
+  `html/post-NN/`), sem copiar para a pasta do post.
   - **Capa**: no topo, `width: 300px`, alinhado à esquerda. Substitui o eyebrow nesse slide.
   - **Slide final**: no topo ou acima do título, `width: 270px`. Substitui o eyebrow.
   - Sempre `height: auto`. Se o container for `display: flex`, ponha `align-self: flex-start`
@@ -153,8 +155,8 @@ Via Google Fonts:
   - Capa e fecho são slides escuros: aplique `filter: brightness(0) invert(1)` para deixar o
     logo branco sólido. Em slide claro, use o logo sem filtro.
   - Nos slides de conteúdo **não** vai logo: a assinatura ali é o rule-mark + a gota no canto.
-- **Gota** (assinatura dos slides de conteúdo do carrossel, no lugar do handle): o ícone
-  `public/images/logos/logo-icon.png`, copiado para a pasta do post como `mark.png`.
+- **Gota** (assinatura dos slides de conteúdo do carrossel, no lugar do handle):
+  `assets/logos/mark.png`, referenciado por path relativo.
   `position: absolute; right: 84px; bottom: 78px; width: 52px; opacity: 0.9`. Sobre foto
   escura, `filter: brightness(0) invert(1)`.
 - **Rule-mark** (assinatura dos slides de conteúdo, uma vez por slide, acima do título): barra
@@ -324,7 +326,8 @@ Emojis úteis por contexto:
 |---|---|
 | HTML dos slides | `instagram-posts/html/post-NN/` |
 | PNGs exportados + `caption.md` | `instagram-posts/output/post-NN/` |
-| Origem do logo | `public/images/logos/logo.png` (copiar para a pasta do post como `logo.png`) |
+| Assets compartilhados (logo, gota, bandeiras) + índice | `instagram-posts/assets/` · `ASSETS.md` |
+| Origem do logo (já copiado para `assets/logos/`) | `public/images/logos/logo.png` |
 | Script de export | `node instagram-posts/scripts/export.mjs post-NN` (`--slides 1,3` para alguns) |
 | Instalar deps (uma vez) | `cd instagram-posts && npm install` |
 | Índice de posts | `instagram-posts/POSTS.md` (tabela + "Detalhes por post" + "Última atualização") |

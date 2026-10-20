@@ -2,7 +2,7 @@
 
 > Índice de todos os posts criados. **Atualize este arquivo sempre que criar, publicar ou arquivar um post.**
 >
-> Última atualização: 2026-10-04
+> Última atualização: 2026-10-19
 
 Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produção / revisão · ⚪️ rascunho
 
@@ -17,10 +17,12 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 | post-06 | Nossos diferenciais: a causa é o motivo | 2026-09-17 | Carrossel | `carrossel-educativo` | 6 | 🔵 | Institucional — os quatro diferenciais da seção "Nossos diferenciais" do site: sem fins lucrativos, trabalho voluntário, cuidado em todas as etapas e atendimento humanizado |
 | post-07 | Nossos diferenciais: a causa é o motivo (slide único) | 2026-09-17 | Único | `destaque-faixa` | 1 | 🔵 | Institucional — versão em slide único do post-06: os quatro diferenciais em lista, com CTA em destaque para gotadecura.com.br/sobre |
 | post-08 | Chegou a Gotinha de Cura: nossa linha para bebês e crianças pequenas | 2026-09-30 | Único | `chamada-blog` | 1 | 🟢 | Lançamento — chamada para o post do blog sobre a linha infantil (Bom Soninho, Bem Me Quer, Sabonete Baby), com CTA em destaque para gotadecura.com.br/blog |
-| post-09 | Os valores da Gota de Cura | 2026-10-04 | Carrossel | `carrossel-educativo` | 7 | 🔵 | Institucional — os cinco valores da página `/sobre` (responsabilidade social, sustentabilidade, qualidade, transparência, inovação), um por slide |
+| post-09 | Os valores da Gota de Cura | 2026-10-04 | Carrossel | `carrossel-educativo` | 7 | 🟡 | Institucional — os cinco valores da página `/sobre` (responsabilidade social, sustentabilidade, qualidade, transparência, inovação), um por slide |
 | post-10 | Os valores da Gota de Cura (lista ilustrada) | 2026-10-04 | Carrossel | `lista-ilustrada` | 8 | 🟢 | Institucional — versão alternativa do post-09: abertura "tudo é feito por muitas mãos" e os cinco valores, um por slide, cada um com ilustração de mãos, título e descrição |
 | post-11 | Melaleuca (tea tree): ficha da planta | 2026-10-04 | Carrossel | `ficha-da-planta` | 5 | 🔵 | Produto — adaptação do post do blog da melaleuca: origem, os três compostos principais do laudo, como usar hidrolato e óleo essencial, fecho com CTA para gotadecura.com.br/blog |
 | post-12 | Melaleuca (tea tree): origem, propriedades e como usar o óleo essencial e o hidrolato | 2026-10-04 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog da melaleuca, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
+| post-13 | Agora o site também fala inglês | 2026-10-06 | Único | `novidade-do-site` | 1 | 🟢 | Novidade do site — versão em inglês em gotadecura.com.br/en, com as bandeiras do Brasil e dos EUA como cartões PT/EN |
+| post-14 | O que dá para fazer com um hidrolato: guia de usos | 2026-10-19 | Único | `chamada-blog` | 1 | 🔵 | Chamada para o post do blog de 15/10: guia de usos do hidrolato por situação (rosto, corpo, cabelo, casa) |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---
@@ -147,6 +149,25 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 - **Fonte:** post do blog `src/content/blog/2026-10-04-melaleuca-tea-tree/index.md`. Faz par com o post-11 (ficha da planta).
 - **Slide único** 1080×1350 (`chamada-blog`): foto de capa do post do blog (`cover.jpg`, a fileira de melaleucas contra o céu) na parte de cima, dissolvendo no fundo `#291945`. Logo e handle no topo, selo "Novo no blog", título do post com a segunda parte em itálico `#f0c8ae` e CTA para `gotadecura.com.br/blog`.
 - **Legenda e hashtags:** em `meta.json` e no `output/post-12/caption.md`.
+- **Status:** 🔵 aguardando revisão antes de publicar.
+
+---
+
+### post-13 — Agora o site também fala inglês
+
+- **Fonte:** lançamento da versão em inglês do site (`/en`), PR #16.
+- **Slide único** 1080×1350 (`novidade-do-site`, primeiro post do template): fundo `#503484`, logo e handle no topo, dois cartões brancos inclinados com as bandeiras simplificadas do Brasil (PT · Português) e dos EUA (EN · English), de `assets/images/`. Selo "Novidade no site", título com "inglês" sublinhado em terracota, apoio e CTA para `gotadecura.com.br/en`.
+- **Legenda e hashtags:** em `meta.json` e no `output/post-13/caption.md`.
+- **Status:** 🔵 aguardando revisão antes de publicar. O slide diz que o catálogo está em inglês: publicar depois de traduzir os produtos (`pnpm translate:produtos`).
+
+
+---
+
+### post-14 — Chamada para o post do blog (guia de usos do hidrolato)
+
+- **Fonte:** post do blog `src/content/blog/2026-10-15-guia-de-usos-do-hidrolato/index.md`.
+- **Slide único** 1080×1350 (`chamada-blog`): `hero.jpg` do post (frasco âmbar com spray sobre bandeja de madeira e capim seco) na parte de cima, dissolvendo no fundo `#291945`. Logo (de `assets/logos/`) e handle no topo, selo "Novo no blog", título do post com a segunda parte ("guia de usos no dia a dia") em itálico `#f0c8ae` e CTA para `gotadecura.com.br/blog`.
+- **Legenda e hashtags:** em `meta.json` e no `output/post-14/caption.md`. Enquadra óleo essencial e hidrolato como resultados da mesma destilação.
 - **Status:** 🔵 aguardando revisão antes de publicar.
 
 ---

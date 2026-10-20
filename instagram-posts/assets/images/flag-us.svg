@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 100" role="img" aria-label="Bandeira dos Estados Unidos (simplificada)">
+  <!-- Proporções oficiais 19×10: 13 listras, cantão de 7 listras com 2/5 da largura; sem as estrelas, de propósito. -->
+  <rect width="190" height="100" fill="#FFFFFF"/>
+  <rect y="0.000" width="190" height="7.692" fill="#B22234"/>
+  <rect y="15.385" width="190" height="7.692" fill="#B22234"/>
+  <rect y="30.769" width="190" height="7.692" fill="#B22234"/>
+  <rect y="46.154" width="190" height="7.692" fill="#B22234"/>
+  <rect y="61.538" width="190" height="7.692" fill="#B22234"/>
+  <rect y="76.923" width="190" height="7.692" fill="#B22234"/>
+  <rect y="92.308" width="190" height="7.692" fill="#B22234"/>
+  <rect width="76" height="53.846" fill="#3C3B6E"/>
+</svg>
