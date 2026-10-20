@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; font-family: 'Archivo', sans-serif; color: #211c2b; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; }
+  .top { position: absolute; inset: 0; background: #503484; clip-path: polygon(0 0, 100% 0, 100% 56%, 0 44%); }
+  .logo { position: absolute; left: 88px; top: 88px; width: 300px; height: auto; filter: brightness(0) invert(1); }
+  .blk { position: absolute; left: 88px; right: 88px; }
+  .tag { display: inline-block; font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 11px 22px; border-radius: 999px; transform: rotate(-3deg); }
+  .mito { top: 290px; } .mito .tag { background: #dacbf9; color: #291945; }
+  .mito p { font-family: 'Petrona', serif; font-weight: 600; font-size: 78px; line-height: 1.06; letter-spacing: -0.022em; color: #fff; margin-top: 28px; max-width: 15ch;
+    text-decoration: line-through; text-decoration-color: #cd632d; text-decoration-thickness: 6px; }
+  .verdade { top: 800px; } .verdade .tag { background: #a24112; color: #fff; transform: rotate(2deg); }
+  .verdade p { font-family: 'Petrona', serif; font-weight: 600; font-size: 82px; line-height: 1.06; letter-spacing: -0.022em; color: #503484; margin-top: 26px; max-width: 14ch; }
+  .verdade .sub { font-family: 'Archivo', sans-serif; font-weight: 400; font-size: 30px; line-height: 1.5; color: #54505f; margin-top: 26px; max-width: 34ch; letter-spacing: 0; }
+  .handle { position: absolute; right: 88px; bottom: 88px; font-size: 20px; color: #5f5b68; } .handle em { font-style: normal; color: #5d3b97; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="top"></div>
+  <img class="logo" src="../../../assets/logos/logo.png" alt="Gota de Cura">
+  <div class="blk mito"><span class="tag">Mito</span><p>A crença comum que vamos desmentir.</p></div>
+  <div class="blk verdade"><span class="tag">Verdade</span><p>A resposta curta e correta.</p><div class="sub">Uma frase de apoio explica o porquê em linguagem de leigo.</div></div>
+  <div class="handle"><em>@</em>gotadecura_artesanais</div>
+</div>
+</body>
+</html>

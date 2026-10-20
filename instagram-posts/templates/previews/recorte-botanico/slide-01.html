@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&amp;family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #dacbf9; font-family: 'Archivo', sans-serif; color: #211c2b; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #dacbf9; }
+  .sun { position: absolute; width: 860px; height: 860px; border-radius: 50%; background: #f3ecff; top: 250px; left: 110px; }
+  /* Título atrás do recorte (z-index 1), planta na frente (z-index 2), nome científico na frente de tudo. */
+  .title { position: absolute; z-index: 1; top: 215px; left: 0; width: 100%; text-align: center; font-family: 'Fraunces', serif;
+    font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 330px; line-height: 0.9; letter-spacing: -0.05em; color: #503484; }
+  .cut { position: absolute; z-index: 2; left: 190px; top: 330px; width: 700px; height: 800px;
+    background: repeating-linear-gradient(135deg, rgba(41,25,69,0.16) 0 4px, rgba(41,25,69,0.06) 4px 30px); border: 3px dashed #503484;
+    clip-path: polygon(50% 0, 74% 26%, 98% 40%, 70% 62%, 78% 100%, 22% 100%, 30% 62%, 2% 40%, 26% 26%);
+    display: flex; align-items: center; justify-content: center; }
+  .cut span { font-size: 18px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #503484; text-align: center; line-height: 1.6; }
+  .top { position: absolute; z-index: 3; top: 80px; left: 88px; right: 88px; display: flex; justify-content: space-between; align-items: center; }
+  .logo { width: 280px; height: auto; }
+  .handle { font-size: 22px; color: #54505f; } .handle em { font-style: normal; color: #5d3b97; }
+  .seal { position: absolute; z-index: 3; right: 70px; top: 520px; width: 230px; height: 230px; transform: rotate(14deg); }
+  .seal text { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: 0.1em; fill: #fff; text-transform: uppercase; }
+  .seal .disc { fill: #a24112; }
+  .seal .mid { font-family: 'Fraunces', serif; font-size: 44px; font-style: italic; letter-spacing: 0; text-transform: none; fill: #fff; }
+  .foot { position: absolute; z-index: 3; left: 88px; right: 88px; bottom: 84px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .latin { font-family: 'Petrona', serif; font-style: italic; font-size: 40px; color: #503484; }
+  .sub { font-size: 24px; color: #54505f; margin-top: 8px; }
+  .cta { display: flex; align-items: center; gap: 14px; background: #503484; color: #fff; font-size: 28px; font-weight: 700; padding: 22px 36px; border-radius: 999px; box-shadow: 0 10px 30px rgba(41,25,69,0.35); }
+  .cta svg { width: 26px; height: 26px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="sun"></div>
+  <div class="top"><img class="logo" src="../../../assets/logos/logo.png" alt="Gota de Cura"><div class="handle"><em>@</em>gotadecura_artesanais</div></div>
+  <div class="title">Planta</div>
+  <div class="cut"><span>RECORTE DA PLANTA<br>planta.png · fundo transparente<br>700×800</span></div>
+  <svg class="seal" viewBox="0 0 230 230" aria-hidden="true">
+    <circle class="disc" cx="115" cy="115" r="113"/>
+    <defs><path id="ring" d="M115,115 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/></defs>
+    <text><textPath href="#ring" textLength="530" lengthAdjust="spacing">Óleo essencial · Hidrolato · Na prateleira · </textPath></text>
+    <text class="mid" x="115" y="130" text-anchor="middle">novo</text>
+  </svg>
+  <div class="foot">
+    <div><div class="latin">Nome científico</div><div class="sub">Nome popular · uma linha de apoio</div></div>
+    <div class="cta"><span>gotadecura.com.br</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></div>
+  </div>
+</div>
+</body>
+</html>

@@ -35,6 +35,13 @@ previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
 | `ficha-do-produto` | Produto pronto que não é uma planta só (sabonete, pomada, Gotinha). |
 | `novidade-do-site` | Slide único anunciando uma novidade do site, com ilustração em cartões. |
 | `bastidores` | Dia ou processo da chácara, alternando cena e explicação. |
+| `mito-ou-verdade` | Nível 2. Slide diagonal: mito riscado em cima, verdade embaixo. |
+| `receita-rapida` | Nível 2. Cartão de papel inclinado com ingredientes e até 3 passos. |
+| `janela-em-arco` | Nível 2. Foto vertical em arco ao lado do título, com círculo terracota. |
+| `frase-gigante` | Nível 3. Frase curta enorme, uma linha em contorno e uma palavra com foto. |
+| `recorte-botanico` | Nível 3. Planta recortada na frente do nome gigante, com selo circular. |
+| `colagem-de-gotas` | Nível 3. Carrossel numerado com fotos em forma de gota. |
+| `rotulo-laudo` | Nível 3. Dado do laudo em número gigante, com moldura de etiqueta e régua. |
 
 ---
 
@@ -138,6 +145,7 @@ Via Google Fonts:
 - **Eyebrow / label**: `Archivo`, 15–17px, weight 700, `letter-spacing: 0.14em`,
   `text-transform: uppercase`, cor `#5f5b68`.
 - **Nome científico**: `Petrona` itálico, cor `#54505f`.
+- **Exceção (templates de nível 3)**: `frase-gigante`, `recorte-botanico`, `colagem-de-gotas` e `rotulo-laudo` usam **Fraunces** (800, `SOFT` 100, `WONK` 1) só em títulos de destaque, números e percentuais. Nunca em corpo, apoio, rótulos ou nos demais templates.
 - **Cards**: título 24–28px Petrona weight 600, corpo 19–22px Archivo weight 400.
 
 ---
@@ -349,3 +357,69 @@ O próximo ID (`post-NN`) sai de olhar `instagram-posts/html/`.
 - Posts anteriores em `instagram-posts/html/` — referência de layout, tom e conteúdo.
 - `PRODUCT.md` — marca, público, anti-referências, princípios de design.
 - `src/app/globals.css` — tokens de cor e tipografia canônicos.
+
+---
+
+## Definições do cliente
+
+Editáveis pelo cliente na aba Configurações da galeria; o `sincronizar` traz as mudanças para cá.
+
+### Sobre o negócio
+
+<!-- definicao:negocio -->
+Óleos essenciais e hidrolatos artesanais, destilados na Chácara da Mãe Luzia com plantas cultivadas sem agrotóxico e água de nascente. Também sabonetes, pomadas, sprays, tinturas e a linha infantil Gotinha de Cura. Diferencial: laudos e cromatografias publicados, para o cliente conferir que o que está no rótulo é o que tem no frasco. Visitas guiadas à chácara. Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.
+<!-- /definicao:negocio -->
+
+### Público-alvo
+
+<!-- definicao:publico -->
+Clientes e curiosos que valorizam origem, transparência de processo e conexão com a natureza: quem usa ou quer começar a usar óleos essenciais e hidrolatos, aromaterapeutas, e quem procura produtos artesanais de confiança. Querem entender o produto, conferir a procedência e comprar com segurança.
+<!-- /definicao:publico -->
+
+### Voz da marca
+
+<!-- definicao:voz -->
+Natural, artesanal, acolhedora. Voz calorosa e próxima, de quem conhece cada planta pelo nome e tem orgulho do que cultiva.
+
+- A planta é a protagonista: nome popular e origem em destaque, nome científico como apoio.
+- Ciência sem intimidar: laudos e cromatografias em linguagem de leigo.
+- Frases curtas e concretas. Começar pela planta, pelo processo ou por uma cena da chácara.
+- Nunca: tom de farmácia industrial, e-commerce genérico, MLM de óleos ou "bem-estar performático".
+<!-- /definicao:voz -->
+
+### Temas e restrições
+
+<!-- definicao:temas -->
+Temas: educativo (o que é, como usar, como ler um laudo), plantas e produtos do catálogo, bastidores da chácara, confiança (laudos, sem agrotóxico, água de nascente) e a Morada.
+
+Restrições:
+- Nunca prometer efeito terapêutico ou cura que não possa ser comprovado.
+- Nunca chamar o hidrolato de "o que sobra", "a água que resta" ou "subproduto": óleo essencial e hidrolato são resultados da mesma destilação (o óleo leva o que é lipossolúvel, o hidrolato o que é hidrossolúvel) e têm o mesmo peso.
+- Incluir cuidados de segurança quando o assunto pedir (gestantes, crianças, gatos e cães, não ingerir).
+- Sem emojis nos slides (só na legenda). No máximo 1 travessão por slide.
+<!-- /definicao:temas -->
+
+### Nível de criatividade
+
+<!-- definicao:criatividade -->
+Ousado
+
+Visual limpo e reconhecível, com algumas composições diferentes (cartões ilustrados, faixa de foto). Ajustar se preferirem mais ou menos ousadia.
+<!-- /definicao:criatividade -->
+
+### Contato e CTA
+
+<!-- definicao:contato -->
+Site: gotadecura.com.br (blog em gotadecura.com.br/blog, versão em inglês em gotadecura.com.br/en). Link na bio. Perfil: @gotadecura_artesanais.
+
+Visitas à chácara pela página /visitas do site.
+
+Hashtags fixas: #gotadecura #oleosessenciais #hidrolatos #aromaterapia
+<!-- /definicao:contato -->
+
+### Datas e frequência
+
+<!-- definicao:datas -->
+- 12/10 — Dia das Crianças (linha Gotinha de Cura)
+- Novembro e dezembro — Vale-presente de fim de ano
+<!-- /definicao:datas -->

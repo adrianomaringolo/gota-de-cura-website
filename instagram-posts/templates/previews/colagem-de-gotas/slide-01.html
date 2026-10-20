@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&amp;family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .fr { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; z-index: 5; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; z-index: 5; }
+  .hatch { background: repeating-linear-gradient(135deg, #8a77ad 0 3px, #6b5a8f 3px 26px); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.6; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #503484; font-family: 'Archivo', sans-serif; color: #fff; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #503484; padding: 96px 88px; }
+  .drop { position: absolute; border-radius: 0 50% 50% 50%; overflow: hidden; transform: rotate(-45deg); }
+  .drop > div { position: absolute; inset: -30%; transform: rotate(45deg); }
+  .d1 { width: 620px; height: 620px; right: -40px; top: 190px; }
+  .d2 { width: 330px; height: 330px; left: 60px; top: 640px; border: 8px solid #cd632d; }
+  .d3 { width: 200px; height: 200px; right: 220px; top: 880px; background: #dacbf9; }
+  .logo { position: relative; width: 300px; height: auto; filter: brightness(0) invert(1); }
+  .num { position: absolute; left: 60px; top: 380px; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 520px; line-height: 0.8; letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 3px #dacbf9; }
+  h1 { position: absolute; left: 88px; right: 88px; bottom: 235px; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 118px; line-height: 0.94; letter-spacing: -0.04em; max-width: 9ch; }
+  h1 em { font-weight: 600; color: #f0c8ae; }
+  .tag { position: absolute; left: 88px; bottom: 150px; font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #291945; background: #cd632d; padding: 11px 20px; border-radius: 999px; }
+  .progress span { background: rgba(255,255,255,0.3); } .progress span.active { background: #dacbf9; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="logo" src="../../../assets/logos/logo.png" alt="Gota de Cura">
+  <div class="drop d1"><div class="hatch">FOTO EM GOTA<br>foto-1.jpg · 900×900</div></div>
+  <div class="drop d2"><div class="hatch">FOTO 2</div></div>
+  <div class="drop d3"></div>
+  <div class="num">5</div>
+  <h1>Título da <em>capa</em></h1>
+  <span class="tag">Série · passo a passo</span>
+  <div class="progress"><span class="active"></span><span></span><span></span></div>
+</div>
+</body>
+</html>

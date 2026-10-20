@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&amp;family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .fr { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; z-index: 5; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; z-index: 5; }
+  .hatch { background: repeating-linear-gradient(135deg, #8a77ad 0 3px, #6b5a8f 3px 26px); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.6; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; font-family: 'Archivo', sans-serif; color: #211c2b; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; }
+  .drop { position: absolute; border-radius: 0 50% 50% 50%; overflow: hidden; transform: rotate(-45deg); width: 700px; height: 700px; left: 330px; top: 70px; }
+  .drop > div { position: absolute; inset: -30%; transform: rotate(45deg); }
+  .num { position: absolute; left: 56px; top: 520px; z-index: 2; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 560px; line-height: 0.8; letter-spacing: -0.06em; color: #5d3b97; mix-blend-mode: multiply; }
+  .text { position: absolute; left: 88px; right: 88px; bottom: 190px; z-index: 3; }
+  .rule-mark { color: #5d3b97; } .rule-mark::before { content: ''; display: block; width: 44px; height: 2px; background: currentColor; opacity: 0.45; margin-bottom: 20px; }
+  h2 { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 84px; line-height: 0.98; letter-spacing: -0.035em; color: #503484; max-width: 12ch; }
+  h2 em { font-weight: 600; color: #a24112; }
+  p { font-size: 30px; line-height: 1.5; color: #54505f; margin-top: 22px; max-width: 28ch; }
+  .dot { position: absolute; border-radius: 50%; background: #cd632d; width: 120px; height: 120px; left: 90px; top: 340px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="dot"></div>
+  <div class="drop"><div class="hatch">FOTO EM GOTA<br>foto-2.jpg · 900×900</div></div>
+  <div class="num">1</div>
+  <div class="text rule-mark"><h2>Título do <em>passo</em></h2><p>Frase de apoio curta que explica o passo.</p></div>
+  <img class="mark" src="../../../assets/logos/mark.png" alt="">
+  <div class="progress"><span></span><span class="active"></span><span></span></div>
+</div>
+</body>
+</html>
