@@ -185,6 +185,12 @@
     "next": "Próximos depoimentos",
     "stripLabel": "Depoimentos de quem já esteve na chácara"
   },
+  "institutionalBand": {
+    "title": "Conheça a Gota de Cura",
+    "lead": "Em poucos minutos, a história da chácara, das plantas e das pessoas por trás de cada frasco.",
+    "watch": "Assistir ao vídeo institucional",
+    "videoTitle": "Vídeo institucional da Gota de Cura"
+  },
   "videosBand": {
     "title": "A chácara em vídeo",
     "lead": "Do canteiro à destilaria, e as plantas do catálogo apresentadas uma a uma pelo nosso aromaterapeuta.",

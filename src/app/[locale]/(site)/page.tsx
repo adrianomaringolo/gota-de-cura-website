@@ -6,6 +6,7 @@ import { ContactBand } from '@/components/home/ContactBand'
 import { DifferentialsBand } from '@/components/home/DifferentialsBand'
 import { Hero } from '@/components/home/Hero'
 import { ImpactBand } from '@/components/home/ImpactBand'
+import { InstitutionalBand } from '@/components/home/InstitutionalBand'
 import { LaudosBand } from '@/components/home/LaudosBand'
 import { LaunchesBand } from '@/components/home/LaunchesBand'
 import { Testimonies } from '@/components/home/Testimonies'
@@ -31,6 +32,7 @@ export default async function HomePage({ params }: Props) {
       {/* The shop's address and opening hours belong to the homepage only. */}
       <JsonLd schema={graph(storeSchema())} />
       <Hero />
+      <InstitutionalBand />
       <LaunchesBand />
       <Catalog />
       <DifferentialsBand />

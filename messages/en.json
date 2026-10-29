@@ -185,6 +185,12 @@
     "next": "Next testimonials",
     "stripLabel": "Testimonials from people who have visited the farm"
   },
+  "institutionalBand": {
+    "title": "Meet Gota de Cura",
+    "lead": "In a few minutes, the story of the farm, the plants and the people behind every bottle. The video is in Portuguese.",
+    "watch": "Watch the institutional video",
+    "videoTitle": "Gota de Cura institutional video"
+  },
   "videosBand": {
     "title": "The farm on video",
     "lead": "From the garden bed to the distillery, and the plants in our catalog introduced one by one by our aromatherapist. Videos are in Portuguese.",
