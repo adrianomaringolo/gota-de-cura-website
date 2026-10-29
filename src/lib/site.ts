@@ -32,7 +32,7 @@ export const SITE = {
     name: 'Marcelo Soares Mattar',
     credential: 'Profissional CertAroma — Abraroma',
     link: 'https://www.instagram.com/p/CbaM_GvAs4U/',
-    seal: 'https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/assets%2Fabraroma-certificacao.jpg?alt=media&token=596598f6-d74a-42af-a049-8ea82fae4399',
+    photo: '/images/aromaterapeuta.jpg',
   },
   morada: {
     name: 'Morada Espírita Prof. Lairi Hans',

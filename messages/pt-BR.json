@@ -201,7 +201,7 @@
     "store": "Loja física",
     "talk": "Fale com a gente",
     "follow": "Acompanhe o dia a dia",
-    "sealAlt": "Certificação CertAroma de {name}",
+    "photoAlt": "Retrato de {name}",
     "aromatherapist": "Aromaterapeuta responsável",
     "aromatherapistBio": "{credential}. Responsável técnico pelas fórmulas e pela destilação de tudo o que sai da chácara.",
     "seeCertification": "Ver a certificação"

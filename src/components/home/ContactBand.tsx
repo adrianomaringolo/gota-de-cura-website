@@ -61,8 +61,8 @@ export function ContactBand() {
               className="relative block aspect-square w-32 shrink-0 overflow-hidden rounded-xl sm:w-40"
             >
               <Image
-                src={SITE.aromatherapist.seal}
-                alt={t('sealAlt', { name: SITE.aromatherapist.name })}
+                src={SITE.aromatherapist.photo}
+                alt={t('photoAlt', { name: SITE.aromatherapist.name })}
                 fill
                 sizes="160px"
                 className="object-cover"
