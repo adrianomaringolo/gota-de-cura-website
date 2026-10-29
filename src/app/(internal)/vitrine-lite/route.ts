@@ -19,6 +19,13 @@ import type { ProductItem, ProductType } from '@/lib/types'
  * with search) and the same 60s idle reset. Keep the two in step by hand when
  * the kiosk changes: there is no shared code on purpose, since sharing it
  * would pull the modern toolchain back in.
+ *
+ * After 5 minutes with no touch the page goes back to the start and plays the
+ * institutional video (16:9, public/videos) full screen, muted and looping,
+ * until the next touch. It is muted because iOS 12 only autoplays muted video;
+ * the captions are burned into the picture for that reason. H.264 8-bit
+ * yuv420p/tv range and a JPEG poster, since old Safari reads neither WebP nor
+ * full-range yuvj420p reliably.
  */
 
 export const dynamic = 'force-dynamic'
@@ -210,12 +217,22 @@ h1.title{font-size:36px;line-height:1.12;font-weight:600}
 .state p+p{margin-top:12px;color:#54505f}
 .state button{margin-top:28px;display:inline-block;background:#5d3b97;color:#fff;border-radius:28px;padding:16px 32px;font-weight:600}
 @media (max-width:640px){.wrap{padding:24px 20px 28px}.grid{grid-template-columns:repeat(2,1fr)}.tile.featured{grid-column:span 2}h1.title,.planta h1{font-size:30px}}
+#attract{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:100;background:#000;-webkit-user-select:none;user-select:none}
+#attract.on{display:block;opacity:1}
+#attract.off{display:block;opacity:0;-webkit-transition:opacity .3s;transition:opacity .3s}
+#attract video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;background:#000}
+#attractHint{position:absolute;left:0;right:0;bottom:28px;text-align:center;pointer-events:none}
+#attractHint span{display:inline-block;background:rgba(255,255,255,.92);color:#503484;font-weight:600;font-size:20px;line-height:1;padding:16px 30px;border-radius:32px;box-shadow:0 8px 30px rgba(0,0,0,.35);-webkit-animation:breathe 2.4s ease-in-out infinite;animation:breathe 2.4s ease-in-out infinite}
+@-webkit-keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes breathe{0%,100%{opacity:.55}50%{opacity:1}}
 `
 
 const SCRIPT = `
 (function () {
   var DATA = window.__VITRINE__;
   var IDLE_MS = 60000;
+  var ATTRACT_MS = 300000;
+  var ATTRACT_PRELOAD_MS = 240000;
   var view = { name: 'home' };
   var query = '';
   var app = document.getElementById('app');
@@ -225,6 +242,11 @@ const SCRIPT = `
   var scrollEl = document.getElementById('scroll');
   var content = document.getElementById('content');
   var idleTimer = null;
+  var attractEl = document.getElementById('attract');
+  var attractVideo = document.getElementById('attractVideo');
+  var attractOn = false;
+  var attractTimer = null;
+  var attractPreloadTimer = null;
 
   var ICONS = {
     right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -404,6 +426,59 @@ const SCRIPT = `
     idleTimer = view.name === 'home' ? null : setTimeout(goHome, IDLE_MS);
   }
 
+  // Attract loop: only a real touch, click or key (see onActivity) pushes the
+  // video back by another ATTRACT_MS. The 60s reset above must not count, or
+  // render() would restart this clock and the video would show up a minute
+  // late. The file is only fetched one minute before it is needed, so a tablet
+  // that is being used never downloads it.
+  function armAttract() {
+    if (attractTimer) clearTimeout(attractTimer);
+    if (attractPreloadTimer) clearTimeout(attractPreloadTimer);
+    attractTimer = attractPreloadTimer = null;
+    if (!attractVideo || attractOn) return;
+    attractPreloadTimer = setTimeout(preloadAttract, ATTRACT_PRELOAD_MS);
+    attractTimer = setTimeout(showAttract, ATTRACT_MS);
+  }
+
+  function preloadAttract() {
+    attractVideo.preload = 'auto';
+    try { attractVideo.load(); } catch (err) {}
+  }
+
+  function showAttract() {
+    if (attractOn) return;
+    goHome();
+    if (attractTimer) clearTimeout(attractTimer);
+    if (attractPreloadTimer) clearTimeout(attractPreloadTimer);
+    attractTimer = attractPreloadTimer = null;
+    attractOn = true;
+    attractEl.className = 'on';
+    attractVideo.muted = true;
+    try { attractVideo.currentTime = 0; } catch (err) {}
+    var started = attractVideo.play();
+    // Autoplay refused or the file is missing: drop the black screen and try
+    // again in another ATTRACT_MS instead of leaving the kiosk blank.
+    if (started && started.then) started.then(null, function () { hideAttract(false); });
+  }
+
+  function hideAttract(reset) {
+    if (!attractOn) return;
+    attractOn = false;
+    try { attractVideo.pause(); } catch (err) {}
+    // Stays in the DOM for a moment, transparent: it swallows the click that
+    // iOS fires after the touch, so waking the kiosk never opens a product.
+    attractEl.className = 'off';
+    setTimeout(function () { if (!attractOn) attractEl.className = ''; }, 450);
+    if (reset) goHome();
+    armAttract();
+  }
+
+  function wakeFromAttract(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (attractOn) hideAttract(true);
+  }
+
   function refreshList() {
     var body = listBody();
     document.getElementById('info').textContent = body.info;
@@ -426,14 +501,27 @@ const SCRIPT = `
   document.addEventListener('input', function (e) {
     if (e.target && e.target.id === 'q') { query = e.target.value; refreshList(); }
   });
-  ['touchstart', 'click', 'keydown'].forEach(function (name) { document.addEventListener(name, armIdle, true); });
+  function onActivity() { armIdle(); armAttract(); }
+  ['touchstart', 'click', 'keydown'].forEach(function (name) { document.addEventListener(name, onActivity, true); });
   scrollEl.addEventListener('scroll', armIdle);
+  if (attractEl && attractVideo) {
+    attractEl.addEventListener('touchstart', wakeFromAttract, false);
+    attractEl.addEventListener('mousedown', wakeFromAttract, false);
+    attractEl.addEventListener('click', wakeFromAttract, false);
+    document.addEventListener('keydown', function () { if (attractOn) hideAttract(true); }, true);
+    attractVideo.addEventListener('error', function () { if (attractOn) hideAttract(false); }, false);
+    attractVideo.addEventListener('ended', function () {
+      if (!attractOn) return;
+      try { attractVideo.currentTime = 0; attractVideo.play(); } catch (err) {}
+    }, false);
+  }
 
   if (!DATA.shelves.length) {
     content.innerHTML = '<div class="state"><p class="display">Catálogo vazio no momento</p><p>Chame a equipe no balcão.</p></div>';
   } else {
     render();
   }
+  armAttract();
 })();
 `
 
@@ -461,6 +549,10 @@ const page = (shelves: ReturnType<typeof buildShelves>) => `<!DOCTYPE html>
     <button type="button" id="home" class="pill home" data-act="home" aria-label="Voltar ao início" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/></svg>Início</button>
   </header>
   <div id="scroll"><div id="content"></div></div>
+</div>
+<div id="attract" aria-hidden="true">
+  <video id="attractVideo" src="/videos/gotadecura-institucional-vitrine.mp4" poster="/videos/gotadecura-institucional-vitrine-poster.jpg" muted loop playsinline webkit-playsinline preload="none"></video>
+  <div id="attractHint"><span>Toque na tela para ver o catálogo</span></div>
 </div>
 <script>window.__VITRINE__ = ${inlineJson({ shelves })};</script>
 <script>${SCRIPT}</script>
