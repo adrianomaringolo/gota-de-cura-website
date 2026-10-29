@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR" class="vertical">
+<head>
+<meta charset="utf-8" />
+<title>Gota de Cura — 9 anos, depoimento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=block" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!--
+  Reel dos 9 anos com a voz gravada (9:16). A timeline GSAP segue as palavras da
+  transcrição (build/timeline.js). O render.mjs posiciona quadro a quadro.
+
+  ?t=12.5        abre parado nesse instante
+  ?play          toca em tempo real, com o áudio (revisão)
+  ?captions=0    sem a legenda queimada
+-->
+<div id="stage">
+
+  <!-- abertura: o cartão dos 9 anos -->
+  <section class="sc s-card">
+    <img class="card-bg" src="build/fotos/9anos.png" alt="" />
+    <div class="card-veil"></div>
+    <div class="card"><img src="build/fotos/9anos.png" alt="" /></div>
+  </section>
+
+  <!-- fotos em tela cheia; cada uma entra na palavra que fala dela (main.js) -->
+  <section class="sc s-slides"></section>
+
+  <!-- chips que acendem nas palavras ditas -->
+  <div class="pills p-valores"></div>
+  <div class="pills p-todos"></div>
+
+  <!-- fecho: a marca -->
+  <section class="sc s-logo">
+    <div class="glow"></div>
+    <div class="rg rg1"></div><div class="rg rg2"></div>
+    <div class="lockup">
+      <div class="lp lp-drop"><img src="build/fotos/logo.png" alt="" /></div>
+      <div class="lp lp-w1"><img src="build/fotos/logo.png" alt="" /></div>
+      <div class="lp lp-w2"><img src="build/fotos/logo.png" alt="" /></div>
+      <div class="lp lp-w3"><img src="build/fotos/logo.png" alt="" /></div>
+      <div class="lp lp-tag"><img src="build/fotos/logo.png" alt="" /></div>
+    </div>
+    <p class="nove">9 anos</p>
+    <p class="url">gotadecura.com.br</p>
+  </section>
+
+  <!-- assinatura: quem criou -->
+  <section class="sc s-autor">
+    <div class="glow"></div>
+    <div class="foto"><img src="build/fotos/marcelo.jpg" alt="" /></div>
+    <p class="nome">Marcelo Mattar</p>
+    <p class="papel">aromaterapeuta responsável<br />e idealizador</p>
+  </section>
+
+  <div class="captions"><p class="cap"></p></div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="lib/cena.js"></script>
+<script src="build/timeline.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

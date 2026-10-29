@@ -1,0 +1,6 @@
+{
+  "nome": "gotadecura-9anos-depoimento",
+  "formato": "9:16",
+  "nota": "A voz é a gravação original (voz/original.m4a), limpa em build.mjs (filtro de ruído, compressão, loudnorm). A legenda sai da transcrição local (build/transcricao.json); texto corrigido em build.mjs.",
+  "music": { "file": "musica/mixkit-classical-vibes-4-684.mp3", "volume": 0.3, "start": 0 }
+}
