@@ -1,0 +1,67 @@
+{
+  "nome": "gotadecura-9anos",
+  "formato": "9:16",
+  "model": "eleven_v3",
+  "voice_id": "vibfi5nlk3hs8Mtvf9Oy",
+  "voice_name": "Ana (biblioteca ElevenLabs, brasileira nativa)",
+  "voice_settings": {
+    "stability": 0.4,
+    "similarity_boost": 0.8,
+    "style": 0.3,
+    "use_speaker_boost": true
+  },
+  "sotaque": "",
+  "nota": "eleven_v3 ignora voice_settings.speed: o ritmo vem das tags ([warmly], [calmly]), das reticências e do respiro entre as cenas (gap + hold). Tags e reticências não vão para a legenda; o campo legenda tem a pontuação de leitura (mesmas palavras, na mesma ordem). Toda fala termina com [pause] ou [long pause] para a última palavra não sair cortada. Depois do voice.mjs, rode falas.mjs --auto. A Adeline sai com sotaque de Portugal sem a tag de sotaque.",
+  "gap": 0.9,
+  "lead": 1.0,
+  "tail": 3.6,
+  "music": {
+    "file": "musica/chopin-noturno-op9-n2.mp3",
+    "volume": 0.5,
+    "start": 0
+  },
+  "icones": [],
+  "cenas": [
+    {
+      "id": "abertura",
+      "text": "[softly] Nove anos... [pause] de Gota de Cura. [pause]",
+      "legenda": "Nove anos, de Gota de Cura.",
+      "hold": 0.6
+    },
+    {
+      "id": "sabonete",
+      "text": "[softly] Tudo começou em dois mil e dezessete... com um sabonete artesanal, feito com paciência. [pause] No lugar da água, hidrolato de melaleuca. [pause]",
+      "legenda": "Tudo começou em dois mil e dezessete, com um sabonete artesanal, feito com paciência. No lugar da água, hidrolato de melaleuca.",
+      "hold": 0.6
+    },
+    {
+      "id": "chacara",
+      "text": "[softly] Depois, a terra chamou... e veio a chácara. [pause] A gente aprendeu a plantar, a colher e a destilar, aqui mesmo, na Mãe Luzia. [pause]",
+      "legenda": "Depois, a terra chamou, e veio a chácara. A gente aprendeu a plantar, a colher e a destilar, aqui mesmo, na Mãe Luzia.",
+      "hold": 0.8
+    },
+    {
+      "id": "voluntarios",
+      "text": "[softly] E cada etapa ganhou... muitas mãos voluntárias. [pause] Mãos que plantam... mãos que colhem... mãos que cuidam. [pause]",
+      "legenda": "E cada etapa ganhou muitas mãos voluntárias. Mãos que plantam, mãos que colhem, mãos que cuidam.",
+      "hold": 0.8
+    },
+    {
+      "id": "produtos",
+      "text": "[softly] O catálogo foi crescendo, como crescem as plantas... sprays, hidrolatos, óleos essenciais, tinturas, pomadas, a linha Gotinha de Cura. [pause]",
+      "legenda": "O catálogo foi crescendo, como crescem as plantas: sprays, hidrolatos, óleos essenciais, tinturas, pomadas, a linha Gotinha de Cura.",
+      "hold": 0.6
+    },
+    {
+      "id": "fecho",
+      "text": "[softly] Nove anos depois, toda a renda continua sendo transformada na fatia de pão e no agasalho... aos que tanto necessitam. [long pause]",
+      "legenda": "Nove anos depois, toda a renda continua sendo transformada na fatia de pão e no agasalho aos que tanto necessitam.",
+      "hold": 0.8
+    },
+    {
+      "id": "logo",
+      "text": "[softly] Gota de Cura... cuidando com amor. [pause]",
+      "legenda": "Gota de Cura, cuidando com amor."
+    }
+  ]
+}

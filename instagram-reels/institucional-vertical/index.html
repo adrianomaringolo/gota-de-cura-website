@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR" class="vertical">
+<head>
+<meta charset="utf-8" />
+<title>Gota de Cura — vídeo institucional (9:16)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=block" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!--
+  Vídeo institucional da Gota de Cura em 9:16 (Reel). Mesma narração e mesma trilha da versão 16:9;
+  aqui só a composição muda. Uma timeline GSAP pausada move tudo no ritmo da narração (build/timeline.js).
+
+  ?t=12.5        abre parado nesse instante
+  ?play          toca em tempo real, com o áudio (revisão)
+  ?captions=0    sem a legenda queimada
+-->
+<div id="stage">
+
+  <!-- 1 · abertura -->
+  <section class="sc s1">
+    <img class="ph1" src="build/fotos/sabonetes-capa.jpg" alt="" />
+    <div class="shade1"></div>
+    <div class="txt1">
+      <p class="kicker k1">Aromaterapia artesanal</p>
+      <h1 class="h1"><span class="l">produtos feitos</span><span class="l">à mão, com</span><span class="l acc">propósito social</span></h1>
+      <div class="since"><span class="since__l">desde</span><span class="since__y" id="yr">2017</span></div>
+    </div>
+  </section>
+
+  <!-- 2 · missão -->
+  <section class="sc s2">
+    <div class="a2"><img src="build/fotos/missao.jpg" alt="" /></div>
+    <div class="shade2"></div>
+    <div class="txt2">
+      <p class="kicker k2">Nossa missão</p>
+      <h2 class="h2"><span class="l">bem-estar e</span><span class="l">qualidade de vida</span></h2>
+      <p class="sub2">através de produtos para aromaterapia</p>
+      <p class="lbl2">equilíbrio</p>
+      <div class="chips">
+        <span class="chip" data-k="fisico">físico</span>
+        <span class="chip" data-k="mental">mental</span>
+        <span class="chip" data-k="emocional">emocional</span>
+        <span class="chip" data-k="espiritual">espiritual</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · visão -->
+  <section class="sc s3">
+    <div class="arch a3"><img src="build/fotos/lavanda.jpg" alt="" /></div>
+    <div class="txt3">
+      <p class="kicker k3">Nossa visão</p>
+      <h2 class="h3"><span class="l">ser referência</span><span class="l">pela qualidade</span></h2>
+      <div class="chips">
+        <span class="chip" data-k="sustentabilidade">sustentabilidade</span>
+        <span class="chip" data-k="natureza">respeito à natureza</span>
+        <span class="chip" data-k="proximo">respeito ao próximo</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · valores -->
+  <section class="sc s4">
+    <p class="kicker k4">Nossos valores</p>
+    <div class="vals">
+      <div class="val v1"><span class="n">01</span><span class="t">Responsabilidade social</span></div>
+      <div class="val v2"><span class="n">02</span><span class="t">Sustentabilidade</span></div>
+      <div class="val v3"><span class="n">03</span><span class="t">Qualidade</span></div>
+      <div class="val v4"><span class="n">04</span><span class="t">Transparência</span></div>
+      <div class="val v5"><span class="n">05</span><span class="t">Inovação</span></div>
+    </div>
+  </section>
+
+  <!-- 5 e 6 · o catálogo -->
+  <section class="sc s5">
+    <h2 class="h5"><span class="l1">O catálogo</span><span class="l2">sempre crescendo</span></h2>
+    <div class="grid">
+      <div class="tile" data-k="hidrolatos"><img src="build/fotos/cat-hidrolatos-1l.jpg" alt="" /><span>Hidrolatos</span></div>
+      <div class="tile" data-k="oleos"><img src="build/fotos/oleos.jpg" alt="" /><span>Óleos essenciais</span></div>
+      <div class="tile" data-k="sprays"><img src="build/fotos/cat-sprays-topicos.jpg" alt="" /><span>Sprays</span></div>
+      <div class="tile" data-k="sabonetes"><img src="build/fotos/cat-sabonetes-manteiga.jpg" alt="" /><span>Sabonetes</span></div>
+      <div class="tile" data-k="pomadas"><img src="build/fotos/pomadas.jpg" alt="" /><span>Pomadas</span></div>
+      <div class="tile" data-k="tinturas"><img src="build/fotos/tinturas.jpg" alt="" /><span>Tinturas</span></div>
+      <div class="tile" data-k="colonias"><img src="build/fotos/cat-colonias.jpg" alt="" /><span>Colônias</span></div>
+      <div class="tile" data-k="sais"><img src="build/fotos/cat-sais.jpg" alt="" /><span>Sais de banho</span></div>
+      <div class="tile" data-k="gotinha"><img src="build/fotos/gotinha.jpg" alt="" /><span>Gotinha de Cura</span></div>
+      <div class="tile more"><b>+</b><span>sempre tem novidade</span></div>
+    </div>
+  </section>
+
+  <!-- 7 · o site -->
+  <section class="sc ssite">
+    <div class="browser">
+      <div class="browser__bar"><i></i><i></i><i></i><span>gotadecura.com.br</span></div>
+      <div class="browser__screen">
+        <img class="shot" src="build/fotos/site.png" alt="" />
+        <div class="ring-site"></div>
+      </div>
+    </div>
+    <div class="txt-site">
+      <p class="kicker k-site">Pelo site</p>
+      <h2 class="h-site"><span class="l">peça de</span><span class="l">qualquer lugar</span><span class="l acc">do Brasil</span></h2>
+      <div class="pill-site">gotadecura.com.br</div>
+    </div>
+  </section>
+
+  <!-- 8 · loja física -->
+  <section class="sc s7">
+    <div class="pc pc-a"><img src="build/fotos/loja.jpg" alt="" /></div>
+    <div class="pc pc-b"><img src="build/fotos/bancada.jpg" alt="" /></div>
+    <div class="txt7">
+      <p class="kicker k7">Loja física</p>
+      <h2 class="h7"><span class="l">sinta o aroma</span><span class="l">antes de levar</span></h2>
+      <ul class="lst">
+        <li>abra os frascos</li>
+        <li>sinta cada aroma com calma</li>
+        <li>converse com quem destilou</li>
+      </ul>
+      <p class="addr">Rua José Paulino, 1916 · Campinas, SP</p>
+    </div>
+  </section>
+
+  <!-- 9 · chácara e visitas -->
+  <section class="sc s8">
+    <div class="frame">
+      <img class="ph" data-p="portao" src="build/fotos/portao2.jpg" alt="" />
+      <img class="ph" data-p="horta" src="build/fotos/horta-irrigada.jpg" alt="" />
+      <img class="ph" data-p="alambique" src="build/fotos/alambique3.jpg" alt="" />
+      <img class="ph" data-p="explicacao" src="build/fotos/explicacao.jpg" alt="" />
+      <img class="ph" data-p="cafe" src="build/fotos/cafe.jpg" alt="" />
+      <img class="ph" data-p="destilador" src="build/fotos/destilador.jpg" alt="" />
+      <img class="ph" data-p="lago" src="build/fotos/roda-lago.jpg" alt="" />
+    </div>
+    <div class="txt8">
+      <p class="kicker k8">Chácara da Mãe Luzia</p>
+      <h2 class="h8"><span class="l">visita guiada</span></h2>
+      <ul class="lst">
+        <li>café da manhã</li>
+        <li>destilação ao vivo</li>
+        <li>uma manhã sem pressa</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 · a renda -->
+  <section class="sc s9">
+    <img class="bg9" src="build/fotos/bg-destination.jpg" alt="" />
+    <div class="scrim9"></div>
+    <div class="txt9">
+      <h2 class="h9"><span class="l a">sem dono,</span><span class="l b">sem sócios.</span></h2>
+      <p class="ln9">Toda a renda vai para os trabalhos assistenciais da</p>
+      <div class="pill9">Morada Espírita Prof. Lairi Hans</div>
+    </div>
+    <div class="pc9"><img src="build/fotos/morada-banner.jpg" alt="" /></div>
+  </section>
+
+  <!-- 11 · logo -->
+  <section class="sc s10">
+    <div class="glow"></div>
+    <div class="rg rg1"></div><div class="rg rg2"></div><div class="rg rg3"></div>
+    <img class="logo10" src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" />
+    <p class="url10">gotadecura.com.br<br /><span>@gotadecura_artesanais</span></p>
+  </section>
+
+  <div class="captions"><p class="cap"></p></div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="lib/cena.js"></script>
+<script src="build/timeline.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

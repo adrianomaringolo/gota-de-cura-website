@@ -1,0 +1,10 @@
+# dependências (Playwright dos vídeos)
+node_modules/
+
+# vídeos: telas, takes de voz, snapshots e renders (gerados), e sessão/chave local
+*/build/
+*/output/
+*/.env
+
+# faixas baixadas só para escolher a trilha (a que vale está em musica/ e na LICENCA.md)
+*/musica/candidatas/

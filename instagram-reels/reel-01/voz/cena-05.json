@@ -1,0 +1,100 @@
+{
+  "text": "O catálogo foi crescendo, como crescem as plantas... sprays, hidrolatos, óleos essenciais, tinturas, pomadas, a linha Gotinha de Cura. ",
+  "words": [
+    {
+      "w": "O",
+      "start": 0.072,
+      "end": 0.08
+    },
+    {
+      "w": "catálogo",
+      "start": 0.18,
+      "end": 0.8
+    },
+    {
+      "w": "foi",
+      "start": 0.84,
+      "end": 0.96
+    },
+    {
+      "w": "crescendo,",
+      "start": 1.027,
+      "end": 1.76
+    },
+    {
+      "w": "como",
+      "start": 1.92,
+      "end": 2.56
+    },
+    {
+      "w": "crescem",
+      "start": 2.624,
+      "end": 3.04
+    },
+    {
+      "w": "as",
+      "start": 3.12,
+      "end": 3.28
+    },
+    {
+      "w": "plantas",
+      "start": 3.347,
+      "end": 4.72
+    },
+    {
+      "w": "sprays,",
+      "start": 4.82,
+      "end": 5.52
+    },
+    {
+      "w": "hidrolatos,",
+      "start": 5.6,
+      "end": 6.64
+    },
+    {
+      "w": "óleos",
+      "start": 6.72,
+      "end": 7.04
+    },
+    {
+      "w": "essenciais,",
+      "start": 7.1,
+      "end": 8.08
+    },
+    {
+      "w": "tinturas,",
+      "start": 8.192,
+      "end": 9.36
+    },
+    {
+      "w": "pomadas,",
+      "start": 9.44,
+      "end": 10.24
+    },
+    {
+      "w": "a",
+      "start": 10.44,
+      "end": 10.64
+    },
+    {
+      "w": "linha",
+      "start": 10.693,
+      "end": 10.96
+    },
+    {
+      "w": "Gotinha",
+      "start": 11.06,
+      "end": 11.6
+    },
+    {
+      "w": "de",
+      "start": 11.627,
+      "end": 11.68
+    },
+    {
+      "w": "Cura.",
+      "start": 11.8,
+      "end": 12.4
+    }
+  ]
+}

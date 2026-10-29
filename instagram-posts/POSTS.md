@@ -2,7 +2,7 @@
 
 > Índice de todos os posts criados. **Atualize este arquivo sempre que criar, publicar ou arquivar um post.**
 >
-> Última atualização: 2026-10-19
+> Última atualização: 2026-10-20
 
 Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produção / revisão · ⚪️ rascunho
 
@@ -23,6 +23,8 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 | post-12 | Melaleuca (tea tree): origem, propriedades e como usar o óleo essencial e o hidrolato | 2026-10-04 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog da melaleuca, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
 | post-13 | Agora o site também fala inglês | 2026-10-06 | Único | `novidade-do-site` | 1 | 🟢 | Novidade do site — versão em inglês em gotadecura.com.br/en, com as bandeiras do Brasil e dos EUA como cartões PT/EN |
 | post-14 | O que dá para fazer com um hidrolato: guia de usos | 2026-10-19 | Único | `chamada-blog` | 1 | 🔵 | Chamada para o post do blog de 15/10: guia de usos do hidrolato por situação (rosto, corpo, cabelo, casa) |
+| post-15 | Planta viva, água limpa | 2026-10-20 | Único | `frase-gigante` | 1 | 🔵 | Nível 3. Frase de marca em quatro linhas (contorno em "viva,", gradiente terracota em "limpa."), apoio sobre agrotóxico e água de nascente |
+| post-16 | O que o laudo mostra: terpinen-4-ol na melaleuca | 2026-10-20 | Carrossel | `rotulo-laudo` | 2 | 🔵 | Nível 3. Dado do laudo da melaleuca (28,9% de terpinen-4-ol) e os três compostos principais. Postar com pelo menos um post de nível 1 ou 2 entre este e o post-15 |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---

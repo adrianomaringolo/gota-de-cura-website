@@ -1,0 +1,35 @@
+{
+  "text": "Nove anos... de Gota de Cura. ",
+  "words": [
+    {
+      "w": "Nove",
+      "start": 0.23,
+      "end": 0.56
+    },
+    {
+      "w": "anos",
+      "start": 0.704,
+      "end": 1.36
+    },
+    {
+      "w": "de",
+      "start": 3.227,
+      "end": 3.28
+    },
+    {
+      "w": "Gota",
+      "start": 3.36,
+      "end": 3.68
+    },
+    {
+      "w": "de",
+      "start": 3.707,
+      "end": 3.76
+    },
+    {
+      "w": "Cura.",
+      "start": 3.84,
+      "end": 4.24
+    }
+  ]
+}

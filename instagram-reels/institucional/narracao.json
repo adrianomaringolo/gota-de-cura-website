@@ -1,0 +1,92 @@
+{
+  "nome": "gotadecura-institucional",
+  "formato": "16:9",
+  "model": "eleven_v3",
+  "voice_id": "5l5f8iK3YPeGga21rQIX",
+  "voice_name": "Adeline (ElevenLabs, com tag de sotaque brasileiro)",
+  "voice_settings": {
+    "stability": 0.5,
+    "similarity_boost": 0.8,
+    "style": 0.2,
+    "use_speaker_boost": true
+  },
+  "sotaque": "[Brazilian Portuguese accent]",
+  "nota": "eleven_v3 ignora voice_settings.speed: o ritmo vem das tags ([warmly], [calmly]), das reticências e do respiro entre as cenas (gap + hold). Tags e reticências não vão para a legenda; o campo legenda tem a pontuação de leitura (mesmas palavras, na mesma ordem). Toda fala termina com [pause] ou [long pause] para a última palavra não sair cortada. Depois do voice.mjs, rode falas.mjs --auto. A Adeline sai com sotaque de Portugal sem a tag de sotaque: manter \"sotaque\": \"[Brazilian Portuguese accent]\".",
+  "gap": 0.9,
+  "lead": 1.0,
+  "tail": 3.6,
+  "music": {
+    "file": "musica/mixkit-classical-vibes-2-estendida.mp3",
+    "volume": 0.15,
+    "start": 0
+  },
+  "icones": [],
+  "cenas": [
+    {
+      "id": "abertura",
+      "text": "[softly] A Gota de Cura faz produtos artesanais de aromaterapia, com um propósito social. [pause] Começou em dois mil e dezessete... com a confecção de sabonetes artesanais, feitos com paciência e carinho. [pause]",
+      "legenda": "A Gota de Cura faz produtos artesanais de aromaterapia, com um propósito social. Começou em dois mil e dezessete, com a confecção de sabonetes artesanais, feitos com paciência e carinho.",
+      "hold": 0.6
+    },
+    {
+      "id": "missao",
+      "text": "[calmly] Nossa missão: proporcionar bem-estar e qualidade de vida, através de produtos para aromaterapia, [pause] promovendo o equilíbrio físico, mental, emocional e espiritual. [pause]",
+      "legenda": "Nossa missão: proporcionar bem-estar e qualidade de vida, através de produtos para aromaterapia, promovendo o equilíbrio físico, mental, emocional e espiritual.",
+      "hold": 0.5
+    },
+    {
+      "id": "visao",
+      "text": "[calmly] Nossa visão: ser referência em produtos para aromaterapia pela qualidade, [pause] com práticas voltadas à sustentabilidade, e ao respeito à natureza e ao próximo. [pause]",
+      "legenda": "Nossa visão: ser referência em produtos para aromaterapia pela qualidade, com práticas voltadas à sustentabilidade, e ao respeito à natureza e ao próximo.",
+      "hold": 0.5
+    },
+    {
+      "id": "valores",
+      "text": "[warmly] E nossos valores: [pause] responsabilidade social, sustentabilidade, qualidade, transparência e inovação. [pause]",
+      "legenda": "E nossos valores: responsabilidade social, sustentabilidade, qualidade, transparência e inovação.",
+      "hold": 0.6
+    },
+    {
+      "id": "produtos",
+      "text": "[warmly] No catálogo, você encontra hidrolatos, óleos essenciais, sprays, sabonetes, pomadas, tinturas, colônias, sais de banho, e a linha Gotinha de Cura. [pause]",
+      "legenda": "No catálogo, você encontra hidrolatos, óleos essenciais, sprays, sabonetes, pomadas, tinturas, colônias, sais de banho, e a linha Gotinha de Cura.",
+      "hold": 0.3
+    },
+    {
+      "id": "variedade",
+      "text": "[warmly] E estamos sempre aumentando a variedade dos nossos produtos. [pause]",
+      "legenda": "E estamos sempre aumentando a variedade dos nossos produtos.",
+      "hold": 0.6
+    },
+    {
+      "id": "site",
+      "text": "[warmly] E pelo nosso site, você faz o seu pedido de qualquer lugar do Brasil. [pause]",
+      "legenda": "E pelo nosso site, você faz o seu pedido de qualquer lugar do Brasil.",
+      "hold": 0.6
+    },
+    {
+      "id": "loja",
+      "text": "[warmly] Na loja física, em Campinas, você abre os frascos, sente cada aroma com calma, e conversa com quem destilou. [pause]",
+      "legenda": "Na loja física, em Campinas, você abre os frascos, sente cada aroma com calma, e conversa com quem destilou.",
+      "hold": 0.6
+    },
+    {
+      "id": "chacara",
+      "text": "[warmly] E na Chácara da Mãe Luzia, onde plantamos e destilamos tudo, você pode agendar uma visita guiada: [pause] café da manhã, destilação ao vivo, e uma manhã sem pressa. [pause]",
+      "legenda": "E na Chácara da Mãe Luzia, onde plantamos e destilamos tudo, você pode agendar uma visita guiada: café da manhã, destilação ao vivo, e uma manhã sem pressa.",
+      "hold": 0.6
+    },
+    {
+      "id": "renda",
+      "text": "[softly] A Gota de Cura não tem dono nem sócios. [pause] Toda a renda vai para os trabalhos assistenciais da Morada Espírita Professor Lairi Hans. [pause]",
+      "legenda": "A Gota de Cura não tem dono nem sócios. Toda a renda vai para os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+      "hold": 0.6
+    },
+    {
+      "id": "logo",
+      "text": "[softly] Gota de Cura. [pause] Cuidando com amor. [long pause]",
+      "legenda": "Gota de Cura. Cuidando com amor.",
+      "hold": 0.4
+    }
+  ]
+}

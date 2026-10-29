@@ -1,0 +1,55 @@
+{
+  "text": "E nossos valores: responsabilidade social, sustentabilidade, qualidade, transparência e inovação. ",
+  "words": [
+    {
+      "w": "E",
+      "start": 0.077,
+      "end": 0.117
+    },
+    {
+      "w": "nossos",
+      "start": 0.181,
+      "end": 0.597
+    },
+    {
+      "w": "valores:",
+      "start": 0.697,
+      "end": 1.957
+    },
+    {
+      "w": "responsabilidade",
+      "start": 2.332,
+      "end": 3.077
+    },
+    {
+      "w": "social,",
+      "start": 3.18,
+      "end": 4.117
+    },
+    {
+      "w": "sustentabilidade,",
+      "start": 4.213,
+      "end": 5.877
+    },
+    {
+      "w": "qualidade,",
+      "start": 5.957,
+      "end": 6.997
+    },
+    {
+      "w": "transparência",
+      "start": 7.05,
+      "end": 8.037
+    },
+    {
+      "w": "e",
+      "start": 8.197,
+      "end": 8.357
+    },
+    {
+      "w": "inovação.",
+      "start": 8.464,
+      "end": 9.277
+    }
+  ]
+}

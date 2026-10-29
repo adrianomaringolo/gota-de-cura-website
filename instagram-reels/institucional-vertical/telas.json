@@ -1,0 +1,15 @@
+{
+  "base": "http://localhost:3000",
+  "relogio": null,
+  "barras": { "nav": "nav.fixed" },
+  "barrasSo": { "nav": "m" },
+  "esconder": [],
+  "telas": [
+    {
+      "nome": "inicio",
+      "url": "/",
+      "inteira": true,
+      "medir": { "titulo": "h1" }
+    }
+  ]
+}

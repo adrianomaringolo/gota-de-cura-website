@@ -1,0 +1,110 @@
+{
+  "text": "No catálogo, você encontra hidrolatos, óleos essenciais, sprays, sabonetes, pomadas, tinturas, colônias, sais de banho, e a linha Gotinha de Cura. ",
+  "words": [
+    {
+      "w": "No",
+      "start": 0.158,
+      "end": 0.163
+    },
+    {
+      "w": "catálogo,",
+      "start": 0.243,
+      "end": 1.043
+    },
+    {
+      "w": "você",
+      "start": 1.107,
+      "end": 1.363
+    },
+    {
+      "w": "encontra",
+      "start": 1.416,
+      "end": 1.843
+    },
+    {
+      "w": "hidrolatos,",
+      "start": 1.923,
+      "end": 2.883
+    },
+    {
+      "w": "óleos",
+      "start": 3.003,
+      "end": 3.363
+    },
+    {
+      "w": "essenciais,",
+      "start": 3.423,
+      "end": 4.403
+    },
+    {
+      "w": "sprays,",
+      "start": 4.483,
+      "end": 5.203
+    },
+    {
+      "w": "sabonetes,",
+      "start": 5.263,
+      "end": 6.243
+    },
+    {
+      "w": "pomadas,",
+      "start": 6.303,
+      "end": 6.963
+    },
+    {
+      "w": "tinturas,",
+      "start": 7.027,
+      "end": 7.843
+    },
+    {
+      "w": "colônias,",
+      "start": 7.883,
+      "end": 8.723
+    },
+    {
+      "w": "sais",
+      "start": 8.787,
+      "end": 9.043
+    },
+    {
+      "w": "de",
+      "start": 9.07,
+      "end": 9.123
+    },
+    {
+      "w": "banho,",
+      "start": 9.223,
+      "end": 9.803
+    },
+    {
+      "w": "e",
+      "start": 9.903,
+      "end": 10.003
+    },
+    {
+      "w": "a",
+      "start": 10.043,
+      "end": 10.083
+    },
+    {
+      "w": "linha",
+      "start": 10.136,
+      "end": 10.403
+    },
+    {
+      "w": "Gotinha",
+      "start": 10.483,
+      "end": 11.043
+    },
+    {
+      "w": "de",
+      "start": 11.096,
+      "end": 11.203
+    },
+    {
+      "w": "Cura.",
+      "start": 11.283,
+      "end": 12.043
+    }
+  ]
+}

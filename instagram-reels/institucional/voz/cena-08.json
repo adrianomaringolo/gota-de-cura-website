@@ -1,0 +1,100 @@
+{
+  "text": "Na loja física, em Campinas, você abre os frascos, sente cada aroma com calma, e conversa com quem destilou. ",
+  "words": [
+    {
+      "w": "Na",
+      "start": 0.147,
+      "end": 0.16
+    },
+    {
+      "w": "loja",
+      "start": 0.24,
+      "end": 0.56
+    },
+    {
+      "w": "física,",
+      "start": 0.66,
+      "end": 1.12
+    },
+    {
+      "w": "em",
+      "start": 1.147,
+      "end": 1.2
+    },
+    {
+      "w": "Campinas,",
+      "start": 1.264,
+      "end": 2.16
+    },
+    {
+      "w": "você",
+      "start": 2.224,
+      "end": 2.48
+    },
+    {
+      "w": "abre",
+      "start": 2.544,
+      "end": 2.8
+    },
+    {
+      "w": "os",
+      "start": 2.853,
+      "end": 2.96
+    },
+    {
+      "w": "frascos,",
+      "start": 3.04,
+      "end": 4
+    },
+    {
+      "w": "sente",
+      "start": 4.064,
+      "end": 4.48
+    },
+    {
+      "w": "cada",
+      "start": 4.544,
+      "end": 4.8
+    },
+    {
+      "w": "aroma",
+      "start": 4.853,
+      "end": 5.12
+    },
+    {
+      "w": "com",
+      "start": 5.18,
+      "end": 5.36
+    },
+    {
+      "w": "calma,",
+      "start": 5.48,
+      "end": 6.16
+    },
+    {
+      "w": "e",
+      "start": 6.28,
+      "end": 6.4
+    },
+    {
+      "w": "conversa",
+      "start": 6.47,
+      "end": 7.04
+    },
+    {
+      "w": "com",
+      "start": 7.08,
+      "end": 7.2
+    },
+    {
+      "w": "quem",
+      "start": 7.264,
+      "end": 7.52
+    },
+    {
+      "w": "destilou.",
+      "start": 7.584,
+      "end": 8.24
+    }
+  ]
+}

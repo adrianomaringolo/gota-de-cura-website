@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&amp;family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  .fr { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1, "opsz" 144; }
+  .progress { position: absolute; left: 88px; bottom: 90px; display: flex; gap: 10px; z-index: 5; }
+  .progress span { width: 12px; height: 12px; border-radius: 50%; background: #dfdce6; }
+  .progress span.active { background: #5d3b97; }
+  .mark { position: absolute; right: 84px; bottom: 78px; width: 52px; height: auto; opacity: 0.9; z-index: 5; }
+  .hatch { background: repeating-linear-gradient(135deg, #8a77ad 0 3px, #6b5a8f 3px 26px); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 17px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; line-height: 1.6; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; font-family: 'Archivo', sans-serif; color: #211c2b; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #faf8fc; padding: 70px; }
+  .frame { position: absolute; inset: 40px; border: 3px solid #503484; border-radius: 12px; }
+  .frame::after { content: ''; position: absolute; inset: 10px; border: 1px solid #503484; border-radius: 6px; }
+  .in { position: relative; height: 100%; padding: 30px 44px 36px; display: flex; flex-direction: column; }
+  .top { display: flex; justify-content: space-between; align-items: center; }
+  .logo { width: 270px; height: auto; }
+  .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #5f5b68; text-align: right; line-height: 1.6; }
+  .sub { font-family: 'Petrona', serif; font-style: italic; font-size: 40px; color: #54505f; margin-top: 56px; }
+  .big { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 330px; line-height: 0.9; letter-spacing: -0.06em; color: #a24112; margin-top: 8px; }
+  .big small { font-size: 150px; letter-spacing: -0.02em; margin-left: 8px; }
+  .name { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 700; font-size: 74px; letter-spacing: -0.03em; color: #503484; margin-top: 44px; }
+  .ruler { height: 46px; margin-top: 40px; border-bottom: 3px solid #503484;
+    background: repeating-linear-gradient(90deg, #503484 0 2px, transparent 2px 20px) bottom / 100% 22px no-repeat, repeating-linear-gradient(90deg, #503484 0 3px, transparent 3px 100px) bottom / 100% 44px no-repeat; }
+  .ruler-l { display: flex; justify-content: space-between; font-size: 16px; font-weight: 600; color: #5f5b68; margin-top: 10px; letter-spacing: 0.06em; }
+  .note { font-size: 26px; line-height: 1.5; color: #54505f; margin-top: auto; max-width: 34ch; }
+  .note b { color: #211c2b; }
+  .url { font-size: 22px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #503484; margin-top: 22px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="frame"></div>
+  <div class="in">
+    <div class="top"><img class="logo" src="../../assets/logos/logo.png" alt="Gota de Cura"><div class="eyebrow">Laudo de cromatografia<br>Melaleuca · 2026</div></div>
+    <div class="sub">O que o laudo mostra no nosso óleo essencial de melaleuca</div>
+    <div class="big">28,9<small>%</small></div>
+    <div class="name">terpinen-4-ol</div>
+    <div class="ruler"></div>
+    <div class="ruler-l"><span>0</span><span>25</span><span>50</span><span>75</span><span>100%</span></div>
+    <div class="note"><b>Quase 3 de cada 10 partes do óleo</b> são terpinen-4-ol, o composto mais estudado da melaleuca.</div>
+    <div class="url">gotadecura.com.br/cromatografias</div>
+  </div>
+  <img class="mark" src="../../assets/logos/mark.png" alt="">
+  <div class="progress"><span class="active"></span><span></span></div>
+</div>
+</body>
+</html>

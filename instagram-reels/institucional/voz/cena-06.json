@@ -1,0 +1,50 @@
+{
+  "text": "E estamos sempre aumentando a variedade dos nossos produtos. ",
+  "words": [
+    {
+      "w": "E",
+      "start": 0.096,
+      "end": 0.116
+    },
+    {
+      "w": "estamos",
+      "start": 0.186,
+      "end": 0.676
+    },
+    {
+      "w": "sempre",
+      "start": 0.733,
+      "end": 1.076
+    },
+    {
+      "w": "aumentando",
+      "start": 1.133,
+      "end": 1.716
+    },
+    {
+      "w": "a",
+      "start": 1.756,
+      "end": 1.796
+    },
+    {
+      "w": "variedade",
+      "start": 1.865,
+      "end": 2.596
+    },
+    {
+      "w": "dos",
+      "start": 2.656,
+      "end": 2.836
+    },
+    {
+      "w": "nossos",
+      "start": 2.9,
+      "end": 3.236
+    },
+    {
+      "w": "produtos.",
+      "start": 3.325,
+      "end": 4.076
+    }
+  ]
+}

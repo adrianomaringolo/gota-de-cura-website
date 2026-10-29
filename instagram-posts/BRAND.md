@@ -152,6 +152,8 @@ Via Google Fonts:
 
 ## Elementos de marca
 
+Fonte da identidade: `marca/MARCA.md` (manual da marca). Os logos em vetor (`logo.svg`, `logo-negativo.svg`, `logo-mono.svg`, `simbolo.svg`, `avatar.svg`) estão em `assets/logos/`; os posts já feitos seguem usando `logo.png` e `mark.png`.
+
 - **Logo** (obrigatório na capa e no slide final, e só nesses dois): o lockup completo
   `assets/logos/logo.png` (gota + "gota de cura" + "Cuidando com amor", 1641×535), na pasta de
   assets compartilhados. Referencie por path relativo (`../../assets/logos/logo.png` a partir de

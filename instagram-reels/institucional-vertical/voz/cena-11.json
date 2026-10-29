@@ -1,0 +1,35 @@
+{
+  "text": "Gota de Cura. Cuidando com amor. ",
+  "words": [
+    {
+      "w": "Gota",
+      "start": 0.425,
+      "end": 0.48
+    },
+    {
+      "w": "de",
+      "start": 0.533,
+      "end": 0.64
+    },
+    {
+      "w": "Cura.",
+      "start": 0.76,
+      "end": 1.24
+    },
+    {
+      "w": "Cuidando",
+      "start": 1.98,
+      "end": 2.56
+    },
+    {
+      "w": "com",
+      "start": 2.64,
+      "end": 2.88
+    },
+    {
+      "w": "amor.",
+      "start": 2.976,
+      "end": 3.44
+    }
+  ]
+}

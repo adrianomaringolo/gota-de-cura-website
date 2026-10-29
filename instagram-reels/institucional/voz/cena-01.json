@@ -1,0 +1,155 @@
+{
+  "text": "A Gota de Cura faz produtos artesanais de aromaterapia, com um propósito social. Começou em dois mil e dezessete... com a confecção de sabonetes artesanais, feitos com paciência e carinho. ",
+  "words": [
+    {
+      "w": "A",
+      "start": 0.153,
+      "end": 0.16
+    },
+    {
+      "w": "Gota",
+      "start": 0.24,
+      "end": 0.56
+    },
+    {
+      "w": "de",
+      "start": 0.613,
+      "end": 0.72
+    },
+    {
+      "w": "Cura",
+      "start": 0.8,
+      "end": 1.12
+    },
+    {
+      "w": "faz",
+      "start": 1.2,
+      "end": 1.44
+    },
+    {
+      "w": "produtos",
+      "start": 1.511,
+      "end": 2.08
+    },
+    {
+      "w": "artesanais",
+      "start": 2.14,
+      "end": 2.88
+    },
+    {
+      "w": "de",
+      "start": 2.933,
+      "end": 3.04
+    },
+    {
+      "w": "aromaterapia,",
+      "start": 3.12,
+      "end": 4.36
+    },
+    {
+      "w": "com",
+      "start": 4.41,
+      "end": 4.56
+    },
+    {
+      "w": "um",
+      "start": 4.587,
+      "end": 4.64
+    },
+    {
+      "w": "propósito",
+      "start": 4.704,
+      "end": 5.52
+    },
+    {
+      "w": "social.",
+      "start": 5.623,
+      "end": 6.76
+    },
+    {
+      "w": "Começou",
+      "start": 7.456,
+      "end": 7.76
+    },
+    {
+      "w": "em",
+      "start": 7.787,
+      "end": 7.84
+    },
+    {
+      "w": "dois",
+      "start": 7.904,
+      "end": 8.16
+    },
+    {
+      "w": "mil",
+      "start": 8.22,
+      "end": 8.4
+    },
+    {
+      "w": "e",
+      "start": 8.44,
+      "end": 8.48
+    },
+    {
+      "w": "dezessete",
+      "start": 8.54,
+      "end": 9.6
+    },
+    {
+      "w": "com",
+      "start": 9.64,
+      "end": 9.76
+    },
+    {
+      "w": "a",
+      "start": 9.8,
+      "end": 9.84
+    },
+    {
+      "w": "confecção",
+      "start": 9.904,
+      "end": 10.64
+    },
+    {
+      "w": "de",
+      "start": 10.693,
+      "end": 10.8
+    },
+    {
+      "w": "sabonetes",
+      "start": 10.86,
+      "end": 11.6
+    },
+    {
+      "w": "artesanais,",
+      "start": 11.64,
+      "end": 12.56
+    },
+    {
+      "w": "feitos",
+      "start": 12.613,
+      "end": 12.96
+    },
+    {
+      "w": "com",
+      "start": 13,
+      "end": 13.12
+    },
+    {
+      "w": "paciência",
+      "start": 13.216,
+      "end": 14
+    },
+    {
+      "w": "e",
+      "start": 14.12,
+      "end": 14.24
+    },
+    {
+      "w": "carinho.",
+      "start": 14.32,
+      "end": 14.88
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "text": "E pelo nosso site, você faz o seu pedido de qualquer lugar do Brasil. ",
+  "words": [
+    {
+      "w": "E",
+      "start": 0.214,
+      "end": 0.314
+    },
+    {
+      "w": "pelo",
+      "start": 0.354,
+      "end": 0.514
+    },
+    {
+      "w": "nosso",
+      "start": 0.567,
+      "end": 0.834
+    },
+    {
+      "w": "site,",
+      "start": 0.93,
+      "end": 1.394
+    },
+    {
+      "w": "você",
+      "start": 1.49,
+      "end": 1.874
+    },
+    {
+      "w": "faz",
+      "start": 1.954,
+      "end": 2.194
+    },
+    {
+      "w": "o",
+      "start": 2.254,
+      "end": 2.314
+    },
+    {
+      "w": "seu",
+      "start": 2.344,
+      "end": 2.434
+    },
+    {
+      "w": "pedido",
+      "start": 2.491,
+      "end": 2.834
+    },
+    {
+      "w": "de",
+      "start": 2.887,
+      "end": 2.994
+    },
+    {
+      "w": "qualquer",
+      "start": 3.074,
+      "end": 3.714
+    },
+    {
+      "w": "lugar",
+      "start": 3.807,
+      "end": 4.274
+    },
+    {
+      "w": "do",
+      "start": 4.301,
+      "end": 4.354
+    },
+    {
+      "w": "Brasil.",
+      "start": 4.434,
+      "end": 4.954
+    }
+  ]
+}

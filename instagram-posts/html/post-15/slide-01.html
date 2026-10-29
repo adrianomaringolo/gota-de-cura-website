@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&amp;family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1350px; overflow: hidden; background: #291945; font-family: 'Archivo', sans-serif; color: #fff; }
+  .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #291945; padding: 96px 70px; display: flex; flex-direction: column; }
+  .blob { position: absolute; width: 1000px; height: 1000px; border-radius: 50%; background: radial-gradient(circle, rgba(137,97,199,0.34) 0%, transparent 66%); top: 240px; left: -260px; }
+  .top { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; }
+  .logo { width: 300px; height: auto; filter: brightness(0) invert(1); }
+  .handle { font-size: 22px; color: rgba(255,255,255,0.86); } .handle em { font-style: normal; color: #dacbf9; }
+  .phrase { position: relative; margin: auto 0; font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+    font-weight: 800; font-size: 200px; line-height: 0.88; letter-spacing: -0.045em; }
+  .phrase span { display: block; }
+  /* Efeito: uma linha só em contorno, uma palavra preenchida pela foto (aqui, a área hachurada). */
+  .phrase .outline { color: transparent; -webkit-text-stroke: 3px #dacbf9; }
+  .phrase .photo { font-style: italic; font-weight: 700;
+    background: repeating-linear-gradient(135deg, #cd632d 0 5px, #a24112 5px 34px); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .foot { position: relative; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 18px; }
+  .support { font-size: 28px; line-height: 1.5; max-width: 22ch; color: rgba(255,255,255,0.8); }
+  .support::before { content: ''; display: block; width: 44px; height: 2px; background: #dacbf9; opacity: 0.7; margin-bottom: 20px; }
+  .tag { font-size: 19px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #291945; background: #cd632d; padding: 11px 20px; border-radius: 999px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="blob"></div>
+  <div class="top"><img class="logo" src="../../assets/logos/logo.png" alt="Gota de Cura"><div class="handle"><em>@</em>gotadecura_artesanais</div></div>
+  <div class="phrase"><span>Planta</span><span class="outline">viva,</span><span>água</span><span><i class="photo">limpa.</i></span></div>
+  <div class="foot"><div class="support">Cultivada sem agrotóxico, destilada com água de nascente.</div><span class="tag">Desde 2017</span></div>
+</div>
+</body>
+</html>

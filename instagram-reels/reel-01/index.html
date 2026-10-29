@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="pt-BR" class="vertical">
+<head>
+<meta charset="utf-8" />
+<title>Gota de Cura — 9 anos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=block" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<!--
+  Reel dos 9 anos da Gota de Cura (9:16). Uma timeline GSAP pausada move tudo no
+  ritmo da narração (build/timeline.js). O render.mjs posiciona quadro a quadro.
+
+  ?t=12.5        abre parado nesse instante
+  ?play          toca em tempo real, com o áudio (revisão)
+  ?captions=0    sem a legenda queimada
+-->
+<div id="stage">
+
+  <!-- 1 · abertura -->
+  <section class="sc s1">
+    <img class="fx" src="build/fotos/cartoes.jpg" alt="" />
+    <div class="ripple r1"></div><div class="ripple r2"></div>
+    <div class="nine">9</div>
+    <p class="anos">anos</p>
+    <p class="de-gota">de Gota de Cura</p>
+  </section>
+
+  <!-- 2 · sabonete, 2017 -->
+  <section class="sc s2">
+    <p class="kicker k2">Tudo começou assim</p>
+    <p class="year"><span id="yr">2017</span></p>
+    <h2 class="h2 t2">um sabonete artesanal</h2>
+    <div class="card c-sab"><img src="build/fotos/sabonetes.jpg" alt="" /></div>
+    <div class="badge"><img src="build/fotos/hidrolatos.jpg" alt="" /></div>
+    <div class="pill p-hid">hidrolato de melaleuca</div>
+  </section>
+
+  <!-- 3 · a chácara -->
+  <section class="sc s3">
+    <h2 class="big3">A chácara</h2>
+    <div class="chips">
+      <span class="chip" data-k="plantar">plantar</span>
+      <span class="chip" data-k="colher">colher</span>
+      <span class="chip" data-k="destilar">destilar</span>
+    </div>
+    <div class="arch">
+      <img class="ph" data-p="portao" src="build/fotos/portao.jpg" alt="" />
+      <img class="ph" data-p="canteiros" src="build/fotos/canteiros.jpg" alt="" />
+      <img class="ph" data-p="lavanda" src="build/fotos/lavanda.jpg" alt="" />
+      <img class="ph" data-p="panela" src="build/fotos/panela.jpg" alt="" />
+      <img class="ph" data-p="placa" src="build/fotos/visita22.jpg" alt="" />
+    </div>
+    <div class="pill p-mae">Chácara da Mãe Luzia</div>
+  </section>
+
+  <!-- 4 · muitas mãos voluntárias -->
+  <section class="sc s4">
+    <p class="kicker k4">Cada etapa</p>
+    <h2 class="big4"><span class="l">muitas mãos</span><span class="l acc">voluntárias</span></h2>
+    <div class="pc pc0"><img src="build/fotos/destila21.jpg" alt="" /><span class="tag">2021</span></div>
+    <div class="pc pc1"><img src="build/fotos/maos1.jpg" alt="" /></div>
+    <div class="pc pc2"><img src="build/fotos/maos2.jpg" alt="" /></div>
+    <div class="pc pc3"><img src="build/fotos/maos3.jpg" alt="" /><span class="tag">hoje</span></div>
+  </section>
+
+  <!-- 5 · o catálogo crescendo -->
+  <section class="sc s5">
+    <h2 class="h5"><span class="l1">O catálogo</span><span class="l2">foi crescendo</span></h2>
+    <div class="tile"><img src="build/fotos/sprays.jpg" alt="" /><span>Sprays</span></div>
+    <div class="tile"><img src="build/fotos/hidrolatos.jpg" alt="" /><span>Hidrolatos</span></div>
+    <div class="tile"><img src="build/fotos/oleos.jpg" alt="" /><span>Óleos essenciais</span></div>
+    <div class="tile"><img src="build/fotos/tinturas.jpg" alt="" /><span>Tinturas</span></div>
+    <div class="tile"><img src="build/fotos/pomadas.jpg" alt="" /><span>Pomadas</span></div>
+    <div class="tile"><img src="build/fotos/gotinha.jpg" alt="" /><span>Gotinha de Cura</span></div>
+  </section>
+
+  <!-- 6 · a renda vira pão e agasalho -->
+  <section class="sc s6">
+    <img class="bgph" src="build/fotos/nevoa2.jpg" alt="" />
+    <div class="scrim"></div>
+    <p class="pill-top">Toda a renda vai para a Morada Espírita Prof. Lairi Hans</p>
+    <div class="lines">
+      <p class="ln a"><span class="u">a fatia de pão</span></p>
+      <p class="ln b"><span class="u">e o agasalho</span></p>
+      <p class="ln c">aos que tanto necessitam.</p>
+    </div>
+  </section>
+
+  <!-- 7 · logo -->
+  <section class="sc s7">
+    <div class="glow"></div>
+    <div class="rg rg1"></div><div class="rg rg2"></div><div class="rg rg3"></div>
+    <div class="lockup">
+      <div class="lp lp-drop"><img src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" /></div>
+      <div class="lp lp-w1"><img src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" /></div>
+      <div class="lp lp-w2"><img src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" /></div>
+      <div class="lp lp-w3"><img src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" /></div>
+      <div class="lp lp-tag"><img src="../../instagram-posts/assets/logos/logo-negativo.svg" alt="" /></div>
+    </div>
+    <p class="url">gotadecura.com.br</p>
+  </section>
+
+  <div class="captions"><p class="cap"></p></div>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="lib/cena.js"></script>
+<script src="build/timeline.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
