@@ -18,6 +18,7 @@ const CLIENT_NAMESPACES = [
   'enrollment',
   'gallery',
   'header',
+  'institutionalBand',
   'laudos',
   'launches',
   'orderStatus',
