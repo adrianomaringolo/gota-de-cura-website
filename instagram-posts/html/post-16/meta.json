@@ -18,10 +18,10 @@
     {
       "file": "slide-02.html",
       "title": "Compostos",
-      "description": "Três compostos do laudo: gama-terpineno 29,3%, terpinen-4-ol 28,9%, alfa-terpineno 12,8%, com nota de que o laudo mostra composição, não efeito"
+      "description": "Três compostos do laudo: gama-terpineno 29,3%, terpinen-4-ol 28,9%, alfa-terpineno 12,8%, com nota de que o laudo mostra composição, não efeito; uma linha de propriedade sob cada composto"
     }
   ],
-  "caption": "🔬 28,9%. Esse é o terpinen-4-ol no laudo do nosso óleo essencial de melaleuca.\n\nÓleo essencial não é uma substância só: é uma mistura. Por isso mandamos analisar o nosso por cromatografia, que separa e mostra cada componente. No laudo da melaleuca aparecem 26 compostos, e três deles somam mais de 70%:\n\n🌿 gama-terpineno: 29,3%\n🌿 terpinen-4-ol: 28,9%\n🌿 alfa-terpineno: 12,8%\n\nO laudo mostra a composição do óleo, e é isso que ele faz: dá transparência sobre o que está no frasco.\n\nTodos os laudos estão no site, em gotadecura.com.br/cromatografias. Link na bio 👇\n\n💜 Toda a renda da Gota de Cura sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
+  "caption": "🔬 28,9%. Esse é o terpinen-4-ol no laudo do nosso óleo essencial de melaleuca.\n\nÓleo essencial não é uma substância só: é uma mistura. Por isso mandamos analisar o nosso por cromatografia, que separa e mostra cada componente. No laudo da melaleuca aparecem 26 compostos, e três deles somam mais de 70%:\n\n🌿 gama-terpineno: 29,3% (monoterpeno com ação antioxidante)\n🌿 terpinen-4-ol: 28,9% (o mais estudado da melaleuca, com ação antimicrobiana)\n🌿 alfa-terpineno: 12,8% (antioxidante, e o que mais oxida com o tempo)\n\nO laudo mostra a composição do óleo, e é isso que ele faz: dá transparência sobre o que está no frasco.\n\nTodos os laudos estão no site, em gotadecura.com.br/cromatografias. Link na bio 👇\n\n💜 Toda a renda da Gota de Cura sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.",
   "hashtags": [
     "cromatografia",
     "laudo",
@@ -33,5 +33,16 @@
     "transparencia",
     "artesanal",
     "gotadecura"
-  ]
+  ],
+  "revisions": [
+    {
+      "note": "adicionar brevemente as propriedades de cada composto",
+      "requestedAt": "2026-11-03T18:28",
+      "requestedBy": "admin",
+      "resolvedAt": "2026-11-03T18:34",
+      "resolvedTo": "pendente"
+    }
+  ],
+  "revisionCount": 1,
+  "revisedAt": "2026-11-03T18:34"
 }

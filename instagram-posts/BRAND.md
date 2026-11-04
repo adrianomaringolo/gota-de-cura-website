@@ -33,6 +33,7 @@ previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
 | `destaque-faixa` | Slide único de confiança levando para uma página do site. |
 | `ficha-da-planta` | Planta do catálogo em destaque (carrossel ou único). |
 | `ficha-do-produto` | Produto pronto que não é uma planta só (sabonete, pomada, Gotinha). |
+| `foto-selo` | Slide único com a foto sangrada e o selo da gota (sem círculo) no canto; texto só em faixa curta opcional. |
 | `novidade-do-site` | Slide único anunciando uma novidade do site, com ilustração em cartões. |
 | `bastidores` | Dia ou processo da chácara, alternando cena e explicação. |
 | `mito-ou-verdade` | Nível 2. Slide diagonal: mito riscado em cima, verdade embaixo. |
@@ -69,6 +70,7 @@ previews e tabela de sugestão). A skill pergunta qual usar antes de desenhar.
 - **Óleo essencial e hidrolato têm o mesmo peso.** Os dois são resultado da destilação: o óleo
   leva as substâncias lipossolúveis, o hidrolato leva as hidrossolúveis. **Nunca** descreva o
   hidrolato como "o que sobra", "a água que resta" ou "subproduto". É um produto, não uma sobra.
+- **Quem faz:** diga "voluntários Gota de Cura", nunca "voluntários da chácara".
 - **Sem "bem-estar performático".** Nada de promessa de cura, linguagem de MLM de óleos, ou tom
   de farmácia industrial. Não prometemos efeito terapêutico que não podemos comprovar.
 - **Frases curtas e concretas.** Nada de abertura genérica tipo "No mundo agitado de hoje...".
@@ -315,8 +317,8 @@ Lido por `instagram-posts/scripts/export.mjs` — o script é a autoridade sobre
 - Começar com um emoji ou frase que prenda a atenção no feed, ancorada na planta ou no processo.
 - Emojis como marcadores de lista (`🌿 item`) ou pontuação visual.
 - Tom conversacional e caloroso, sem promessa terapêutica.
-- Terminar com um CTA claro (`👇`, `💬`, link na bio).
-- 8–12 hashtags relevantes ao final.
+- **Sem hashtags nas legendas** (`hashtags: []` no `meta.json`).
+- Fecho padrão: em post de mostra de produtos, `🛒 Acesse e faça sua reserva em gotadecura.com.br!`; em todos, a assinatura `Gota de Cura, cuidando com amor 💖` como última linha. Nos demais CTAs (`👇`, `💬`) vale o contexto do post.
 
 Emojis úteis por contexto:
 | Contexto | Emojis |
@@ -416,7 +418,7 @@ Site: gotadecura.com.br (blog em gotadecura.com.br/blog, versão em inglês em g
 
 Visitas à chácara pela página /visitas do site.
 
-Hashtags fixas: #gotadecura #oleosessenciais #hidrolatos #aromaterapia
+Hashtags: não usar nas legendas.
 <!-- /definicao:contato -->
 
 ### Datas e frequência

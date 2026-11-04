@@ -24,6 +24,7 @@ Cada template tem um `.md` nesta pasta e previews em `previews/<id>/`.
 | `destaque-faixa` | [Destaque com faixa de foto](destaque-faixa.md) | Uma afirmação de confiança que leva para uma página do site (laudos, sem agrotóxico, água de nascente). | Único | Exige foto (faixa) | 1 · Base |
 | `ficha-da-planta` | [Ficha da planta](ficha-da-planta.md) | Lançamento ou apresentação de uma planta do catálogo, com nome popular e científico em destaque. | Carrossel 4–5 **ou** único | Exige foto da planta | 1 · Base |
 | `ficha-do-produto` | [Ficha do produto](ficha-do-produto.md) | Apresentar um produto pronto que não é uma planta só (sabonete, pomada, spray, Gotinha), com o que é e como usar. | Carrossel 4–5 **ou** único | Exige foto do produto | 1 · Base |
+| `foto-selo` | [Foto com selo](foto-selo.md) | Uma foto forte que se explica sozinha (Gotinha com os produtos, banca, canteiro), com o selo da gota (sem círculo) no canto e, se precisar, uma frase curta no rodapé. | Único | Exige 1 foto vertical | 1 · Base |
 | `novidade-do-site` | [Novidade do site](novidade-do-site.md) | Anunciar uma mudança no próprio site (idioma novo, página ou função nova), mostrada com 1 a 3 cartões gráficos. | Único | Não usa foto: cartões ilustrados | 2 · Expressivo |
 | `bastidores` | [Bastidores da chácara](bastidores.md) | Contar um dia ou um processo da chácara (destilação, colheita, visita), alternando cena e explicação. | Carrossel 4–7 | Exige 2+ fotos | 1 · Base |
 | `mito-ou-verdade` | [Mito ou verdade](mito-ou-verdade.md) | Desmentir uma crença comum em uma frase de mito e uma de resposta. | Único | Não usa foto | 2 · Expressivo |
@@ -50,9 +51,9 @@ Cada template tem um `.md` nesta pasta e previews em `previews/<id>/`.
 |---|---|---|
 | ![](previews/ficha-do-produto/slide-01.png) | ![](previews/ficha-do-produto/unico.png) | ![](previews/lista-ilustrada/slide-02.png) |
 
-| `novidade-do-site` |
-|---|
-| ![](previews/novidade-do-site/slide-01.png) |
+| `novidade-do-site` | `foto-selo` | `foto-selo` (com faixa) |
+|---|---|---|
+| ![](previews/novidade-do-site/slide-01.png) | ![](previews/foto-selo/unico.png) | ![](previews/foto-selo/com-faixa.png) |
 
 | `frase-gigante` | `recorte-botanico` | `rotulo-laudo` |
 |---|---|---|
@@ -84,6 +85,7 @@ Sinais no pedido que apontam para um template. É só **sugestão**: a skill sem
 | "bastidores", "dia de destilação", "colheita", "visita guiada", "como é feito", fotos da chácara | `bastidores` |
 | "mito", "verdade", "é verdade que", "será que", crença comum | `mito-ou-verdade` |
 | "receita", "como fazer", "passo a passo curto", "cubos de gelo", "spray caseiro", uso do hidrolato em até 3 passos | `receita-rapida` |
+| "só a foto", "foto sozinha", "foto com o selo", foto forte que dispensa texto | `foto-selo` |
 | foto vertical da chácara, "convite", "uma manhã na chácara", "planta da estação" com título curto | `janela-em-arco` |
 | "frase de impacto", "lema", "manifesto", "frase da chácara", frase curta sem dado | `frase-gigante` |
 | nome de planta + "destaque", "chegou", "safra", e há foto recortada | `recorte-botanico` |

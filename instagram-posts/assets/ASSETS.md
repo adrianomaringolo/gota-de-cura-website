@@ -19,3 +19,4 @@ migrados.
 | `logos/logo-mono.svg` | Logotipo em `currentColor` | Colar inline e colorir por contexto; uma cor | Só Roxo Profundo sobre claro ou branco sobre escuro |
 | `logos/simbolo.svg` | Só a gota, `currentColor` | Ícones, assinatura | Tamanho mínimo 8 mm / 24 px |
 | `logos/avatar.svg` | Foto de perfil: gota branca sobre `#503484` (também `avatar-320.png`) | Instagram | Testado a 32 px |
+| `logos/selo-gota.png` | Só a gota em degradê, fundo transparente (416×417) | Selo no canto inferior direito de fotos (template `foto-selo`) | 300px, a 24px das bordas. Sem círculo atrás. Só em canto claro |

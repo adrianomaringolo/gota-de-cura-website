@@ -98,13 +98,7 @@ const captionMd = `# ${meta.title}
 
 ## Legenda
 
-${meta.caption}
-
----
-
-## Hashtags
-
-${hashtags}
+${meta.caption}${hashtags ? `\n\n---\n\n## Hashtags\n\n${hashtags}` : ''}
 `
 
 const captionPath = path.join(outputDir, 'caption.md')

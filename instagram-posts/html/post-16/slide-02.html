@@ -18,9 +18,11 @@
   .in { position: relative; height: 100%; padding: 30px 44px 100px; display: flex; flex-direction: column; }
   .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #5f5b68; }
   h2 { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 96px; line-height: 0.96; letter-spacing: -0.04em; color: #503484; margin-top: 26px; max-width: 11ch; }
-  .rows { margin-top: 60px; }
-  .row { display: flex; align-items: baseline; gap: 14px; padding: 26px 0; border-top: 2px solid #dfdce6; }
-  .row:last-child { border-bottom: 2px solid #dfdce6; }
+  .rows { margin-top: 48px; }
+  .item { border-top: 2px solid #dfdce6; padding: 26px 0 30px; }
+  .item:last-child { border-bottom: 2px solid #dfdce6; }
+  .row { display: flex; align-items: baseline; gap: 14px; }
+  .d { font-size: 26px; line-height: 1.4; color: #54505f; margin-top: 6px; }
   .row .n { font-family: 'Petrona', serif; font-weight: 600; font-size: 40px; color: #211c2b; }
   .row .dots { flex: 1; border-bottom: 3px dotted #b9b3c7; transform: translateY(-8px); }
   .row .v { font-family: 'Fraunces', serif; font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144; font-weight: 800; font-size: 96px; letter-spacing: -0.04em; color: #a24112; line-height: 1; }
@@ -37,9 +39,9 @@
     <div class="eyebrow">Laudo de cromatografia · Melaleuca · 2026</div>
     <h2>Os três que mais aparecem</h2>
     <div class="rows">
-      <div class="row"><span class="n">Gama-terpineno</span><span class="dots"></span><span class="v">29,3<small>%</small></span></div>
-      <div class="row brand"><span class="n">Terpinen-4-ol</span><span class="dots"></span><span class="v">28,9<small>%</small></span></div>
-      <div class="row"><span class="n">Alfa-terpineno</span><span class="dots"></span><span class="v">12,8<small>%</small></span></div>
+      <div class="item"><div class="row"><span class="n">Gama-terpineno</span><span class="dots"></span><span class="v">29,3<small>%</small></span></div><div class="d">Monoterpeno com ação antioxidante.</div></div>
+      <div class="item"><div class="row brand"><span class="n">Terpinen-4-ol</span><span class="dots"></span><span class="v">28,9<small>%</small></span></div><div class="d">O mais estudado da melaleuca, com ação antimicrobiana.</div></div>
+      <div class="item"><div class="row"><span class="n">Alfa-terpineno</span><span class="dots"></span><span class="v">12,8<small>%</small></span></div><div class="d">Antioxidante. É o que mais oxida com o tempo.</div></div>
     </div>
     <div class="note">O laudo mostra a composição do óleo. Não promete efeito.</div>
   </div>
