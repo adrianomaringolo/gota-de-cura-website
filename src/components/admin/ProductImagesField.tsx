@@ -74,6 +74,27 @@ export function ProductImagesField({
 
   const remove = (index: number) => onChange(value.filter((_, i) => i !== index))
 
+  const download = async (src: string, index: number) => {
+    try {
+      const response = await fetch(src)
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      const blob = await response.blob()
+      const extension = blob.type.split('/')[1]?.split('+')[0] || 'jpg'
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `${slugify(productName) || 'produto'}-${index + 1}.${extension}`
+      document.body.appendChild(link)
+      link.click()
+      link.remove()
+      URL.revokeObjectURL(url)
+    } catch (error) {
+      // Storage sem CORS: abre a imagem original para o usuário salvar.
+      console.error('[ProductImagesField] Falha ao baixar', error)
+      window.open(src, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
     <div className="flex flex-col gap-3">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -153,9 +174,18 @@ export function ProductImagesField({
               )}
               <button
                 type="button"
+                onClick={() => void download(src, index)}
+                aria-label="Baixar imagem"
+                title="Baixar imagem"
+                className="ml-auto grid h-7 w-7 place-items-center rounded-full bg-white/90 text-ink hover:bg-white"
+              >
+                <DownloadIcon />
+              </button>
+              <button
+                type="button"
                 onClick={() => remove(index)}
                 aria-label="Remover imagem"
-                className="ml-auto rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-danger hover:bg-white"
+                className="rounded-full bg-white/90 px-2.5 py-1 text-xs font-medium text-danger hover:bg-white"
               >
                 Remover
               </button>
@@ -236,6 +266,32 @@ function Chevron({ direction }: { direction: 'left' | 'right' }) {
       aria-hidden="true"
     >
       <path d={direction === 'left' ? 'M15 6l-6 6 6 6' : 'M9 6l6 6-6 6'} />
+    </svg>
+  )
+}
+
+function slugify(text: string) {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+function DownloadIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-4 w-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 4v11M7 11l5 5 5-5M5 20h14" />
     </svg>
   )
 }
