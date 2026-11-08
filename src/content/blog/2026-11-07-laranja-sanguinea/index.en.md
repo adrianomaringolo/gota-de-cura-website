@@ -11,12 +11,14 @@ tldr:
   - 'The sweet orange arose in southern China and reached Europe along Portuguese trade routes. The blood variety appeared later, in Sicily, and Tarocco, Moro and Sanguinello are the three best known.'
   - 'The color depends on cold: without cool nights, the flesh stays orange. That is why the fruit is hard to grow outside regions like Sicily.'
   - 'The hydrosol carries the water-soluble part of the plant and can go straight on the skin: a facial toner, a refreshing mist, a light everyday deodorant and a room scent.'
+  - 'Our distillation uses the leaves of the orange tree, not the fruit peel. That is why neither the hydrosol nor the essential oil is photosensitizing, which keeps skin use safe.'
+  - 'The chromatography of our essential oil shows citronellal, linalool and limonene as the main components, a profile quite different from peel oil.'
   - 'We also offer the essential oil ready-diluted at 2% in MCT (two drops in 5 ml), ready to use on the body.'
   - 'What is said about the hydrosol (invigorating, calming, toning) comes from tradition and personal experience, not clinical studies. Internal use only with professional guidance.'
   - 'Nothing here replaces treatment. If in doubt, especially with children, pregnancy or diagnosed conditions, talk to a professional.'
 ---
 
-Anyone cutting a blood orange for the first time tends to step back. On the outside it looks like an ordinary orange, sometimes with a reddish blush on the peel. Inside, the flesh runs from pink to wine, as if someone had painted the fruit. The smell, though, is pure orange: sweet, fresh, with a slightly fruity undertone. This text tells where it comes from, why it has that color and how to use the hydrosol safely.
+Anyone cutting a blood orange for the first time tends to step back. On the outside it looks like an ordinary orange, sometimes with a reddish blush on the peel. Inside, the flesh runs from pink to wine, as if someone had painted the fruit. The smell, though, is pure orange: sweet, fresh, with a slightly fruity undertone. This text tells where it comes from, why it has that color, what is different about our distillation and how to use the hydrosol safely.
 
 ## What the blood orange is
 
@@ -54,6 +56,12 @@ Outside Sicily it grows in places like Spain, the United States, Japan, South Af
 
 The orange tree is small to medium in size, with glossy dark green leaves and very fragrant white flowers, the orange blossoms that give rise to another well-known scent. The fruit is rich in **vitamin C** and, in the blood orange, also carries anthocyanins, antioxidants studied in the lab. A word of honesty, as always: eating the fruit is one thing, using the hydrosol is another. The benefits of the flesh do not automatically carry over into the bottle.
 
+## We distill the leaves, not the peel
+
+At Gota de Cura, blood orange hydrosol and essential oil come from distilling the **leaves** of the orange tree, not the fruit or its peel. That matters for anyone using it on the skin.
+
+Photosensitivity is an exaggerated skin reaction to sunlight after contact with certain substances, the furanocoumarins. They turn up in some citrus oils taken from the peel, especially the cold-pressed ones, which is why people are told to avoid the sun after using them. Because our material comes from the leaves, **neither the hydrosol nor the essential oil is photosensitizing**, which keeps skin use safe. For a deeper look, see Via Aroma's article on [photosensitizing or phototoxic essential oils](https://viaaroma.blog/2022/04/05/o-que-sao-oleos-essenciais-fotossensibilizantes-ou-fototoxicos/) (in Portuguese).
+
 ## Blood orange hydrosol
 
 Distillation gives two products at once. The **essential oil** carries the fat-soluble substances, and the **hydrosol** carries the water-soluble ones, in a lighter, gentler profile, with the plant's fresh citrus character and little of the oil's concentration. We explain the difference in more detail in [essential oil or hydrosol, what is the difference](/en/blog/oleos-essenciais-e-hidrolatos-diferencas).
@@ -85,14 +93,24 @@ Misted into the air, on bed linen or in the car, or in an ultrasonic diffuser, i
 
 We also offer blood orange essential oil (*Citrus sinensis*) in a **ready-diluted** version: **blood orange essential oil (2% dilution in MCT), 5 ml bottle**. That is two drops of essential oil for every 5 ml of MCT, medium-chain triglyceride, a light fractionated vegetable oil with almost no scent. You do not have to do the math or count drops: the dilution is already done. To understand how and why we dilute, see our page on [essential oil dilutions](/en/diluicoes-oleos-essenciais).
 
-A 2% dilution is commonly suggested for use on the body, in massage and for localized application. Even so, do a patch test first, keep it away from eyes, ears and mucous membranes, and remember that citrus essential oil can make skin more sensitive to the sun: avoid sun exposure right after applying it. Essential oil must **never be ingested**.
+A 2% dilution is commonly suggested for use on the body, in massage and for localized application. Even so, do a patch test first, keep it away from eyes, ears and mucous membranes, and remember that, because it is made from leaves and not peel, our oil is not photosensitizing. Essential oil must **never be ingested**.
+
+## What the chromatography shows
+
+We sent the essential oil for gas chromatography coupled to mass spectrometry (GC-MS), the technique that separates and identifies each substance present. The report, from October 2024, is a qualitative analysis, and the percentages are each compound's share of the total chromatogram area. About twenty compounds were identified, and three of them make up more than 60% of the total:
+
+- **Citronellal**, about 24%, with a fresh citrus scent.
+- **Linalool**, about 20%, floral and soft.
+- **D-limonene**, about 20%, the best-known orange scent.
+
+In smaller amounts there are sabinene (about 7.6%), benzyl benzoate, trans-beta-ocimene, geranial and neral (about 3 to 5% each). It is quite different from orange peel oil, where limonene is usually almost the whole story: the leaf oil has more linalool and citronellal, which fits the greener, more floral scent of our bottle. See the full report on our [chromatography page](/en/cromatografias).
 
 ## Safety precautions
 
 - **It is water, and it spoils.** Keep it in the fridge, in a bottle with a spray valve (so you do not wet your finger), away from light, and discard if it turns cloudy or the smell changes.
 - **Do a patch test** on a small area of skin before first use and wait a few hours, especially if you are allergic to citrus.
 - **Avoid eyes, ears and mucous membranes.**
-- **Citrus essential oil needs more care** than the hydrosol: always diluted, never ingested, and watch for photosensitivity, because some citrus oils can stain skin exposed to the sun.
+- **Essential oil needs more care** than the hydrosol: always diluted and never ingested. Ours is not photosensitizing because it comes from leaves. Peel-based citrus oils from other sources can stain skin exposed to the sun, so check the origin if you use another one.
 - **Pets.** Citrus scents can bother cats and dogs. Be careful with diffusers and sprays in closed rooms where they stay.
 
 This text does not replace an individual assessment. **If in doubt, always consult a professional**, especially if you are pregnant, breastfeeding, thinking of using it with small children or have a diagnosed health condition. Hydrosol does not replace prescribed treatment. Lab reports for each batch are on our [chromatography page](/en/cromatografias): what is on the label is what is in the bottle.
@@ -101,6 +119,8 @@ This text does not replace an individual assessment. **If in doubt, always consu
 
 - Butelli, E. et al. [Retrotransposons control fruit-specific, cold-dependent accumulation of anthocyanins in blood oranges](https://pmc.ncbi.nlm.nih.gov/articles/3336134). *The Plant Cell*, 2012.
 - John Innes Centre. [Blood Oranges](https://www.jic.ac.uk/research-impact/blood-oranges/).
+- Via Aroma Blog. [O que são óleos essenciais fotossensibilizantes ou fototóxicos](https://viaaroma.blog/2022/04/05/o-que-sao-oleos-essenciais-fotossensibilizantes-ou-fototoxicos/) (in Portuguese). 2022.
+- GC-MS technical report on blood orange essential oil (*Citrus sinensis*), issued 18 Oct 2024.
 - Gota de Cura. [Essential oil or hydrosol, what is the difference](/en/blog/oleos-essenciais-e-hidrolatos-diferencas).
 
 ## Where to find us
