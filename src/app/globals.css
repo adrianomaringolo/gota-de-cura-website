@@ -352,3 +352,17 @@
 #post-article[data-reading='true'] [data-post-text] :is(h2, h3) {
   line-height: 1.3;
 }
+
+/* Reading mode also takes the site header away; the post's own title band loses
+   the room it kept for it, and the reading toolbar sticks to the top edge. */
+body:has(#post-article[data-reading='true']) [data-site-header] {
+  display: none;
+}
+
+body:has(#post-article[data-reading='true']) [data-post-hero] > div:last-child {
+  padding-top: 3rem;
+}
+
+body:has(#post-article[data-reading='true']) [data-reading-toolbar] {
+  top: 0.75rem;
+}

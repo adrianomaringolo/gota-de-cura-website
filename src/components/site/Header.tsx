@@ -55,6 +55,7 @@ export function Header() {
       </a>
 
       <header
+        data-site-header
         className={cn(
           'fixed inset-x-0 top-0 z-[var(--z-sticky)] transition-all duration-300 ease-[var(--ease-out-quart)]',
           // Solid at rest: a translucent bar over the dark hero bands reads as

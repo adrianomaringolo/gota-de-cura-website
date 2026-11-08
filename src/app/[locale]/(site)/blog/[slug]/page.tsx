@@ -133,7 +133,10 @@ export default async function PostPage({ params }: PostPageProps) {
     <>
       <JsonLd schema={schema} />
 
-      <header className="relative overflow-hidden bg-brand-darkest text-white">
+      <header
+        data-post-hero
+        className="relative overflow-hidden bg-brand-darkest text-white"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -top-40 -right-24 h-96 w-96 rounded-full bg-brand-lift/25 blur-3xl"
@@ -217,27 +220,46 @@ export default async function PostPage({ params }: PostPageProps) {
           {(post.tldr.length > 0 || post.excerpt) && (
             <aside
               data-reading-hide
-              className="mb-12 rounded-2xl border border-brand/20 bg-brand-tint px-6 py-5"
+              className="mb-12 rounded-2xl border border-brand/20 bg-brand-tint"
             >
-              <p className="text-2xs font-bold tracking-[0.14em] text-brand uppercase">
-                {t('summary')}
-              </p>
-              {post.tldr.length > 0 ? (
-                <ul className="mt-3 space-y-2 text-base leading-relaxed text-ink-soft">
-                  {post.tldr.map((point) => (
-                    <li key={point} className="flex items-start gap-2.5">
-                      <span aria-hidden="true" className="mt-2 text-xs text-brand/60">
-                        ▸
-                      </span>
-                      <span>{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-3 text-base leading-relaxed text-ink-soft">
-                  {post.excerpt}
-                </p>
-              )}
+              {/* Collapsed by default: a native <details>, so it works without JS. */}
+              <details className="group">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-6 py-4 marker:content-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
+                  <span className="text-2xs font-bold tracking-[0.14em] text-brand uppercase">
+                    {t('summary')}
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-5 w-5 shrink-0 text-brand transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="m6 9 6 6 6-6" />
+                  </svg>
+                </summary>
+                <div className="px-6 pb-5">
+                  {post.tldr.length > 0 ? (
+                    <ul className="space-y-2 text-base leading-relaxed text-ink-soft">
+                      {post.tldr.map((point) => (
+                        <li key={point} className="flex items-start gap-2.5">
+                          <span aria-hidden="true" className="mt-2 text-xs text-brand/60">
+                            ▸
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-base leading-relaxed text-ink-soft">
+                      {post.excerpt}
+                    </p>
+                  )}
+                </div>
+              </details>
             </aside>
           )}
 

@@ -25,14 +25,37 @@ const readableBlocks = (): HTMLElement[] =>
     document.querySelectorAll<HTMLElement>('[data-post-text] :is(h2, h3, p, li, th, td)'),
   ).filter((el) => !el.querySelector('li'))
 
+/** macOS ships joke/novelty voices that declare pt-BR too; never narrate with them. */
+const NOVELTY =
+  /\b(eddy|flo|grandma|grandpa|reed|rocko|sandy|shelley|bad news|bahh|bells|boing|bubbles|cellos|albert|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|kathy|ralph)\b/i
+
+/** Names that mark a neural / premium voice on the common platforms. */
+const QUALITY = /natural|neural|online|premium|enhanced|google|siri/i
+
+/**
+ * Best voice for the text's language: exact locale first (pt-BR over pt-PT),
+ * then neural/premium voices, then on-device ones (no network hiccups mid-read).
+ * Novelty voices are excluded. Returns undefined to let the browser pick.
+ */
 const pickVoice = (lang: string): SpeechSynthesisVoice | undefined => {
   const voices = window.speechSynthesis.getVoices()
   const prefix = lang.split('-')[0].toLowerCase()
 
-  return (
-    voices.find((voice) => voice.lang.replace('_', '-') === lang) ??
-    voices.find((voice) => voice.lang.toLowerCase().startsWith(prefix))
-  )
+  const score = (voice: SpeechSynthesisVoice) => {
+    const code = voice.lang.replace('_', '-')
+    let points = 0
+    if (code.toLowerCase() === lang.toLowerCase()) points += 100
+    else if (code.toLowerCase().startsWith(prefix)) points += 50
+    if (QUALITY.test(voice.name)) points += 30
+    if (voice.localService) points += 5
+    if (voice.default) points += 1
+    return points
+  }
+
+  return voices
+    .filter((voice) => voice.lang.toLowerCase().startsWith(prefix))
+    .filter((voice) => !NOVELTY.test(voice.name))
+    .sort((a, b) => score(b) - score(a))[0]
 }
 
 const Icon = ({ children }: { children: React.ReactNode }) => (
