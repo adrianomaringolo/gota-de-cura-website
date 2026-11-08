@@ -13,6 +13,7 @@ tldr:
   - 'O hidrolato leva a parte hidrossolúvel da planta e pode ser usado direto na pele: tônico facial, borrifo refrescante, desodorante leve do dia a dia e aroma de ambiente.'
   - 'A nossa destilação é feita das folhas da laranjeira, e não da casca do fruto. Por isso nem o hidrolato nem o óleo essencial são fotossensibilizantes, o que garante o uso seguro na pele.'
   - 'A cromatografia do nosso óleo essencial mostra citronelal, linalol e limoneno como principais componentes, um perfil bem diferente do óleo da casca.'
+  - 'Na visão vibracional da aromaterapia, a laranja sanguínea é associada ao estímulo, ao perdão e à renovação dos sentimentos. É uma leitura simbólica, não um efeito comprovado.'
   - 'Temos também o óleo essencial já diluído a 2% em TCM (duas gotas em 5 ml), pronto para usar no corpo.'
   - 'O que se diz do hidrolato (revitalizante, calmante, tônico) vem da tradição e da experiência de uso, não de estudos clínicos. Uso interno só com orientação profissional.'
   - 'Nada aqui substitui tratamento. Em caso de dúvida, principalmente com crianças, gestantes ou doenças diagnosticadas, consulte um profissional da área.'
@@ -88,6 +89,14 @@ Há quem tome o hidrolato diluído em água depois das refeições, pelo uso tra
 ### Para o ambiente
 
 Borrifado no ar, em roupas de cama ou no carro, ou no difusor ultrassônico, é uma forma simples de levar o aroma de laranja para o dia a dia.
+
+## O olhar vibracional
+
+Além do uso no corpo, a aromaterapia tem uma leitura simbólica das plantas, a chamada visão vibracional. É um campo de tradição e de sensibilidade, não de comprovação científica, e é assim que o apresentamos. O Marcelo, que destila as plantas aqui na chácara, resume o que essa leitura diz da laranja sanguínea:
+
+> "Na visão vibracional da aromaterapia, nós associamos a laranja sanguínea ao estímulo, ao perdão, à remoção de mágoas e rancores, à renovação dos sentimentos, dando lugar ao acolhimento e a uma leveza maior no coração."
+
+Para ele, o hidrolato é antes de tudo um convite a transformar o autocuidado em um momento de carinho com você: respirar, perceber como você se sente e se permitir abrir espaço para momentos mais luminosos e sentimentos mais leves. Um borrifo no rosto, de olhos fechados, já pode ser esse momento.
 
 ## O óleo essencial: já diluído e pronto para usar
 

@@ -13,6 +13,7 @@ tldr:
   - 'The hydrosol carries the water-soluble part of the plant and can go straight on the skin: a facial toner, a refreshing mist, a light everyday deodorant and a room scent.'
   - 'Our distillation uses the leaves of the orange tree, not the fruit peel. That is why neither the hydrosol nor the essential oil is photosensitizing, which keeps skin use safe.'
   - 'The chromatography of our essential oil shows citronellal, linalool and limonene as the main components, a profile quite different from peel oil.'
+  - 'In the vibrational view of aromatherapy, the blood orange is linked to stimulation, forgiveness and the renewal of feelings. It is a symbolic reading, not a proven effect.'
   - 'We also offer the essential oil ready-diluted at 2% in MCT (two drops in 5 ml), ready to use on the body.'
   - 'What is said about the hydrosol (invigorating, calming, toning) comes from tradition and personal experience, not clinical studies. Internal use only with professional guidance.'
   - 'Nothing here replaces treatment. If in doubt, especially with children, pregnancy or diagnosed conditions, talk to a professional.'
@@ -88,6 +89,14 @@ Some people take the hydrosol diluted in water after meals, following the tradit
 ### For your space
 
 Misted into the air, on bed linen or in the car, or in an ultrasonic diffuser, it is a simple way to bring the scent of orange into everyday life.
+
+## The vibrational view
+
+Beyond use on the body, aromatherapy has a symbolic reading of plants, the so-called vibrational view. It belongs to tradition and sensitivity, not to scientific proof, and that is how we present it. Marcelo, who distills the plants here at the farm, sums up what this reading says about the blood orange:
+
+> "In the vibrational view of aromatherapy, we associate the blood orange with stimulation, forgiveness, letting go of hurt and resentment, the renewal of feelings, making room for acceptance and a lighter heart."
+
+For him, the hydrosol is above all an invitation to turn self-care into a moment of kindness toward yourself: to breathe, notice how you feel and allow space for brighter moments and lighter feelings. One mist on the face, eyes closed, can already be that moment.
 
 ## The essential oil: already diluted and ready to use
 
