@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Container } from '@/components/site/Section'
 import { PostBody } from '@/components/blog/PostBody'
+import { PostReader } from '@/components/blog/PostReader'
 import { PostCard } from '@/components/blog/PostCard'
 import { JsonLd } from '@/components/site/JsonLd'
 import { Link } from '@/i18n/navigation'
@@ -196,6 +197,7 @@ export default async function PostPage({ params }: PostPageProps) {
       </header>
 
       <article
+        id="post-article"
         lang={untranslated ? contentLocale : undefined}
         className="bg-canvas py-14 lg:py-20"
       >
@@ -207,12 +209,16 @@ export default async function PostPage({ params }: PostPageProps) {
               width={1200}
               height={630}
               priority
+              data-reading-hide
               className="mb-12 w-full rounded-2xl"
             />
           )}
 
           {(post.tldr.length > 0 || post.excerpt) && (
-            <aside className="mb-12 rounded-2xl border border-brand/20 bg-brand-tint px-6 py-5">
+            <aside
+              data-reading-hide
+              className="mb-12 rounded-2xl border border-brand/20 bg-brand-tint px-6 py-5"
+            >
               <p className="text-2xs font-bold tracking-[0.14em] text-brand uppercase">
                 {t('summary')}
               </p>
@@ -234,6 +240,12 @@ export default async function PostPage({ params }: PostPageProps) {
               )}
             </aside>
           )}
+
+          <PostReader
+            minutes={post.readingTime}
+            title={post.title}
+            lang={intlLocale(contentLocale)}
+          />
 
           <PostBody content={post.content} />
         </div>

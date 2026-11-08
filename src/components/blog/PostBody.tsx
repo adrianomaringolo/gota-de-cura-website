@@ -49,6 +49,7 @@ export function PostBody({ content }: { content: string }) {
       {headings.length > 0 && (
         <nav
           aria-label={t('toc')}
+          data-reading-hide
           className="mb-10 rounded-2xl border border-line bg-canvas-sunk px-6 py-5"
         >
           <p className="text-2xs font-bold tracking-[0.14em] text-ink-muted uppercase">
@@ -69,137 +70,139 @@ export function PostBody({ content }: { content: string }) {
         </nav>
       )}
 
-      <ReactMarkdown
-        // react-markdown ships CommonMark only, which has no tables — without
-        // gfm the `table` renderers below could never fire.
-        remarkPlugins={[remarkGfm]}
-        components={{
-          // Demoted to h2: the page title is already the document's only h1, and
-          // a `#` in the body must not compete with it in the outline.
-          h1: ({ children }) => (
-            <h2
-              id={idByText[textOf(children)]}
-              className="mt-12 mb-4 scroll-mt-28 font-display text-2xl font-semibold text-ink first:mt-0"
-            >
-              {children}
-            </h2>
-          ),
-          h2: ({ children }) => (
-            <h2
-              id={idByText[textOf(children)]}
-              className="mt-12 mb-4 scroll-mt-28 font-display text-2xl font-semibold text-ink first:mt-0"
-            >
-              {children}
-            </h2>
-          ),
-          h3: ({ children }) => (
-            <h3
-              id={idByText[textOf(children)]}
-              className="mt-9 mb-3 scroll-mt-28 font-display text-xl font-semibold text-ink"
-            >
-              {children}
-            </h3>
-          ),
-          p: ({ children }) => (
-            <p className="mb-5 max-w-[68ch] text-lg leading-relaxed text-ink-soft">
-              {children}
-            </p>
-          ),
-          ul: ({ children }) => (
-            <ul className="mb-5 max-w-[68ch] list-disc space-y-2 pl-6 text-lg leading-relaxed text-ink-soft">
-              {children}
-            </ul>
-          ),
-          ol: ({ children }) => (
-            <ol className="mb-5 max-w-[68ch] list-decimal space-y-2 pl-6 text-lg leading-relaxed text-ink-soft">
-              {children}
-            </ol>
-          ),
-          strong: ({ children }) => (
-            <strong className="font-semibold text-ink">{children}</strong>
-          ),
-          a: ({ children, href }) => {
-            const external = href?.startsWith('http')
-
-            return (
-              <a
-                href={href}
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noreferrer' : undefined}
-                className="text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
+      <div data-post-text>
+        <ReactMarkdown
+          // react-markdown ships CommonMark only, which has no tables — without
+          // gfm the `table` renderers below could never fire.
+          remarkPlugins={[remarkGfm]}
+          components={{
+            // Demoted to h2: the page title is already the document's only h1, and
+            // a `#` in the body must not compete with it in the outline.
+            h1: ({ children }) => (
+              <h2
+                id={idByText[textOf(children)]}
+                className="mt-12 mb-4 scroll-mt-28 font-display text-2xl font-semibold text-ink first:mt-0"
               >
                 {children}
-              </a>
-            )
-          },
-          blockquote: ({ children }) => (
-            <blockquote className="my-8 border-l-2 border-brand/30 pl-5 text-lg leading-relaxed text-ink-muted italic [&>p]:mb-0">
-              {children}
-            </blockquote>
-          ),
-          hr: () => <hr className="my-10 border-line" />,
-          // No syntax highlighting: this blog is about aromatherapy, so a
-          // preformatted block is a measurement or a recipe, not source code.
-          // It reads as a quiet aside in the page's own palette.
-          code: ({ children, className }) =>
-            className?.includes('language-') ? (
-              <code className="block font-mono text-sm leading-relaxed text-ink">
-                {children}
-              </code>
-            ) : (
-              <code className="rounded bg-brand-tint px-1.5 py-0.5 font-mono text-[0.9em] text-brand">
-                {children}
-              </code>
+              </h2>
             ),
-          pre: ({ children }) => (
-            <pre className="mb-6 overflow-x-auto rounded-2xl border border-line bg-canvas-sunk px-5 py-4">
-              {children}
-            </pre>
-          ),
-          table: ({ children }) => (
-            <div className="mb-6 overflow-x-auto rounded-xl border border-line">
-              <table className="w-full border-collapse text-left text-sm">
+            h2: ({ children }) => (
+              <h2
+                id={idByText[textOf(children)]}
+                className="mt-12 mb-4 scroll-mt-28 font-display text-2xl font-semibold text-ink first:mt-0"
+              >
                 {children}
-              </table>
-            </div>
-          ),
-          th: ({ children }) => (
-            <th className="border-b border-line bg-canvas-sunk px-4 py-3 font-semibold text-ink">
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td className="border-b border-line px-4 py-3 align-top text-ink-soft">
-              {children}
-            </td>
-          ),
-          // eslint-disable-next-line @next/next/no-img-element -- post images are
-          // authored in markdown, so their intrinsic size is not known here.
-          // `![alt](src "half")` renders the image at half width, centred —
-          // portrait product shots would otherwise fill the whole column.
-          img: ({ src, alt, title }) => (
-            <span className="my-8 block">
-              <img
-                src={typeof src === 'string' ? src : undefined}
-                alt={alt ?? ''}
-                loading="lazy"
-                className={
-                  title === 'half'
-                    ? 'mx-auto w-full rounded-2xl sm:w-1/2'
-                    : 'w-full rounded-2xl'
-                }
-              />
-              {alt && (
-                <span className="mt-2 block text-center text-sm text-ink-muted italic">
-                  {alt}
-                </span>
-              )}
-            </span>
-          ),
-        }}
-      >
-        {content}
-      </ReactMarkdown>
+              </h2>
+            ),
+            h3: ({ children }) => (
+              <h3
+                id={idByText[textOf(children)]}
+                className="mt-9 mb-3 scroll-mt-28 font-display text-xl font-semibold text-ink"
+              >
+                {children}
+              </h3>
+            ),
+            p: ({ children }) => (
+              <p className="mb-5 max-w-[68ch] text-lg leading-relaxed text-ink-soft">
+                {children}
+              </p>
+            ),
+            ul: ({ children }) => (
+              <ul className="mb-5 max-w-[68ch] list-disc space-y-2 pl-6 text-lg leading-relaxed text-ink-soft">
+                {children}
+              </ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="mb-5 max-w-[68ch] list-decimal space-y-2 pl-6 text-lg leading-relaxed text-ink-soft">
+                {children}
+              </ol>
+            ),
+            strong: ({ children }) => (
+              <strong className="font-semibold text-ink">{children}</strong>
+            ),
+            a: ({ children, href }) => {
+              const external = href?.startsWith('http')
+
+              return (
+                <a
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noreferrer' : undefined}
+                  className="text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
+                >
+                  {children}
+                </a>
+              )
+            },
+            blockquote: ({ children }) => (
+              <blockquote className="my-8 border-l-2 border-brand/30 pl-5 text-lg leading-relaxed text-ink-muted italic [&>p]:mb-0">
+                {children}
+              </blockquote>
+            ),
+            hr: () => <hr className="my-10 border-line" />,
+            // No syntax highlighting: this blog is about aromatherapy, so a
+            // preformatted block is a measurement or a recipe, not source code.
+            // It reads as a quiet aside in the page's own palette.
+            code: ({ children, className }) =>
+              className?.includes('language-') ? (
+                <code className="block font-mono text-sm leading-relaxed text-ink">
+                  {children}
+                </code>
+              ) : (
+                <code className="rounded bg-brand-tint px-1.5 py-0.5 font-mono text-[0.9em] text-brand">
+                  {children}
+                </code>
+              ),
+            pre: ({ children }) => (
+              <pre className="mb-6 overflow-x-auto rounded-2xl border border-line bg-canvas-sunk px-5 py-4">
+                {children}
+              </pre>
+            ),
+            table: ({ children }) => (
+              <div className="mb-6 overflow-x-auto rounded-xl border border-line">
+                <table className="w-full border-collapse text-left text-sm">
+                  {children}
+                </table>
+              </div>
+            ),
+            th: ({ children }) => (
+              <th className="border-b border-line bg-canvas-sunk px-4 py-3 font-semibold text-ink">
+                {children}
+              </th>
+            ),
+            td: ({ children }) => (
+              <td className="border-b border-line px-4 py-3 align-top text-ink-soft">
+                {children}
+              </td>
+            ),
+            // eslint-disable-next-line @next/next/no-img-element -- post images are
+            // authored in markdown, so their intrinsic size is not known here.
+            // `![alt](src "half")` renders the image at half width, centred —
+            // portrait product shots would otherwise fill the whole column.
+            img: ({ src, alt, title }) => (
+              <span className="my-8 block">
+                <img
+                  src={typeof src === 'string' ? src : undefined}
+                  alt={alt ?? ''}
+                  loading="lazy"
+                  className={
+                    title === 'half'
+                      ? 'mx-auto w-full rounded-2xl sm:w-1/2'
+                      : 'w-full rounded-2xl'
+                  }
+                />
+                {alt && (
+                  <span className="mt-2 block text-center text-sm text-ink-muted italic">
+                    {alt}
+                  </span>
+                )}
+              </span>
+            ),
+          }}
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
     </>
   )
 }

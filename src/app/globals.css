@@ -324,3 +324,31 @@
     background: white;
   }
 }
+
+/* Post reading aids (PostReader). The block being read aloud is lifted off the
+   page; reading mode swaps to a warm paper tone and a larger, airier measure. */
+[data-speaking='true'] {
+  background: var(--color-brand-tint);
+  box-shadow:
+    -0.5rem 0 0 var(--color-brand-tint),
+    0.5rem 0 0 var(--color-brand-tint);
+  border-radius: 0.25rem;
+}
+
+#post-article[data-reading='true'] {
+  background: oklch(0.97 0.022 85);
+}
+
+#post-article[data-reading='true'] [data-reading-hide] {
+  display: none;
+}
+
+#post-article[data-reading='true'] [data-post-text] :is(p, li) {
+  font-size: 1.3125rem;
+  line-height: 1.95;
+  color: var(--color-ink);
+}
+
+#post-article[data-reading='true'] [data-post-text] :is(h2, h3) {
+  line-height: 1.3;
+}

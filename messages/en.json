@@ -244,7 +244,15 @@
     "summary": "In short",
     "related": "Read next",
     "untranslated": "This article hasn't been translated into English yet, so it appears below in Portuguese.",
-    "toc": "In this article"
+    "toc": "In this article",
+    "readerTools": "Reading tools",
+    "listen": "Listen",
+    "pause": "Pause",
+    "resume": "Resume",
+    "stop": "Stop",
+    "readingMode": "Reading mode",
+    "minutesLeft": "{minutes} min left",
+    "endOfText": "End of article"
   },
   "postList": {
     "filter": "Filter by topic",

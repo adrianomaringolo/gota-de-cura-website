@@ -244,7 +244,15 @@
     "summary": "Em resumo",
     "related": "Para ler depois",
     "untranslated": "Este texto ainda não tem versão em português.",
-    "toc": "Neste texto"
+    "toc": "Neste texto",
+    "readerTools": "Ferramentas de leitura",
+    "listen": "Ouvir",
+    "pause": "Pausar",
+    "resume": "Continuar",
+    "stop": "Parar",
+    "readingMode": "Modo leitura",
+    "minutesLeft": "{minutes} min restantes",
+    "endOfText": "Fim do texto"
   },
   "postList": {
     "filter": "Filtrar por assunto",
