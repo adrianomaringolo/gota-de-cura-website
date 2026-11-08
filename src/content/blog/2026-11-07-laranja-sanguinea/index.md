@@ -59,7 +59,7 @@ A laranjeira é uma árvore de porte pequeno a médio, de folhas brilhantes e ve
 
 ## Destilamos as folhas, não a casca
 
-Aqui na Gota de cura, o hidrolato e o óleo essencial de laranja sanguínea vêm da destilação das **folhas** da laranjeira, e não do fruto nem da casca. Isso muda uma coisa importante para quem vai usar na pele.
+Aqui no Gota de Cura, o hidrolato e o óleo essencial de laranja sanguínea vêm da destilação das **folhas** da laranjeira, e não do fruto nem da casca. Isso muda uma coisa importante para quem vai usar na pele.
 
 A fotossensibilização é uma reação exagerada da pele ao sol depois do contato com certas substâncias, as furanocumarinas. Elas aparecem em alguns óleos cítricos extraídos da casca, em especial os obtidos por prensagem, e por isso se recomenda evitar o sol depois de usá-los. Como o nosso material vem das folhas, **nem o hidrolato nem o óleo essencial são fotossensibilizantes**, o que garante o uso seguro na pele. Para entender o assunto com mais calma, vale a leitura do texto da Via Aroma sobre [óleos essenciais fotossensibilizantes ou fototóxicos](https://viaaroma.blog/2022/04/05/o-que-sao-oleos-essenciais-fotossensibilizantes-ou-fototoxicos/).
 
@@ -92,7 +92,7 @@ Borrifado no ar, em roupas de cama ou no carro, ou no difusor ultrassônico, é 
 
 ## O olhar vibracional
 
-Além do uso no corpo, a aromaterapia tem uma leitura simbólica das plantas, a chamada visão vibracional. É um campo de tradição e de sensibilidade, não de comprovação científica, e é assim que o apresentamos. O Marcelo, que destila as plantas aqui na chácara, resume o que essa leitura diz da laranja sanguínea:
+Além do uso no corpo, a aromaterapia tem uma leitura simbólica das plantas, a chamada visão vibracional. É um campo de tradição e de sensibilidade, não de comprovação científica, e é assim que o apresentamos. Marcelo, o aromaterapeuta responsável pelo Gota de Cura, resume o que essa leitura diz da laranja sanguínea:
 
 > "Na visão vibracional da aromaterapia, nós associamos a laranja sanguínea ao estímulo, ao perdão, à remoção de mágoas e rancores, à renovação dos sentimentos, dando lugar ao acolhimento e a uma leveza maior no coração."
 
@@ -130,7 +130,7 @@ Este texto não substitui uma avaliação individual. **Em caso de dúvida, cons
 - John Innes Centre. [Blood Oranges](https://www.jic.ac.uk/research-impact/blood-oranges/).
 - Via Aroma Blog. [O que são óleos essenciais fotossensibilizantes ou fototóxicos](https://viaaroma.blog/2022/04/05/o-que-sao-oleos-essenciais-fotossensibilizantes-ou-fototoxicos/). 2022.
 - Relatório técnico GC-MS do óleo essencial de laranja sanguínea (*Citrus sinensis*), emitido em 18/10/2024.
-- Gota de cura. [Óleo essencial ou hidrolato, qual a diferença](/blog/oleos-essenciais-e-hidrolatos-diferencas).
+- Gota de Cura. [Óleo essencial ou hidrolato, qual a diferença](/blog/oleos-essenciais-e-hidrolatos-diferencas).
 
 ## Onde encontrar
 

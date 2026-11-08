@@ -92,7 +92,7 @@ Misted into the air, on bed linen or in the car, or in an ultrasonic diffuser, i
 
 ## The vibrational view
 
-Beyond use on the body, aromatherapy has a symbolic reading of plants, the so-called vibrational view. It belongs to tradition and sensitivity, not to scientific proof, and that is how we present it. Marcelo, who distills the plants here at the farm, sums up what this reading says about the blood orange:
+Beyond use on the body, aromatherapy has a symbolic reading of plants, the so-called vibrational view. It belongs to tradition and sensitivity, not to scientific proof, and that is how we present it. Marcelo, the aromatherapist in charge of Gota de Cura, sums up what this reading says about the blood orange:
 
 > "In the vibrational view of aromatherapy, we associate the blood orange with stimulation, forgiveness, letting go of hurt and resentment, the renewal of feelings, making room for acceptance and a lighter heart."
 
