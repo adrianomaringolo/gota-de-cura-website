@@ -37,8 +37,10 @@ const QUALITY = /natural|neural|online|premium|enhanced|google|siri/i
  * then neural/premium voices, then on-device ones (no network hiccups mid-read).
  * Novelty voices are excluded. Returns undefined to let the browser pick.
  */
-const pickVoice = (lang: string): SpeechSynthesisVoice | undefined => {
-  const voices = window.speechSynthesis.getVoices()
+const pickVoice = (
+  lang: string,
+  voices: SpeechSynthesisVoice[],
+): SpeechSynthesisVoice | undefined => {
   const prefix = lang.split('-')[0].toLowerCase()
 
   const score = (voice: SpeechSynthesisVoice) => {
@@ -57,6 +59,22 @@ const pickVoice = (lang: string): SpeechSynthesisVoice | undefined => {
     .filter((voice) => !NOVELTY.test(voice.name))
     .sort((a, b) => score(b) - score(a))[0]
 }
+
+/** Browsers fill the voice list asynchronously; the first call can come back empty. */
+const loadVoices = (): Promise<SpeechSynthesisVoice[]> =>
+  new Promise((resolve) => {
+    const synth = window.speechSynthesis
+    const ready = synth.getVoices()
+    if (ready.length > 0) return resolve(ready)
+
+    const done = () => {
+      synth.removeEventListener('voiceschanged', done)
+      clearTimeout(timer)
+      resolve(synth.getVoices())
+    }
+    const timer = setTimeout(done, 1500)
+    synth.addEventListener('voiceschanged', done)
+  })
 
 const Icon = ({ children }: { children: React.ReactNode }) => (
   <svg
@@ -178,11 +196,16 @@ export function PostReader({ minutes, title, lang }: Props) {
     }
   }, [])
 
-  const play = () => {
+  const play = async () => {
     const synth = window.speechSynthesis
     synth.cancel()
     run.current += 1
     const token = run.current
+
+    // One voice for the whole read: picking per utterance let the title (spoken
+    // first, possibly before the voice list loaded) differ from the body.
+    const voice = pickVoice(lang, await loadVoices())
+    if (token !== run.current) return
 
     const blocks = readableBlocks()
     const queue: { text: string; el?: HTMLElement }[] = [
@@ -204,7 +227,6 @@ export function PostReader({ minutes, title, lang }: Props) {
       const { text, el } = queue[index]
       const utterance = new SpeechSynthesisUtterance(text)
       utterance.lang = lang
-      const voice = pickVoice(lang)
       if (voice) utterance.voice = voice
 
       utterance.onstart = () => {
