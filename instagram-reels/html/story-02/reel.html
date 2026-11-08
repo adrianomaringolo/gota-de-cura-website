@@ -1,0 +1,75 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<!-- Story 1080x1920 sem narração: linha do tempo por cena (timeline.js) + trilha. -->
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,600;0,700;1,600&family=Archivo:wght@500;600;700&display=block" rel="stylesheet">
+<style>
+:root{--roxo:#503484;--noite:#291945;--lilas:#dacbf9;--terra:#cd632d;--ink:#211c2b;--serif:'Petrona',serif;--sans:'Archivo',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--noite)}
+body{font-family:var(--sans);position:relative}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.dark{background:radial-gradient(ellipse at 50% 25%,#6b46b0 0%,var(--roxo) 45%,var(--noite) 100%)}
+.light{background:#faf8fc}
+.eyebrow{font-weight:700;font-size:34px;letter-spacing:.2em;text-transform:uppercase}
+.h{font-family:var(--serif);font-weight:700;line-height:1.05}
+/* cena 1 */
+.arch{position:absolute;left:150px;width:780px;top:270px;height:960px;border-radius:390px 390px 36px 36px;overflow:hidden;border:10px solid #fff;box-shadow:0 40px 80px rgba(20,8,40,.5)}
+.arch .ph{position:absolute;inset:0;background:url(fotos/oleo-e-hidrolato-recem-separados.jpg) center 40%/cover}
+.s1t{position:absolute;left:70px;right:70px;top:1290px;text-align:center;color:#fff}
+.s1t .eyebrow{color:var(--lilas)}
+.s1t .h{font-size:98px;margin-top:22px}
+/* cena 2 */
+.s2h{position:absolute;left:70px;right:70px;top:250px;text-align:center}
+.s2h .eyebrow{color:var(--roxo)}
+.s2h .h{font-size:92px;color:var(--ink);margin-top:16px}
+.card{position:absolute;left:100px;width:880px;height:300px;border-radius:32px;overflow:hidden;box-shadow:0 24px 50px rgba(41,25,69,.28)}
+.card .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+.card .cap{position:absolute;left:0;right:0;bottom:0;padding:70px 36px 26px;background:linear-gradient(180deg,rgba(41,25,69,0),rgba(41,25,69,.85));color:#fff;font-family:var(--serif);font-weight:700;font-size:54px;line-height:1.05}
+.mais{position:absolute;left:70px;right:70px;top:1548px;text-align:center;font-family:var(--serif);font-style:italic;font-weight:600;font-size:76px;color:var(--roxo)}
+/* cena 3 */
+.logo{position:absolute;left:190px;width:700px;top:470px}
+.f1{position:absolute;left:70px;right:70px;top:830px;text-align:center;color:#fff;font-family:var(--serif);font-weight:700;font-size:112px;line-height:1.05}
+.f2{position:absolute;left:70px;right:70px;top:1130px;text-align:center;color:#fff;font-weight:600;font-size:48px;line-height:1.3}
+.pill{position:absolute;left:230px;right:230px;top:1260px;height:104px;border-radius:52px;background:#fff;color:var(--roxo);font-weight:700;font-size:48px;display:flex;align-items:center;justify-content:center}
+.f3{position:absolute;left:70px;right:70px;top:1400px;text-align:center;font-weight:500;font-size:38px;color:var(--lilas)}
+</style></head><body>
+
+<div class="scene dark" id="s1">
+  <div class="arch" id="s1-a"><div class="ph" id="s1-p"></div></div>
+  <div class="s1t" id="s1-t"><div class="eyebrow">Blog da Gota de Cura</div><div class="h">Quer aprender mais sobre aromaterapia?</div></div>
+</div>
+
+<div class="scene light" id="s2">
+  <div class="s2h" id="s2-h"><div class="eyebrow">No nosso blog</div><div class="h">Você encontra</div></div>
+  <div class="card" id="c1" style="top:520px"><div class="ph" style="background-image:url(fotos/folhas-na-mao.jpg);background-position:center 40%"></div><div class="cap">Sobre as plantas</div></div>
+  <div class="card" id="c2" style="top:860px"><div class="ph" style="background-image:url(fotos/difusor-na-pratica.jpg)"></div><div class="cap">Como usar óleos e hidrolatos</div></div>
+  <div class="card" id="c3" style="top:1200px"><div class="ph" style="background-image:url(fotos/planta-na-caldeira.jpg);background-position:center 55%"></div><div class="cap">Nossas histórias</div></div>
+  <div class="mais" id="mais">e muito mais</div>
+</div>
+
+<div class="scene dark" id="s3">
+  <img class="logo" id="f-l" src="../../../instagram-posts/assets/logos/logo-negativo.svg" alt="">
+  <div class="f1" id="f-1">Venha ler<br>no blog</div>
+  <div class="f2" id="f-2">Aprenda sobre óleos essenciais,<br>hidrolatos e plantas</div>
+  <div class="pill" id="f-p">gotadecura.com.br/blog</div>
+  <div class="f3" id="f-3">@gotadecura_artesanais</div>
+</div>
+
+<script src="timeline.js"></script>
+<script>
+const TL=window.TL,S=Object.fromEntries(TL.scenes.map(s=>[s.id,s]));
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const $=id=>document.getElementById(id);
+const X=.5;
+const vis=(t,s,first,last)=>{const a=first?0:s.start-X,b=last?TL.total:s.end;return clamp((t-a)/X)*(last?1:clamp((b-t)/X))};
+const fi=(el,t,t0,dy=40)=>{const k=eo((t-t0)/.7);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`};
+window.setT=async function(t){
+  const ids=['s1','s2','s3'];
+  ids.forEach((id,i)=>{$(id).style.opacity=vis(t,S[id],i==0,i==2)});
+  let s=S.s1; fi($('s1-a'),t,.2,60); $('s1-p').style.transform=`scale(${1+.07*clamp((t-s.start)/(s.end-s.start))})`; fi($('s1-t'),t,.9);
+  s=S.s2; fi($('s2-h'),t,s.start+.1); fi($('c1'),t,s.start+.7,70); fi($('c2'),t,s.start+1.6,70); fi($('c3'),t,s.start+2.5,70); fi($('mais'),t,s.start+3.5,30);
+  s=S.s3; fi($('f-l'),t,s.start+.1,30); fi($('f-1'),t,s.start+.5); fi($('f-2'),t,s.start+1.2,30); fi($('f-p'),t,s.start+1.9,30); fi($('f-3'),t,s.start+2.3,20);
+  await document.fonts.ready;
+};
+window.TOTAL=TL.total;
+</script></body></html>

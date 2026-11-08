@@ -1,0 +1,114 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<!-- Story 1080x1920, sem narração: a linha do tempo é por cena (timeline.js), a trilha é a música. -->
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Petrona:wght@700&family=Archivo:wght@500;600;700&display=block" rel="stylesheet">
+<style>
+:root{--roxo:#503484;--noite:#291945;--ink:#211c2b;--serif:'Ma Shan Zheng','Petrona',serif;--sans:'Archivo',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--noite)}
+body{font-family:var(--sans);position:relative;font-variant-numeric:lining-nums}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.bg{position:absolute;inset:-120px;background-size:cover;background-position:center;filter:blur(46px) saturate(1.1)}
+.veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.05) 40%,rgba(41,25,69,0) 55%,rgba(41,25,69,.78) 80%,rgba(41,25,69,.9))}
+.card{position:absolute;left:80px;width:920px;height:920px;top:290px;border-radius:44px;overflow:hidden;box-shadow:0 40px 90px rgba(41,25,69,.38)}
+.card.big{left:40px;width:1000px;height:1000px;top:300px}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.prod{position:absolute;left:0;right:0;top:250px;height:1000px;display:flex;align-items:center;justify-content:center}
+.prod img{width:900px;height:auto;max-height:960px;object-fit:contain;filter:drop-shadow(0 30px 40px rgba(41,25,69,.4))}
+.sym{position:absolute;left:0;right:0;top:250px;display:flex;justify-content:center}
+.sym img{width:1040px;height:1040px;filter:drop-shadow(0 24px 40px rgba(120,20,30,.35))}
+.txt{position:absolute;left:70px;right:70px;text-align:center;top:1280px}
+.eyebrow{font-weight:700;font-size:34px;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(41,25,69,.55)}
+.name{font-family:var(--serif);font-weight:400;font-size:128px;line-height:1.02;color:#fff;margin-top:22px;filter:drop-shadow(0 4px 14px rgba(41,25,69,.55))}
+.det{font-weight:600;font-size:42px;line-height:1.3;color:#fff;margin-top:26px;text-shadow:0 2px 14px rgba(41,25,69,.6)}
+.fecho{background:radial-gradient(ellipse at 50% 30%,#6b46b0 0%,var(--roxo) 45%,var(--noite) 100%)}
+.fecho .logo{position:absolute;left:190px;width:700px;top:520px}
+.fecho .h{position:absolute;left:70px;right:70px;top:880px;text-align:center;font-family:var(--serif);font-weight:400;font-size:118px;line-height:1.06;color:#fff}
+.fecho .u{position:absolute;left:70px;right:70px;top:1210px;text-align:center;font-weight:700;font-size:52px;color:#fff;letter-spacing:.02em}
+.fecho .a{position:absolute;left:70px;right:70px;top:1290px;text-align:center;font-weight:500;font-size:40px;color:#dacbf9}
+.ac{position:relative;display:inline-block}
+.ac .mk{position:absolute;overflow:visible;fill:currentColor}
+.ac .mk.t{fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round}
+.ac .semponto{display:inline-block;clip-path:inset(.335em 0 0 0)}
+</style></head><body>
+
+<div class="scene" id="cat">
+  <div class="bg" style="background-image:url(fotos/fundo-inicial.jpg);filter:none;inset:0"></div>
+  <div class="sym" id="cat-c"><img src="fotos/categoria-simbolo.png" alt=""></div>
+  <div class="txt" id="cat-t" style="top:1400px"><div class="name" style="font-size:124px;margin-top:0;color:#1f5148;filter:drop-shadow(0 2px 0 rgba(255,255,255,.4))">Conheça os produtos</div></div>
+</div>
+
+<div class="scene" id="p1">
+  <div class="bg" style="background-image:url(fotos/pomada-artemisia.jpg)"></div><div class="veil"></div>
+  <div class="prod" id="p1-c"><img src="fotos/pomada-artemisia-corte.png" alt=""></div>
+  <div class="txt" id="p1-t"><div class="eyebrow">Medicina Tradicional Chinesa</div><div class="name">Pomada de Artemísia</div><div class="det">Óleos e manteigas vegetais e óleos essenciais selecionados, incluindo o de artemísia · 10 g</div></div>
+</div>
+
+<div class="scene" id="p2">
+  <div class="bg" style="background-image:url(fotos/pomada-moxinha.jpg)"></div><div class="veil"></div>
+  <div class="prod" id="p2-c"><img src="fotos/pomada-moxinha-corte.png" alt=""></div>
+  <div class="txt" id="p2-t"><div class="eyebrow">Medicina Tradicional Chinesa</div><div class="name">Pomada para Moxinha</div><div class="det">Óleos e manteigas vegetais, urucum orgânico e óleos essenciais selecionados · 10 g</div></div>
+</div>
+
+<div class="scene" id="p3">
+  <div class="bg" style="background-image:url(fotos/tintura-elixir.jpg)"></div><div class="veil"></div>
+  <div class="prod" id="p3-c"><img src="fotos/tintura-elixir-corte.png" style="width:auto;height:960px" alt=""></div>
+  <div class="txt" id="p3-t"><div class="eyebrow">Medicina Tradicional Chinesa</div><div class="name">Guardião do Jing</div><div class="det">Semente de gergelim preto e goji berry · 30 ml</div></div>
+</div>
+
+<div class="scene fecho" id="fecho">
+  <img class="logo" id="f-l" src="../../../instagram-posts/assets/logos/logo-negativo.svg" alt="">
+  <div class="h" id="f-h">Acesse e faça<br>sua reserva</div>
+  <div class="u" id="f-u">gotadecura.com.br</div>
+  <div class="a" id="f-a">@gotadecura_artesanais</div>
+</div>
+
+<script src="timeline.js"></script>
+<script>
+
+// A Ma Shan Zheng não tem í, ã, ç etc.: o navegador trocaria por outra fonte. Aqui a letra-base é da própria fonte
+// e o acento é desenhado em pincel por cima (medidas em em; i sem o ponto original).
+const MK={
+  acute:'<svg class="mk" viewBox="0 0 40 90" style="width:.2em;height:.36em;left:{x}em;top:-.1em"><path d="M9 86C4 70 13 42 26 10 30 0 41 4 39 17 35 40 23 68 13 87Z"/></svg>',
+  grave:'<svg class="mk" viewBox="0 0 40 90" style="width:.2em;height:.36em;left:{x}em;top:-.1em;transform:scaleX(-1)"><path d="M9 86C4 70 13 42 26 10 30 0 41 4 39 17 35 40 23 68 13 87Z"/></svg>',
+  circ:'<svg class="mk t" viewBox="0 0 80 50" style="width:.26em;height:.15em;left:{x}em;top:.07em;stroke-width:17"><path d="M8 42 38 10 72 40"/></svg>',
+  tilde:'<svg class="mk t" viewBox="0 0 90 40" style="width:.3em;height:.12em;left:{x}em;top:.09em;stroke-width:17"><path d="M8 28C18 6 32 6 44 18S68 30 82 8"/></svg>',
+  cedil:'<svg class="mk t" viewBox="0 0 40 50" style="width:.1em;height:.14em;left:{x}em;top:.82em;stroke-width:13"><path d="M10 6C22 8 30 16 26 28 23 38 12 40 6 36"/></svg>'
+};
+const MAP={á:['a','acute'],à:['a','grave'],â:['a','circ'],ã:['a','tilde'],é:['e','acute'],ê:['e','circ'],í:['i','acute'],ó:['o','acute'],ô:['o','circ'],õ:['o','tilde'],ú:['u','acute'],ç:['c','cedil']};
+const W={a:.42,e:.34,i:.24,o:.28,u:.34,c:.28};
+function pincel(node){
+  if(node.nodeType===3){
+    const f=document.createDocumentFragment();
+    for(const ch of node.textContent){
+      const m=MAP[ch.toLowerCase()];
+      if(!m){f.append(ch);continue}
+      const [b,k]=m,w=W[b];
+      let x=w/2-(k==='tilde'?.15:k==='circ'?.13:.05);
+      if(k==='acute'||k==='grave')x=b==='i'?w*.62:w*.5;
+      if(k==='cedil')x=w*.35;
+      const sp=document.createElement('span');sp.className='ac';
+      sp.innerHTML=(b==='i'&&k!=='cedil'?'<span class="semponto">i</span>':b)+MK[k].replace('{x}',x.toFixed(3));
+      f.append(sp);
+    }
+    node.replaceWith(f);
+  } else [...node.childNodes].forEach(pincel);
+}
+document.querySelectorAll('.name,.fecho .h').forEach(pincel);
+const TL=window.TL,S=Object.fromEntries(TL.scenes.map(s=>[s.id,s]));
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const $=id=>document.getElementById(id);
+const X=.5;
+const vis=(t,s,first,last)=>{const a=first?0:s.start-X,b=last?TL.total:s.end;return clamp((t-a)/X)*(last?1:clamp((b-t)/X))};
+const fi=(el,t,t0,dy=40)=>{const k=eo((t-t0)/.7);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`};
+function kb(el,t,s){const k=clamp((t-s.start)/(s.end-s.start));el.style.transform=`scale(${1+.06*k})`}
+window.setT=async function(t){
+  const ids=['cat','p1','p2','p3','fecho'];
+  ids.forEach((id,i)=>{const s=S[id];$(id).style.opacity=vis(t,s,i==0,i==ids.length-1)});
+  let s=S.cat; fi($('cat-t'),t,.5);kb($('cat-c'),t,s);
+  for(const id of ['p1','p2','p3']){s=S[id];fi($(id+'-t'),t,s.start+.25);kb($(id+'-c'),t,s)}
+  s=S.fecho; fi($('f-l'),t,s.start+.1,30);fi($('f-h'),t,s.start+.5);fi($('f-u'),t,s.start+1.0,20);fi($('f-a'),t,s.start+1.3,20);
+  await document.fonts.ready;
+};
+window.TOTAL=TL.total;
+</script></body></html>

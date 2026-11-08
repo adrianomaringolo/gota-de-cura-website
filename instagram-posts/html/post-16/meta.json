@@ -1,6 +1,7 @@
 {
   "title": "O que o laudo mostra: terpinen-4-ol na melaleuca",
   "date": "2026-10-20",
+  "status": "descartado",
   "type": "carousel",
   "template": "rotulo-laudo",
   "tags": [
@@ -43,6 +44,5 @@
       "resolvedTo": "pendente"
     }
   ],
-  "revisionCount": 1,
-  "revisedAt": "2026-11-03T18:34"
+  "revisionCount": 1
 }

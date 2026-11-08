@@ -1,0 +1,32 @@
+{
+  "title": "Story: convite para o blog",
+  "date": "2026-11-04",
+  "type": "story",
+  "tags": [
+    "story",
+    "blog",
+    "aromaterapia"
+  ],
+  "format": "1080x1920",
+  "duration": 18,
+  "music": "Forest Mist Whispers · Alejandro Magaña (Mixkit) · Mixkit Stock Music Free License",
+  "voice": "sem narração",
+  "photos": "fotos do próprio blog (public/images/blog)",
+  "scenes": [
+    {
+      "title": "Abertura",
+      "description": "Quer aprender mais sobre aromaterapia?"
+    },
+    {
+      "title": "No blog",
+      "description": "Sobre as plantas · Como usar óleos e hidrolatos · Nossas histórias · e muito mais"
+    },
+    {
+      "title": "Fecho",
+      "description": "Venha ler no blog · gotadecura.com.br/blog"
+    }
+  ],
+  "caption": "🌿 Quer aprender mais sobre aromaterapia?\n\nNo blog da Gota de Cura você encontra conteúdo sobre as plantas, como usar óleos essenciais e hidrolatos, nossas histórias e muito mais.\n\n🛒 Acesse gotadecura.com.br/blog e continue aprendendo com a gente!\n\nGota de Cura, cuidando com amor 💖",
+  "hashtags": [],
+  "coverAt": 1.2
+}

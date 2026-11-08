@@ -1,6 +1,7 @@
 {
   "title": "Planta viva, água limpa (frase gigante)",
   "date": "2026-10-20",
+  "status": "aprovado",
   "type": "single",
   "template": "frase-gigante",
   "tags": [
@@ -28,5 +29,15 @@
     "plantasmedicinais",
     "chacara",
     "feitocomamor"
-  ]
+  ],
+  "revisions": [
+    {
+      "note": "adicione uma imagem com baixa opacidade no fundo, que remeta a agua.",
+      "requestedAt": "2026-11-06T11:07",
+      "requestedBy": "admin",
+      "resolvedAt": "2026-11-06T11:09",
+      "resolvedTo": "pendente"
+    }
+  ],
+  "revisionCount": 1
 }

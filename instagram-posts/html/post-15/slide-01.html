@@ -7,6 +7,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { width: 1080px; height: 1350px; overflow: hidden; background: #291945; font-family: 'Archivo', sans-serif; color: #fff; }
   .slide { position: relative; width: 1080px; height: 1350px; overflow: hidden; background: #291945; padding: 96px 70px; display: flex; flex-direction: column; }
+  .water { position: absolute; inset: 0; background: url(../../assets/images/agua-ondas.jpg) center/cover; opacity: 0.18; mix-blend-mode: screen; }
   .blob { position: absolute; width: 1000px; height: 1000px; border-radius: 50%; background: radial-gradient(circle, rgba(137,97,199,0.34) 0%, transparent 66%); top: 240px; left: -260px; }
   .top { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; }
   .logo { width: 300px; height: auto; filter: brightness(0) invert(1); }
@@ -26,6 +27,7 @@
 </head>
 <body>
 <div class="slide">
+  <div class="water"></div>
   <div class="blob"></div>
   <div class="top"><img class="logo" src="../../assets/logos/logo.png" alt="Gota de Cura"><div class="handle"><em>@</em>gotadecura_artesanais</div></div>
   <div class="phrase"><span>Planta</span><span class="outline">viva,</span><span>água</span><span><i class="photo">limpa.</i></span></div>

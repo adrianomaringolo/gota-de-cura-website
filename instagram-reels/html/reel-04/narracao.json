@@ -1,0 +1,18 @@
+{
+  "voice_name": "Áudio próprio (gravação da equipe, cortada em cenas; não usa ElevenLabs)",
+  "language": "pt",
+  "lead": 2,
+  "gap": 0,
+  "tail": 3.2,
+  "music": "music.mp3",
+  "music_volume": 0.55,
+  "cenas": [
+    { "id": "abertura", "text": "Você já imaginou trazer um pouco da energia dos cítricos para o seu dia?" },
+    { "id": "produto", "text": "O hidrolato de laranja sanguínea, Gota de cura, é um convite a transformar o autocuidado em um momento de carinho com você." },
+    { "id": "fisico", "text": "O hidrolato de laranja sanguínea oferece cuidados para o físico, despertando os sentidos e a atenção ao próprio corpo." },
+    { "id": "estimulo", "text": "Na visão vibracional da aromaterapia, nós associamos a laranja sanguínea ao estímulo, ao perdão, à remoção de mágoas e rancores," },
+    { "id": "renovacao", "text": "à renovação dos sentimentos, dando lugar ao acolhimento e a uma leveza maior no coração." },
+    { "id": "respirar", "text": "É um convite para respirar, perceber como você se sente e se permitir abrir espaço para momentos mais luminosos e sentimentos mais leves." },
+    { "id": "fecho", "text": "Conheça o hidrolato de laranja sanguínea da Gota de cura. Gota de cura, cuidando com amor." }
+  ]
+}

@@ -1,0 +1,167 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,600;0,700;1,500&family=Archivo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#503484;--noite:#291945;--lilas:#dacbf9;--terra:#cd632d;--serif:'Petrona',serif;--sans:'Archivo',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--noite)}
+body{font-family:var(--sans);color:#fff;position:relative}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden;background:var(--noite)}
+.abs{position:absolute}
+.media{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover}
+.scrim{position:absolute;inset:0}
+.scrim.top{background:linear-gradient(180deg,rgba(41,25,69,.78) 0%,rgba(41,25,69,.35) 30%,rgba(41,25,69,0) 48%)}
+.scrim.bot{background:linear-gradient(0deg,rgba(41,25,69,.9) 0%,rgba(41,25,69,.55) 22%,rgba(41,25,69,0) 42%)}
+.tint{position:absolute;inset:0;background:rgba(80,52,132,.55);mix-blend-mode:multiply}
+.eyebrow{position:absolute;left:80px;right:80px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;text-transform:uppercase;color:var(--lilas)}
+.h{position:absolute;left:70px;right:70px;text-align:center;font-family:var(--serif);font-weight:600;line-height:1.04;letter-spacing:-.022em}
+.h em{font-style:italic;font-weight:500;color:var(--lilas)}
+.cap{position:absolute;left:80px;right:80px;text-align:center;font-weight:600;font-size:52px;line-height:1.36;top:1340px;text-shadow:0 2px 18px rgba(20,10,40,.55)}
+.sci{position:absolute;left:80px;right:80px;text-align:center;font-family:var(--serif);font-style:italic;font-size:46px;color:var(--lilas)}
+.word{position:absolute;left:60px;right:60px;text-align:center;font-family:var(--serif);font-weight:600;font-size:150px;line-height:1;letter-spacing:-.025em;text-shadow:0 4px 30px rgba(20,10,40,.45)}
+.mic{position:absolute;left:70px;top:140px;height:116px;padding:6px 34px 6px 6px;border-radius:58px;display:flex;align-items:center;gap:20px;background:rgba(41,25,69,.5);box-shadow:0 6px 30px rgba(10,5,25,.35);opacity:0;z-index:20}
+.mic img{width:104px;height:104px;border-radius:50%;object-fit:cover;border:3px solid #dacbf9;display:block}
+.mic .bars{display:flex;align-items:center;gap:7px;height:64px}
+.mic .bars i{display:block;width:8px;height:10px;border-radius:4px;background:#dacbf9}
+.drop{position:absolute;width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--terra)}
+</style></head><body>
+
+<!-- 1 abertura -->
+<div class="scene" id="abertura">
+  <video class="media" id="v1" src="video/cena1.mp4" muted playsinline preload="auto"></video>
+  <div class="scrim top"></div><div class="scrim bot"></div>
+  <img class="abs" id="logo1" src="../../../instagram-posts/assets/logos/logo-negativo.svg" style="left:290px;top:290px;width:500px">
+  <div class="h" id="h1" style="top:470px;font-size:112px">A energia dos <em>cítricos</em> no seu dia</div>
+  <p class="cap" id="c1"></p>
+</div>
+
+<!-- 2 produto -->
+<div class="scene" id="produto">
+  <img class="media" id="foto2" src="fotos/laranja-chacara.jpg">
+  <div class="scrim top"></div><div class="scrim bot"></div>
+  <div class="eyebrow" id="e2" style="top:290px">Hidrolato</div>
+  <div class="h" id="h2" style="top:350px;font-size:118px">Laranja<br>sanguínea</div>
+  <div class="sci" id="s2" style="top:640px">Citrus sinensis</div>
+  <p class="cap" id="c2"></p>
+</div>
+
+<!-- 3 físico -->
+<div class="scene" id="fisico">
+  <video class="media" id="v3" src="video/cena3.mp4" muted playsinline preload="auto"></video>
+  <div class="scrim top"></div><div class="scrim bot"></div>
+  <div class="eyebrow" id="e3" style="top:290px">Para o corpo</div>
+  <div class="h" id="h3a" style="top:360px;font-size:124px">Cuidado<br>para o físico</div>
+  <div class="h" id="h3b" style="top:660px;font-size:84px"><em>sentidos despertos</em></div>
+  <p class="cap" id="c3"></p>
+</div>
+
+<!-- 4 estímulo, perdão, mágoas -->
+<div class="scene" id="estimulo">
+  <video class="media" id="v4" src="video/cena4.mp4" muted playsinline preload="auto"></video>
+  <div class="tint"></div><div class="scrim top"></div><div class="scrim bot"></div>
+  <div class="eyebrow" id="e4" style="top:290px">Visão vibracional da aromaterapia</div>
+  <div class="word" id="w4a" style="top:420px">Estímulo</div>
+  <div class="word" id="w4b" style="top:620px">Perdão</div>
+  <div class="word" id="w4c" style="top:820px;font-size:112px">Sem mágoas</div>
+  <p class="cap" id="c4"></p>
+</div>
+
+<!-- 5 renovação -->
+<div class="scene" id="renovacao">
+  <video class="media" id="v5" src="video/cena5.mp4" muted playsinline preload="auto"></video>
+  <div class="tint"></div><div class="scrim top"></div><div class="scrim bot"></div>
+  <div class="word" id="w5a" style="top:330px;font-size:132px">Renovação</div>
+  <div class="word" id="w5b" style="top:530px;font-size:132px">Acolhimento</div>
+  <div class="word" id="w5c" style="top:730px;font-size:132px">Leveza</div>
+  <p class="cap" id="c5"></p>
+</div>
+
+<!-- 6 respirar -->
+<div class="scene" id="respirar" style="background:linear-gradient(180deg,#291945 0%,#503484 100%)">
+  <div class="abs" id="arco" style="left:240px;top:280px;width:600px;height:720px;border-radius:300px 300px 24px 24px;overflow:hidden;box-shadow:0 30px 80px rgba(10,5,25,.5)">
+    <img id="foto6" src="fotos/laranja-chacara.jpg" style="position:absolute;left:-330px;top:-330px;width:1260px;height:1680px;object-fit:cover">
+  </div>
+  <div class="abs" id="circ" style="left:730px;top:790px;width:190px;height:190px;border-radius:50%;background:var(--terra)"></div>
+  <div class="h" id="h6a" style="top:1020px;font-size:100px;color:#fff;opacity:0">Respire.</div>
+  <p class="cap" id="c6" style="top:1250px"></p>
+</div>
+
+<!-- 7 fecho -->
+<div class="scene" id="fecho" style="background:linear-gradient(180deg,#503484 0%,#291945 100%)">
+  <img class="abs" id="logo7" src="../../../instagram-posts/assets/logos/logo-negativo.svg" style="left:190px;top:420px;width:700px">
+  <div class="h" id="h7" style="top:690px;font-size:100px">Hidrolato de<br>laranja sanguínea</div>
+  <div class="sci" id="s7" style="top:960px">Citrus sinensis</div>
+  <div class="abs" id="u7" style="left:80px;right:80px;top:1080px;text-align:center;font-weight:600;font-size:48px;color:var(--lilas)">gotadecura.com.br</div>
+  <div class="abs" id="a7" style="left:80px;right:80px;top:1150px;text-align:center;font-weight:600;font-size:40px;color:#fff;opacity:.85">@gotadecura_artesanais</div>
+  <p class="cap" id="c7" style="top:1300px"></p>
+</div>
+
+<!-- Marcelo falando: foto pequena + onda sonora sutil, guiada pela energia real do áudio -->
+<div class="mic" id="mic"><img src="fotos/marcelo.jpg" alt=""><div class="bars" id="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+
+<script src="timeline.js"></script>
+<script src="env.js"></script>
+<script>
+const TL=window.TL,S=Object.fromEntries(TL.scenes.map(s=>[s.id,s]));
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const $=id=>document.getElementById(id);
+const X=.4;
+const vis=(t,s,first,last)=>{const a=first?0:s.start-X,b=last?TL.total:s.end+X;return clamp((t-a)/X)*clamp((b-t)/(last?.001:X))};
+const fi=(el,t,t0,dy=40)=>{const k=eo((t-t0)/.7);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`};
+const pop=(el,t,t0,dy=50)=>{const k=eo((t-t0)/.55);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px) scale(${.94+.06*k})`};
+function setWords(el,t,words){
+  if(!el.dataset.built){el.innerHTML=words.map(w=>`<span>${w.w}</span>`).join(' ');el.dataset.built=1}
+  [...el.children].forEach((sp,i)=>{const w=words[i];const on=t>=w.start;sp.style.opacity=on?1:.38;sp.style.color=(on&&t<w.end+.3)?'#dacbf9':'#fff'});
+}
+const find=(s,re)=>{const i=s.words.findIndex(w=>re.test(w.w));return i<0?s.start:s.words[i].start};
+// vídeo: busca o quadro do instante t (sem relógio), repetindo o clipe se a cena for mais longa que ele
+async function seek(v,t0,t){
+  const d=v.duration||8; let x=Math.max(0,t-t0); x=x%Math.max(.1,d-.1);
+  if(Math.abs(v.currentTime-x)<.001) return;
+  await new Promise(res=>{const done=()=>{v.removeEventListener('seeked',done);res()};v.addEventListener('seeked',done);v.currentTime=x;setTimeout(done,1500)});
+}
+// movimento lento (Ken Burns) numa mídia
+const kb=(el,t,s,from=1.0,to=1.09)=>{const k=clamp((t-s.start)/(s.end-s.start));el.style.transform=`scale(${from+(to-from)*k})`};
+
+
+// onda sonora do Marcelo: altura de cada barra = energia do áudio no instante t (com defasagem leve entre barras)
+const BARS=[...document.querySelectorAll('#bars i')];
+const env=t=>{const E=window.ENV,i=Math.round((t-E.off)*E.fps+ (0.5*E.fps)*0);return E.v[Math.max(0,Math.min(E.v.length-1,i))]||0};
+function setMic(t){
+  const first=S.abertura.words[0].start-.4, last=S.fecho.words[S.fecho.words.length-1].end+.5;
+  $('mic').style.opacity=clamp((t-first)/.6)*clamp((last+.6-t)/.6);
+  BARS.forEach((b,k)=>{const e=env(t-k*.045)*(.65+.35*Math.sin(t*9+k*1.7));b.style.height=(10+54*e)+'px';b.style.opacity=.55+.45*e});
+}
+window.setT=async function(t){
+  let s,k;
+  setMic(t);
+  s=S.abertura;$('abertura').style.opacity=vis(t,s,true,false);
+  fi($('h1'),t,.5,50);fi($('logo1'),t,.2,30);setWords($('c1'),t,s.words);await seek($('v1'),s.start-X,t);
+
+  s=S.produto;$('produto').style.opacity=vis(t,s,false,false);kb($('foto2'),t,s,1.0,1.1);
+  pop($('e2'),t,find(s,/^hidrolato/i)-.35);pop($('h2'),t,find(s,/^laranja/i)-.35);pop($('s2'),t,find(s,/^sanguínea/i)+.2,30);setWords($('c2'),t,s.words);
+
+  s=S.fisico;$('fisico').style.opacity=vis(t,s,false,false);
+  fi($('e3'),t,s.start+.1,30);pop($('h3a'),t,find(s,/^físico/i)-.6);pop($('h3b'),t,find(s,/^sentidos/i)-.3,30);setWords($('c3'),t,s.words);await seek($('v3'),s.start-X,t);
+
+  s=S.estimulo;$('estimulo').style.opacity=vis(t,s,false,false);
+  fi($('e4'),t,s.start+.1,30);pop($('w4a'),t,find(s,/^estímulo/i)-.3);pop($('w4b'),t,find(s,/^perdão/i)-.3);pop($('w4c'),t,find(s,/^mágoas/i)-.5);setWords($('c4'),t,s.words);await seek($('v4'),s.start-X,t);
+
+  s=S.renovacao;$('renovacao').style.opacity=vis(t,s,false,false);
+  pop($('w5a'),t,find(s,/^renovação/i)-.3);pop($('w5b'),t,find(s,/^acolhimento/i)-.3);pop($('w5c'),t,find(s,/^leveza/i)-.3);setWords($('c5'),t,s.words);await seek($('v5'),s.start-X,t);
+
+  s=S.respirar;$('respirar').style.opacity=vis(t,s,false,false);
+  k=clamp((t-s.start)/(s.end-s.start));$('foto6').style.transform=`scale(${1+.08*k})`;
+  $('circ').style.transform=`scale(${.9+.12*Math.sin((t-s.start)*1.1)})`;
+  pop($('arco'),t,s.start+.1,40);pop($('h6a'),t,find(s,/^respirar/i)-.3,30);
+  // palavra de destaque que muda com a fala
+  const h6=$('h6a'); h6.textContent = t>=find(s,/^permitir/i)-.2?'Permita-se.':(t>=find(s,/^perceber/i)-.2?'Perceba.':'Respire.');
+  setWords($('c6'),t,s.words);
+
+  s=S.fecho;$('fecho').style.opacity=vis(t,s,false,true);
+  fi($('logo7'),t,s.start+.1,30);pop($('h7'),t,find(s,/^conheça/i)-.1);fi($('s7'),t,s.start+.6,20);fi($('u7'),t,s.start+1.2,20);fi($('a7'),t,s.start+1.5,20);
+  setWords($('c7'),t,s.words);
+  await document.fonts.ready;
+};
+window.TOTAL=TL.total;
+</script></body></html>

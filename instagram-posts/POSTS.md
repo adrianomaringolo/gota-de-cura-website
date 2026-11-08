@@ -22,13 +22,13 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 | post-11 | Melaleuca (tea tree): ficha da planta | 2026-10-04 | Carrossel | `ficha-da-planta` | 5 | 🟡 | Produto — adaptação do post do blog da melaleuca: origem, os três compostos principais do laudo, como usar hidrolato e óleo essencial, fecho com CTA para gotadecura.com.br/blog |
 | post-12 | Melaleuca (tea tree): origem, propriedades e como usar o óleo essencial e o hidrolato | 2026-10-04 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog da melaleuca, com o título do próprio post e CTA em destaque para gotadecura.com.br/blog |
 | post-13 | Agora o site também fala inglês | 2026-10-06 | Único | `novidade-do-site` | 1 | 🟢 | Novidade do site — versão em inglês em gotadecura.com.br/en, com as bandeiras do Brasil e dos EUA como cartões PT/EN |
-| post-14 | O que dá para fazer com um hidrolato: guia de usos | 2026-10-19 | Único | `chamada-blog` | 1 | 🔵 | Chamada para o post do blog de 15/10: guia de usos do hidrolato por situação (rosto, corpo, cabelo, casa) |
-| post-15 | Planta viva, água limpa | 2026-10-20 | Único | `frase-gigante` | 1 | 🔵 | Nível 3. Frase de marca em quatro linhas (contorno em "viva,", gradiente terracota em "limpa."), apoio sobre agrotóxico e água de nascente |
-| post-16 | O que o laudo mostra: terpinen-4-ol na melaleuca | 2026-10-20 | Carrossel | `rotulo-laudo` | 2 | 🔵 | Nível 3. Dado do laudo da melaleuca (28,9% de terpinen-4-ol) e os três compostos principais. Postar com pelo menos um post de nível 1 ou 2 entre este e o post-15 |
-| post-17 | Gotinha de Cura: a linha para os pequenos | 2026-11-04 | Único | `foto-selo` | 1 | 🔵 | Foto da Gotinha de pelúcia com spray Bem soninho, sabonete baby e creme Bem me quer. Sem texto no slide |
-| post-18 | Medicina Tradicional Chinesa: pomadas de moxinha e artemísia | 2026-11-06 | Único | `foto-selo` | 1 | 🔵 | Foto da bancada com potes de pomada e frascos âmbar; faixa 'Medicina Tradicional Chinesa' |
-| post-19 | Breu branco, direto da Amazônia | 2026-11-09 | Único | `foto-selo` | 1 | 🔵 | Foto da resina de breu branco em bandeja de madeira; faixa 'Breu branco' com apoio sobre o hidrolato disponível |
-| post-20 | Um spray para cada momento | 2026-11-11 | Único | `foto-selo` | 1 | 🔵 | Foto da fileira de sprays (Relaxamento, Prosperidade, Respire bem); faixa no rodapé. Há duas pessoas desfocadas ao fundo |
+| post-14 | O que dá para fazer com um hidrolato: guia de usos | 2026-10-19 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog de 15/10: guia de usos do hidrolato por situação (rosto, corpo, cabelo, casa) |
+| post-15 | Planta viva, água limpa | 2026-10-20 | Único | `frase-gigante` | 1 | 🟡 | Nível 3. Frase de marca em quatro linhas (contorno em "viva,", gradiente terracota em "limpa."), apoio sobre agrotóxico e água de nascente |
+| post-16 | O que o laudo mostra: terpinen-4-ol na melaleuca | 2026-10-20 | Carrossel | `rotulo-laudo` | 2 | 🔴 | Nível 3. Dado do laudo da melaleuca (28,9% de terpinen-4-ol) e os três compostos principais. Postar com pelo menos um post de nível 1 ou 2 entre este e o post-15 |
+| post-17 | Gotinha de Cura: a linha para os pequenos | 2026-11-04 | Único | `foto-selo` | 1 | 🟢 | Foto da Gotinha de pelúcia com spray Bem soninho, sabonete baby e creme Bem me quer. Sem texto no slide |
+| post-18 | Medicina Tradicional Chinesa: pomadas de moxinha e artemísia | 2026-11-06 | Único | `foto-selo` | 1 | 🟢 | Foto da bancada com potes de pomada e frascos âmbar; faixa 'Medicina Tradicional Chinesa' |
+| post-19 | Breu branco, direto da Amazônia | 2026-11-09 | Único | `foto-selo` | 1 | 🟡 | Foto da resina de breu branco em bandeja de madeira; faixa 'Breu branco' com apoio sobre o hidrolato disponível |
+| post-20 | Um spray para cada momento | 2026-11-11 | Único | `foto-selo` | 1 | 🟡 | Foto da fileira de sprays (Relaxamento, Prosperidade, Respire bem); faixa no rodapé. Há duas pessoas desfocadas ao fundo |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---
