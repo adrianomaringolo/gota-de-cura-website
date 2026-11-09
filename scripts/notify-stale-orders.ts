@@ -21,7 +21,7 @@ import {
   markNotified,
   pickRecipients,
 } from '@/services/stale-orders'
-import { orderMailList } from '@/services/maillist'
+import { MailListsService } from '@/services/maillist'
 
 const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send'
 
@@ -76,6 +76,7 @@ async function main(): Promise<void> {
 
   console.log(`${stale.length} pedido(s) parado(s):`)
   const directory = await loadTeamDirectory()
+  const { orders: orderMailList } = await MailListsService.get()
 
   let sent = 0
   let failed = 0
@@ -94,6 +95,9 @@ async function main(): Promise<void> {
     )
 
     try {
+      if (to.length === 0) {
+        throw new Error('sem destinatários: a lista de e-mails de pedidos está vazia')
+      }
       await sendEmail(to, title, html)
       if (!dryRun) await markNotified(entry, now)
       sent += 1

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { AdminHeading, StatusTag, Td, Th, TableWrap } from '@/components/admin/AdminUI'
+import { UserAvatar } from '@/components/admin/UserAvatar'
 import { Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
@@ -17,6 +18,29 @@ const itemCount = (order: Order) =>
 const total = (order: Order) => {
   const subtotal = orderTotal(order.items)
   return subtotal - couponDiscount(subtotal, order.coupon)
+}
+
+/**
+ * An explicit choice wins ("Sem responsável" included). Orders where nobody
+ * was ever picked keep showing who last touched the status, as before.
+ */
+function Assignee({ order }: { order: Order }) {
+  if (order.assignee) {
+    return (
+      <span className="mt-1.5 flex items-center gap-1.5 text-xs text-ink-soft">
+        <UserAvatar name={order.assignee.name} className="h-5 w-5 text-[9px]" />
+        {order.assignee.name}
+      </span>
+    )
+  }
+  if (order.assignee === null) {
+    return <span className="mt-1.5 block text-xs text-ink-muted">Sem responsável</span>
+  }
+  return (
+    <span className="mt-1.5 block text-xs text-ink-muted">
+      {order.statusLogs?.at(-1)?.userName ?? '—'}
+    </span>
+  )
 }
 
 export default function AdminOrdersPage() {
@@ -133,9 +157,7 @@ export default function AdminOrdersPage() {
                     </Td>
                     <Td>
                       <StatusTag status={order.status} />
-                      <span className="mt-1.5 block text-xs text-ink-muted">
-                        {order.statusLogs?.at(-1)?.userName ?? '—'}
-                      </span>
+                      <Assignee order={order} />
                     </Td>
                     <Td className="text-right">
                       <Link

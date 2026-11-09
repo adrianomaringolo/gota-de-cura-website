@@ -137,6 +137,13 @@ export interface User {
   roles: string[]
 }
 
+/** Who is looking after an order. */
+export interface OrderAssignee {
+  /** The user's Firestore document id (same as the login). */
+  id: string
+  name: string
+}
+
 export interface OrderStatusLog {
   userName: string
   oldStatus: string
@@ -160,6 +167,11 @@ export interface Order {
   coupon?: { number: string; discount: number; discountType: 'percentage' | 'fixed' } | ''
   statusLogs?: OrderStatusLog[]
   comments?: OrderComment[]
+  /**
+   * `undefined`: never defined (the panel falls back to whoever last changed the
+   * status). `null`: explicitly "Sem responsável".
+   */
+  assignee?: OrderAssignee | null
   /** The site language the order was placed in; absent means Portuguese. */
   locale?: string
 }

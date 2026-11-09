@@ -21,10 +21,11 @@ import type {
   ContactInfo,
   Coupon,
   Order,
+  OrderAssignee,
   OrderComment,
 } from '@/lib/types'
 import { EmailSender } from './email'
-import { orderMailList } from './maillist'
+import { MailListsService } from './maillist'
 import { UsersService } from './users'
 
 const ordersRef = collection(db, 'orders')
@@ -141,13 +142,18 @@ export const OrdersService = {
 
     // Best effort: a failed notification must not lose a confirmed order.
     try {
-      await EmailSender.sendNewOrderEmail(
-        orderNumber,
-        contactInfo.name,
-        items,
-        orderMailList,
-        locale,
-      )
+      const { orders: teamList } = await MailListsService.get()
+      if (teamList.length === 0) {
+        console.warn('Lista de e-mails de pedidos vazia: equipe não notificada')
+      } else {
+        await EmailSender.sendNewOrderEmail(
+          orderNumber,
+          contactInfo.name,
+          items,
+          teamList,
+          locale,
+        )
+      }
     } catch (error) {
       console.error('Falha ao notificar a equipe sobre o novo pedido', error)
     }
@@ -224,6 +230,14 @@ export const OrdersService = {
       ...(newComments.length
         ? { comments: [...(order.comments || []), ...newComments] }
         : {}),
+    })
+  },
+
+  /** `null` records an explicit "Sem responsável". */
+  async assignOrder(order: Order, assignee: OrderAssignee | null): Promise<void> {
+    await updateDoc(doc(ordersRef, order.id), {
+      assignee,
+      updatedAt: new Date().toISOString(),
     })
   },
 

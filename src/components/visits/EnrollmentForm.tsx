@@ -14,7 +14,7 @@ import { useVisits } from '@/lib/hooks'
 import { formatVisitDateLong, maskPhone } from '@/lib/format'
 import type { EnrollmentData } from '@/lib/types'
 import { EmailSender } from '@/services/email'
-import { visitMailList } from '@/services/maillist'
+import { MailListsService } from '@/services/maillist'
 import { isUpcoming, VisitsService } from '@/services/visits'
 import { PaymentTerms } from './PaymentTerms'
 
@@ -102,11 +102,15 @@ export function EnrollmentForm() {
       await VisitsService.addEnrollmentToVisit(values.visitDate, enrollment)
 
       // Notifications must not block a saved enrollment.
-      void EmailSender.sendNewEnrollmentEmail(
-        values.visitDate,
-        enrollment,
-        visitMailList,
-      ).catch(() => undefined)
+      void MailListsService.get()
+        .then(({ visits }) => {
+          if (visits.length === 0) {
+            console.warn('Lista de e-mails de visitas vazia: equipe não notificada')
+            return
+          }
+          return EmailSender.sendNewEnrollmentEmail(values.visitDate, enrollment, visits)
+        })
+        .catch((error) => console.error('Falha ao notificar a equipe', error))
       void EmailSender.sendEnrollmentGreetingEmail(
         enrollment.name.split(' ')[0],
         [enrollment.email],

@@ -79,6 +79,10 @@ function CredentialsForm({
         setError('Login ou senha incorretos.')
         return
       }
+      if (result.archived) {
+        setError('Este acesso foi arquivado. Fale com um administrador.')
+        return
+      }
       onAuthenticated(result)
     } catch (cause) {
       // A denied read or an offline Firestore is indistinguishable from wrong

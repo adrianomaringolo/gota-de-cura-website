@@ -59,7 +59,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
       toast(
         status === 'removed'
           ? 'Seu acesso ao painel foi removido.'
-          : 'Sua senha foi redefinida. Entre com a senha padrão e crie uma nova.',
+          : status === 'archived'
+            ? 'Seu acesso ao painel foi arquivado.'
+            : 'Sua senha foi redefinida. Entre com a senha padrão e crie uma nova.',
         { duration: 8000 },
       )
       router.replace('/admin/login')

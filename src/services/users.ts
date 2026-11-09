@@ -34,6 +34,8 @@ export type AuthResult = {
   user: IdentifiedUser
   /** The password on file is still the seeded one. */
   mustChangePassword: boolean
+  /** The credentials are right, but the account was archived: no access. */
+  archived: boolean
 }
 
 /** A row on the user-management screen — the panel's own view of an account. */
@@ -47,6 +49,8 @@ export interface ManagedUser {
   roles: string[]
   /** Carries the `admin` role, so reaches the restricted sections. */
   isAdmin: boolean
+  /** Archived accounts cannot sign in; the document and its history stay. */
+  archived: boolean
   /** Still on the seeded password — asked to change it on the next sign-in. */
   usesDefaultPassword: boolean
   /** ISO of the last password change, absent while still on the seeded one. */
@@ -194,6 +198,7 @@ export const UsersService = {
           return {
             user: { ...user, id: match.id },
             mustChangePassword: hash === DEFAULT_PASSWORD_HASH,
+            archived: Boolean(match.data().archivedAt),
           }
         }
       }
@@ -252,7 +257,9 @@ export const UsersService = {
    * account would only bite on the next manual sign-in. A failed read (offline,
    * denied) counts as `valid` — a flaky network must not log the team out.
    */
-  async checkSession(user: User): Promise<'valid' | 'must-change-password' | 'removed'> {
+  async checkSession(
+    user: User,
+  ): Promise<'valid' | 'must-change-password' | 'removed' | 'archived'> {
     try {
       let raw: Record<string, unknown> | undefined
       if (user.id) {
@@ -264,6 +271,7 @@ export const UsersService = {
       }
 
       if (!raw) return 'removed'
+      if (raw.archivedAt) return 'archived'
       return raw.password === DEFAULT_PASSWORD_HASH ? 'must-change-password' : 'valid'
     } catch (cause) {
       console.error('Falha ao validar a sessão do painel', cause)
@@ -306,6 +314,7 @@ export const UsersService = {
         email: typeof raw.email === 'string' ? raw.email : '',
         roles,
         isAdmin: roles.includes('admin'),
+        archived: Boolean(raw.archivedAt),
         usesDefaultPassword: raw.password === DEFAULT_PASSWORD_HASH,
         passwordUpdatedAt:
           typeof raw.passwordUpdatedAt === 'string' ? raw.passwordUpdatedAt : undefined,
@@ -360,6 +369,15 @@ export const UsersService = {
       password: DEFAULT_PASSWORD_HASH,
       passwordUpdatedAt: deleteField(),
     })
+  },
+
+  /** Blocks sign-in and ends open sessions on their next check. Reversible. */
+  async archiveManagedUser(id: string): Promise<void> {
+    await updateDoc(doc(usersRef, id), { archivedAt: new Date().toISOString() })
+  },
+
+  async unarchiveManagedUser(id: string): Promise<void> {
+    await updateDoc(doc(usersRef, id), { archivedAt: deleteField() })
   },
 
   async deleteManagedUser(id: string): Promise<void> {

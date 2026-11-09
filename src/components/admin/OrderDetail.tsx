@@ -12,6 +12,7 @@ import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
+import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
 export function OrderDetail({ orderId }: { orderId: string }) {
@@ -88,7 +89,8 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           )}
         </div>
 
-        <div className="print-none">
+        <div className="space-y-4 print-none">
+          <AssigneePicker order={order} onSaved={load} />
           <StatusChanger order={order} onSaved={load} />
         </div>
       </div>
