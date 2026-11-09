@@ -590,7 +590,8 @@
     "summaryAddress": "Address",
     "contactNoticeTitle": "We'll be in touch within 48 hours",
     "contactNotice": "One of the {name} volunteers will contact you within 48 hours to arrange payment and delivery. Your order is only finalized after that conversation.",
-    "preferredContact": "Preferred way to be contacted"
+    "preferredContact": "Preferred way to be contacted",
+    "pickupHours": "Opening hours"
   },
   "orderStatus": {
     "notFoundTitle": "Order not found",

@@ -150,6 +150,7 @@ const emptyAddress: ShippingAddress = {
 
 export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
   const t = useTranslations('checkout')
+  const store = useTranslations('store')
   const [method, setMethod] = useState<Method>(initial?.method ?? 'pickup')
   const [lookup, setLookup] = useState<'idle' | 'loading' | 'notFound'>('idle')
   const lastLookup = useRef('')
@@ -261,6 +262,17 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
             >
               Google Maps
             </a>
+            <div className="mt-3 border-t border-brand/15 pt-3">
+              <p className="font-semibold text-ink">{t('pickupHours')}</p>
+              <ul className="mt-1 space-y-0.5 text-ink-soft">
+                {SITE.store.hours.map(([day, hours]) => (
+                  <li key={day} className="flex gap-2">
+                    <span className="min-w-28 text-ink">{store(day)}</span>
+                    <span className="tabular-nums">{store(hours)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       ) : (

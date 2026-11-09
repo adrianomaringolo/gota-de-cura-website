@@ -590,7 +590,8 @@
     "summaryAddress": "Endereço",
     "contactNoticeTitle": "Entraremos em contato em até 48 horas",
     "contactNotice": "Um dos voluntários {name} falará com você em até 48 horas para combinar o pagamento e o envio. Seu pedido só é fechado depois dessa conversa.",
-    "preferredContact": "Prefere ser contatado por"
+    "preferredContact": "Prefere ser contatado por",
+    "pickupHours": "Horário de funcionamento"
   },
   "orderStatus": {
     "notFoundTitle": "Pedido não encontrado",
