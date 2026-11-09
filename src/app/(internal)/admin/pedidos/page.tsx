@@ -12,15 +12,12 @@ import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
 import { formatDuration, timeInCurrentStatus } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
-import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
+import { OrdersService, orderGrandTotal } from '@/services/orders'
 
 const itemCount = (order: Order) =>
   order.items.reduce((total, item) => total + (item.amount || 0), 0)
 
-const total = (order: Order) => {
-  const subtotal = orderTotal(order.items)
-  return subtotal - couponDiscount(subtotal, order.coupon)
-}
+const total = orderGrandTotal
 
 const href = (order: Order) => `/admin/pedidos/${order.orderId}`
 

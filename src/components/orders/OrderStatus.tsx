@@ -134,10 +134,16 @@ export function OrderStatus({ orderRef }: { orderRef: string }) {
             <dd className="tabular-nums">− {money(discount)}</dd>
           </div>
         )}
+        {order.shippingCost ? (
+          <div className="flex justify-between">
+            <dt className="text-ink-soft">{t('shippingFee')}</dt>
+            <dd className="tabular-nums">{money(order.shippingCost)}</dd>
+          </div>
+        ) : null}
         <div className="flex justify-between border-t border-line pt-2">
           <dt className="font-display text-lg font-semibold text-ink">{t('total')}</dt>
           <dd className="font-display text-xl font-semibold text-ink tabular-nums">
-            {money(subtotal - discount)}
+            {money(subtotal - discount + (order.shippingCost || 0))}
           </dd>
         </div>
       </dl>

@@ -602,6 +602,7 @@
     "greeting": "Hello, <strong>{name}</strong>! Your order will be handled within 48 hours. If you have any questions, reach out to us on <instagram>Instagram</instagram> or by email at <mail>{email}</mail>.",
     "products": "Products",
     "subtotal": "Subtotal",
+    "shippingFee": "Shipping",
     "coupon": "Coupon {code}",
     "total": "Total",
     "history": "History"

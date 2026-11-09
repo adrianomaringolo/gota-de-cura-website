@@ -95,8 +95,7 @@ export interface ShippingAddress {
 }
 
 export type DeliveryInfo =
-  | { method: 'pickup' }
-  | ({ method: 'shipping' } & ShippingAddress)
+  { method: 'pickup' } | ({ method: 'shipping' } & ShippingAddress)
 
 export interface Coupon {
   id?: string
@@ -193,6 +192,10 @@ export interface Order {
   assignee?: OrderAssignee | null
   /** The site language the order was placed in; absent means Portuguese. */
   locale?: string
+  /** Shipping fee the team agreed with the customer; absent means none charged. */
+  shippingCost?: number
+  /** Free-form internal notes about the shipping (carrier, tracking code, deal made). */
+  shippingNotes?: string
 }
 
 /**

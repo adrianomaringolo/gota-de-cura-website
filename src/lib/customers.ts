@@ -3,7 +3,7 @@ import { toDate } from './format'
 import type { Order } from './types'
 
 export interface Customer {
-  /** Grouping key: the phone, or the e-mail / name when no usable phone exists. */
+  /** Grouping key (one of the customer's identifiers). */
   key: string
   /** The most recent spelling of the name. */
   name: string
@@ -36,24 +36,53 @@ export function phoneKey(phone: string | undefined): string | null {
 const nameKey = (name: string) =>
   name.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim()
 
-const customerKey = (order: Order): string => {
+/**
+ * Every identifier an order carries. Orders sharing any one of them belong to
+ * the same customer: a mistyped digit in the phone is bridged by the e-mail,
+ * and a different e-mail by the phone. The name is only a last resort, for
+ * orders with neither.
+ */
+const identifiers = (order: Order): string[] => {
+  const keys: string[] = []
+
   const byPhone = phoneKey(order.contactInfo?.phone)
-  if (byPhone) return byPhone
+  if (byPhone) keys.push(byPhone)
 
   const email = order.contactInfo?.email?.trim().toLowerCase()
-  if (email) return `mail:${email}`
+  if (email) keys.push(`mail:${email}`)
 
-  return `name:${nameKey(order.contactInfo?.name ?? '')}`
+  return keys.length ? keys : [`name:${nameKey(order.contactInfo?.name ?? '')}`]
 }
 
 const time = (order: Order) => toDate(order.createdAt)?.getTime() ?? 0
 
 export function groupByCustomer(orders: Order[]): Customer[] {
-  const groups = new Map<string, Order[]>()
-  for (const order of orders) {
-    const key = customerKey(order)
-    groups.set(key, [...(groups.get(key) ?? []), order])
+  // Union-find over identifiers: all identifiers of one order end up together.
+  const parent = new Map<string, string>()
+  const find = (key: string): string => {
+    const up = parent.get(key) ?? key
+    if (up === key) return key
+    const root = find(up)
+    parent.set(key, root)
+    return root
   }
+  const union = (a: string, b: string) => {
+    const rootA = find(a)
+    const rootB = find(b)
+    if (rootA !== rootB) parent.set(rootB, rootA)
+  }
+
+  const keysByOrder = orders.map(identifiers)
+  keysByOrder.forEach((keys) => {
+    keys.forEach((key) => parent.has(key) || parent.set(key, key))
+    keys.slice(1).forEach((key) => union(keys[0], key))
+  })
+
+  const groups = new Map<string, Order[]>()
+  orders.forEach((order, index) => {
+    const key = find(keysByOrder[index][0])
+    groups.set(key, [...(groups.get(key) ?? []), order])
+  })
 
   return [...groups.entries()]
     .map(([key, list]) => {

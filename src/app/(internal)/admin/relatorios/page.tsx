@@ -16,12 +16,9 @@ import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
 import type { Order } from '@/lib/types'
-import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
+import { OrdersService, orderGrandTotal } from '@/services/orders'
 
-const orderValue = (order: Order) => {
-  const subtotal = orderTotal(order.items)
-  return subtotal - couponDiscount(subtotal, order.coupon)
-}
+const orderValue = orderGrandTotal
 
 export default function AdminReportsPage() {
   const [orders, setOrders] = useState<Order[] | null>(null)

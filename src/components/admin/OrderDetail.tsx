@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import toast from 'react-hot-toast'
-import { Button } from '@/components/ui/Button'
+import { Button, ButtonLink } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
-import { Checkbox, Select, Textarea } from '@/components/ui/Field'
+import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import {
   ORDER_STATUS_DESCRIPTIONS,
@@ -18,7 +18,13 @@ import { formatCurrency, formatDateAndTime } from '@/lib/format'
 import { useLoggedUser } from '@/lib/hooks'
 import { formatDuration } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
-import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
+import {
+  couponDiscount,
+  OrdersService,
+  orderTotal,
+  publicOrderUrl,
+} from '@/services/orders'
+import { toAmount } from '@/lib/format'
 import { DeliveryPill } from './DeliveryPill'
 import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
@@ -50,6 +56,13 @@ export function OrderDetail({ orderId }: { orderId: string }) {
 
   const subtotal = orderTotal(order.items)
   const discount = couponDiscount(subtotal, order.coupon)
+  // The page the customer sees, in the language they ordered in.
+  const publicUrl = publicOrderUrl(order.id, order.locale ?? 'pt-BR')
+  const copyPublicLink = () =>
+    navigator.clipboard.writeText(publicUrl).then(
+      () => toast.success('Link copiado'),
+      () => toast.error('Não foi possível copiar o link'),
+    )
 
   return (
     <>
@@ -60,9 +73,23 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         >
           ← Voltar aos pedidos
         </Link>
-        <Button variant="outline" size="sm" onClick={() => window.print()}>
-          Imprimir
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" size="sm" onClick={copyPublicLink}>
+            Copiar link do cliente
+          </Button>
+          <ButtonLink
+            variant="outline"
+            size="sm"
+            href={publicUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver página pública ↗
+          </ButtonLink>
+          <Button variant="outline" size="sm" onClick={() => window.print()}>
+            Imprimir
+          </Button>
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -104,69 +131,83 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               </div>
             ))}
           </dl>
+          {order.shippingNotes && (
+            <p className="mt-4 rounded-lg bg-canvas-sunk px-4 py-3 text-sm whitespace-pre-line text-ink">
+              <strong className="font-semibold">Detalhes do frete:</strong>{' '}
+              {order.shippingNotes}
+            </p>
+          )}
           {order.contactInfo.observations && (
             <p className="mt-4 rounded-lg bg-warning-tint px-4 py-3 text-sm text-ink">
               <strong className="font-semibold">Observações:</strong>{' '}
               {order.contactInfo.observations}
             </p>
           )}
+          <h2 className="mt-8 mb-4 font-display text-xl font-semibold text-ink">
+            Produtos
+          </h2>
+          <TableWrap>
+            <thead>
+              <tr>
+                <Th>Produto</Th>
+                <Th className="text-right">Preço un.</Th>
+                <Th className="text-right">Qtd.</Th>
+                <Th className="text-right">Total</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {order.items
+                .filter((item) => item.amount)
+                .map((item, index) => (
+                  <tr key={`${item.id}-${index}`}>
+                    <Td>
+                      <span className="font-medium">{item.name}</span>
+                      <span className="block text-xs text-ink-muted">{item.type}</span>
+                    </Td>
+                    <Td className="text-right tabular-nums">
+                      {formatCurrency(item.price)}
+                    </Td>
+                    <Td className="text-right tabular-nums">{item.amount}</Td>
+                    <Td className="text-right font-medium tabular-nums">
+                      {formatCurrency(item.price * (item.amount || 0))}
+                    </Td>
+                  </tr>
+                ))}
+            </tbody>
+          </TableWrap>
+
+          <dl className="mt-5 ml-auto max-w-sm space-y-1.5 text-base">
+            <div className="flex justify-between">
+              <dt className="text-ink-soft">Subtotal</dt>
+              <dd className="tabular-nums">{formatCurrency(subtotal)}</dd>
+            </div>
+            {order.coupon && discount > 0 && (
+              <div className="flex justify-between text-positive">
+                <dt>Cupom {order.coupon.number}</dt>
+                <dd className="tabular-nums">− {formatCurrency(discount)}</dd>
+              </div>
+            )}
+            {order.shippingCost ? (
+              <div className="flex justify-between">
+                <dt className="text-ink-soft">Frete</dt>
+                <dd className="tabular-nums">{formatCurrency(order.shippingCost)}</dd>
+              </div>
+            ) : null}
+            <div className="flex justify-between border-t border-line pt-2">
+              <dt className="font-display text-lg font-semibold">Total</dt>
+              <dd className="font-display text-xl font-semibold tabular-nums">
+                {formatCurrency(subtotal - discount + (order.shippingCost || 0))}
+              </dd>
+            </div>
+          </dl>
         </div>
 
         <div className="space-y-4 print-none">
           <AssigneePicker order={order} onSaved={load} />
           <StatusChanger order={order} onSaved={load} />
+          <ShippingPanel order={order} onSaved={load} />
         </div>
       </div>
-
-      <h2 className="mt-10 mb-4 font-display text-xl font-semibold text-ink">Produtos</h2>
-      <TableWrap>
-        <thead>
-          <tr>
-            <Th>Código</Th>
-            <Th>Produto</Th>
-            <Th className="text-right">Preço un.</Th>
-            <Th className="text-right">Qtd.</Th>
-            <Th className="text-right">Total</Th>
-          </tr>
-        </thead>
-        <tbody>
-          {order.items
-            .filter((item) => item.amount)
-            .map((item, index) => (
-              <tr key={`${item.id}-${index}`}>
-                <Td className="text-xs text-ink-muted">{item.id}</Td>
-                <Td>
-                  <span className="font-medium">{item.name}</span>
-                  <span className="block text-xs text-ink-muted">{item.type}</span>
-                </Td>
-                <Td className="text-right tabular-nums">{formatCurrency(item.price)}</Td>
-                <Td className="text-right tabular-nums">{item.amount}</Td>
-                <Td className="text-right font-medium tabular-nums">
-                  {formatCurrency(item.price * (item.amount || 0))}
-                </Td>
-              </tr>
-            ))}
-        </tbody>
-      </TableWrap>
-
-      <dl className="mt-5 ml-auto max-w-sm space-y-1.5 text-base">
-        <div className="flex justify-between">
-          <dt className="text-ink-soft">Subtotal</dt>
-          <dd className="tabular-nums">{formatCurrency(subtotal)}</dd>
-        </div>
-        {order.coupon && discount > 0 && (
-          <div className="flex justify-between text-positive">
-            <dt>Cupom {order.coupon.number}</dt>
-            <dd className="tabular-nums">− {formatCurrency(discount)}</dd>
-          </div>
-        )}
-        <div className="flex justify-between border-t border-line pt-2">
-          <dt className="font-display text-lg font-semibold">Total</dt>
-          <dd className="font-display text-xl font-semibold tabular-nums">
-            {formatCurrency(subtotal - discount)}
-          </dd>
-        </div>
-      </dl>
 
       <div className="mt-12 print-none">
         <div className="flex gap-1 border-b border-line">
@@ -200,6 +241,67 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         </div>
       </div>
     </>
+  )
+}
+
+function ShippingPanel({ order, onSaved }: { order: Order; onSaved: () => void }) {
+  const initialCost = order.shippingCost
+    ? String(order.shippingCost).replace('.', ',')
+    : ''
+  const [cost, setCost] = useState(initialCost)
+  const [notes, setNotes] = useState(order.shippingNotes ?? '')
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    setCost(order.shippingCost ? String(order.shippingCost).replace('.', ',') : '')
+    setNotes(order.shippingNotes ?? '')
+  }, [order.shippingCost, order.shippingNotes])
+
+  const amount = toAmount(cost)
+  const invalid =
+    cost.trim() !== '' && (amount < 0 || !/^\s*\d+([.,]\d{1,2})?\s*$/.test(cost))
+  const dirty =
+    amount !== (order.shippingCost || 0) || notes.trim() !== (order.shippingNotes ?? '')
+
+  const save = async () => {
+    setSaving(true)
+    try {
+      await OrdersService.setShipping(order, { cost: amount, notes: notes.trim() })
+      toast.success('Frete salvo')
+      onSaved()
+    } catch {
+      toast.error('Não foi possível salvar o frete')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <Panel className="p-5">
+      <h2 className="font-display text-lg font-semibold text-ink">Frete</h2>
+      <div className="mt-3 space-y-3">
+        <Input
+          label="Valor do frete (R$)"
+          inputMode="decimal"
+          placeholder="0,00"
+          value={cost}
+          onChange={(event) => setCost(event.target.value)}
+          error={invalid ? 'Use só números, por exemplo 18,50' : undefined}
+          hint="Entra no total do pedido, que o cliente também vê."
+        />
+        <Textarea
+          label="Detalhes do frete"
+          rows={3}
+          value={notes}
+          onChange={(event) => setNotes(event.target.value)}
+          placeholder="Transportadora, código de rastreio, combinado com o cliente…"
+          hint="Anotação interna: o cliente não vê."
+        />
+        <Button onClick={save} disabled={saving || invalid || !dirty}>
+          {saving ? <Spinner className="h-4 w-4" /> : 'Salvar frete'}
+        </Button>
+      </div>
+    </Panel>
   )
 }
 

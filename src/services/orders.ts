@@ -48,6 +48,9 @@ const toOrder = (id: string, data: Record<string, unknown>): Order => {
       price: toAmount(item.price),
       amount: toAmount(item.amount),
     })),
+    ...(order.shippingCost !== undefined
+      ? { shippingCost: toAmount(order.shippingCost) }
+      : {}),
     ...(order.coupon
       ? { coupon: { ...order.coupon, discount: toAmount(order.coupon.discount) } }
       : {}),
@@ -65,6 +68,12 @@ export const couponDiscount = (
   return coupon.discountType === 'fixed'
     ? coupon.discount
     : (total * coupon.discount) / 100
+}
+
+/** What the customer pays: products, minus the coupon, plus the shipping fee. */
+export const orderGrandTotal = (order: Order): number => {
+  const subtotal = orderTotal(order.items ?? [])
+  return subtotal - couponDiscount(subtotal, order.coupon) + (order.shippingCost || 0)
 }
 
 /**
@@ -249,6 +258,17 @@ export const OrdersService = {
   async assignOrder(order: Order, assignee: OrderAssignee | null): Promise<void> {
     await updateDoc(doc(ordersRef, order.id), {
       assignee,
+      updatedAt: new Date().toISOString(),
+    })
+  },
+
+  async setShipping(
+    order: Order,
+    shipping: { cost: number; notes: string },
+  ): Promise<void> {
+    await updateDoc(doc(ordersRef, order.id), {
+      shippingCost: shipping.cost,
+      shippingNotes: shipping.notes,
       updatedAt: new Date().toISOString(),
     })
   },
