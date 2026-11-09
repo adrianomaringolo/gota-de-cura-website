@@ -23,7 +23,13 @@ export default function AdminCustomersPage() {
       .catch(() => setOrders([]))
   }, [])
 
-  const customers = useMemo(() => groupByCustomer(orders ?? []), [orders])
+  const customers = useMemo(
+    () =>
+      groupByCustomer(orders ?? []).sort((a, b) =>
+        a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }),
+      ),
+    [orders],
+  )
 
   const filtered = useMemo(() => {
     const term = normalise(search.trim())

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -117,12 +118,14 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             href="/admin"
             className="flex shrink-0 items-center gap-2 font-[family-name:var(--font-wordmark)] text-base lowercase"
           >
-            <span
-              aria-hidden="true"
-              className="grid h-7 w-7 place-items-center rounded-full bg-white/15 text-xs font-bold"
-            >
-              gc
-            </span>
+            <Image
+              src="/images/logos/logo-light-gray.png"
+              alt=""
+              width={415}
+              height={601}
+              className="h-8 w-auto"
+              priority
+            />
             painel
           </Link>
 
