@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
+import { format } from 'date-fns'
 import { AdminHeading, Td, Th, TableWrap } from '@/components/admin/AdminUI'
 import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Field'
@@ -14,6 +15,7 @@ import { ProductsService } from '@/services/products'
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<ProductItem[] | null>(null)
   const [type, setType] = useState('all')
+  const [exporting, setExporting] = useState(false)
   const [savingId, setSavingId] = useState<string | null>(null)
 
   const load = async () => setProducts(await ProductsService.getProducts())
@@ -29,6 +31,73 @@ export default function AdminProductsPage() {
         .sort((a, b) => a.name.localeCompare(b.name, 'pt-BR')),
     [products, type],
   )
+
+  const exportToExcel = async () => {
+    setExporting(true)
+    try {
+      // Loaded on demand: the library only matters when someone exports.
+      const { default: writeExcelFile } = await import('write-excel-file/browser')
+      // "Todas as categorias" keeps the plain name; otherwise the category is
+      // appended as a lowercase, accent-free slug.
+      const slug = type
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+      const fileName = type === 'all' || !slug ? 'produtos' : `produtos-${slug}`
+      const header = (value: string) => ({ value, fontWeight: 'bold' as const })
+
+      await writeExcelFile(filtered, {
+        columns: [
+          {
+            header: header('Código'),
+            cell: (product: ProductItem) => ({ value: product.id }),
+            width: 14,
+          },
+          {
+            header: header('Produto'),
+            cell: (product: ProductItem) => ({ value: product.name }),
+            width: 44,
+          },
+          {
+            header: header('Categoria'),
+            cell: (product: ProductItem) => ({ value: product.type ?? '' }),
+            width: 26,
+          },
+          {
+            header: header('Preço (R$)'),
+            cell: (product: ProductItem) => ({
+              value: product.price,
+              type: Number,
+              format: '#,##0.00',
+            }),
+            width: 14,
+          },
+          {
+            header: header('Quantidade'),
+            cell: (product: ProductItem) => ({
+              value: product.amount ?? 0,
+              type: Number,
+            }),
+            width: 13,
+          },
+          {
+            header: header('Disponibilidade'),
+            cell: (product: ProductItem) => ({
+              value: product.available ? 'Disponível' : 'Esgotado',
+            }),
+            width: 16,
+          },
+        ],
+      }).toFile(`${fileName}-${format(new Date(), 'yyyy-MM-dd')}.xlsx`)
+    } catch (error) {
+      console.error('Falha ao exportar os produtos', error)
+      toast.error('Não foi possível exportar a planilha')
+    } finally {
+      setExporting(false)
+    }
+  }
 
   const patch = (id: string, changes: Partial<ProductItem>) =>
     setProducts((current) =>
@@ -55,19 +124,28 @@ export default function AdminProductsPage() {
         title="Disponibilidade e estoque"
         description="Tirar a disponibilidade impede novos pedidos do produto, mas ele continua visível no site. As quantidades são só informativas."
         actions={
-          <Select
-            aria-label="Filtrar por categoria"
-            value={type}
-            onChange={(event) => setType(event.target.value)}
-            className="w-72"
-          >
-            <option value="all">Todas as categorias</option>
-            {productTypes.map((productType) => (
-              <option key={productType.id} value={productType.type}>
-                {productType.type}
-              </option>
-            ))}
-          </Select>
+          <>
+            <Button
+              variant="outline"
+              onClick={exportToExcel}
+              disabled={exporting || filtered.length === 0}
+            >
+              {exporting ? 'Exportando…' : 'Exportar para Excel'}
+            </Button>
+            <Select
+              aria-label="Filtrar por categoria"
+              value={type}
+              onChange={(event) => setType(event.target.value)}
+              className="w-72"
+            >
+              <option value="all">Todas as categorias</option>
+              {productTypes.map((productType) => (
+                <option key={productType.id} value={productType.type}>
+                  {productType.type}
+                </option>
+              ))}
+            </Select>
+          </>
         }
       />
 
