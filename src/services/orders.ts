@@ -14,6 +14,7 @@ import { db } from '@/lib/firebase'
 import { ORDER_STATUS, orderStatusLabel } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
 import { localizedPath } from '@/lib/i18n'
+import { describeChanges, type ItemChange } from '@/lib/order-edit'
 import { cartLineName } from '@/lib/products'
 import { SITE } from '@/lib/site'
 import type {
@@ -270,6 +271,38 @@ export const OrdersService = {
       shippingCost: shipping.cost,
       shippingNotes: shipping.notes,
       updatedAt: new Date().toISOString(),
+    })
+  },
+
+  /**
+   * Replaces the order's items and records, in the comments, who changed what
+   * and why — the trail is written in the same update as the change itself, so
+   * an edit can never exist without its log.
+   */
+  async updateOrderItems(
+    order: Order,
+    items: CartItem[],
+    changes: ItemChange[],
+    reason?: string,
+  ): Promise<void> {
+    const user = UsersService.getStoredUser()
+    const totalAfter = orderGrandTotal({ ...order, items })
+
+    await updateDoc(doc(ordersRef, order.id), {
+      items,
+      updatedAt: new Date().toISOString(),
+      comments: [
+        ...(order.comments || []),
+        {
+          userName: user?.name ?? '—',
+          comment: describeChanges(changes, {
+            reason,
+            totalBefore: orderGrandTotal(order),
+            totalAfter,
+          }),
+          createdAt: new Date().toISOString(),
+        },
+      ],
     })
   },
 

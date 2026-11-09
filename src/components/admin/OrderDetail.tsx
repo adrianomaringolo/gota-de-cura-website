@@ -26,12 +26,14 @@ import {
 } from '@/services/orders'
 import { toAmount } from '@/lib/format'
 import { DeliveryPill } from './DeliveryPill'
+import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
 export function OrderDetail({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined)
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
+  const [editItemsOpen, setEditItemsOpen] = useState(false)
 
   const load = useCallback(async () => {
     try {
@@ -143,9 +145,17 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               {order.contactInfo.observations}
             </p>
           )}
-          <h2 className="mt-8 mb-4 font-display text-xl font-semibold text-ink">
-            Produtos
-          </h2>
+          <div className="mt-8 mb-4 flex items-center justify-between gap-3">
+            <h2 className="font-display text-xl font-semibold text-ink">Produtos</h2>
+            <Button
+              variant="outline"
+              size="sm"
+              className="print-none"
+              onClick={() => setEditItemsOpen(true)}
+            >
+              Editar itens
+            </Button>
+          </div>
           <TableWrap>
             <thead>
               <tr>
@@ -240,6 +250,12 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           )}
         </div>
       </div>
+      <OrderItemsDialog
+        order={order}
+        open={editItemsOpen}
+        onClose={() => setEditItemsOpen(false)}
+        onSaved={load}
+      />
     </>
   )
 }
