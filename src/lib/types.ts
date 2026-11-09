@@ -194,7 +194,7 @@ export interface Order {
   locale?: string
   /** Shipping fee the team agreed with the customer; absent means none charged. */
   shippingCost?: number
-  /** Free-form internal notes about the shipping (carrier, tracking code, deal made). */
+  /** Free-form shipping details (carrier, tracking code, deal made), shown to the customer too. */
   shippingNotes?: string
 }
 

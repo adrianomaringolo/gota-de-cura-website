@@ -148,6 +148,15 @@ export function OrderStatus({ orderRef }: { orderRef: string }) {
         </div>
       </dl>
 
+      {order.shippingNotes && (
+        <div className="mt-6 rounded-xl border border-line bg-surface px-5 py-4">
+          <h3 className="text-sm font-semibold text-ink">{t('shippingDetails')}</h3>
+          <p className="mt-1.5 text-sm whitespace-pre-line text-ink-soft">
+            {order.shippingNotes}
+          </p>
+        </div>
+      )}
+
       {order.statusLogs && order.statusLogs.length > 0 && (
         <>
           <h2 className="mt-10 mb-4 font-display text-xl font-semibold text-ink">

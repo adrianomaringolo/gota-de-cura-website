@@ -603,6 +603,7 @@
     "products": "Produtos",
     "subtotal": "Subtotal",
     "shippingFee": "Frete",
+    "shippingDetails": "Detalhes do frete",
     "coupon": "Cupom {code}",
     "total": "Total",
     "history": "Histórico"

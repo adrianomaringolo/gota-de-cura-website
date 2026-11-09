@@ -603,6 +603,7 @@
     "products": "Products",
     "subtotal": "Subtotal",
     "shippingFee": "Shipping",
+    "shippingDetails": "Shipping details",
     "coupon": "Coupon {code}",
     "total": "Total",
     "history": "History"

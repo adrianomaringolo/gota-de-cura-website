@@ -295,7 +295,7 @@ function ShippingPanel({ order, onSaved }: { order: Order; onSaved: () => void }
           value={notes}
           onChange={(event) => setNotes(event.target.value)}
           placeholder="Transportadora, código de rastreio, combinado com o cliente…"
-          hint="Anotação interna: o cliente não vê."
+          hint="O cliente também vê estes detalhes na página pública do pedido."
         />
         <Button onClick={save} disabled={saving || invalid || !dirty}>
           {saving ? <Spinner className="h-4 w-4" /> : 'Salvar frete'}
