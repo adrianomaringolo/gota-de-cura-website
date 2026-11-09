@@ -2,7 +2,7 @@ import { useTranslations } from 'next-intl'
 import { cn } from '@/lib/cn'
 
 /** Keys under `cart.steps`. */
-const STEPS = ['order', 'details', 'confirmation'] as const
+const STEPS = ['order', 'details', 'delivery', 'confirmation'] as const
 
 export function Stepper({ current }: { current: number }) {
   const t = useTranslations('cart.steps')

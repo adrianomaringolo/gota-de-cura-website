@@ -76,10 +76,27 @@ export interface ContactInfo {
   name: string
   phone: string
   email?: string
-  city: string
-  zipcode: string
+  /** How the customer prefers the team to reach them. Absent on older orders. */
+  preferredContact?: 'whatsapp' | 'email'
+  /** Legacy: orders placed before the delivery step kept city and CEP here. */
+  city?: string
+  zipcode?: string
   observations?: string
 }
+
+export interface ShippingAddress {
+  zipcode: string
+  street: string
+  number: string
+  complement?: string
+  neighborhood: string
+  city: string
+  state: string
+}
+
+export type DeliveryInfo =
+  | { method: 'pickup' }
+  | ({ method: 'shipping' } & ShippingAddress)
 
 export interface Coupon {
   id?: string
@@ -162,6 +179,8 @@ export interface Order {
   orderId: number
   items: CartItem[]
   contactInfo: ContactInfo
+  /** Absent on orders placed before the delivery step existed. */
+  delivery?: DeliveryInfo
   status: string
   createdAt: string
   coupon?: { number: string; discount: number; discountType: 'percentage' | 'fixed' } | ''

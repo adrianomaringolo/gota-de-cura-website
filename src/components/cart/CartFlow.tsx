@@ -10,24 +10,26 @@ import { EmptyState, Spinner } from '@/components/ui/Feedback'
 import { Input, Textarea } from '@/components/ui/Field'
 import { Link } from '@/i18n/navigation'
 import { useCart } from '@/lib/cart-context'
-import { formatCurrency, maskPhone, maskZipcode } from '@/lib/format'
+import { formatCurrency, maskPhone } from '@/lib/format'
 import { typeDisplayName } from '@/lib/product-types'
 import { cartLineName } from '@/lib/products'
 import { SITE } from '@/lib/site'
-import type { ContactInfo, Coupon } from '@/lib/types'
+import type { ContactInfo, Coupon, DeliveryInfo } from '@/lib/types'
 import { couponDiscount, OrdersService } from '@/services/orders'
 import { CartLines } from './CartLines'
 import { CouponBox } from './CouponBox'
+import { DeliveryStep } from './DeliveryStep'
 import { Stepper } from './Stepper'
 
-type Step = 'items' | 'contact' | 'review' | 'saving' | 'done'
+type Step = 'items' | 'contact' | 'delivery' | 'review' | 'saving' | 'done'
 
 const stepIndex: Record<Step, number> = {
   items: 0,
   contact: 1,
-  review: 2,
-  saving: 2,
-  done: 2,
+  delivery: 2,
+  review: 3,
+  saving: 3,
+  done: 3,
 }
 
 export function CartFlow() {
@@ -37,6 +39,7 @@ export function CartFlow() {
   const { items, total, count, ready, clear } = useCart()
   const [step, setStep] = useState<Step>('items')
   const [contact, setContact] = useState<ContactInfo | null>(null)
+  const [delivery, setDelivery] = useState<DeliveryInfo | null>(null)
   const [coupon, setCoupon] = useState<Coupon | undefined>()
   const [orderNumber, setOrderNumber] = useState<number | null>(null)
   const [orderRef, setOrderRef] = useState<string | null>(null)
@@ -46,18 +49,23 @@ export function CartFlow() {
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<ContactInfo>({ defaultValues: contact ?? undefined })
+    watch,
+  } = useForm<ContactInfo>({
+    defaultValues: contact ?? { preferredContact: 'whatsapp' },
+  })
+  const preferredContact = watch('preferredContact')
 
   const discount = couponDiscount(total, coupon)
   const payable = Math.max(0, total - discount)
 
   const submitOrder = async () => {
-    if (!contact) return
+    if (!contact || !delivery) return
     setStep('saving')
     try {
       const { orderNumber: number, orderRef: ref } = await OrdersService.saveOrder(
         { items: items.filter((item) => item.amount > 0) },
         contact,
+        delivery,
         coupon,
         locale,
       )
@@ -187,7 +195,7 @@ export function CartFlow() {
           className="mt-10"
           onSubmit={handleSubmit((data) => {
             setContact(data)
-            setStep('review')
+            setStep('delivery')
           })}
           noValidate
         >
@@ -216,31 +224,69 @@ export function CartFlow() {
             />
             <Input
               label={t('email')}
+              required={preferredContact === 'email'}
               type="email"
               autoComplete="email"
               error={errors.email && t('emailError')}
-              {...register('email', { pattern: /^\S+@\S+\.\S+$/ })}
-            />
-            <Input
-              label={t('city')}
-              required
-              autoComplete="address-level2"
-              error={errors.city && t('cityError')}
-              {...register('city', { required: true })}
-            />
-            <Input
-              label={t('zipcode')}
-              required
-              inputMode="numeric"
-              autoComplete="postal-code"
-              placeholder="13024-000"
-              error={errors.zipcode && t('zipcodeError')}
-              {...register('zipcode', {
-                required: true,
-                pattern: /^\d{5}-?\d{3}$/,
-                onChange: (event) => setValue('zipcode', maskZipcode(event.target.value)),
+              {...register('email', {
+                pattern: /^\S+@\S+\.\S+$/,
+                validate: (value, form) =>
+                  form.preferredContact !== 'email' || Boolean(value?.trim()),
               })}
             />
+            <fieldset className="sm:col-span-2">
+              <legend className="text-sm font-medium text-ink">
+                {t('preferredContact')}
+              </legend>
+              <div className="mt-2 grid gap-3 sm:grid-cols-2">
+                {(['whatsapp', 'email'] as const).map((channel) => (
+                  <label key={channel} className="cursor-pointer">
+                    <input
+                      type="radio"
+                      value={channel}
+                      className="peer sr-only"
+                      {...register('preferredContact')}
+                    />
+                    <span className="flex items-center gap-3 rounded-xl border-2 border-line bg-surface px-4 py-3 transition-colors hover:border-brand/40 peer-checked:border-brand peer-checked:bg-brand-tint peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-lift">
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-soft/60 text-brand">
+                        {channel === 'whatsapp' ? (
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z" />
+                            <path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .7a3 3 0 0 1-1.7-1.7l.7-1-1-2L9 9.5z" />
+                          </svg>
+                        ) : (
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-5 w-5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.8"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            aria-hidden="true"
+                          >
+                            <rect x="3" y="5" width="18" height="14" rx="2" />
+                            <path d="m4 7 8 6 8-6" />
+                          </svg>
+                        )}
+                      </span>
+                      <span className="text-base font-medium text-ink">
+                        {channel === 'whatsapp' ? 'WhatsApp' : t('email')}
+                      </span>
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
             <Textarea
               label={t('notes')}
               rows={4}
@@ -255,13 +301,24 @@ export function CartFlow() {
               {t('backToProducts')}
             </Button>
             <Button type="submit" size="lg">
-              {t('review')}
+              {t('fillDelivery')}
             </Button>
           </div>
         </form>
       )}
 
-      {(step === 'review' || step === 'saving') && contact && (
+      {step === 'delivery' && (
+        <DeliveryStep
+          initial={delivery}
+          onBack={() => setStep('contact')}
+          onSubmit={(value) => {
+            setDelivery(value)
+            setStep('review')
+          }}
+        />
+      )}
+
+      {(step === 'review' || step === 'saving') && contact && delivery && (
         <section className="mt-10 space-y-8">
           <div className="rounded-2xl border border-line bg-surface p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -281,8 +338,10 @@ export function CartFlow() {
                 [t('summaryName'), contact.name],
                 [t('summaryPhone'), contact.phone],
                 [t('email'), contact.email || '—'],
-                [t('city'), contact.city],
-                [t('zipcode'), contact.zipcode],
+                [
+                  t('preferredContact'),
+                  contact.preferredContact === 'email' ? t('email') : 'WhatsApp',
+                ],
                 [t('notes'), contact.observations || '—'],
               ].map(([label, value]) => (
                 <div key={label} className="flex gap-2">
@@ -291,6 +350,39 @@ export function CartFlow() {
                 </div>
               ))}
             </dl>
+          </div>
+
+          <div className="rounded-2xl border border-line bg-surface p-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h2 className="font-display text-xl font-semibold text-ink">
+                {t('delivery')}
+              </h2>
+              <button
+                type="button"
+                onClick={() => setStep('delivery')}
+                className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
+              >
+                {t('edit')}
+              </button>
+            </div>
+            {delivery.method === 'pickup' ? (
+              <div className="mt-4 text-base">
+                <p className="font-medium text-ink">{t('summaryPickup')}</p>
+                <p className="text-ink-soft">{SITE.store.address}</p>
+              </div>
+            ) : (
+              <div className="mt-4 text-base">
+                <p className="font-medium text-ink">{t('summaryShipping')}</p>
+                <p className="text-ink-soft">
+                  {delivery.street}, {delivery.number}
+                  {delivery.complement ? ` — ${delivery.complement}` : ''}
+                </p>
+                <p className="text-ink-soft">
+                  {delivery.neighborhood} · {delivery.city}/{delivery.state} · CEP{' '}
+                  {delivery.zipcode}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="rounded-2xl border border-line bg-surface p-6">
@@ -348,11 +440,38 @@ export function CartFlow() {
             <p className="mt-3 text-sm text-ink-muted">{t('shipping')}</p>
           </div>
 
+          <div
+            role="note"
+            className="flex items-start gap-4 rounded-2xl border border-warning/30 bg-warning-tint p-5"
+          >
+            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-warning text-white">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7.5V12l3 2" />
+              </svg>
+            </span>
+            <div>
+              <p className="font-semibold text-ink">{t('contactNoticeTitle')}</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+                {t('contactNotice', { name: SITE.name })}
+              </p>
+            </div>
+          </div>
+
           <div className="flex flex-wrap justify-between gap-3">
             <Button
               type="button"
               variant="ghost"
-              onClick={() => setStep('contact')}
+              onClick={() => setStep('delivery')}
               disabled={step === 'saving'}
             >
               {t('back')}

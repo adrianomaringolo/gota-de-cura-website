@@ -19,6 +19,7 @@ import type {
   Cart,
   CartItem,
   ContactInfo,
+  DeliveryInfo,
   Coupon,
   Order,
   OrderAssignee,
@@ -102,6 +103,7 @@ export const OrdersService = {
   async saveOrder(
     cart: Cart,
     contactInfo: ContactInfo,
+    delivery: DeliveryInfo,
     coupon?: Coupon,
     locale = 'pt-BR',
   ): Promise<{ orderNumber: number; orderRef: string }> {
@@ -133,6 +135,7 @@ export const OrdersService = {
           }
         : '',
       contactInfo,
+      delivery,
       status: ORDER_STATUS.EM_ESPERA,
       createdAt: new Date().toISOString(),
       locale,

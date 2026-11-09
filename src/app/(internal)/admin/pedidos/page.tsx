@@ -131,7 +131,11 @@ export default function AdminOrdersPage() {
                         {order.contactInfo.phone}
                       </span>
                       <span className="block text-xs text-ink-muted">
-                        {order.contactInfo.city} · CEP {order.contactInfo.zipcode}
+                        {order.delivery?.method === 'pickup'
+                          ? 'Retira na loja'
+                          : order.delivery?.method === 'shipping'
+                            ? `Envio · ${order.delivery.city}/${order.delivery.state} · CEP ${order.delivery.zipcode}`
+                            : `${order.contactInfo.city ?? ''} · CEP ${order.contactInfo.zipcode ?? ''}`}
                       </span>
                     </Td>
                     <Td>

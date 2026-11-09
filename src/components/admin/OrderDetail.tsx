@@ -1,5 +1,6 @@
 'use client'
 
+import { deliverySummary } from '@/lib/orders-delivery'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
@@ -65,6 +66,12 @@ export function OrderDetail({ orderId }: { orderId: string }) {
             </h1>
             <StatusTag status={order.status} />
             {order.locale === 'en' && <Badge tone="lab">Cliente em inglês</Badge>}
+            {order.contactInfo.preferredContact && (
+              <Badge tone="lab">
+                Contato:{' '}
+                {order.contactInfo.preferredContact === 'email' ? 'e-mail' : 'WhatsApp'}
+              </Badge>
+            )}
           </div>
 
           <p className="mt-3 font-display text-xl text-ink">{order.contactInfo.name}</p>
@@ -73,7 +80,15 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               ['Feito em', formatDateAndTime(new Date(order.createdAt))],
               ['Celular', order.contactInfo.phone],
               ['E-mail', order.contactInfo.email || '—'],
-              ['Cidade', `${order.contactInfo.city} (CEP ${order.contactInfo.zipcode})`],
+              [
+                'Prefere contato por',
+                order.contactInfo.preferredContact === 'email'
+                  ? 'E-mail'
+                  : order.contactInfo.preferredContact === 'whatsapp'
+                    ? 'WhatsApp'
+                    : 'Não informado',
+              ],
+              ['Entrega', deliverySummary(order)],
             ].map(([label, value]) => (
               <div key={label} className="flex gap-2">
                 <dt className="shrink-0 text-ink-muted">{label}:</dt>
