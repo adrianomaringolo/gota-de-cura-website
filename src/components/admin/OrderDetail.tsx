@@ -9,9 +9,14 @@ import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Select, Textarea } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
-import { ORDER_STATUS_DESCRIPTIONS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
+import {
+  ORDER_STATUS_DESCRIPTIONS,
+  ORDER_STATUS_OPTIONS,
+  orderStatusLabel,
+} from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
 import { useLoggedUser } from '@/lib/hooks'
+import { formatDuration } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
 import { DeliveryPill } from './DeliveryPill'
@@ -422,19 +427,36 @@ function HistoryTab({ order }: { order: Order }) {
   }
 
   return (
-    <ul className="space-y-2.5">
-      {order.statusLogs.map((log, index) => (
-        <li key={index} className="flex flex-wrap items-center gap-2 text-sm">
-          <span className="text-xs text-ink-muted tabular-nums">
-            {format(new Date(log.updatedAt), 'dd/MM/yyyy HH:mm')}
-          </span>
-          <strong className="font-semibold text-ink">{log.userName}</strong>
-          <span className="text-ink-soft">mudou de</span>
-          <StatusTag status={log.oldStatus} />
-          <span className="text-ink-soft">para</span>
-          <StatusTag status={log.newStatus} />
-        </li>
-      ))}
+    <ul className="space-y-3">
+      {order.statusLogs.map((log, index) => {
+        // Time spent in the previous status: since the last change, or since
+        // the order came in for the first one.
+        const since =
+          index === 0 ? order.createdAt : order.statusLogs![index - 1].updatedAt
+        const elapsed = new Date(log.updatedAt).getTime() - new Date(since).getTime()
+
+        return (
+          <li key={index} className="text-sm">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs text-ink-muted tabular-nums">
+                {format(new Date(log.updatedAt), 'dd/MM/yyyy HH:mm')}
+              </span>
+              <strong className="font-semibold text-ink">{log.userName}</strong>
+              <span className="text-ink-soft">mudou de</span>
+              <StatusTag status={log.oldStatus} />
+              <span className="text-ink-soft">para</span>
+              <StatusTag status={log.newStatus} />
+            </div>
+            {Number.isFinite(elapsed) && elapsed >= 0 && (
+              <p className="mt-1 text-xs text-ink-muted">
+                Ficou <strong className="font-semibold">{formatDuration(elapsed)}</strong>{' '}
+                em {orderStatusLabel(log.oldStatus) || 'status anterior'} antes desta
+                mudança
+              </p>
+            )}
+          </li>
+        )
+      })}
     </ul>
   )
 }

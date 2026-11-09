@@ -1,10 +1,90 @@
 'use client'
 
 import Link from 'next/link'
-import { AdminHeading } from '@/components/admin/AdminUI'
+import { useEffect, useMemo, useState } from 'react'
+import { AdminHeading, StatValue } from '@/components/admin/AdminUI'
 import { Badge } from '@/components/ui/Feedback'
 import { useLoggedUser } from '@/lib/hooks'
 import { visibleSections } from '@/lib/admin-nav'
+import { computeOrderKpis, formatDuration, formatPercent } from '@/lib/order-kpis'
+import type { Order } from '@/lib/types'
+import { OrdersService } from '@/services/orders'
+
+/** How many of the latest orders the KPIs are computed over. */
+const KPI_WINDOW = 50
+
+function OrderKpiSection() {
+  const [orders, setOrders] = useState<Order[] | null>(null)
+
+  useEffect(() => {
+    OrdersService.getRecentOrders(KPI_WINDOW)
+      .then(setOrders)
+      .catch(() => setOrders([]))
+  }, [])
+
+  const kpis = useMemo(() => (orders ? computeOrderKpis(orders) : null), [orders])
+
+  if (!kpis || kpis.total === 0) return null
+
+  return (
+    <section aria-labelledby="kpis-title" className="mb-10">
+      <h2 id="kpis-title" className="font-display text-xl font-semibold text-ink">
+        Pedidos em números
+      </h2>
+      <p className="mt-1 mb-4 text-sm text-ink-soft">
+        Considera os {kpis.total} pedidos mais recentes.
+      </p>
+
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <StatValue
+          label="Tempo médio de atendimento"
+          value={formatDuration(kpis.avgFirstResponseMs)}
+          hint={`Da entrada até sair de "Em espera" · ${kpis.firstResponseSample} pedidos`}
+          tone="brand"
+        />
+        <StatValue
+          label="Tempo médio de fechamento"
+          value={formatDuration(kpis.avgCloseMs)}
+          hint={`Da entrada até "Finalizado", sem cancelados · ${kpis.closeSample} pedidos`}
+          tone="brand"
+        />
+        <StatValue
+          label="Aguardando atendimento"
+          value={kpis.waiting}
+          hint='Pedidos ainda "Em espera"'
+        />
+        <StatValue
+          label="Parados há mais de 2 dias"
+          value={kpis.stale}
+          hint="Abertos, sem mudança de status"
+        />
+        <StatValue label="Em aberto" value={kpis.open} />
+        <StatValue label="Finalizados" value={kpis.finalized} />
+        <StatValue
+          label="Taxa de cancelamento"
+          value={formatPercent(kpis.cancelRate)}
+          hint={`${kpis.canceled} de ${kpis.total} pedidos`}
+        />
+        <StatValue
+          label="Com entrega (vs. retirada)"
+          value={formatPercent(kpis.shippingShare)}
+          hint="Entre os não cancelados"
+        />
+        <StatValue
+          label="Mais pedidos"
+          value={
+            <span className="block text-base leading-snug">
+              {kpis.topProducts.length
+                ? kpis.topProducts.map((p) => `${p.name} (${p.amount})`).join(', ')
+                : '—'}
+            </span>
+          }
+          hint="Unidades, sem cancelados"
+        />
+      </div>
+    </section>
+  )
+}
 
 const ACCESS = {
   admin: { label: 'Admin', tone: 'brand' },
@@ -17,6 +97,10 @@ const DESCRIPTIONS: Record<string, { title: string; text: string }> = {
   '/admin/pedidos': {
     title: 'Pedidos',
     text: 'Ver, acompanhar e mudar o status dos pedidos do site.',
+  },
+  '/admin/clientes': {
+    title: 'Clientes',
+    text: 'Pedidos agrupados por cliente, pelo número de celular.',
   },
   '/admin/produtos': {
     title: 'Disponibilidade',
@@ -55,6 +139,8 @@ export default function AdminHomePage() {
   return (
     <>
       <AdminHeading title={`Olá, ${firstName}`} description="Escolha por onde começar." />
+
+      <OrderKpiSection />
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {visibleSections(user)

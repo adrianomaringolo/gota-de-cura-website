@@ -85,10 +85,13 @@ export function StatValue({
   label,
   value,
   tone,
+  hint,
 }: {
   label: string
   value: ReactNode
   tone?: 'brand'
+  /** Small print under the value: the sample behind an average, a caveat. */
+  hint?: ReactNode
 }) {
   return (
     <div
@@ -106,6 +109,16 @@ export function StatValue({
         {label}
       </p>
       <p className="mt-1 font-display text-2xl font-semibold tabular-nums">{value}</p>
+      {hint && (
+        <p
+          className={cn(
+            'mt-1 text-xs',
+            tone === 'brand' ? 'text-white/75' : 'text-ink-muted',
+          )}
+        >
+          {hint}
+        </p>
+      )}
     </div>
   )
 }

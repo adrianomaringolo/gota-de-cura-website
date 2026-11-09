@@ -3,6 +3,7 @@ import {
   collection,
   getDoc,
   getDocs,
+  limit,
   orderBy,
   query,
   updateDoc,
@@ -80,6 +81,14 @@ export const OrdersService = {
       statusToFilter
         ? query(ordersRef, orderBy('orderId'), where('status', '==', statusToFilter))
         : query(ordersRef, orderBy('orderId')),
+    )
+    return snapshot.docs.map((entry) => toOrder(entry.id, entry.data()))
+  },
+
+  /** The `count` most recent orders, newest first — enough for dashboard KPIs without reading the whole collection. */
+  async getRecentOrders(count: number): Promise<Order[]> {
+    const snapshot = await getDocs(
+      query(ordersRef, orderBy('orderId', 'desc'), limit(count)),
     )
     return snapshot.docs.map((entry) => toOrder(entry.id, entry.data()))
   },

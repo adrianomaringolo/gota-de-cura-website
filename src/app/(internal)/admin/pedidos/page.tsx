@@ -10,6 +10,7 @@ import { Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
+import { formatDuration, timeInCurrentStatus } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
 
@@ -19,6 +20,42 @@ const itemCount = (order: Order) =>
 const total = (order: Order) => {
   const subtotal = orderTotal(order.items)
   return subtotal - couponDiscount(subtotal, order.coupon)
+}
+
+const href = (order: Order) => `/admin/pedidos/${order.orderId}`
+
+/** The first two cells are the way into the order, so the whole cell is the link. */
+const cellLink =
+  '-m-2 block rounded-lg p-2 transition-colors hover:bg-brand/5 hover:[&_.font-medium]:text-brand focus-visible:outline-2 focus-visible:outline-brand'
+
+const DAY_MS = 24 * 60 * 60 * 1000
+
+/** Elapsed time in the current status, escalating in colour after 1, 2 and 4 days; closed orders stay quiet, it would only grow forever. */
+function TimeInStatus({ order }: { order: Order }) {
+  if (
+    order.status === ORDER_STATUS.FINALIZADO ||
+    order.status === ORDER_STATUS.CANCELADO
+  ) {
+    return null
+  }
+  const elapsed = timeInCurrentStatus(order)
+  if (elapsed === null) return null
+
+  const days = elapsed / DAY_MS
+  const tone =
+    days > 4
+      ? 'rounded bg-danger px-1.5 py-0.5 font-semibold text-white'
+      : days > 2
+        ? 'font-semibold text-danger'
+        : days > 1
+          ? 'font-semibold text-warning'
+          : 'text-ink-muted'
+
+  return (
+    <span className={`ml-2 text-xs tabular-nums ${tone}`}>
+      há {formatDuration(elapsed)}
+    </span>
+  )
 }
 
 /**
@@ -107,7 +144,6 @@ export default function AdminOrdersPage() {
                 <Th>Cliente</Th>
                 <Th>Produtos</Th>
                 <Th>Status</Th>
-                <Th className="text-right">Ações</Th>
               </tr>
             </thead>
             <tbody>
@@ -119,34 +155,38 @@ export default function AdminOrdersPage() {
                     className="transition-colors hover:bg-canvas-sunk/60"
                   >
                     <Td>
-                      <span className="font-display text-lg font-semibold">
-                        #{order.orderId}
-                      </span>
-                      <span className="block text-xs text-ink-muted">
-                        {format(new Date(order.createdAt), 'dd/MM/yyyy HH:mm')}
-                      </span>
+                      <Link href={href(order)} className={cellLink}>
+                        <span className="font-display text-lg font-semibold text-brand underline decoration-brand/30 underline-offset-4">
+                          #{order.orderId}
+                        </span>
+                        <span className="block text-xs text-ink-muted">
+                          {format(new Date(order.createdAt), 'dd/MM/yyyy HH:mm')}
+                        </span>
+                      </Link>
                     </Td>
                     <Td>
-                      <span className="font-medium">{order.contactInfo.name}</span>
-                      <span className="block text-xs text-ink-soft">
-                        {order.contactInfo.phone}
-                      </span>
-                      <div className="mt-1.5">
-                        <DeliveryPill delivery={order.delivery} />
-                      </div>
-                      {order.delivery?.method === 'shipping' ? (
-                        <span className="mt-1 block text-xs text-ink-muted">
-                          {order.delivery.city}/{order.delivery.state} · CEP{' '}
-                          {order.delivery.zipcode}
+                      <Link href={href(order)} className={cellLink}>
+                        <span className="font-medium">{order.contactInfo.name}</span>
+                        <span className="block text-xs text-ink-soft">
+                          {order.contactInfo.phone}
                         </span>
-                      ) : (
-                        !order.delivery &&
-                        order.contactInfo.city && (
-                          <span className="block text-xs text-ink-muted">
-                            {order.contactInfo.city} · CEP {order.contactInfo.zipcode}
+                        <div className="mt-1.5">
+                          <DeliveryPill delivery={order.delivery} />
+                        </div>
+                        {order.delivery?.method === 'shipping' ? (
+                          <span className="mt-1 block text-xs text-ink-muted">
+                            {order.delivery.city}/{order.delivery.state} · CEP{' '}
+                            {order.delivery.zipcode}
                           </span>
-                        )
-                      )}
+                        ) : (
+                          !order.delivery &&
+                          order.contactInfo.city && (
+                            <span className="block text-xs text-ink-muted">
+                              {order.contactInfo.city} · CEP {order.contactInfo.zipcode}
+                            </span>
+                          )
+                        )}
+                      </Link>
                     </Td>
                     <Td>
                       <span className="block tabular-nums">{itemCount(order)} itens</span>
@@ -171,15 +211,8 @@ export default function AdminOrdersPage() {
                     </Td>
                     <Td>
                       <StatusTag status={order.status} />
+                      <TimeInStatus order={order} />
                       <Assignee order={order} />
-                    </Td>
-                    <Td className="text-right">
-                      <Link
-                        href={`/admin/pedidos/${order.orderId}`}
-                        className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
-                      >
-                        Detalhes
-                      </Link>
                     </Td>
                   </tr>
                 ))}

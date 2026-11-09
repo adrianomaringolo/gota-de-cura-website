@@ -1,3 +1,8 @@
+/* buildgrid-ui ships a full compiled Tailwind build. In its own lowest layer it
+   still provides the component styles and tokens, but can no longer override
+   this project's utilities (it used to turn `hidden lg:block` into `hidden`). */
+@layer buildgrid, theme, base, components, utilities;
+@import 'buildgrid-ui/theme' layer(buildgrid);
 @import 'tailwindcss';
 
 /* ---------------------------------------------------------------------------

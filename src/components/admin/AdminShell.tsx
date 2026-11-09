@@ -6,7 +6,20 @@ import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { cn } from '@/lib/cn'
 import { useDisclosure, useLoggedUser } from '@/lib/hooks'
-import { canAccessPath, visibleSections } from '@/lib/admin-nav'
+import {
+  canAccessPath,
+  navEntries,
+  visibleSections,
+  type AdminSection,
+} from '@/lib/admin-nav'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from 'buildgrid-ui'
 import { UsersService } from '@/services/users'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
@@ -94,6 +107,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   }
 
   const links = visibleSections(user)
+  const entries = navEntries(user)
 
   return (
     <div className="min-h-screen bg-canvas">
@@ -112,29 +126,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             painel
           </Link>
 
-          <nav aria-label="Painel" className="hidden flex-1 lg:block">
-            <ul className="flex flex-wrap items-center gap-0.5">
-              {links.map((item) => {
-                const active = pathname.startsWith(item.href)
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? 'page' : undefined}
-                      className={cn(
-                        'rounded-full px-3.5 py-2 text-sm font-medium transition-colors',
-                        active
-                          ? 'bg-white/15 text-white'
-                          : 'text-white/70 hover:bg-white/10 hover:text-white',
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                )
-              })}
-            </ul>
-          </nav>
+          <div className="hidden flex-1 lg:block">
+            <AdminNav pathname={pathname} entries={entries} />
+          </div>
 
           <div className="ml-auto flex items-center gap-3">
             <span className="hidden text-sm text-white/70 sm:block">{user.name}</span>
@@ -207,5 +201,70 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </p>
       </Dialog>
     </div>
+  )
+}
+
+const TRIGGER_CLASS =
+  'h-auto rounded-full bg-transparent px-3.5 py-2 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white focus:bg-white/10 focus:text-white data-[active=true]:bg-white/15 data-[active=true]:text-white data-[state=open]:bg-white/15 data-[state=open]:text-white data-[state=open]:hover:bg-white/15 data-[state=open]:focus:bg-white/15'
+
+const isActive = (pathname: string, section: AdminSection) =>
+  pathname.startsWith(section.href)
+
+function AdminNav({
+  pathname,
+  entries,
+}: {
+  pathname: string
+  entries: ReturnType<typeof navEntries>
+}) {
+  return (
+    <NavigationMenu
+      viewport={false}
+      aria-label="Painel"
+      className="max-w-none justify-start"
+    >
+      <NavigationMenuList className="justify-start gap-0.5">
+        {entries.map((entry) =>
+          entry.type === 'link' ? (
+            <NavigationMenuItem key={entry.section.href}>
+              <NavigationMenuLink
+                asChild
+                active={isActive(pathname, entry.section)}
+                className={cn('inline-flex items-center justify-center', TRIGGER_CLASS)}
+              >
+                <Link href={entry.section.href}>{entry.section.label}</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+          ) : (
+            <NavigationMenuItem key={entry.label}>
+              <NavigationMenuTrigger
+                className={cn(
+                  TRIGGER_CLASS,
+                  entry.sections.some((section) => isActive(pathname, section)) &&
+                    'bg-white/15 text-white',
+                )}
+              >
+                {entry.label}
+              </NavigationMenuTrigger>
+              <NavigationMenuContent className="top-full left-0 mt-2 min-w-48 overflow-hidden rounded-xl border border-line bg-surface p-1.5 text-ink shadow-lift">
+                <ul className="grid gap-0.5">
+                  {entry.sections.map((section) => (
+                    <li key={section.href}>
+                      <NavigationMenuLink
+                        asChild
+                        active={isActive(pathname, section)}
+                        className="block rounded-md px-3 py-2 text-sm font-medium text-ink hover:bg-brand/10 hover:text-brand focus:bg-brand/10 focus:text-brand data-[active=true]:bg-brand/10 data-[active=true]:text-brand"
+                      >
+                        <Link href={section.href}>{section.label}</Link>
+                      </NavigationMenuLink>
+                    </li>
+                  ))}
+                </ul>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+          ),
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
   )
 }
