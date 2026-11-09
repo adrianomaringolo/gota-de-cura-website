@@ -34,6 +34,24 @@ export const ORDER_STATUS_OPTIONS: { value: string; label: string }[] = [
   { value: ORDER_STATUS.CANCELADO, label: 'Cancelado' },
 ]
 
+/** What each status means for the team, shown under the status picker. */
+export const ORDER_STATUS_DESCRIPTIONS: Record<string, string> = {
+  [ORDER_STATUS.EM_ESPERA]:
+    'Pedido recebido pelo site. Ainda ninguém falou com o cliente.',
+  [ORDER_STATUS.EM_ANDAMENTO]:
+    'Um voluntário já entrou em contato e está combinando os detalhes com o cliente.',
+  [ORDER_STATUS.APROVADO]:
+    'Disponibilidade dos produtos, entrega e valores confirmados com o cliente. Falta o pagamento.',
+  [ORDER_STATUS.PAGO]: 'Pagamento recebido. O pedido já pode ser separado.',
+  [ORDER_STATUS.SEPARADO]:
+    'Produtos separados e embalados, prontos para retirada ou já enviados ao cliente.',
+  [ORDER_STATUS.EM_FINALIZACAO]:
+    'Entrega feita ou retirada combinada; só falta confirmar que o cliente recebeu tudo certo.',
+  [ORDER_STATUS.FINALIZADO]: 'Pedido concluído. Cliente atendido e nada pendente.',
+  [ORDER_STATUS.CANCELADO]:
+    'Pedido encerrado sem ser atendido (desistência, falta de produto ou sem retorno do cliente).',
+}
+
 /** What a customer who ordered in English reads for each status. */
 export const ORDER_STATUS_LABELS_EN: Record<string, string> = {
   [ORDER_STATUS.EM_ESPERA]: 'Waiting',

@@ -1,5 +1,6 @@
 'use client'
 
+import { DeliveryPill } from '@/components/admin/DeliveryPill'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
@@ -130,13 +131,22 @@ export default function AdminOrdersPage() {
                       <span className="block text-xs text-ink-soft">
                         {order.contactInfo.phone}
                       </span>
-                      <span className="block text-xs text-ink-muted">
-                        {order.delivery?.method === 'pickup'
-                          ? 'Retira na loja'
-                          : order.delivery?.method === 'shipping'
-                            ? `Envio · ${order.delivery.city}/${order.delivery.state} · CEP ${order.delivery.zipcode}`
-                            : `${order.contactInfo.city ?? ''} · CEP ${order.contactInfo.zipcode ?? ''}`}
-                      </span>
+                      <div className="mt-1.5">
+                        <DeliveryPill delivery={order.delivery} />
+                      </div>
+                      {order.delivery?.method === 'shipping' ? (
+                        <span className="mt-1 block text-xs text-ink-muted">
+                          {order.delivery.city}/{order.delivery.state} · CEP{' '}
+                          {order.delivery.zipcode}
+                        </span>
+                      ) : (
+                        !order.delivery &&
+                        order.contactInfo.city && (
+                          <span className="block text-xs text-ink-muted">
+                            {order.contactInfo.city} · CEP {order.contactInfo.zipcode}
+                          </span>
+                        )
+                      )}
                     </Td>
                     <Td>
                       <span className="block tabular-nums">{itemCount(order)} itens</span>

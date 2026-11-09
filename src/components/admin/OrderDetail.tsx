@@ -9,10 +9,12 @@ import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Select, Textarea } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
-import { ORDER_STATUS_OPTIONS } from '@/lib/constants'
+import { ORDER_STATUS_DESCRIPTIONS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 import { formatCurrency, formatDateAndTime } from '@/lib/format'
+import { useLoggedUser } from '@/lib/hooks'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
+import { DeliveryPill } from './DeliveryPill'
 import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
@@ -65,6 +67,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               Pedido #{order.orderId}
             </h1>
             <StatusTag status={order.status} />
+            <DeliveryPill delivery={order.delivery} />
             {order.locale === 'en' && <Badge tone="lab">Cliente em inglês</Badge>}
             {order.contactInfo.preferredContact && (
               <Badge tone="lab">
@@ -204,6 +207,9 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
   const [notifyCustomer, setNotifyCustomer] = useState(false)
   const [comment, setComment] = useState('')
   const [saving, setSaving] = useState(false)
+  const { user } = useLoggedUser()
+  const [assignOpen, setAssignOpen] = useState(false)
+  const [assignToMe, setAssignToMe] = useState(false)
 
   useEffect(() => {
     setStatus(order.status)
@@ -212,6 +218,15 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
   const openConfirm = () => {
     setNotifyCustomer(false)
     setComment('')
+    setAssignToMe(false)
+    // Nobody looks after this order yet: offer to take it before changing status.
+    if (!order.assignee && user) setAssignOpen(true)
+    else setConfirmOpen(true)
+  }
+
+  const answerAssign = (assign: boolean) => {
+    setAssignToMe(assign)
+    setAssignOpen(false)
     setConfirmOpen(true)
   }
 
@@ -225,6 +240,15 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
       toast.success(
         notifyCustomer ? 'Status atualizado e cliente avisado' : 'Status atualizado',
       )
+      if (assignToMe && user) {
+        try {
+          const me = { id: user.id ?? user.login, name: user.name }
+          await OrdersService.assignOrder(order, me)
+          toast.success(`Pedido atribuído a ${me.name}`)
+        } catch {
+          toast.error('Status atualizado, mas não foi possível atribuir o pedido')
+        }
+      }
       setConfirmOpen(false)
       onSaved()
     } catch {
@@ -249,6 +273,14 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
           </option>
         ))}
       </Select>
+      {ORDER_STATUS_DESCRIPTIONS[status] && (
+        <p
+          key={status}
+          className="mt-2 rounded-lg bg-canvas-sunk px-3 py-2 text-sm leading-relaxed text-ink-soft"
+        >
+          {ORDER_STATUS_DESCRIPTIONS[status]}
+        </p>
+      )}
       <Button
         className="mt-3 w-full"
         onClick={openConfirm}
@@ -256,6 +288,27 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
       >
         Salvar status
       </Button>
+
+      <Dialog
+        open={assignOpen}
+        onClose={() => setAssignOpen(false)}
+        title="Este pedido não tem responsável"
+        description={`Posso atribuir o pedido a você${user ? ` (${user.name})` : ''} ao mudar o status?`}
+        size="sm"
+        footer={
+          <>
+            <Button variant="ghost" onClick={() => answerAssign(false)}>
+              Não atribuir
+            </Button>
+            <Button onClick={() => answerAssign(true)}>Sim, atribuir a mim</Button>
+          </>
+        }
+      >
+        <p className="text-sm text-ink-soft">
+          Assim a equipe sabe quem está cuidando deste pedido. Você pode trocar o
+          responsável depois.
+        </p>
+      </Dialog>
 
       <Dialog
         open={confirmOpen}
