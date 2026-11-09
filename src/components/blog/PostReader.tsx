@@ -188,13 +188,24 @@ export function PostReader({ minutes, title, lang }: Props) {
 
   useEffect(() => {
     // Feature detection has to wait for the browser; the server cannot know.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setCanSpeak('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window)
+    // The option only shows when the API exists AND the browser has a usable
+    // voice for the text's language; otherwise "Ouvir" is left out entirely.
+    let alive = true
+    if ('speechSynthesis' in window && 'SpeechSynthesisUtterance' in window) {
+      loadVoices()
+        .then((voices) => {
+          if (alive) setCanSpeak(pickVoice(lang, voices) !== undefined)
+        })
+        .catch(() => {
+          if (alive) setCanSpeak(false)
+        })
+    }
     return () => {
+      alive = false
       run.current += 1
       window.speechSynthesis?.cancel()
     }
-  }, [])
+  }, [lang])
 
   const play = async () => {
     const synth = window.speechSynthesis
