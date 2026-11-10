@@ -47,9 +47,15 @@ const toRow = (customer: Customer): CustomerRow => {
   }
 }
 
+const HEAD =
+  'border-b border-line bg-canvas-sunk px-4 py-3 text-xs font-semibold tracking-wide text-ink-soft uppercase'
+const CELL = 'border-b border-line px-4 py-3 align-top text-sm text-ink'
+
 const COLUMNS: DataTableColumn<CustomerRow>[] = [
   {
     key: 'name',
+    headerClassName: HEAD,
+    cellClassName: CELL,
     title: 'Cliente',
     sortable: true,
     customRenderer: (_, { customer }) => (
@@ -65,6 +71,8 @@ const COLUMNS: DataTableColumn<CustomerRow>[] = [
   },
   {
     key: 'phone',
+    headerClassName: HEAD,
+    cellClassName: CELL,
     title: 'Contato',
     customRenderer: (_, { customer }) => (
       <>
@@ -77,6 +85,8 @@ const COLUMNS: DataTableColumn<CustomerRow>[] = [
   },
   {
     key: 'validOrders',
+    headerClassName: HEAD,
+    cellClassName: CELL,
     title: 'Pedidos',
     sortable: true,
     align: 'right',
@@ -94,6 +104,8 @@ const COLUMNS: DataTableColumn<CustomerRow>[] = [
   },
   {
     key: 'lastOrderAt',
+    headerClassName: HEAD,
+    cellClassName: CELL,
     title: 'Último pedido',
     sortable: true,
     customRenderer: (value: number) => (
@@ -104,6 +116,8 @@ const COLUMNS: DataTableColumn<CustomerRow>[] = [
   },
   {
     key: 'customer',
+    headerClassName: HEAD,
+    cellClassName: CELL,
     title: 'Pedidos do cliente',
     customRenderer: (_, { customer }) => (
       <details>
@@ -165,6 +179,7 @@ export default function AdminCustomersPage() {
           columns={COLUMNS}
           searchFields={['searchText']}
           pageSize={25}
+          className="[&_*]:border-line [&_table]:border-collapse [&_tbody_tr]:hover:bg-canvas-sunk/50"
           tools={{
             search: { placeholder: 'Nome, celular ou e-mail' },
             filter: { hide: true },
