@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser'
 import { VISIT_PRICES, VISIT_PRICES_NUMERIC } from '@/lib/constants'
+import { localizedPath } from '@/lib/i18n'
 import { formatCurrency, formatVisitDate } from '@/lib/format'
 import { typeDisplayName } from '@/lib/product-types'
 import { SITE } from '@/lib/site'
@@ -85,6 +86,24 @@ const customerFooter = (locale?: string) =>
         </div>
 
         <p style="margin-top: 30px">Com carinho,<br/>Equipe Gota de Cura</p>`
+
+/** An invitation to leave a testimonial, for the e-mail sent when an order is placed. */
+const testimonyInvite = (locale?: string) => {
+  const url = `${SITE.url}${localizedPath('/depoimento', locale ?? 'pt-BR')}`
+  const en = isEnglish(locale)
+
+  return `
+        <div style="background-color: #f1edf8; border-radius: 10px; padding: 15px 20px; margin-top: 30px; font-size: 14px; text-align: center">
+          <p style="margin: 0 0 8px">${
+            en
+              ? '💬 Already know our products? We would love to read your testimonial.'
+              : '💬 Já conhece nossos produtos? Vamos adorar ler o seu depoimento.'
+          }</p>
+          <a href="${url}" target="_blank" rel="noopener" style="color: #4c3b82; font-weight: bold">${
+            en ? 'Share your experience' : 'Deixar meu depoimento'
+          }</a>
+        </div>`
+}
 
 const visitPrice = (value: number) => (value ? formatCurrency(value, 'en') : 'free')
 
@@ -179,6 +198,7 @@ export const EmailSender = {
           <a href="${orderUrl}" target="_blank" rel="noopener" style="background-color: #4c3b82; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">${en ? 'Track my order' : 'Acompanhar meu pedido'}</a>
         </p>
         <p style="font-size: 13px; color: #888; text-align: center">${en ? 'Or go to' : 'Ou acesse'}: <a style="color: #4c3b82" href="${orderUrl}" target="_blank" rel="noopener">${orderUrl}</a></p>
+        ${testimonyInvite(locale)}
         ${customerFooter(locale)}
       </div>`,
       mail_list: contact.email,

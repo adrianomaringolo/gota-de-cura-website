@@ -9,6 +9,7 @@ import { visibleSections } from '@/lib/admin-nav'
 import { computeOrderKpis, formatDuration, formatPercent } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
 import { OrdersService } from '@/services/orders'
+import { TestimonyService, testimonyStatus } from '@/services/testimony'
 
 /** How many of the latest orders the KPIs are computed over. */
 const KPI_WINDOW = 50
@@ -86,6 +87,36 @@ function OrderKpiSection() {
   )
 }
 
+/** Only for admins — the testimonies page is theirs to moderate. */
+function PendingTestimoniesNotice() {
+  const [pending, setPending] = useState(0)
+
+  useEffect(() => {
+    TestimonyService.getAll()
+      .then((all) =>
+        setPending(all.filter((item) => testimonyStatus(item) === 'pending').length),
+      )
+      .catch(() => setPending(0))
+  }, [])
+
+  if (pending === 0) return null
+
+  return (
+    <Link
+      href="/admin/depoimentos"
+      className="mb-8 flex items-center justify-between gap-4 rounded-xl border border-warning/30 bg-warning-tint px-5 py-4 transition-colors hover:border-warning/60"
+    >
+      <span className="text-sm text-ink">
+        <strong className="font-semibold">
+          {pending === 1 ? '1 depoimento novo' : `${pending} depoimentos novos`}
+        </strong>{' '}
+        aguardando avaliação.
+      </span>
+      <span className="shrink-0 text-sm font-medium text-brand">Avaliar →</span>
+    </Link>
+  )
+}
+
 const ACCESS = {
   admin: { label: 'Admin', tone: 'brand' },
   team: { label: 'Equipe', tone: 'neutral' },
@@ -126,6 +157,10 @@ const DESCRIPTIONS: Record<string, { title: string; text: string }> = {
     title: 'Relatórios',
     text: 'Receita e volume de pedidos por período.',
   },
+  '/admin/depoimentos': {
+    title: 'Depoimentos',
+    text: 'Aprovar, editar e cadastrar os depoimentos exibidos na página inicial.',
+  },
   '/admin/usuarios': {
     title: 'Usuários',
     text: 'Quem acessa o painel, quem é administrador e redefinição de senha.',
@@ -139,6 +174,8 @@ export default function AdminHomePage() {
   return (
     <>
       <AdminHeading title={`Olá, ${firstName}`} description="Escolha por onde começar." />
+
+      {isAdmin && <PendingTestimoniesNotice />}
 
       <OrderKpiSection />
 
