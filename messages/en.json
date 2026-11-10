@@ -185,6 +185,27 @@
     "next": "Next testimonials",
     "stripLabel": "Testimonials from people who have visited the farm"
   },
+  "testimonyForm": {
+    "metaTitle": "Share your experience",
+    "description": "Tell us about your experience with our products and your visit to Gota de Cura.",
+    "title": "Share your experience",
+    "intro": "We would love to hear from our dear customers about our products! If you can spare 5 minutes to leave us a comment, we'll be very grateful. A day of light to you! ✨",
+    "name": "Name",
+    "nameError": "Please enter your name.",
+    "city": "City/State",
+    "cityPlaceholder": "Campinas, SP",
+    "message": "Write your testimonial below",
+    "messageError": "Please write at least a few words.",
+    "authorize": "I authorize the publication (in whole or in part) of my testimonial online (website and social media)",
+    "yes": "Yes",
+    "no": "No",
+    "send": "Send testimonial",
+    "sending": "Sending…",
+    "error": "We couldn't send it right now. Please try again in a moment.",
+    "doneTitle": "Thank you for your testimonial!",
+    "doneBody": "Thank you for your support! Your purchase means one more slice of bread for our brothers and sisters. May every drop of light in our products reach your heart! ✨",
+    "back": "Back to home"
+  },
   "institutionalBand": {
     "title": "Meet Gota de Cura",
     "lead": "In a few minutes, the story of the farm, the plants and the people behind every bottle. The video is in Portuguese.",

@@ -351,7 +351,7 @@ export const EmailSender = {
           </p>
           <p>
             💬 Deixe um depoimento sobre sua experiência:
-            <a href="https://forms.gle/oJxGeuXHJWgv37tW6" target="_blank">Clique aqui</a>
+            <a href="https://www.gotadecura.com.br/depoimento" target="_blank">Clique aqui</a>
           </p>
         </div>
       </div>`,

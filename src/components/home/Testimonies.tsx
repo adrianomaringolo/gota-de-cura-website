@@ -3,9 +3,9 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Container, SectionHead } from '@/components/site/Section'
+import { Link } from '@/i18n/navigation'
 import { useTestimonies } from '@/lib/hooks'
 import { formatMonthAndYear } from '@/lib/format'
-import { SITE } from '@/lib/site'
 
 const ARROWS = [
   { label: 'previous', delta: -1, path: 'M15 6l-6 6 6 6' },
@@ -70,14 +70,12 @@ export function Testimonies() {
           title={t('title')}
           aside={
             <div className="flex items-center gap-5">
-              <a
-                href={SITE.testimonyForm}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                href="/depoimento"
                 className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
               >
                 {t('leave')}
-              </a>
+              </Link>
               {scrollable && (
                 <div className="flex items-center gap-2">
                   {ARROWS.map((arrow) => (

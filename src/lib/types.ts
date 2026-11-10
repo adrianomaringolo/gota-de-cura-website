@@ -137,11 +137,27 @@ export interface Visit {
   enrollments?: EnrollmentData[]
 }
 
+export type TestimonyStatus = 'pending' | 'approved' | 'rejected'
+
 export interface Testimony {
+  /** Firestore document id — only set on records read through the admin service. */
+  id?: string
   name: string
   message: string
   city?: string
   sentAt: string
+  /**
+   * Moderation state. Testimonies imported from the old Google Form have none:
+   * they were already on the site, so a missing status reads as `approved`.
+   */
+  status?: TestimonyStatus
+  /** The author's answer to "I authorize publication". Absent on imported ones. */
+  authorized?: boolean
+  /** Where a team-entered testimony came from (Instagram, WhatsApp…). Absent on form submissions. */
+  source?: string
+  /** Set when the team edits the text, so the original wording is never lost. */
+  originalMessage?: string
+  moderatedAt?: string
 }
 
 export interface User {

@@ -185,6 +185,27 @@
     "next": "Próximos depoimentos",
     "stripLabel": "Depoimentos de quem já esteve na chácara"
   },
+  "testimonyForm": {
+    "metaTitle": "Deixe seu depoimento",
+    "description": "Conte como foi sua experiência com os produtos e a visita à Gota de Cura.",
+    "title": "Deixe seu depoimento",
+    "intro": "Adoraríamos um depoimento sobre nossos produtos dos nossos queridos clientes! Se puder nos dar 5 minutos para nos deixar um comentário, ficaremos muito agradecidos! Um dia de luz para você! ✨",
+    "name": "Nome",
+    "nameError": "Informe seu nome.",
+    "city": "Cidade/Estado",
+    "cityPlaceholder": "Campinas, SP",
+    "message": "Escreva o depoimento abaixo",
+    "messageError": "Escreva ao menos algumas palavras.",
+    "authorize": "Eu autorizo a publicação (total ou parcial) do meu depoimento em meios virtuais (site e redes sociais)",
+    "yes": "Sim",
+    "no": "Não",
+    "send": "Enviar depoimento",
+    "sending": "Enviando…",
+    "error": "Não foi possível enviar agora. Tente novamente em instantes.",
+    "doneTitle": "Obrigado pelo seu depoimento!",
+    "doneBody": "Agradecemos pelo seu apoio! Sua compra significa mais uma fatia de pão aos nossos irmãos! Receba no seu coração cada gota de luz dos nossos produtos! ✨",
+    "back": "Voltar ao início"
+  },
   "institutionalBand": {
     "title": "Conheça a Gota de Cura",
     "lead": "Em poucos minutos, a história da chácara, das plantas e das pessoas por trás de cada frasco.",

@@ -28,12 +28,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/depoimento',
-        destination:
-          'https://docs.google.com/forms/d/e/1FAIpQLSetBUhLfPUyn-AAaeZFSluLuB3BEzrpEX0yirA2CPk6LklYWg/viewform',
-        permanent: false,
-      },
-      {
         source: '/youtube',
         destination: 'https://www.youtube.com/channel/UCq6y4YcG2WBqZyM5Y5MhNoA',
         permanent: false,

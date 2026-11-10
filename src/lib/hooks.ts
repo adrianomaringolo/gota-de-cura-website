@@ -42,8 +42,13 @@ export const useVisits = () => useAsyncList<Visit>(() => VisitsService.getVisits
 export const useCoupons = () =>
   useAsyncList<Coupon>(() => CouponsService.getActiveCoupons())
 
+/** Approved testimonies only — what the public site shows. */
 export const useTestimonies = () =>
   useAsyncList<Testimony>(() => TestimonyService.getTestimonyList())
+
+/** Every testimony, whatever its status — for the admin moderation page. */
+export const useAllTestimonies = () =>
+  useAsyncList<Testimony>(() => TestimonyService.getAll())
 
 export const useCromatografias = () =>
   useAsyncList<Cromatografia>(() => CromatografiasService.getAll())

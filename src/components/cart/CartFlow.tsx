@@ -118,14 +118,9 @@ export function CartFlow() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <ButtonLink href="/#catalogo">{t('backToCatalog')}</ButtonLink>
-            <a
-              href={SITE.testimonyForm}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex h-11 items-center rounded-full border border-brand/35 px-6 text-sm font-medium text-brand transition-colors hover:border-brand hover:bg-brand-tint"
-            >
+            <ButtonLink href="/depoimento" variant="outline">
               {t('testimony')}
-            </a>
+            </ButtonLink>
           </div>
         </div>
       </Container>

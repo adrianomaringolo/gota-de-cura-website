@@ -29,6 +29,7 @@ const CLIENT_NAMESPACES = [
   'productList',
   'store',
   'testimonies',
+  'testimonyForm',
   'ui',
   'videos',
   'visitDates',

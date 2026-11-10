@@ -33,6 +33,7 @@ export const ADMIN_SECTIONS: AdminSection[] = [
     group: 'Catálogo',
   },
   { label: 'Relatórios', href: '/admin/relatorios', adminOnly: true, group: 'Gestão' },
+  { label: 'Depoimentos', href: '/admin/depoimentos', adminOnly: true, group: 'Gestão' },
   { label: 'Usuários', href: '/admin/usuarios', adminOnly: true, group: 'Gestão' },
 ]
 
