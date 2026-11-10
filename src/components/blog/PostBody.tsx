@@ -1,6 +1,6 @@
 import GithubSlugger from 'github-slugger'
 import { useTranslations } from 'next-intl'
-import { Children, type ReactNode } from 'react'
+import { Children, isValidElement, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -102,11 +102,30 @@ export function PostBody({ content }: { content: string }) {
                 {children}
               </h3>
             ),
-            p: ({ children }) => (
-              <p className="mb-5 max-w-[68ch] text-lg leading-relaxed text-ink-soft">
-                {children}
-              </p>
-            ),
+            // A paragraph made only of images (one per line in the markdown) is a
+            // gallery: the pictures sit side by side instead of stacking.
+            p: ({ children }) => {
+              const parts = Children.toArray(children).filter(
+                (child) => !(typeof child === 'string' && child.trim() === ''),
+              )
+              const gallery =
+                parts.length > 1 &&
+                parts.every(
+                  (child) =>
+                    isValidElement<{ node?: { tagName?: string } }>(child) &&
+                    child.props.node?.tagName === 'img',
+                )
+
+              return gallery ? (
+                <span className="my-8 grid grid-cols-2 items-start gap-3 sm:gap-5 [&>span]:my-0">
+                  {parts}
+                </span>
+              ) : (
+                <p className="mb-5 max-w-[68ch] text-lg leading-relaxed text-ink-soft">
+                  {children}
+                </p>
+              )
+            },
             ul: ({ children }) => (
               <ul className="mb-5 max-w-[68ch] list-disc space-y-2 pl-6 text-lg leading-relaxed text-ink-soft">
                 {children}

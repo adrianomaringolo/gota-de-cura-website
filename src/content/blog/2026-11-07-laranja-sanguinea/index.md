@@ -5,7 +5,7 @@ author: 'Equipe Gota de cura'
 publishedAt: '2026-11-07'
 tags: ['laranja sanguínea', 'citrus', 'hidrolatos', 'aromaterapia', 'plantas']
 featured: false
-image: '/images/blog/laranja-sanguinea/hero.jpg'
+image: '/images/blog/laranja-sanguinea/polpa.jpg'
 tldr:
   - 'A laranja sanguínea é Citrus sinensis, da família das rutáceas, a mesma da laranja-doce comum. A cor vermelha vem de uma mutação natural que liga a produção de antocianinas, os mesmos pigmentos de frutas como a amora e o mirtilo.'
   - 'A laranja-doce surgiu no sul da China e chegou à Europa pelas rotas portuguesas. A variedade sanguínea apareceu depois, na Sicília, e Tarocco, Moro e Sanguinello são as três mais conhecidas.'
@@ -33,9 +33,7 @@ O vermelho da laranja sanguínea vem das **antocianinas**, pigmentos hidrossolú
 
 O detalhe mais curioso é que esse interruptor **só liga com o frio**. Sem noites frescas durante o amadurecimento, o gene fica quieto e a polpa sai alaranjada, quase igual à de uma laranja comum. É por isso que a laranja sanguínea é tão ligada a poucos lugares do mundo.
 
-![Laranja sanguínea da chácara cortada ao meio, na mão de um visitante, com a polpa vermelho-alaranjada e as sementes à mostra](/images/blog/laranja-sanguinea/polpa.jpg)
-
-Esta é uma das laranjas sanguíneas da nossa chácara, aberta durante uma visita, em agosto. A cor varia de fruta para fruta e de safra para safra, justamente porque depende do frio.
+A laranja da foto de abertura é uma das sanguíneas da nossa chácara, aberta durante uma visita, em agosto. A cor varia de fruta para fruta e de safra para safra, justamente porque depende do frio.
 
 ## Origem: a Sicília e o Monte Etna
 
@@ -101,6 +99,9 @@ Para ele, o hidrolato é antes de tudo um convite a transformar o autocuidado em
 ## O óleo essencial: já diluído e pronto para usar
 
 Também temos o óleo essencial de laranja sanguínea (*Citrus sinensis*), em versão **já diluída**: o **óleo essencial de laranja sanguínea (diluição 2% em TCM), frasco de 5 ml**. São duas gotas de óleo essencial para cada 5 ml de TCM, o triglicerídeo de cadeia média, um óleo vegetal fracionado, leve e que quase não tem cheiro. Assim você não precisa fazer conta nem medir gota: a diluição já está feita. Para entender como e por que diluímos, veja nossa página de [diluições de óleos essenciais](/diluicoes-oleos-essenciais).
+
+![Hidrolato de laranja sanguínea da Gota de Cura, frasco de 120 ml, ao lado de laranja cortada e flor de laranjeira](/images/blog/laranja-sanguinea/produto-hidrolato.jpg)
+![Óleo essencial de laranja sanguínea da Gota de Cura, diluído a 2%, frasco de 5 ml, ao lado de laranja cortada e flor de laranjeira](/images/blog/laranja-sanguinea/produto-oleo.jpg)
 
 Uma diluição de 2% costuma ser indicada para uso no corpo, em massagem e em aplicações localizadas. Mesmo assim, faça o teste de sensibilidade antes, não use nos olhos, nos ouvidos e nas mucosas, e lembre que, por ser feito das folhas e não da casca, o nosso óleo não é fotossensibilizante. O óleo essencial **nunca deve ser ingerido**.
 

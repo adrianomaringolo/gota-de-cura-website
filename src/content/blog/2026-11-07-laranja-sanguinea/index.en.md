@@ -5,7 +5,7 @@ author: 'The Gota de Cura team'
 publishedAt: '2026-11-07'
 tags: ['blood orange', 'citrus', 'hydrosols', 'aromatherapy', 'plants']
 featured: false
-image: '/images/blog/laranja-sanguinea/hero.jpg'
+image: '/images/blog/laranja-sanguinea/polpa.jpg'
 tldr:
   - 'The blood orange is Citrus sinensis, in the rue family, the same species as the common sweet orange. Its red color comes from a natural mutation that switches on anthocyanins, the same pigments found in blackberries and blueberries.'
   - 'The sweet orange arose in southern China and reached Europe along Portuguese trade routes. The blood variety appeared later, in Sicily, and Tarocco, Moro and Sanguinello are the three best known.'
@@ -33,9 +33,7 @@ The red comes from **anthocyanins**, water-soluble pigments that color blueberri
 
 The curious part is that this switch **only turns on with cold**. Without cool nights during ripening, the gene stays quiet and the flesh comes out orange, almost like a regular orange. That is why the blood orange is tied to so few places in the world.
 
-![Blood orange from the farm cut in half, held in a visitor's hand, with red-orange flesh and the seeds showing](/images/blog/laranja-sanguinea/polpa.jpg)
-
-This is one of the blood oranges from our farm, cut open during a visit in August. The color varies from fruit to fruit and from season to season, precisely because it depends on the cold.
+The orange in the opening photo is one of the blood oranges from our farm, cut open during a visit in August. The color varies from fruit to fruit and from season to season, precisely because it depends on the cold.
 
 ## Origin: Sicily and Mount Etna
 
@@ -101,6 +99,9 @@ For him, the hydrosol is above all an invitation to turn self-care into a moment
 ## The essential oil: already diluted and ready to use
 
 We also offer blood orange essential oil (*Citrus sinensis*) in a **ready-diluted** version: **blood orange essential oil (2% dilution in MCT), 5 ml bottle**. That is two drops of essential oil for every 5 ml of MCT, medium-chain triglyceride, a light fractionated vegetable oil with almost no scent. You do not have to do the math or count drops: the dilution is already done. To understand how and why we dilute, see our page on [essential oil dilutions](/en/diluicoes-oleos-essenciais).
+
+![Gota de Cura blood orange hydrosol, 120 ml bottle, next to a halved orange and an orange blossom](/images/blog/laranja-sanguinea/produto-hidrolato.jpg)
+![Gota de Cura blood orange essential oil, 2% dilution, 5 ml bottle, next to a halved orange and an orange blossom](/images/blog/laranja-sanguinea/produto-oleo.jpg)
 
 A 2% dilution is commonly suggested for use on the body, in massage and for localized application. Even so, do a patch test first, keep it away from eyes, ears and mucous membranes, and remember that, because it is made from leaves and not peel, our oil is not photosensitizing. Essential oil must **never be ingested**.
 
