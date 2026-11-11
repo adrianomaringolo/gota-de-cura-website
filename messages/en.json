@@ -584,6 +584,7 @@
     "fillDelivery": "Choose delivery",
     "deliveryTitle": "How would you like to receive it?",
     "deliveryIntro": "Pick up your order at our store or have it delivered. Shipping costs are arranged with our team.",
+    "deliveryMethodRequired": "Choose a delivery method to continue.",
     "pickup": "Pick up at the store",
     "pickupBody": "No shipping cost. We'll let you know when it's ready.",
     "pickupAt": "Store address",

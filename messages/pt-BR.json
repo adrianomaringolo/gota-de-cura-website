@@ -584,6 +584,7 @@
     "fillDelivery": "Escolher entrega",
     "deliveryTitle": "Como você quer receber?",
     "deliveryIntro": "Escolha entre retirar seu pedido na loja ou receber em casa. O valor do frete é combinado com a equipe.",
+    "deliveryMethodRequired": "Escolha uma forma de entrega para continuar.",
     "pickup": "Retirar na loja",
     "pickupBody": "Sem custo de frete. Avisamos quando estiver separado.",
     "pickupAt": "Endereço da loja",

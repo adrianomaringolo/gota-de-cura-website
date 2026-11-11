@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
 import { Spinner } from '@/components/ui/Feedback'
 import { Input } from '@/components/ui/Field'
@@ -151,7 +152,8 @@ const emptyAddress: ShippingAddress = {
 export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
   const t = useTranslations('checkout')
   const store = useTranslations('store')
-  const [method, setMethod] = useState<Method>(initial?.method ?? 'pickup')
+  const [method, setMethod] = useState<Method | null>(initial?.method ?? null)
+  const [methodError, setMethodError] = useState(false)
   const [lookup, setLookup] = useState<'idle' | 'loading' | 'notFound'>('idle')
   const lastLookup = useRef('')
 
@@ -198,6 +200,12 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
       className="mt-10"
       noValidate
       onSubmit={(event) => {
+        if (!method) {
+          event.preventDefault()
+          setMethodError(true)
+          toast.error(t('deliveryMethodRequired'))
+          return
+        }
         if (method === 'pickup') {
           event.preventDefault()
           onSubmit({ method: 'pickup' })
@@ -216,23 +224,35 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
       <div
         role="radiogroup"
         aria-label={t('deliveryTitle')}
+        aria-invalid={methodError ? true : undefined}
         className="mt-6 grid gap-4 sm:grid-cols-2"
       >
         <OptionCard
           selected={method === 'pickup'}
-          onSelect={() => setMethod('pickup')}
+          onSelect={() => {
+            setMethod('pickup')
+            setMethodError(false)
+          }}
           icon={<StoreIcon />}
           title={t('pickup')}
           body={t('pickupBody')}
         />
         <OptionCard
           selected={method === 'shipping'}
-          onSelect={() => setMethod('shipping')}
+          onSelect={() => {
+            setMethod('shipping')
+            setMethodError(false)
+          }}
           icon={<TruckIcon />}
           title={t('shippingOption')}
           body={t('shippingBody')}
         />
       </div>
+      {methodError && (
+        <p role="alert" className="mt-2 text-sm font-medium text-danger">
+          {t('deliveryMethodRequired')}
+        </p>
+      )}
 
       {method === 'pickup' ? (
         <div className="mt-6 flex items-start gap-4 rounded-2xl border border-brand/20 bg-brand-tint p-5">
@@ -275,7 +295,7 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
             </div>
           </div>
         </div>
-      ) : (
+      ) : method === 'shipping' ? (
         <fieldset className="mt-6 rounded-2xl border border-line bg-surface p-6">
           <legend className="sr-only">{t('addressTitle')}</legend>
           <h3 className="font-display text-lg font-semibold text-ink">
@@ -373,7 +393,7 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
             />
           </div>
         </fieldset>
-      )}
+      ) : null}
 
       <div className="mt-8 flex flex-wrap justify-between gap-3">
         <Button type="button" variant="ghost" onClick={onBack}>
