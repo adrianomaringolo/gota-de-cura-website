@@ -30,6 +30,14 @@ import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
+/** WhatsApp Web chat link; assumes Brazil (+55) when the number has no country code. */
+function whatsappWebUrl(phone: string): string | null {
+  let digits = phone.replace(/\D/g, '')
+  if (digits.length < 10) return null
+  if (digits.length <= 11) digits = `55${digits}`
+  return `https://web.whatsapp.com/send?phone=${digits}`
+}
+
 export function OrderDetail({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined)
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
@@ -59,6 +67,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const subtotal = orderTotal(order.items)
   const discount = couponDiscount(subtotal, order.coupon)
   // The page the customer sees, in the language they ordered in.
+  const whatsappUrl = whatsappWebUrl(order.contactInfo.phone)
   const publicUrl = publicOrderUrl(order.id, order.locale ?? 'pt-BR')
   const copyPublicLink = () =>
     navigator.clipboard.writeText(publicUrl).then(
@@ -76,6 +85,17 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           ← Voltar aos pedidos
         </Link>
         <div className="flex flex-wrap gap-2">
+          {whatsappUrl && (
+            <ButtonLink
+              variant="outline"
+              size="sm"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp Web ↗
+            </ButtonLink>
+          )}
           <Button variant="outline" size="sm" onClick={copyPublicLink}>
             Copiar link do cliente
           </Button>
@@ -97,7 +117,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="font-display text-3xl font-semibold text-ink">
+            <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
               Pedido #{order.orderId}
             </h1>
             <StatusTag status={order.status} />
@@ -115,7 +135,22 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           <dl className="mt-4 grid gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2">
             {[
               ['Feito em', formatDateAndTime(new Date(order.createdAt))],
-              ['Celular', order.contactInfo.phone],
+              [
+                'Celular',
+                whatsappUrl ? (
+                  <a
+                    key="phone"
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+                  >
+                    {order.contactInfo.phone} ↗
+                  </a>
+                ) : (
+                  order.contactInfo.phone
+                ),
+              ],
               ['E-mail', order.contactInfo.email || '—'],
               [
                 'Prefere contato por',
@@ -127,7 +162,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               ],
               ['Entrega', deliverySummary(order)],
             ].map(([label, value]) => (
-              <div key={label} className="flex gap-2">
+              <div key={label as string} className="flex gap-2">
                 <dt className="shrink-0 text-ink-muted">{label}:</dt>
                 <dd className="min-w-0 break-words text-ink">{value}</dd>
               </div>
@@ -156,35 +191,57 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               Editar itens
             </Button>
           </div>
-          <TableWrap>
-            <thead>
-              <tr>
-                <Th>Produto</Th>
-                <Th className="text-right">Preço un.</Th>
-                <Th className="text-right">Qtd.</Th>
-                <Th className="text-right">Total</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {order.items
-                .filter((item) => item.amount)
-                .map((item, index) => (
-                  <tr key={`${item.id}-${index}`}>
-                    <Td>
-                      <span className="font-medium">{item.name}</span>
-                      <span className="block text-xs text-ink-muted">{item.type}</span>
-                    </Td>
-                    <Td className="text-right tabular-nums">
-                      {formatCurrency(item.price)}
-                    </Td>
-                    <Td className="text-right tabular-nums">{item.amount}</Td>
-                    <Td className="text-right font-medium tabular-nums">
+          <ul className="divide-y divide-line rounded-xl border border-line bg-surface md:hidden">
+            {order.items
+              .filter((item) => item.amount)
+              .map((item, index) => (
+                <li key={`${item.id}-${index}`} className="px-4 py-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="font-medium text-ink">{item.name}</p>
+                      <p className="text-xs text-ink-muted">{item.type}</p>
+                    </div>
+                    <p className="shrink-0 font-semibold tabular-nums text-ink">
                       {formatCurrency(item.price * (item.amount || 0))}
-                    </Td>
-                  </tr>
-                ))}
-            </tbody>
-          </TableWrap>
+                    </p>
+                  </div>
+                  <p className="mt-1 text-sm text-ink-soft tabular-nums">
+                    {item.amount} × {formatCurrency(item.price)}
+                  </p>
+                </li>
+              ))}
+          </ul>
+          <div className="hidden md:block">
+            <TableWrap>
+              <thead>
+                <tr>
+                  <Th>Produto</Th>
+                  <Th className="text-right">Preço un.</Th>
+                  <Th className="text-right">Qtd.</Th>
+                  <Th className="text-right">Total</Th>
+                </tr>
+              </thead>
+              <tbody>
+                {order.items
+                  .filter((item) => item.amount)
+                  .map((item, index) => (
+                    <tr key={`${item.id}-${index}`}>
+                      <Td>
+                        <span className="font-medium">{item.name}</span>
+                        <span className="block text-xs text-ink-muted">{item.type}</span>
+                      </Td>
+                      <Td className="text-right tabular-nums">
+                        {formatCurrency(item.price)}
+                      </Td>
+                      <Td className="text-right tabular-nums">{item.amount}</Td>
+                      <Td className="text-right font-medium tabular-nums">
+                        {formatCurrency(item.price * (item.amount || 0))}
+                      </Td>
+                    </tr>
+                  ))}
+              </tbody>
+            </TableWrap>
+          </div>
 
           <dl className="mt-5 ml-auto max-w-sm space-y-1.5 text-base">
             <div className="flex justify-between">
@@ -220,7 +277,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
       </div>
 
       <div className="mt-12 print-none">
-        <div className="flex gap-1 border-b border-line">
+        <div className="flex gap-1 overflow-x-auto border-b border-line">
           {(
             [
               ['comments', `Comentários (${order.comments?.length ?? 0})`],
@@ -233,8 +290,8 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               onClick={() => setTab(key)}
               className={
                 tab === key
-                  ? '-mb-px border-b-2 border-brand px-4 py-2.5 text-sm font-semibold text-brand'
-                  : '-mb-px border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink'
+                  ? '-mb-px whitespace-nowrap border-b-2 border-brand px-4 py-2.5 text-sm font-semibold text-brand'
+                  : '-mb-px whitespace-nowrap border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink'
               }
             >
               {label}
