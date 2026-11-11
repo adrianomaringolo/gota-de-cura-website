@@ -30,18 +30,29 @@ import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
-/** WhatsApp Web chat link; assumes Brazil (+55) when the number has no country code. */
-function whatsappWebUrl(phone: string): string | null {
+/**
+ * WhatsApp chat link; assumes Brazil (+55) when the number has no country code.
+ * On phones wa.me opens the app directly; on desktop we go straight to WhatsApp Web.
+ */
+function whatsappUrlFor(phone: string, mobile: boolean): string | null {
   let digits = phone.replace(/\D/g, '')
   if (digits.length < 10) return null
   if (digits.length <= 11) digits = `55${digits}`
-  return `https://web.whatsapp.com/send?phone=${digits}`
+  return mobile
+    ? `https://wa.me/${digits}`
+    : `https://web.whatsapp.com/send?phone=${digits}`
 }
 
 export function OrderDetail({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined)
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
   const [editItemsOpen, setEditItemsOpen] = useState(false)
+  const [editPhoneOpen, setEditPhoneOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(/Android|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent))
+  }, [])
 
   const load = useCallback(async () => {
     try {
@@ -67,7 +78,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const subtotal = orderTotal(order.items)
   const discount = couponDiscount(subtotal, order.coupon)
   // The page the customer sees, in the language they ordered in.
-  const whatsappUrl = whatsappWebUrl(order.contactInfo.phone)
+  const whatsappUrl = whatsappUrlFor(order.contactInfo.phone, isMobile)
   const publicUrl = publicOrderUrl(order.id, order.locale ?? 'pt-BR')
   const copyPublicLink = () =>
     navigator.clipboard.writeText(publicUrl).then(
@@ -93,7 +104,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp Web ↗
+              WhatsApp ↗
             </ButtonLink>
           )}
           <Button variant="outline" size="sm" onClick={copyPublicLink}>
@@ -137,19 +148,27 @@ export function OrderDetail({ orderId }: { orderId: string }) {
               ['Feito em', formatDateAndTime(new Date(order.createdAt))],
               [
                 'Celular',
-                whatsappUrl ? (
-                  <a
-                    key="phone"
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+                <span key="phone" className="flex flex-wrap items-center gap-x-3">
+                  {whatsappUrl ? (
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+                    >
+                      {order.contactInfo.phone} ↗
+                    </a>
+                  ) : (
+                    order.contactInfo.phone
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setEditPhoneOpen(true)}
+                    className="print-none text-xs font-medium text-ink-soft underline underline-offset-4 hover:text-ink"
                   >
-                    {order.contactInfo.phone} ↗
-                  </a>
-                ) : (
-                  order.contactInfo.phone
-                ),
+                    Editar
+                  </button>
+                </span>,
               ],
               ['E-mail', order.contactInfo.email || '—'],
               [
@@ -307,6 +326,12 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           )}
         </div>
       </div>
+      <PhoneDialog
+        order={order}
+        open={editPhoneOpen}
+        onClose={() => setEditPhoneOpen(false)}
+        onSaved={load}
+      />
       <OrderItemsDialog
         order={order}
         open={editItemsOpen}
@@ -314,6 +339,71 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         onSaved={load}
       />
     </>
+  )
+}
+
+function PhoneDialog({
+  order,
+  open,
+  onClose,
+  onSaved,
+}: {
+  order: Order
+  open: boolean
+  onClose: () => void
+  onSaved: () => void
+}) {
+  const [phone, setPhone] = useState(order.contactInfo.phone)
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    if (open) setPhone(order.contactInfo.phone)
+  }, [open, order.contactInfo.phone])
+
+  const digits = phone.replace(/\D/g, '')
+  const invalid = digits.length < 10 || digits.length > 13
+  const unchanged = phone.trim() === order.contactInfo.phone
+
+  const save = async () => {
+    setSaving(true)
+    try {
+      await OrdersService.setPhone(order, phone.trim())
+      toast.success('Celular atualizado')
+      onClose()
+      onSaved()
+    } catch {
+      toast.error('Não foi possível salvar o celular')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      title="Editar celular de contato"
+      size="sm"
+      footer={
+        <>
+          <Button variant="ghost" onClick={onClose} disabled={saving}>
+            Cancelar
+          </Button>
+          <Button onClick={save} disabled={saving || invalid || unchanged}>
+            {saving ? <Spinner className="h-4 w-4" /> : 'Salvar'}
+          </Button>
+        </>
+      }
+    >
+      <Input
+        label="Celular (com DDD)"
+        type="tel"
+        inputMode="tel"
+        value={phone}
+        onChange={(event) => setPhone(event.target.value)}
+        error={phone.trim() && invalid ? 'Informe o DDD e o número' : undefined}
+      />
+    </Dialog>
   )
 }
 

@@ -263,6 +263,13 @@ export const OrdersService = {
     })
   },
 
+  async setPhone(order: Order, phone: string): Promise<void> {
+    await updateDoc(doc(ordersRef, order.id), {
+      'contactInfo.phone': phone,
+      updatedAt: new Date().toISOString(),
+    })
+  },
+
   async setShipping(
     order: Order,
     shipping: { cost: number; notes: string },
