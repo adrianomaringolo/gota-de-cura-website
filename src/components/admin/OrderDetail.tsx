@@ -25,6 +25,7 @@ import {
   publicOrderUrl,
 } from '@/services/orders'
 import { toAmount } from '@/lib/format'
+import { DeliveryDialog } from './DeliveryDialog'
 import { DeliveryPill } from './DeliveryPill'
 import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
@@ -48,6 +49,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
   const [editItemsOpen, setEditItemsOpen] = useState(false)
   const [editPhoneOpen, setEditPhoneOpen] = useState(false)
+  const [editDeliveryOpen, setEditDeliveryOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -179,7 +181,19 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                     ? 'WhatsApp'
                     : 'Não informado',
               ],
-              ['Entrega', deliverySummary(order)],
+              [
+                'Entrega',
+                <span key="delivery" className="flex flex-wrap items-center gap-x-3">
+                  {deliverySummary(order)}
+                  <button
+                    type="button"
+                    onClick={() => setEditDeliveryOpen(true)}
+                    className="print-none text-xs font-medium text-ink-soft underline underline-offset-4 hover:text-ink"
+                  >
+                    Editar
+                  </button>
+                </span>,
+              ],
             ].map(([label, value]) => (
               <div key={label as string} className="flex gap-2">
                 <dt className="shrink-0 text-ink-muted">{label}:</dt>
@@ -330,6 +344,12 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         order={order}
         open={editPhoneOpen}
         onClose={() => setEditPhoneOpen(false)}
+        onSaved={load}
+      />
+      <DeliveryDialog
+        order={order}
+        open={editDeliveryOpen}
+        onClose={() => setEditDeliveryOpen(false)}
         onSaved={load}
       />
       <OrderItemsDialog

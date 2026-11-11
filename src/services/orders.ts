@@ -15,6 +15,7 @@ import { ORDER_STATUS, orderStatusLabel } from '@/lib/constants'
 import { toAmount } from '@/lib/format'
 import { localizedPath } from '@/lib/i18n'
 import { describeChanges, type ItemChange } from '@/lib/order-edit'
+import { describeDeliveryChange } from '@/lib/orders-delivery'
 import { cartLineName } from '@/lib/products'
 import { SITE } from '@/lib/site'
 import type {
@@ -267,6 +268,28 @@ export const OrdersService = {
     await updateDoc(doc(ordersRef, order.id), {
       'contactInfo.phone': phone,
       updatedAt: new Date().toISOString(),
+    })
+  },
+
+  /**
+   * Replaces how the order is delivered (pickup vs. shipping, and the
+   * address) and records the change in the comments, the same way an item
+   * edit is logged.
+   */
+  async setDelivery(order: Order, delivery: DeliveryInfo): Promise<void> {
+    const user = UsersService.getStoredUser()
+
+    await updateDoc(doc(ordersRef, order.id), {
+      delivery,
+      updatedAt: new Date().toISOString(),
+      comments: [
+        ...(order.comments || []),
+        {
+          userName: user?.name ?? '—',
+          comment: describeDeliveryChange(order.delivery, delivery),
+          createdAt: new Date().toISOString(),
+        },
+      ],
     })
   },
 
