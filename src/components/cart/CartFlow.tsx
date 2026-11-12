@@ -400,6 +400,7 @@ export function CartFlow() {
                   {delivery.neighborhood} · {delivery.city}/{delivery.state} · CEP{' '}
                   {delivery.zipcode}
                 </p>
+                <p className="text-ink-soft">CPF {delivery.cpf}</p>
               </div>
             )}
           </div>

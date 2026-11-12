@@ -131,3 +131,12 @@ export const maskZipcode = (raw: string): string => {
   const digits = raw.replace(/\D/g, '').slice(0, 8)
   return digits.length > 5 ? digits.replace(/^(\d{5})(\d{0,3})/, '$1-$2') : digits
 }
+
+/** "123.456.789-00" */
+export const maskCpf = (raw: string): string => {
+  const digits = raw.replace(/\D/g, '').slice(0, 11)
+  return digits
+    .replace(/^(\d{3})(\d)/, '$1.$2')
+    .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+    .replace(/\.(\d{3})(\d)$/, '.$1-$2')
+}

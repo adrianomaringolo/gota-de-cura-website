@@ -3,7 +3,7 @@ import type { DeliveryInfo, Order } from '@/lib/types'
 function deliveryLine(delivery: DeliveryInfo): string {
   if (delivery.method === 'pickup') return 'Retira na loja'
   const extra = delivery.complement ? ` — ${delivery.complement}` : ''
-  return `Envio: ${delivery.street}, ${delivery.number}${extra}, ${delivery.neighborhood}, ${delivery.city}/${delivery.state} (CEP ${delivery.zipcode})`
+  return `Envio: ${delivery.street}, ${delivery.number}${extra}, ${delivery.neighborhood}, ${delivery.city}/${delivery.state} (CEP ${delivery.zipcode}) — CPF ${delivery.cpf || '—'}`
 }
 
 /** One-line delivery summary for the admin; handles orders that predate the delivery step. */
