@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Spinner } from '@/components/ui/Feedback'
 import { Input } from '@/components/ui/Field'
 import { cn } from '@/lib/cn'
-import { maskZipcode } from '@/lib/format'
+import { maskCpf, maskZipcode } from '@/lib/format'
 import { SITE } from '@/lib/site'
 import type { DeliveryInfo, ShippingAddress } from '@/lib/types'
 
@@ -140,6 +140,7 @@ function OptionCard({
 }
 
 const emptyAddress: ShippingAddress = {
+  cpf: '',
   zipcode: '',
   street: '',
   number: '',
@@ -303,6 +304,21 @@ export function DeliveryStep({ initial, onBack, onSubmit }: Props) {
           </h3>
 
           <div className="mt-5 grid gap-5 sm:grid-cols-6">
+            <Input
+              label={t('cpf')}
+              required
+              inputMode="numeric"
+              autoComplete="off"
+              placeholder="123.456.789-00"
+              hint={t('cpfHint')}
+              error={errors.cpf && t('cpfError')}
+              className="sm:col-span-3"
+              {...register('cpf', {
+                required: true,
+                pattern: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
+                onChange: (event) => setValue('cpf', maskCpf(event.target.value)),
+              })}
+            />
             <div className="sm:col-span-2">
               <Input
                 label={t('zipcode')}

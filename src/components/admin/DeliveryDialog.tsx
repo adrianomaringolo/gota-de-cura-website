@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Input, RadioChip } from '@/components/ui/Field'
 import { Spinner } from '@/components/ui/Feedback'
-import { maskZipcode } from '@/lib/format'
+import { maskCpf, maskZipcode } from '@/lib/format'
 import type { DeliveryInfo, Order, ShippingAddress } from '@/lib/types'
 import { OrdersService } from '@/services/orders'
 
@@ -19,6 +19,7 @@ type ViaCep = {
 }
 
 const emptyAddress: ShippingAddress = {
+  cpf: '',
   zipcode: '',
   street: '',
   number: '',
@@ -88,7 +89,8 @@ export function DeliveryDialog({
 
   const invalidAddress =
     method === 'shipping' &&
-    (address.zipcode.replace(/\D/g, '').length !== 8 ||
+    (address.cpf.replace(/\D/g, '').length !== 11 ||
+      address.zipcode.replace(/\D/g, '').length !== 8 ||
       !address.street.trim() ||
       !address.number.trim() ||
       !address.neighborhood.trim() ||
@@ -151,6 +153,15 @@ export function DeliveryDialog({
 
       {method === 'shipping' && (
         <div className="mt-5 grid gap-4 sm:grid-cols-6">
+          <Input
+            label="CPF"
+            inputMode="numeric"
+            placeholder="123.456.789-00"
+            hint="Exigido pelas transportadoras para gerar a etiqueta de envio."
+            className="sm:col-span-3"
+            value={address.cpf}
+            onChange={(event) => set({ cpf: maskCpf(event.target.value) })}
+          />
           <Input
             label="CEP"
             inputMode="numeric"

@@ -85,6 +85,7 @@ export interface ContactInfo {
 }
 
 export interface ShippingAddress {
+  cpf: string
   zipcode: string
   street: string
   number: string
