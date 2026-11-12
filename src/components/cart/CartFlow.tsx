@@ -7,6 +7,7 @@ import toast from 'react-hot-toast'
 import { Button, ButtonLink } from '@/components/ui/Button'
 import { Container } from '@/components/site/Section'
 import { EmptyState, Spinner } from '@/components/ui/Feedback'
+import { Dialog } from '@/components/ui/Dialog'
 import { Input, Textarea } from '@/components/ui/Field'
 import { Link } from '@/i18n/navigation'
 import { useCart } from '@/lib/cart-context'
@@ -43,6 +44,7 @@ export function CartFlow() {
   const [coupon, setCoupon] = useState<Coupon | undefined>()
   const [orderNumber, setOrderNumber] = useState<number | null>(null)
   const [orderRef, setOrderRef] = useState<string | null>(null)
+  const [confirmContactOpen, setConfirmContactOpen] = useState(false)
 
   const {
     register,
@@ -54,6 +56,9 @@ export function CartFlow() {
     defaultValues: contact ?? { preferredContact: 'whatsapp' },
   })
   const preferredContact = watch('preferredContact')
+
+  const viaEmail = contact?.preferredContact === 'email'
+  const contactValue = contact ? (viaEmail ? contact.email : contact.phone) : ''
 
   const discount = couponDiscount(total, coupon)
   const payable = Math.max(0, total - discount)
@@ -217,6 +222,9 @@ export function CartFlow() {
                 onChange: (event) => setValue('phone', maskPhone(event.target.value)),
               })}
             />
+            <p className="-mt-2 rounded-lg bg-warning-tint px-3 py-2 text-sm font-medium text-ink sm:hidden">
+              {t('phoneDddNote')}
+            </p>
             <Input
               label={t('email')}
               required={preferredContact === 'email'}
@@ -315,6 +323,22 @@ export function CartFlow() {
 
       {(step === 'review' || step === 'saving') && contact && delivery && (
         <section className="mt-10 space-y-8">
+          <div className="rounded-2xl border-2 border-brand bg-brand-tint p-6 text-center">
+            <p className="text-sm font-medium text-ink-soft">
+              {viaEmail ? t('contactBigEmail') : t('contactBigWhatsapp')}
+            </p>
+            <p className="mt-2 font-display text-3xl font-semibold break-words text-ink sm:text-4xl">
+              {contactValue}
+            </p>
+            <button
+              type="button"
+              onClick={() => setStep('contact')}
+              className="mt-3 text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 transition-colors hover:decoration-brand"
+            >
+              {t('edit')}
+            </button>
+          </div>
+
           <div className="rounded-2xl border border-line bg-surface p-6">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
               <h2 className="font-display text-xl font-semibold text-ink">
@@ -471,7 +495,11 @@ export function CartFlow() {
             >
               {t('back')}
             </Button>
-            <Button size="lg" onClick={submitOrder} disabled={step === 'saving'}>
+            <Button
+              size="lg"
+              onClick={() => setConfirmContactOpen(true)}
+              disabled={step === 'saving'}
+            >
               {step === 'saving' ? (
                 <>
                   <Spinner className="h-4 w-4" /> {t('sending')}
@@ -483,6 +511,41 @@ export function CartFlow() {
           </div>
         </section>
       )}
+
+      <Dialog
+        open={confirmContactOpen}
+        onClose={() => setConfirmContactOpen(false)}
+        title={t('confirmContactTitle')}
+        size="sm"
+        footer={
+          <>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                setConfirmContactOpen(false)
+                setStep('contact')
+              }}
+            >
+              {t('confirmContactNo')}
+            </Button>
+            <Button
+              onClick={() => {
+                setConfirmContactOpen(false)
+                void submitOrder()
+              }}
+            >
+              {t('confirmContactYes')}
+            </Button>
+          </>
+        }
+      >
+        <p className="text-base text-ink-soft">
+          {viaEmail ? t('confirmContactEmail') : t('confirmContactWhatsapp')}
+        </p>
+        <p className="mt-3 font-display text-3xl font-semibold break-words text-ink">
+          {contactValue}
+        </p>
+      </Dialog>
     </Container>
   )
 }
