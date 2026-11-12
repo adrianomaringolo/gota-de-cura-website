@@ -30,7 +30,7 @@ const emptyAddress: ShippingAddress = {
 }
 
 const addressOf = (delivery?: DeliveryInfo): ShippingAddress =>
-  delivery?.method === 'shipping' ? delivery : emptyAddress
+  delivery?.method === 'shipping' ? { ...emptyAddress, ...delivery } : emptyAddress
 
 export function DeliveryDialog({
   order,
