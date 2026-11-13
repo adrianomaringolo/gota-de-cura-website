@@ -131,6 +131,7 @@ const STATUS_META: Record<
   [ORDER_STATUS.EM_ANDAMENTO]: { label: 'Em andamento', tone: 'brand' },
   [ORDER_STATUS.APROVADO]: { label: 'Aprovado', tone: 'lab' },
   [ORDER_STATUS.PAGO]: { label: 'Pago', tone: 'positive' },
+  [ORDER_STATUS.PREPARADO]: { label: 'Preparado', tone: 'terra' },
   [ORDER_STATUS.SEPARADO]: { label: 'Separado/enviado', tone: 'lab' },
   [ORDER_STATUS.EM_FINALIZACAO]: { label: 'Em finalização', tone: 'brand' },
   [ORDER_STATUS.FINALIZADO]: { label: 'Finalizado', tone: 'positive' },

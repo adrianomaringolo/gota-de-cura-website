@@ -15,6 +15,7 @@ export const ORDER_STATUS = {
   EM_ANDAMENTO: 'em-andamento',
   APROVADO: 'aprovado',
   PAGO: 'pago',
+  PREPARADO: 'preparado',
   SEPARADO: 'separado-enviado',
   EM_FINALIZACAO: 'em-finalizacao',
   FINALIZADO: 'finalizado',
@@ -28,6 +29,7 @@ export const ORDER_STATUS_OPTIONS: { value: string; label: string }[] = [
   { value: ORDER_STATUS.EM_ANDAMENTO, label: 'Em andamento' },
   { value: ORDER_STATUS.APROVADO, label: 'Aprovado' },
   { value: ORDER_STATUS.PAGO, label: 'Pago' },
+  { value: ORDER_STATUS.PREPARADO, label: 'Preparado' },
   { value: ORDER_STATUS.SEPARADO, label: 'Separado/enviado' },
   { value: ORDER_STATUS.EM_FINALIZACAO, label: 'Em finalização' },
   { value: ORDER_STATUS.FINALIZADO, label: 'Finalizado' },
@@ -43,6 +45,8 @@ export const ORDER_STATUS_DESCRIPTIONS: Record<string, string> = {
   [ORDER_STATUS.APROVADO]:
     'Disponibilidade dos produtos, entrega e valores confirmados com o cliente. Falta o pagamento.',
   [ORDER_STATUS.PAGO]: 'Pagamento recebido. O pedido já pode ser separado.',
+  [ORDER_STATUS.PREPARADO]:
+    'Pacote pronto para envio: produtos conferidos e embalados, só falta despachar ou entregar ao cliente.',
   [ORDER_STATUS.SEPARADO]:
     'Produtos separados e embalados, prontos para retirada ou já enviados ao cliente.',
   [ORDER_STATUS.EM_FINALIZACAO]:
@@ -59,6 +63,7 @@ export const ORDER_STATUS_LABELS_EN: Record<string, string> = {
   [ORDER_STATUS.EM_ANDAMENTO]: 'In progress',
   [ORDER_STATUS.APROVADO]: 'Approved',
   [ORDER_STATUS.PAGO]: 'Paid',
+  [ORDER_STATUS.PREPARADO]: 'Ready to ship',
   [ORDER_STATUS.SEPARADO]: 'Packed/shipped',
   [ORDER_STATUS.EM_FINALIZACAO]: 'Being finalized',
   [ORDER_STATUS.FINALIZADO]: 'Completed',
