@@ -29,7 +29,7 @@ Legenda de status: 🟢 publicado · 🟡 pronto para publicar · 🔵 em produ�
 | post-18 | Medicina Tradicional Chinesa: pomadas de moxinha e artemísia | 2026-11-06 | Único | `foto-selo` | 1 | 🟢 | Foto da bancada com potes de pomada e frascos âmbar; faixa 'Medicina Tradicional Chinesa' |
 | post-19 | Breu branco, direto da Amazônia | 2026-11-09 | Único | `foto-selo` | 1 | 🟡 | Foto da resina de breu branco em bandeja de madeira; faixa 'Breu branco' com apoio sobre o hidrolato disponível |
 | post-20 | Um spray para cada momento | 2026-11-11 | Único | `foto-selo` | 1 | 🟡 | Foto da fileira de sprays (Relaxamento, Prosperidade, Respire bem); faixa no rodapé. Há duas pessoas desfocadas ao fundo |
-| post-21 | Laranja sanguínea: origem, a cor que vem do frio e como usar o hidrolato | 2026-11-10 | Único | `chamada-blog` | 1 | 🔵 | Chamada para o post do blog de 07/11, com o título do próprio post. Foto de capa é o hero do blog (1200×500, ampliada: fica um pouco macia) |
+| post-21 | Laranja sanguínea: origem, a cor que vem do frio e como usar o hidrolato | 2026-11-10 | Único | `chamada-blog` | 1 | 🟢 | Chamada para o post do blog de 07/11, com o título do próprio post. Foto de capa é o hero do blog (1200×500, ampliada: fica um pouco macia) |
 > Todos os posts usam **1080×1350** (formato padrão do feed).
 
 ---

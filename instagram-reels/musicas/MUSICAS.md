@@ -18,3 +18,4 @@ Crédito para a legenda: "Música: Chinese Restaurant Background 7, de Sascha En
 
 - `story-02` (convite para o blog): Forest Mist Whispers
 - `reel-04` (hidrolato de laranja sanguínea): Forest Mist Whispers
+- `story-03` (Dia Mundial da Gentileza): Forest Mist Whispers

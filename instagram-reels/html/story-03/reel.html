@@ -1,0 +1,67 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<!-- Story 1080x1920 sem narração: vídeo do Pexels (frames em fotos/maos) + textos por cena + trilha. -->
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,600;0,700;1,600&family=Archivo:wght@500;600;700&display=block" rel="stylesheet">
+<style>
+:root{--roxo:#503484;--noite:#291945;--lilas:#dacbf9;--terra:#cd632d;--serif:'Petrona',serif;--sans:'Archivo',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--noite)}
+body{font-family:var(--sans);position:relative;color:#fff}
+#vid{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover}
+#scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(41,25,69,.55) 0%,rgba(41,25,69,.15) 20%,rgba(41,25,69,.25) 40%,rgba(41,25,69,.82) 68%,rgba(41,25,69,.95) 100%)}
+.scene{position:absolute;inset:0;opacity:0;overflow:hidden}
+.eyebrow{display:inline-block;font-weight:700;font-size:34px;letter-spacing:.2em;text-transform:uppercase;color:var(--noite);background:var(--terra);padding:16px 30px;border-radius:999px}
+.h{font-family:var(--serif);font-weight:700;line-height:1.04}
+.s1b{position:absolute;left:80px;right:80px;top:1010px}
+.s1b .h{font-size:136px;margin-top:34px}
+.s1b .h em{font-style:italic;font-weight:600;color:#f0c8ae}
+.s2b{position:absolute;left:80px;right:80px;top:1060px}
+.s2b .h{font-size:100px}
+.s2b .h em{font-style:italic;font-weight:600;color:#f0c8ae}
+.dark{background:radial-gradient(ellipse at 50% 25%,#6b46b0 0%,var(--roxo) 45%,var(--noite) 100%)}
+.logo{position:absolute;left:190px;width:700px;top:470px}
+.f1{position:absolute;left:70px;right:70px;top:830px;text-align:center;font-family:var(--serif);font-weight:700;font-size:112px;line-height:1.05}
+.f2{position:absolute;left:70px;right:70px;top:1130px;text-align:center;font-weight:600;font-size:48px;line-height:1.3;color:var(--lilas)}
+.f3{position:absolute;left:70px;right:70px;top:1150px;text-align:center;font-weight:500;font-size:40px;color:var(--lilas)}
+</style></head><body>
+
+<img id="vid" alt="">
+<div id="scrim"></div>
+
+<div class="scene" id="s1">
+  <div class="s1b" id="s1-b"><span class="eyebrow">13 de novembro</span><div class="h">Dia Mundial da <em>Gentileza</em></div></div>
+</div>
+
+<div class="scene" id="s2">
+  <div class="s2b" id="s2-b"><div class="h">Um gesto de cuidado pode <em>transformar o dia</em> de alguém.</div></div>
+</div>
+
+<div class="scene dark" id="s3">
+  <img class="logo" id="f-l" src="../../../instagram-posts/assets/logos/logo-negativo.svg" alt="">
+  <div class="f1" id="f-1">Seja gentil<br>hoje</div>
+  <div class="f3" id="f-3">@gotadecura_artesanais</div>
+</div>
+
+<script src="timeline.js"></script>
+<script>
+const TL=window.TL,S=Object.fromEntries(TL.scenes.map(s=>[s.id,s]));
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const $=id=>document.getElementById(id);
+const X=.5, N=300;
+const vis=(t,s,first,last)=>{const a=first?0:s.start-X,b=last?TL.total:s.end;return clamp((t-a)/X)*(last?1:clamp((b-t)/X))};
+const fi=(el,t,t0,dy=40)=>{const k=eo((t-t0)/.7);el.style.opacity=k;el.style.transform=`translateY(${(1-k)*dy}px)`};
+window.setT=async function(t){
+  const ids=['s1','s2','s3'];
+  ids.forEach((id,i)=>{$(id).style.opacity=vis(t,S[id],i==0,i==2)});
+  // vídeo + scrim somem na cena final
+  const vk=clamp((S.s3.start+X-t)/X); $('vid').style.opacity=vk; $('scrim').style.opacity=vk;
+  const n=Math.min(N,Math.floor(t*30)+1), im=$('vid');
+  const src='fotos/maos/f'+String(n).padStart(4,'0')+'.jpg';
+  if(!im.src.endsWith(src)){im.src=src;try{await im.decode()}catch(e){}}
+  let s=S.s1; fi($('s1-b'),t,.5);
+  s=S.s2; fi($('s2-b'),t,s.start+.2);
+  s=S.s3; fi($('f-l'),t,s.start+.1,30); fi($('f-1'),t,s.start+.5); fi($('f-3'),t,s.start+1.8,20);
+  await document.fonts.ready;
+};
+window.TOTAL=TL.total;
+</script></body></html>

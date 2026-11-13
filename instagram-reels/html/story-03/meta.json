@@ -1,0 +1,34 @@
+{
+  "title": "Story: Dia Mundial da Gentileza",
+  "date": "2026-11-13",
+  "type": "story",
+  "tags": [
+    "story",
+    "gentileza",
+    "data comemorativa"
+  ],
+  "format": "1080x1920",
+  "duration": 15.5,
+  "music": "Forest Mist Whispers · Alejandro Magaña (Mixkit) · Mixkit Stock Music Free License",
+  "voice": "sem narração",
+  "photos": "vídeo do Pexels: 'A volunteer helping an elderly man stepping out of a car' (id 6646669, RDNE Stock project), licença Pexels",
+  "scenes": [
+    {
+      "title": "Abertura",
+      "description": "13 de novembro · Dia Mundial da Gentileza, sobre vídeo de um voluntário ajudando um senhor a sair do carro"
+    },
+    {
+      "title": "Mensagem",
+      "description": "Um gesto de cuidado pode transformar o dia de alguém."
+    },
+    {
+      "title": "Fecho",
+      "description": "Seja gentil hoje · logo · @gotadecura_artesanais"
+    }
+  ],
+  "hashtags": [],
+  "videoFrames": {
+    "note": "O render lê quadros em fotos/maos/ (apagados após o render). Para refazer, rode a partir desta pasta (html/story-03):",
+    "command": "mkdir -p fotos/maos && ffmpeg -ss 7.2 -t 10 -i fotos/gesto.mp4 -vf \"fps=30,scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920\" -q:v 5 fotos/maos/f%04d.jpg"
+  }
+}
