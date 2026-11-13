@@ -4,6 +4,10 @@ node_modules/
 # vídeos: telas, takes de voz, snapshots e renders (gerados), e sessão/chave local
 */build/
 */output/
+# renders dos reels e stories (a galeria guarda os vídeos; o render.mjs recria)
+/output/
+# quadros extraídos de vídeo de banco de imagens (comando de extração no meta.json do reel)
+html/*/fotos/maos/
 */.env
 
 # faixas baixadas só para escolher a trilha (a que vale está em musica/ e na LICENCA.md)
