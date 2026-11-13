@@ -46,7 +46,7 @@ export const ORDER_STATUS_DESCRIPTIONS: Record<string, string> = {
     'Disponibilidade dos produtos, entrega e valores confirmados com o cliente. Falta o pagamento.',
   [ORDER_STATUS.PAGO]: 'Pagamento recebido. O pedido já pode ser separado.',
   [ORDER_STATUS.PREPARADO]:
-    'Pacote pronto para envio: produtos conferidos e embalados, só falta despachar ou entregar ao cliente.',
+    'Etiquetas criadas. Pacote pronto para envio: produtos conferidos e embalados, só falta despachar ou entregar ao cliente.',
   [ORDER_STATUS.SEPARADO]:
     'Pacote despachado ao cliente ou separado à espera da retirada.',
   [ORDER_STATUS.EM_FINALIZACAO]:
