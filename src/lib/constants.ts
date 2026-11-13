@@ -47,7 +47,8 @@ export const ORDER_STATUS_DESCRIPTIONS: Record<string, string> = {
     'Produtos separados e embalados, prontos para retirada ou já enviados ao cliente.',
   [ORDER_STATUS.EM_FINALIZACAO]:
     'Entrega feita ou retirada combinada; só falta confirmar que o cliente recebeu tudo certo.',
-  [ORDER_STATUS.FINALIZADO]: 'Pedido concluído. Cliente atendido e nada pendente.',
+  [ORDER_STATUS.FINALIZADO]:
+    'Pedido concluído. Cliente atendido e nada pendente. Para finalizar, a entrega precisa estar confirmada.',
   [ORDER_STATUS.CANCELADO]:
     'Pedido encerrado sem ser atendido (desistência, falta de produto ou sem retorno do cliente).',
 }

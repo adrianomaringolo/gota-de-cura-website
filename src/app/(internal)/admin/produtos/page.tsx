@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
 import { format } from 'date-fns'
 import { AdminHeading, Td, Th, TableWrap } from '@/components/admin/AdminUI'
+import { StockHistoryDialog } from '@/components/admin/StockHistoryDialog'
 import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows } from '@/components/ui/Feedback'
@@ -17,6 +18,7 @@ export default function AdminProductsPage() {
   const [type, setType] = useState('all')
   const [exporting, setExporting] = useState(false)
   const [savingId, setSavingId] = useState<string | null>(null)
+  const [historyOf, setHistoryOf] = useState<ProductItem | null>(null)
 
   const load = async () => setProducts(await ProductsService.getProducts())
 
@@ -122,7 +124,7 @@ export default function AdminProductsPage() {
     <>
       <AdminHeading
         title="Disponibilidade e estoque"
-        description="Tirar a disponibilidade impede novos pedidos do produto, mas ele continua visível no site. As quantidades são só informativas."
+        description="Tirar a disponibilidade impede novos pedidos do produto, mas ele continua visível no site. A quantidade desce sozinha quando um pedido avisa a retirada de produtos (e volta numa devolução); o histórico de cada produto fica em “Histórico”."
         actions={
           <>
             <Button
@@ -198,6 +200,13 @@ export default function AdminProductsPage() {
                     >
                       Salvar
                     </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => setHistoryOf(product)}
+                    >
+                      Histórico
+                    </Button>
                   </div>
                 </Td>
                 <Td>
@@ -226,6 +235,8 @@ export default function AdminProductsPage() {
           </tbody>
         </TableWrap>
       )}
+
+      <StockHistoryDialog product={historyOf} onClose={() => setHistoryOf(null)} />
     </>
   )
 }

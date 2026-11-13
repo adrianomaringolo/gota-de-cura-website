@@ -190,6 +190,26 @@ export interface OrderComment {
   createdAt: string
 }
 
+/** One product line of a stock withdrawal or return. */
+export interface StockLine {
+  id: string
+  name: string
+  quantity: number
+}
+
+/** A withdrawal from, or return to, a product's stock; kept per product. */
+export interface StockMovement {
+  id: string
+  type: 'withdrawal' | 'return'
+  quantity: number
+  /** Stock right after this movement. */
+  balanceAfter: number
+  userName: string
+  createdAt: string
+  orderNumber: number
+  orderRef: string
+}
+
 export interface Order {
   id: string
   orderId: number
@@ -213,6 +233,8 @@ export interface Order {
   shippingCost?: number
   /** Free-form shipping details (carrier, tracking code, deal made), shown to the customer too. */
   shippingNotes?: string
+  /** Products taken out of stock for this order and not yet returned. */
+  stockWithdrawn?: StockLine[]
 }
 
 /**

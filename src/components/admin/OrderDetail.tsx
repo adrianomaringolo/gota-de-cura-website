@@ -29,6 +29,7 @@ import { DeliveryDialog } from './DeliveryDialog'
 import { DeliveryPill } from './DeliveryPill'
 import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
+import { OrderStockPanel } from './OrderStock'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
 /**
@@ -305,6 +306,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         <div className="space-y-4 print-none">
           <AssigneePicker order={order} onSaved={load} />
           <StatusChanger order={order} onSaved={load} />
+          <OrderStockPanel order={order} onSaved={load} />
           <ShippingPanel order={order} onSaved={load} />
         </div>
       </div>
@@ -500,6 +502,7 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
   const { user } = useLoggedUser()
   const [assignOpen, setAssignOpen] = useState(false)
   const [assignToMe, setAssignToMe] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
 
   useEffect(() => {
     setStatus(order.status)
@@ -550,7 +553,16 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
 
   return (
     <Panel className="p-5">
-      <h2 className="font-display text-lg font-semibold text-ink">Mudar status</h2>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="font-display text-lg font-semibold text-ink">Mudar status</h2>
+        <button
+          type="button"
+          onClick={() => setDetailsOpen(true)}
+          className="text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+        >
+          Detalhes
+        </button>
+      </div>
       <Select
         aria-label="Novo status"
         className="mt-3"
@@ -578,6 +590,29 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
       >
         Salvar status
       </Button>
+
+      <Dialog
+        open={detailsOpen}
+        onClose={() => setDetailsOpen(false)}
+        title="Etapas do pedido"
+        description="O que significa cada status."
+        footer={
+          <Button variant="ghost" onClick={() => setDetailsOpen(false)}>
+            Fechar
+          </Button>
+        }
+      >
+        <ul className="divide-y divide-line">
+          {ORDER_STATUS_OPTIONS.map((option) => (
+            <li key={option.value} className="py-3 first:pt-0 last:pb-0">
+              <StatusTag status={option.value} />
+              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
+                {ORDER_STATUS_DESCRIPTIONS[option.value]}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Dialog>
 
       <Dialog
         open={assignOpen}
