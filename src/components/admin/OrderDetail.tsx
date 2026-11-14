@@ -16,7 +16,7 @@ import {
   ORDER_STATUS_OPTIONS,
   orderStatusLabel,
 } from '@/lib/constants'
-import { formatCurrency, formatDateAndTime } from '@/lib/format'
+import { formatCurrency, formatDateAndTime, maskPhone } from '@/lib/format'
 import { useLoggedUser } from '@/lib/hooks'
 import { formatDuration } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
@@ -52,7 +52,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const [order, setOrder] = useState<Order | null | undefined>(undefined)
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
   const [editItemsOpen, setEditItemsOpen] = useState(false)
-  const [editPhoneOpen, setEditPhoneOpen] = useState(false)
+  const [editContactOpen, setEditContactOpen] = useState(false)
   const [duplicateOpen, setDuplicateOpen] = useState(false)
   const [duplicating, setDuplicating] = useState(false)
   const router = useRouter()
@@ -171,7 +171,16 @@ export function OrderDetail({ orderId }: { orderId: string }) {
             )}
           </div>
 
-          <p className="mt-3 font-display text-xl text-ink">{order.contactInfo.name}</p>
+          <p className="mt-3 flex flex-wrap items-baseline gap-x-3 font-display text-xl text-ink">
+            {order.contactInfo.name}
+            <button
+              type="button"
+              onClick={() => setEditContactOpen(true)}
+              className="print-none font-sans text-sm font-medium text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand"
+            >
+              Editar dados do cliente
+            </button>
+          </p>
           <dl className="mt-4 grid gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2">
             {[
               ['Feito em', formatDateAndTime(new Date(order.createdAt))],
@@ -190,13 +199,6 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                   ) : (
                     order.contactInfo.phone
                   )}
-                  <button
-                    type="button"
-                    onClick={() => setEditPhoneOpen(true)}
-                    className="print-none text-xs font-medium text-ink-soft underline underline-offset-4 hover:text-ink"
-                  >
-                    Editar
-                  </button>
                 </span>,
               ],
               ['E-mail', order.contactInfo.email || '—'],
@@ -394,10 +396,10 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           responsável e retiradas de estoque não, e nenhum e-mail é enviado.
         </p>
       </Dialog>
-      <PhoneDialog
+      <ContactDialog
         order={order}
-        open={editPhoneOpen}
-        onClose={() => setEditPhoneOpen(false)}
+        open={editContactOpen}
+        onClose={() => setEditContactOpen(false)}
         onSaved={load}
       />
       <DeliveryDialog
@@ -416,7 +418,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   )
 }
 
-function PhoneDialog({
+function ContactDialog({
   order,
   open,
   onClose,
@@ -427,26 +429,63 @@ function PhoneDialog({
   onClose: () => void
   onSaved: () => void
 }) {
-  const [phone, setPhone] = useState(order.contactInfo.phone)
+  const current = order.contactInfo
+  const [form, setForm] = useState({
+    name: current.name,
+    phone: current.phone,
+    email: current.email ?? '',
+    preferredContact: current.preferredContact ?? '',
+    observations: current.observations ?? '',
+  })
   const [saving, setSaving] = useState(false)
 
   useEffect(() => {
-    if (open) setPhone(order.contactInfo.phone)
-  }, [open, order.contactInfo.phone])
+    if (!open) return
+    setForm({
+      name: current.name,
+      phone: current.phone,
+      email: current.email ?? '',
+      preferredContact: current.preferredContact ?? '',
+      observations: current.observations ?? '',
+    })
+  }, [open, current])
 
-  const digits = phone.replace(/\D/g, '')
-  const invalid = digits.length < 10 || digits.length > 13
-  const unchanged = phone.trim() === order.contactInfo.phone
+  const set = (changes: Partial<typeof form>) =>
+    setForm((value) => ({ ...value, ...changes }))
+
+  const digits = form.phone.replace(/\D/g, '')
+  const errors = {
+    name: form.name.trim().length < 3 ? 'Informe o nome completo' : undefined,
+    phone:
+      digits.length < 10 || digits.length > 13 ? 'Informe o DDD e o número' : undefined,
+    email:
+      form.email.trim() && !/^\S+@\S+\.\S+$/.test(form.email.trim())
+        ? 'E-mail inválido'
+        : form.preferredContact === 'email' && !form.email.trim()
+          ? 'Informe o e-mail: é o contato preferido'
+          : undefined,
+  }
+  const invalid = Boolean(errors.name || errors.phone || errors.email)
 
   const save = async () => {
     setSaving(true)
     try {
-      await OrdersService.setPhone(order, phone.trim())
-      toast.success('Celular atualizado')
+      const { email: _email, observations: _observations, ...rest } = current
+      await OrdersService.updateContact(order, {
+        ...rest,
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        ...(form.email.trim() && { email: form.email.trim() }),
+        ...(form.preferredContact && {
+          preferredContact: form.preferredContact as 'whatsapp' | 'email',
+        }),
+        ...(form.observations.trim() && { observations: form.observations.trim() }),
+      })
+      toast.success('Dados do cliente atualizados')
       onClose()
       onSaved()
     } catch {
-      toast.error('Não foi possível salvar o celular')
+      toast.error('Não foi possível salvar os dados do cliente')
     } finally {
       setSaving(false)
     }
@@ -456,27 +495,57 @@ function PhoneDialog({
     <Dialog
       open={open}
       onClose={onClose}
-      title="Editar celular de contato"
-      size="sm"
+      title="Editar dados do cliente"
+      closeOnBackdrop={false}
       footer={
         <>
           <Button variant="ghost" onClick={onClose} disabled={saving}>
             Cancelar
           </Button>
-          <Button onClick={save} disabled={saving || invalid || unchanged}>
+          <Button onClick={save} disabled={saving || invalid}>
             {saving ? <Spinner className="h-4 w-4" /> : 'Salvar'}
           </Button>
         </>
       }
     >
-      <Input
-        label="Celular (com DDD)"
-        type="tel"
-        inputMode="tel"
-        value={phone}
-        onChange={(event) => setPhone(event.target.value)}
-        error={phone.trim() && invalid ? 'Informe o DDD e o número' : undefined}
-      />
+      <div className="space-y-4">
+        <Input
+          label="Nome"
+          value={form.name}
+          onChange={(event) => set({ name: event.target.value })}
+          error={errors.name}
+        />
+        <Input
+          label="Celular (com DDD)"
+          type="tel"
+          inputMode="tel"
+          value={form.phone}
+          onChange={(event) => set({ phone: maskPhone(event.target.value) })}
+          error={errors.phone}
+        />
+        <Input
+          label="E-mail"
+          type="email"
+          value={form.email}
+          onChange={(event) => set({ email: event.target.value })}
+          error={errors.email}
+        />
+        <Select
+          label="Prefere contato por"
+          value={form.preferredContact}
+          onChange={(event) => set({ preferredContact: event.target.value })}
+        >
+          <option value="">Não informado</option>
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">E-mail</option>
+        </Select>
+        <Textarea
+          label="Observações do cliente"
+          rows={3}
+          value={form.observations}
+          onChange={(event) => set({ observations: event.target.value })}
+        />
+      </div>
     </Dialog>
   )
 }

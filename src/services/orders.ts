@@ -298,10 +298,42 @@ export const OrdersService = {
     })
   },
 
-  async setPhone(order: Order, phone: string): Promise<void> {
+  /**
+   * Replaces the customer's contact details and records, in the comments, what
+   * changed — the same trail item and delivery edits leave.
+   */
+  async updateContact(order: Order, contact: ContactInfo): Promise<void> {
+    const user = UsersService.getStoredUser()
+    const before = order.contactInfo
+    const channel = (value?: string) =>
+      value === 'email' ? 'e-mail' : value === 'whatsapp' ? 'WhatsApp' : 'não informado'
+    const fields: [string, string, string][] = [
+      ['Nome', before.name, contact.name],
+      ['Celular', before.phone, contact.phone],
+      ['E-mail', before.email ?? '', contact.email ?? ''],
+      [
+        'Prefere contato por',
+        channel(before.preferredContact),
+        channel(contact.preferredContact),
+      ],
+      ['Observações', before.observations ?? '', contact.observations ?? ''],
+    ]
+    const changes = fields
+      .filter(([, from, to]) => from !== to)
+      .map(([label, from, to]) => `${label}: ${from || '—'} → ${to || '—'}`)
+    if (changes.length === 0) return
+
     await updateDoc(doc(ordersRef, order.id), {
-      'contactInfo.phone': phone,
+      contactInfo: contact,
       updatedAt: new Date().toISOString(),
+      comments: [
+        ...(order.comments || []),
+        {
+          userName: user?.name ?? '—',
+          comment: `Dados do cliente alterados — ${changes.join('; ')}`,
+          createdAt: new Date().toISOString(),
+        },
+      ],
     })
   },
 
