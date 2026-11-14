@@ -198,6 +198,40 @@ export const OrdersService = {
     return { orderNumber, orderRef: docRef.id }
   },
 
+  /**
+   * A new order identical to `order` (customer, items, delivery, coupon,
+   * shipping) but back at "Em espera". No notification e-mail goes out, and
+   * the history, comments, assignee and stock movements are not carried over.
+   */
+  async duplicateOrder(order: Order): Promise<{ orderNumber: number; orderRef: string }> {
+    const lastOrder = (await OrdersService.getOrders()).pop()
+    const orderNumber = lastOrder ? Number(lastOrder.orderId) + 1 : 0
+    const user = UsersService.getStoredUser()
+    const now = new Date().toISOString()
+
+    const docRef = await addDoc(ordersRef, {
+      items: order.items,
+      orderId: orderNumber,
+      coupon: order.coupon ?? '',
+      contactInfo: order.contactInfo,
+      ...(order.delivery && { delivery: order.delivery }),
+      status: ORDER_STATUS.EM_ESPERA,
+      createdAt: now,
+      locale: order.locale ?? 'pt-BR',
+      ...(order.shippingCost && { shippingCost: order.shippingCost }),
+      ...(order.shippingNotes && { shippingNotes: order.shippingNotes }),
+      comments: [
+        {
+          userName: user?.name ?? '—',
+          comment: `Pedido criado como cópia do pedido #${order.orderId}`,
+          createdAt: now,
+        },
+      ],
+    })
+
+    return { orderNumber, orderRef: docRef.id }
+  },
+
   async editOrderStatus(
     order: Order,
     newStatus: string,

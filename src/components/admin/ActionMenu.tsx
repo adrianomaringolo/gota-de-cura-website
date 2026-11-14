@@ -1,12 +1,13 @@
 'use client'
 
-import { MoreHorizontal } from 'lucide-react'
+import { ChevronDown, MoreHorizontal } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from 'buildgrid-ui'
+import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
 
 export type ActionMenuItem = {
@@ -14,6 +15,7 @@ export type ActionMenuItem = {
   onSelect: () => void
   disabled?: boolean
   danger?: boolean
+  icon?: ReactNode
 }
 
 /**
@@ -24,18 +26,28 @@ export type ActionMenuItem = {
 export function ActionMenu({
   items,
   label = 'Ações',
+  variant = 'icon',
 }: {
   items: ActionMenuItem[]
   label?: string
+  /** `button` shows the label with a chevron; `icon` is the compact "…" for table rows. */
+  variant?: 'icon' | 'button'
 }) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger
-        aria-label={label}
-        className="inline-grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:bg-canvas-sunk hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lift data-[state=open]:bg-canvas-sunk data-[state=open]:text-ink"
-      >
-        <MoreHorizontal className="h-5 w-5" aria-hidden="true" />
-      </DropdownMenuTrigger>
+      {variant === 'button' ? (
+        <DropdownMenuTrigger className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-canvas-sunk focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lift data-[state=open]:bg-canvas-sunk">
+          {label}
+          <ChevronDown className="h-4 w-4" aria-hidden="true" />
+        </DropdownMenuTrigger>
+      ) : (
+        <DropdownMenuTrigger
+          aria-label={label}
+          className="inline-grid h-9 w-9 place-items-center rounded-full text-ink-soft transition-colors hover:bg-canvas-sunk hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-lift data-[state=open]:bg-canvas-sunk data-[state=open]:text-ink"
+        >
+          <MoreHorizontal className="h-5 w-5" aria-hidden="true" />
+        </DropdownMenuTrigger>
+      )}
 
       <DropdownMenuContent
         align="end"
@@ -54,7 +66,10 @@ export function ActionMenu({
                 : 'text-ink focus:text-ink',
             )}
           >
-            {item.label}
+            <span className="flex items-center gap-2.5">
+              {item.icon}
+              {item.label}
+            </span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

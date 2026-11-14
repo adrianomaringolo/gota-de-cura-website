@@ -4,8 +4,10 @@ import { deliverySummary } from '@/lib/orders-delivery'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
+import { Copy, ExternalLink, Link2, MessageCircle, Printer } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
-import { Button, ButtonLink } from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
@@ -30,6 +32,7 @@ import { DeliveryPill } from './DeliveryPill'
 import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
 import { OrderStockPanel } from './OrderStock'
+import { ActionMenu } from './ActionMenu'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
 /**
@@ -50,6 +53,9 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   const [tab, setTab] = useState<'comments' | 'history'>('comments')
   const [editItemsOpen, setEditItemsOpen] = useState(false)
   const [editPhoneOpen, setEditPhoneOpen] = useState(false)
+  const [duplicateOpen, setDuplicateOpen] = useState(false)
+  const [duplicating, setDuplicating] = useState(false)
+  const router = useRouter()
   const [editDeliveryOpen, setEditDeliveryOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -83,6 +89,19 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   // The page the customer sees, in the language they ordered in.
   const whatsappUrl = whatsappUrlFor(order.contactInfo.phone, isMobile)
   const publicUrl = publicOrderUrl(order.id, order.locale ?? 'pt-BR')
+  const duplicate = async () => {
+    setDuplicating(true)
+    try {
+      const { orderNumber, orderRef } = await OrdersService.duplicateOrder(order)
+      toast.success(`Pedido #${orderNumber} criado`)
+      setDuplicateOpen(false)
+      router.push(`/admin/pedidos/${orderRef}`)
+    } catch {
+      toast.error('Não foi possível duplicar o pedido')
+    } finally {
+      setDuplicating(false)
+    }
+  }
   const copyPublicLink = () =>
     navigator.clipboard.writeText(publicUrl).then(
       () => toast.success('Link copiado'),
@@ -98,34 +117,41 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         >
           ← Voltar aos pedidos
         </Link>
-        <div className="flex flex-wrap gap-2">
-          {whatsappUrl && (
-            <ButtonLink
-              variant="outline"
-              size="sm"
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WhatsApp ↗
-            </ButtonLink>
-          )}
-          <Button variant="outline" size="sm" onClick={copyPublicLink}>
-            Copiar link do cliente
-          </Button>
-          <ButtonLink
-            variant="outline"
-            size="sm"
-            href={publicUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver página pública ↗
-          </ButtonLink>
-          <Button variant="outline" size="sm" onClick={() => window.print()}>
-            Imprimir
-          </Button>
-        </div>
+        <ActionMenu
+          variant="button"
+          items={[
+            ...(whatsappUrl
+              ? [
+                  {
+                    label: 'Abrir WhatsApp',
+                    icon: <MessageCircle className="h-4 w-4" aria-hidden="true" />,
+                    onSelect: () =>
+                      window.open(whatsappUrl, '_blank', 'noopener,noreferrer'),
+                  },
+                ]
+              : []),
+            {
+              label: 'Copiar link do cliente',
+              icon: <Link2 className="h-4 w-4" aria-hidden="true" />,
+              onSelect: copyPublicLink,
+            },
+            {
+              label: 'Ver página pública',
+              icon: <ExternalLink className="h-4 w-4" aria-hidden="true" />,
+              onSelect: () => window.open(publicUrl, '_blank', 'noopener,noreferrer'),
+            },
+            {
+              label: 'Imprimir',
+              icon: <Printer className="h-4 w-4" aria-hidden="true" />,
+              onSelect: () => window.print(),
+            },
+            {
+              label: 'Duplicar pedido',
+              icon: <Copy className="h-4 w-4" aria-hidden="true" />,
+              onSelect: () => setDuplicateOpen(true),
+            },
+          ]}
+        />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
@@ -134,7 +160,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
             <h1 className="font-display text-2xl font-semibold text-ink sm:text-3xl">
               Pedido #{order.orderId}
             </h1>
-            <StatusTag status={order.status} />
+            <StatusTag status={order.status} size="lg" />
             <DeliveryPill delivery={order.delivery} />
             {order.locale === 'en' && <Badge tone="lab">Cliente em inglês</Badge>}
             {order.contactInfo.preferredContact && (
@@ -342,6 +368,32 @@ export function OrderDetail({ orderId }: { orderId: string }) {
           )}
         </div>
       </div>
+      <Dialog
+        open={duplicateOpen}
+        onClose={() => setDuplicateOpen(false)}
+        title="Duplicar pedido"
+        description={`Criar um novo pedido igual ao #${order.orderId}, com o status Em espera?`}
+        size="sm"
+        footer={
+          <>
+            <Button
+              variant="ghost"
+              onClick={() => setDuplicateOpen(false)}
+              disabled={duplicating}
+            >
+              Cancelar
+            </Button>
+            <Button onClick={duplicate} disabled={duplicating}>
+              {duplicating ? <Spinner className="h-4 w-4" /> : 'Duplicar'}
+            </Button>
+          </>
+        }
+      >
+        <p className="text-sm text-ink-soft">
+          Cliente, produtos, entrega, cupom e frete são copiados. Comentários, histórico,
+          responsável e retiradas de estoque não, e nenhum e-mail é enviado.
+        </p>
+      </Dialog>
       <PhoneDialog
         order={order}
         open={editPhoneOpen}
