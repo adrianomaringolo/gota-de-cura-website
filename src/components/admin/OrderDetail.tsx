@@ -4,7 +4,14 @@ import { deliverySummary } from '@/lib/orders-delivery'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { Copy, ExternalLink, Link2, MessageCircle, Printer } from 'lucide-react'
+import {
+  Copy,
+  ExternalLink,
+  Link2,
+  MessageCircle,
+  Printer,
+  TriangleAlert,
+} from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { Button } from '@/components/ui/Button'
@@ -32,6 +39,7 @@ import { DeliveryPill } from './DeliveryPill'
 import { OrderItemsDialog } from './OrderItemsDialog'
 import { AssigneePicker } from './AssigneePicker'
 import { OrderStockPanel } from './OrderStock'
+import { StockService } from '@/services/stock'
 import { ActionMenu } from './ActionMenu'
 import { Panel, StatusTag, Td, Th, TableWrap } from './AdminUI'
 
@@ -74,6 +82,16 @@ export function OrderDetail({ orderId }: { orderId: string }) {
   useEffect(() => {
     void load()
   }, [load])
+
+  // Stock per product, re-read whenever the order reloads (a stock withdrawal
+  // saves the order, which reloads it).
+  const [stock, setStock] = useState<Record<string, number>>({})
+  useEffect(() => {
+    if (!order) return
+    StockService.getStock([...new Set(order.items.map((item) => item.id))])
+      .then(setStock)
+      .catch(() => undefined)
+  }, [order])
 
   if (order === undefined) return <LoadingRows rows={5} />
   if (order === null) {
@@ -262,6 +280,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                     <div className="min-w-0">
                       <p className="font-medium text-ink">{item.name}</p>
                       <p className="text-xs text-ink-muted">{item.type}</p>
+                      <StockNote amount={stock[item.id]} />
                     </div>
                     <p className="shrink-0 font-semibold tabular-nums text-ink">
                       {formatCurrency(item.price * (item.amount || 0))}
@@ -291,6 +310,7 @@ export function OrderDetail({ orderId }: { orderId: string }) {
                       <Td>
                         <span className="font-medium">{item.name}</span>
                         <span className="block text-xs text-ink-muted">{item.type}</span>
+                        <StockNote amount={stock[item.id]} />
                       </Td>
                       <Td className="text-right tabular-nums">
                         {formatCurrency(item.price)}
@@ -415,6 +435,28 @@ export function OrderDetail({ orderId }: { orderId: string }) {
         onSaved={load}
       />
     </>
+  )
+}
+
+const LOW_STOCK = 5
+
+/** "Em estoque: N" under a product, with a warning when it runs low. */
+function StockNote({ amount }: { amount: number | undefined }) {
+  if (amount === undefined) return null
+  const low = amount < LOW_STOCK
+
+  return (
+    <p
+      className={
+        low
+          ? 'mt-0.5 flex items-center gap-1 text-xs font-semibold text-warning print-none'
+          : 'mt-0.5 text-xs text-ink-muted print-none'
+      }
+    >
+      {low && <TriangleAlert className="h-3.5 w-3.5" aria-hidden="true" />}
+      {amount === 0 ? 'Sem estoque' : `Em estoque: ${amount}`}
+      {low && amount > 0 && <span className="sr-only"> (estoque baixo)</span>}
+    </p>
   )
 }
 
