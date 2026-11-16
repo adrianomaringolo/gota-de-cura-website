@@ -216,10 +216,48 @@ export function StatusTag({
   )
 }
 
+/** Status pills never offer the two closed statuses — those have their own view, outside this filter. */
+const OPEN_STATUS_OPTIONS = ORDER_STATUS_OPTIONS.filter(
+  (option) =>
+    option.value !== ORDER_STATUS.FINALIZADO && option.value !== ORDER_STATUS.CANCELADO,
+)
+
+function FilterPill({
+  active,
+  onClick,
+  className,
+  ringClassName = 'ring-current',
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  className: string
+  ringClassName?: string
+  children: ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={cn(
+        'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap transition-opacity',
+        className,
+        active
+          ? cn('ring-2 ring-offset-1', ringClassName)
+          : 'opacity-70 hover:opacity-100',
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+
 /**
- * One pill per status present in `counts`, each showing how many orders are
- * in it; clicking toggles that status as the active filter. An "Todos" pill
- * clears it back to the caller's default view.
+ * One pill per open status present in `counts` (finalizado/cancelado are
+ * never offered here), each showing how many orders are in it; clicking
+ * toggles that status as the active filter. An "Todos" pill clears it back
+ * to the caller's default view.
  */
 export function StatusFilterPills({
   counts,
@@ -236,43 +274,82 @@ export function StatusFilterPills({
 }) {
   return (
     <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por status">
-      <button
-        type="button"
+      <FilterPill
+        active={value === ''}
         onClick={() => onChange('')}
-        aria-pressed={value === ''}
-        className={cn(
-          'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap transition-opacity',
-          'bg-canvas-sunk text-ink-soft',
-          value === ''
-            ? 'ring-2 ring-ink/40 ring-offset-1'
-            : 'opacity-70 hover:opacity-100',
-        )}
+        className="bg-canvas-sunk text-ink-soft"
+        ringClassName="ring-ink/40"
       >
         {totalLabel}
         <span className="tabular-nums opacity-70">{totalCount}</span>
-      </button>
-      {ORDER_STATUS_OPTIONS.filter((option) => counts[option.value]).map((option) => {
+      </FilterPill>
+      {OPEN_STATUS_OPTIONS.filter((option) => counts[option.value]).map((option) => {
         const meta = STATUS_META[option.value]
         const Icon = meta.icon
         const active = value === option.value
         return (
-          <button
+          <FilterPill
             key={option.value}
-            type="button"
+            active={active}
             onClick={() => onChange(active ? '' : option.value)}
-            aria-pressed={active}
-            className={cn(
-              'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap transition-opacity',
-              meta.color,
-              active
-                ? 'ring-2 ring-current ring-offset-1'
-                : 'opacity-70 hover:opacity-100',
-            )}
+            className={meta.color}
           >
             <Icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
             {meta.label}
             <span className="tabular-nums opacity-70">{counts[option.value]}</span>
-          </button>
+          </FilterPill>
+        )
+      })}
+    </div>
+  )
+}
+
+/**
+ * One pill per responsável present in `entries`, each showing how many
+ * orders are assigned to them; clicking toggles them as the active filter.
+ * An "Todos" pill clears it back to everyone.
+ */
+export function AssigneeFilterPills({
+  entries,
+  totalLabel,
+  totalCount,
+  value,
+  onChange,
+}: {
+  entries: { key: string; name: string; count: number }[]
+  totalLabel: string
+  totalCount: number
+  value: string
+  onChange: (key: string) => void
+}) {
+  return (
+    <div
+      className="flex flex-wrap gap-2"
+      role="group"
+      aria-label="Filtrar por responsável"
+    >
+      <FilterPill
+        active={value === ''}
+        onClick={() => onChange('')}
+        className="bg-canvas-sunk text-ink-soft"
+        ringClassName="ring-ink/40"
+      >
+        {totalLabel}
+        <span className="tabular-nums opacity-70">{totalCount}</span>
+      </FilterPill>
+      {entries.map((entry) => {
+        const active = value === entry.key
+        return (
+          <FilterPill
+            key={entry.key}
+            active={active}
+            onClick={() => onChange(active ? '' : entry.key)}
+            className="bg-canvas-sunk text-ink-soft"
+            ringClassName="ring-ink/40"
+          >
+            {entry.name}
+            <span className="tabular-nums opacity-70">{entry.count}</span>
+          </FilterPill>
         )
       })}
     </div>

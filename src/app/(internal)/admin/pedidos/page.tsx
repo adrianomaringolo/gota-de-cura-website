@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
 import {
   AdminHeading,
+  AssigneeFilterPills,
   StatusFilterPills,
   StatusTag,
   Td,
@@ -88,9 +89,16 @@ function Assignee({ order }: { order: Order }) {
 const isActive = (order: Order) =>
   order.status !== ORDER_STATUS.FINALIZADO && order.status !== ORDER_STATUS.CANCELADO
 
+/** Orders with no one explicitly assigned share this key in the person filter. */
+const UNASSIGNED = '__sem-responsavel__'
+
+const assigneeKey = (order: Order) => order.assignee?.id ?? UNASSIGNED
+const assigneeName = (order: Order) => order.assignee?.name ?? 'Sem responsável'
+
 export default function AdminOrdersPage() {
   const [allOrders, setAllOrders] = useState<Order[] | null>(null)
   const [status, setStatus] = useState('')
+  const [assignee, setAssignee] = useState('')
 
   const load = useCallback(async () => {
     setAllOrders(null)
@@ -101,20 +109,45 @@ export default function AdminOrdersPage() {
     void load()
   }, [load])
 
+  const openOrders = useMemo(() => (allOrders ?? []).filter(isActive), [allOrders])
+
+  const matchesAssignee = useCallback(
+    (order: Order) => !assignee || assigneeKey(order) === assignee,
+    [assignee],
+  )
+  const matchesStatus = useCallback(
+    (order: Order) => !status || order.status === status,
+    [status],
+  )
+
   const statusCounts = useMemo(() => {
     const counts: Partial<Record<string, number>> = {}
-    for (const order of allOrders ?? []) {
+    for (const order of openOrders.filter(matchesAssignee)) {
       counts[order.status] = (counts[order.status] ?? 0) + 1
     }
     return counts
-  }, [allOrders])
+  }, [openOrders, matchesAssignee])
 
-  const orders = useMemo(() => {
-    if (!allOrders) return null
-    return status
-      ? allOrders.filter((order) => order.status === status)
-      : allOrders.filter(isActive)
-  }, [allOrders, status])
+  const assigneeEntries = useMemo(() => {
+    const entries = new Map<string, { key: string; name: string; count: number }>()
+    for (const order of openOrders.filter(matchesStatus)) {
+      const key = assigneeKey(order)
+      const current = entries.get(key)
+      if (current) current.count += 1
+      else entries.set(key, { key, name: assigneeName(order), count: 1 })
+    }
+    const unassigned = entries.get(UNASSIGNED)
+    entries.delete(UNASSIGNED)
+    const named = [...entries.values()].sort((a, b) =>
+      a.name.localeCompare(b.name, 'pt-BR'),
+    )
+    return unassigned ? [...named, unassigned] : named
+  }, [openOrders, matchesStatus])
+
+  const orders = useMemo(
+    () => (allOrders ? openOrders.filter(matchesStatus).filter(matchesAssignee) : null),
+    [allOrders, openOrders, matchesStatus, matchesAssignee],
+  )
 
   return (
     <>
@@ -124,13 +157,20 @@ export default function AdminOrdersPage() {
       />
 
       {allOrders && (
-        <div className="mb-6">
+        <div className="mb-6 space-y-3">
           <StatusFilterPills
             counts={statusCounts}
             totalLabel="Todos (não finalizados)"
-            totalCount={allOrders.filter(isActive).length}
+            totalCount={openOrders.filter(matchesAssignee).length}
             value={status}
             onChange={setStatus}
+          />
+          <AssigneeFilterPills
+            entries={assigneeEntries}
+            totalLabel="Todos os responsáveis"
+            totalCount={openOrders.filter(matchesStatus).length}
+            value={assignee}
+            onChange={setAssignee}
           />
         </div>
       )}
