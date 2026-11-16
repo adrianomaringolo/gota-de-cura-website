@@ -2,13 +2,19 @@
 
 import { DeliveryPill } from '@/components/admin/DeliveryPill'
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
-import { AdminHeading, StatusTag, Td, Th, TableWrap } from '@/components/admin/AdminUI'
+import {
+  AdminHeading,
+  StatusFilterPills,
+  StatusTag,
+  Td,
+  Th,
+  TableWrap,
+} from '@/components/admin/AdminUI'
 import { UserAvatar } from '@/components/admin/UserAvatar'
-import { Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
-import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
+import { ORDER_STATUS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
 import { formatDuration, timeInCurrentStatus } from '@/lib/order-kpis'
 import type { Order } from '@/lib/types'
@@ -78,49 +84,56 @@ function Assignee({ order }: { order: Order }) {
   )
 }
 
+/** Orders still in progress: not finalized, not canceled. */
+const isActive = (order: Order) =>
+  order.status !== ORDER_STATUS.FINALIZADO && order.status !== ORDER_STATUS.CANCELADO
+
 export default function AdminOrdersPage() {
-  const [orders, setOrders] = useState<Order[] | null>(null)
+  const [allOrders, setAllOrders] = useState<Order[] | null>(null)
   const [status, setStatus] = useState('')
 
-  const load = useCallback(async (statusFilter: string) => {
-    setOrders(null)
-    const result = await OrdersService.getOrders(statusFilter)
-    setOrders(
-      statusFilter
-        ? result
-        : result.filter(
-            (order) =>
-              order.status !== ORDER_STATUS.FINALIZADO &&
-              order.status !== ORDER_STATUS.CANCELADO,
-          ),
-    )
+  const load = useCallback(async () => {
+    setAllOrders(null)
+    setAllOrders(await OrdersService.getOrders())
   }, [])
 
   useEffect(() => {
-    void load(status)
-  }, [load, status])
+    void load()
+  }, [load])
+
+  const statusCounts = useMemo(() => {
+    const counts: Partial<Record<string, number>> = {}
+    for (const order of allOrders ?? []) {
+      counts[order.status] = (counts[order.status] ?? 0) + 1
+    }
+    return counts
+  }, [allOrders])
+
+  const orders = useMemo(() => {
+    if (!allOrders) return null
+    return status
+      ? allOrders.filter((order) => order.status === status)
+      : allOrders.filter(isActive)
+  }, [allOrders, status])
 
   return (
     <>
       <AdminHeading
         title="Pedidos"
         description="Pedidos feitos pelo site. Sem filtro, a lista mostra apenas os que ainda estão em andamento."
-        actions={
-          <Select
-            aria-label="Filtrar por status"
-            value={status}
-            onChange={(event) => setStatus(event.target.value)}
-            className="w-64"
-          >
-            <option value="">Todos (não finalizados)</option>
-            {ORDER_STATUS_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </Select>
-        }
       />
+
+      {allOrders && (
+        <div className="mb-6">
+          <StatusFilterPills
+            counts={statusCounts}
+            totalLabel="Todos (não finalizados)"
+            totalCount={allOrders.filter(isActive).length}
+            value={status}
+            onChange={setStatus}
+          />
+        </div>
+      )}
 
       {orders === null ? (
         <LoadingRows rows={6} />

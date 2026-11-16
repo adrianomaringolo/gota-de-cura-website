@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/cn'
-import { ORDER_STATUS } from '@/lib/constants'
+import { ORDER_STATUS, ORDER_STATUS_OPTIONS } from '@/lib/constants'
 
 export function AdminHeading({
   title,
@@ -213,5 +213,68 @@ export function StatusTag({
       />
       {label ?? meta.label}
     </span>
+  )
+}
+
+/**
+ * One pill per status present in `counts`, each showing how many orders are
+ * in it; clicking toggles that status as the active filter. An "Todos" pill
+ * clears it back to the caller's default view.
+ */
+export function StatusFilterPills({
+  counts,
+  totalLabel,
+  totalCount,
+  value,
+  onChange,
+}: {
+  counts: Partial<Record<string, number>>
+  totalLabel: string
+  totalCount: number
+  value: string
+  onChange: (status: string) => void
+}) {
+  return (
+    <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por status">
+      <button
+        type="button"
+        onClick={() => onChange('')}
+        aria-pressed={value === ''}
+        className={cn(
+          'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap transition-opacity',
+          'bg-canvas-sunk text-ink-soft',
+          value === ''
+            ? 'ring-2 ring-ink/40 ring-offset-1'
+            : 'opacity-70 hover:opacity-100',
+        )}
+      >
+        {totalLabel}
+        <span className="tabular-nums opacity-70">{totalCount}</span>
+      </button>
+      {ORDER_STATUS_OPTIONS.filter((option) => counts[option.value]).map((option) => {
+        const meta = STATUS_META[option.value]
+        const Icon = meta.icon
+        const active = value === option.value
+        return (
+          <button
+            key={option.value}
+            type="button"
+            onClick={() => onChange(active ? '' : option.value)}
+            aria-pressed={active}
+            className={cn(
+              'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-semibold whitespace-nowrap transition-opacity',
+              meta.color,
+              active
+                ? 'ring-2 ring-current ring-offset-1'
+                : 'opacity-70 hover:opacity-100',
+            )}
+          >
+            <Icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
+            {meta.label}
+            <span className="tabular-nums opacity-70">{counts[option.value]}</span>
+          </button>
+        )
+      })}
+    </div>
   )
 }
