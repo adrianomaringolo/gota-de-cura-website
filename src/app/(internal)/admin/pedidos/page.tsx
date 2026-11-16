@@ -4,6 +4,7 @@ import { DeliveryPill } from '@/components/admin/DeliveryPill'
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { format } from 'date-fns'
+import { useLocalStorage } from 'buildgrid-ui'
 import {
   AdminHeading,
   AssigneeFilterPills,
@@ -95,10 +96,13 @@ const UNASSIGNED = '__sem-responsavel__'
 const assigneeKey = (order: Order) => order.assignee?.id ?? UNASSIGNED
 const assigneeName = (order: Order) => order.assignee?.name ?? 'Sem responsável'
 
+/** Keeps the chosen responsável filter across visits to the orders list. */
+const ASSIGNEE_FILTER_KEY = 'admin-pedidos-filtro-responsavel'
+
 export default function AdminOrdersPage() {
   const [allOrders, setAllOrders] = useState<Order[] | null>(null)
   const [status, setStatus] = useState('')
-  const [assignee, setAssignee] = useState('')
+  const [assignee, setAssignee] = useLocalStorage(ASSIGNEE_FILTER_KEY, '')
 
   const load = useCallback(async () => {
     setAllOrders(null)
