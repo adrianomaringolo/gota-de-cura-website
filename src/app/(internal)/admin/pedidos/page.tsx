@@ -15,6 +15,7 @@ import {
   TableWrap,
 } from '@/components/admin/AdminUI'
 import { UserAvatar } from '@/components/admin/UserAvatar'
+import { Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows } from '@/components/ui/Feedback'
 import { ORDER_STATUS } from '@/lib/constants'
 import { formatCurrency } from '@/lib/format'
@@ -90,6 +91,14 @@ function Assignee({ order }: { order: Order }) {
 const isActive = (order: Order) =>
   order.status !== ORDER_STATUS.FINALIZADO && order.status !== ORDER_STATUS.CANCELADO
 
+/** The top dropdown's three buckets: open orders (every non-closed status), or one of the two closed ones. */
+const ABERTOS = 'abertos'
+const BUCKET_OPTIONS = [
+  { value: ABERTOS, label: 'Pedidos abertos' },
+  { value: ORDER_STATUS.FINALIZADO, label: 'Finalizados' },
+  { value: ORDER_STATUS.CANCELADO, label: 'Cancelados' },
+]
+
 /** Orders with no one explicitly assigned share this key in the person filter. */
 const UNASSIGNED = '__sem-responsavel__'
 
@@ -101,6 +110,7 @@ const ASSIGNEE_FILTER_KEY = 'admin-pedidos-filtro-responsavel'
 
 export default function AdminOrdersPage() {
   const [allOrders, setAllOrders] = useState<Order[] | null>(null)
+  const [bucket, setBucket] = useState<string>(ABERTOS)
   const [status, setStatus] = useState('')
   const [assignee, setAssignee] = useLocalStorage(ASSIGNEE_FILTER_KEY, '')
 
@@ -113,7 +123,17 @@ export default function AdminOrdersPage() {
     void load()
   }, [load])
 
-  const openOrders = useMemo(() => (allOrders ?? []).filter(isActive), [allOrders])
+  const changeBucket = (value: string) => {
+    setBucket(value)
+    setStatus('')
+  }
+
+  const pool = useMemo(() => {
+    if (!allOrders) return []
+    return bucket === ABERTOS
+      ? allOrders.filter(isActive)
+      : allOrders.filter((order) => order.status === bucket)
+  }, [allOrders, bucket])
 
   const matchesAssignee = useCallback(
     (order: Order) => !assignee || assigneeKey(order) === assignee,
@@ -126,15 +146,15 @@ export default function AdminOrdersPage() {
 
   const statusCounts = useMemo(() => {
     const counts: Partial<Record<string, number>> = {}
-    for (const order of openOrders.filter(matchesAssignee)) {
+    for (const order of pool.filter(matchesAssignee)) {
       counts[order.status] = (counts[order.status] ?? 0) + 1
     }
     return counts
-  }, [openOrders, matchesAssignee])
+  }, [pool, matchesAssignee])
 
   const assigneeEntries = useMemo(() => {
     const entries = new Map<string, { key: string; name: string; count: number }>()
-    for (const order of openOrders.filter(matchesStatus)) {
+    for (const order of pool.filter(matchesStatus)) {
       const key = assigneeKey(order)
       const current = entries.get(key)
       if (current) current.count += 1
@@ -146,33 +166,49 @@ export default function AdminOrdersPage() {
       a.name.localeCompare(b.name, 'pt-BR'),
     )
     return unassigned ? [...named, unassigned] : named
-  }, [openOrders, matchesStatus])
+  }, [pool, matchesStatus])
 
   const orders = useMemo(
-    () => (allOrders ? openOrders.filter(matchesStatus).filter(matchesAssignee) : null),
-    [allOrders, openOrders, matchesStatus, matchesAssignee],
+    () => (allOrders ? pool.filter(matchesStatus).filter(matchesAssignee) : null),
+    [allOrders, pool, matchesStatus, matchesAssignee],
   )
 
   return (
     <>
       <AdminHeading
         title="Pedidos"
-        description="Pedidos feitos pelo site. Sem filtro, a lista mostra apenas os que ainda estão em andamento."
+        description="Pedidos feitos pelo site."
+        actions={
+          <Select
+            aria-label="Filtrar por situação"
+            value={bucket}
+            onChange={(event) => changeBucket(event.target.value)}
+            className="w-56"
+          >
+            {BUCKET_OPTIONS.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </Select>
+        }
       />
 
       {allOrders && (
         <div className="mb-6 space-y-3">
-          <StatusFilterPills
-            counts={statusCounts}
-            totalLabel="Todos (não finalizados)"
-            totalCount={openOrders.filter(matchesAssignee).length}
-            value={status}
-            onChange={setStatus}
-          />
+          {bucket === ABERTOS && (
+            <StatusFilterPills
+              counts={statusCounts}
+              totalLabel="Todos"
+              totalCount={pool.filter(matchesAssignee).length}
+              value={status}
+              onChange={setStatus}
+            />
+          )}
           <AssigneeFilterPills
             entries={assigneeEntries}
             totalLabel="Todos os responsáveis"
-            totalCount={openOrders.filter(matchesStatus).length}
+            totalCount={pool.filter(matchesStatus).length}
             value={assignee}
             onChange={setAssignee}
           />
