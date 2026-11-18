@@ -13,6 +13,20 @@ import { SITE } from '@/lib/site'
 import type { Order } from '@/lib/types'
 import { couponDiscount, OrdersService, orderTotal } from '@/services/orders'
 
+/** How the order will reach the customer, in their own language; falls back to the legacy city/CEP fields on older orders. */
+function deliveryAddress(order: Order, t: (key: string) => string): string {
+  const { delivery, contactInfo } = order
+  if (delivery?.method === 'pickup') return t('pickup')
+  if (delivery?.method === 'shipping') {
+    const extra = delivery.complement ? ` — ${delivery.complement}` : ''
+    return `${delivery.street}, ${delivery.number}${extra}, ${delivery.neighborhood}, ${delivery.city}/${delivery.state} — ${t('zipcodeLabel')} ${delivery.zipcode}`
+  }
+  if (contactInfo.city) {
+    return `${contactInfo.city} — ${t('zipcodeLabel')} ${contactInfo.zipcode ?? '—'}`
+  }
+  return '—'
+}
+
 export function OrderStatus({ orderRef }: { orderRef: string }) {
   const t = useTranslations('orderStatus')
   const locale = useLocale()
@@ -98,6 +112,23 @@ export function OrderStatus({ orderRef }: { orderRef: string }) {
           })}
         </p>
       </div>
+
+      <h2 className="mt-10 mb-4 font-display text-xl font-semibold text-ink">
+        {t('customerDetails')}
+      </h2>
+      <dl className="grid gap-x-8 gap-y-1.5 text-sm sm:grid-cols-2">
+        {[
+          [t('name'), order.contactInfo.name],
+          [t('phone'), order.contactInfo.phone],
+          ...(order.contactInfo.email ? [[t('email'), order.contactInfo.email]] : []),
+          [t('delivery'), deliveryAddress(order, t)],
+        ].map(([label, value]) => (
+          <div key={label} className="flex gap-2">
+            <dt className="shrink-0 text-ink-muted">{label}:</dt>
+            <dd className="min-w-0 break-words text-ink">{value}</dd>
+          </div>
+        ))}
+      </dl>
 
       <h2 className="mt-10 mb-4 font-display text-xl font-semibold text-ink">
         {t('products')}
