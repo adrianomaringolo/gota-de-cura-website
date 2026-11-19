@@ -83,6 +83,7 @@ export function UserFormDialog({
     <Dialog
       open={open}
       onClose={onClose}
+      closeOnBackdrop={false}
       title={editing ? `Editar ${editing.name || editing.login}` : 'Novo usuário'}
       description={
         editing

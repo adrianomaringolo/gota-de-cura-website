@@ -70,6 +70,7 @@ export function CromatografiaFormDialog({
     <Dialog
       open={open}
       onClose={onClose}
+      closeOnBackdrop={false}
       title={editing ? 'Editar cromatografia' : 'Nova cromatografia'}
       footer={
         <>

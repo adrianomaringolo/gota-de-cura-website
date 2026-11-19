@@ -64,6 +64,7 @@ export function VisitFormDialog({
     <Dialog
       open={open}
       onClose={onClose}
+      closeOnBackdrop={false}
       title={editing ? 'Editar visita' : 'Nova visita'}
       footer={
         <>

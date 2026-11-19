@@ -109,6 +109,7 @@ export default function AdminCouponsPage() {
         open={open}
         onClose={() => setOpen(false)}
         title="Novo cupom"
+        closeOnBackdrop={false}
         description="Deixe as datas em branco para um cupom sem prazo."
         footer={
           <>

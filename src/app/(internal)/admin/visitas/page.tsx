@@ -232,6 +232,7 @@ function ThankEmailDialog({ open, onClose }: { open: boolean; onClose: () => voi
       open={open}
       onClose={onClose}
       title="E-mail de agradecimento"
+      closeOnBackdrop={false}
       description="Envia o texto padrão de agradecimento pela visita. O formulário fica aberto para o próximo visitante."
       footer={
         <>
