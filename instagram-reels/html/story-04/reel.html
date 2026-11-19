@@ -1,0 +1,72 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,600;1,500&family=Archivo:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--roxo:#503484;--noite:#291945;--lilas:#dacbf9;--serif:'Petrona',serif;--sans:'Archivo',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--noite)}
+body{font-family:var(--sans);color:#fff;position:relative}
+.abs{position:absolute}
+#v{position:absolute;inset:0;width:1080px;height:1920px;object-fit:cover;transform-origin:50% 50%}
+#tint{position:absolute;inset:0;background:linear-gradient(180deg,#ffffff,#fff8ec 60%,#fffdf8);opacity:0}
+#glow{position:absolute;inset:0;background:radial-gradient(ellipse 60% 34% at 50% 50%,rgba(255,214,130,.55),rgba(255,214,130,0) 70%);opacity:0}
+#end{position:absolute;inset:0;opacity:0}
+.capx{position:absolute;left:80px;right:80px;text-align:center;font-weight:600;font-size:60px;line-height:1.3;top:1120px;text-wrap:balance;text-shadow:0 2px 20px rgba(20,10,40,.6)}
+</style></head><body>
+<video id="v" src="video/lima.mp4" muted playsinline preload="auto"></video>
+<div id="tint"></div><div id="glow"></div>
+<div id="end">
+  <div class="abs" id="halo" style="left:190px;top:400px;width:700px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,236,190,.55) 55%,rgba(255,236,190,0));opacity:0"></div>
+  <div class="abs" id="lg" style="left:160px;top:400px;width:760px;height:747px">
+    <img class="abs" id="mark" src="../../../instagram-posts/assets/logos/logo-vertical.png" style="left:0;top:0;width:760px;clip-path:inset(0 0 36.5% 0)">
+    <img class="abs" id="txt" src="../../../instagram-posts/assets/logos/logo-vertical.png" style="left:0;top:0;width:760px;clip-path:inset(63.5% 0 0 0)">
+  </div>
+  <div class="abs" id="u" style="left:80px;right:80px;top:1180px;text-align:center;font-weight:700;font-size:56px;color:var(--noite)">gotadecura.com.br</div>
+  <div class="abs" id="a" style="left:80px;right:80px;top:1260px;text-align:center;font-weight:600;font-size:42px;color:var(--roxo)">@gotadecura_artesanais</div>
+</div>
+<script src="timeline.js"></script>
+<script>
+const TL=window.TL,S=TL.scenes[0];
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const eo=t=>1-Math.pow(1-clamp(t),3);
+const $=id=>document.getElementById(id);
+const B0=7.8,B1=9.8; // rampa do desfoque
+function setWords(el,t,words){
+  if(!el.dataset.built){el.innerHTML=words.map(w=>`<span>${w.w}</span>`).join(' ');el.dataset.built=1}
+  [...el.children].forEach((sp,i)=>{const w=words[i];const on=t>=w.start;sp.style.opacity=on?1:.4;sp.style.color=(on&&t<w.end+.3)?'#dacbf9':'#fff'});
+}
+async function seek(v,t){
+  const d=v.duration||10; const x=Math.min(Math.max(0,t),d-.05);
+  if(Math.abs(v.currentTime-x)<.001) return;
+  await new Promise(res=>{const done=()=>{v.removeEventListener('seeked',done);res()};v.addEventListener('seeked',done);v.currentTime=x;setTimeout(done,1500)});
+}
+window.setT=async function(t){
+  const k=eo((t-B0)/(B1-B0));
+  const v=$('v');
+  v.style.filter=`blur(${k*38}px) saturate(${1+.3*k})`;
+  v.style.transform=`scale(${1+.01*t/10+.12*k})`;
+  $('tint').style.opacity=.72*k;
+  $('glow').style.opacity=k;
+  const e=$('end');e.style.opacity=clamp((t-(B1-.3))/.9)*clamp((TL.total-t)/.001+1);
+  const kl=eo((t-(B1-.2))/1.1);
+  const mk=$('mark'),tx=$('txt'),lg=$('lg');
+  // a gota nasce desfocada e respira; pulsa quando a Adeline diz "Cura" e "amor"
+  const pulse=t0=>{const x=t-t0;return x<0?0:Math.exp(-x*2.6)*Math.sin(Math.min(1,x/.25)*Math.PI/2)};
+  const p=pulse(S.words[2].start)+pulse(S.words[5].start);
+  mk.style.opacity=kl;
+  mk.style.filter=`blur(${(1-kl)*16}px) drop-shadow(0 0 ${14+26*p}px rgba(255,200,90,${.3+.5*p}))`;
+  lg.style.transform=`translateY(${(1-kl)*26+Math.sin(t*1.3)*4}px) scale(${.94+.06*kl+Math.sin(t*1.6)*.006+.02*p})`;
+  // o nome surge devagar, em varredura suave da esquerda p/ a direita, no ritmo da fala
+  const t0=S.words[0].start-.3,t1=S.words[5].end+.2;
+  const w=clamp((t-t0)/(t1-t0)),sw=-30+w*160; // % da largura (borda suave de 30%)
+  const m=`linear-gradient(90deg,#000 ${sw-30}%,transparent ${sw}%)`;
+  tx.style.webkitMaskImage=m;tx.style.maskImage=m;
+  tx.style.opacity=eo(w*4);tx.style.filter=`blur(${(1-eo(w*1.6))*7}px)`;
+  tx.style.transform=`translateY(${(1-eo(w*1.3))*12}px)`;
+  const H=$('halo');H.style.opacity=kl*(.7+.3*p);H.style.transform=`scale(${.9+.1*kl+.08*p})`;
+  const ku=eo((t-(S.words[5].end+.1))/.8);$('u').style.opacity=ku;$('u').style.transform=`translateY(${(1-ku)*20}px)`;
+  const ka=eo((t-(S.words[5].end+.6))/.8);$('a').style.opacity=ka;$('a').style.transform=`translateY(${(1-ka)*20}px)`;
+  await seek(v,t);
+  await document.fonts.ready;
+};
+window.TOTAL=TL.total;
+</script></body></html>

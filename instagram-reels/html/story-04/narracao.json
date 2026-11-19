@@ -1,0 +1,14 @@
+{
+  "voice_name": "Adeline (ElevenLabs, reaproveitada do vídeo institucional: institucional/voz/cena-11.mp3; sem custo novo)",
+  "language": "pt",
+  "lead": 11.0,
+  "gap": 0.3,
+  "tail": 3.2,
+  "music": "music.mp3",
+  "music_volume": 1.0,
+  "duck_ratio": 2.5,
+  "duck_threshold": 0.05,
+  "cenas": [
+    { "id": "fecho", "text": "Gota de Cura. Cuidando com amor." }
+  ]
+}

@@ -1,0 +1,1 @@
+window.TL={"total":18.05,"scenes":[{"id":"fecho","start":11,"end":14.85,"words":[{"w":"Gota","start":11.425,"end":11.48},{"w":"de","start":11.533,"end":11.64},{"w":"Cura.","start":11.76,"end":12.24},{"w":"Cuidando","start":12.98,"end":13.56},{"w":"com","start":13.64,"end":13.88},{"w":"amor.","start":13.976,"end":14.44}]}]};

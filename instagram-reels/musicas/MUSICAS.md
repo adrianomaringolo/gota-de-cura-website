@@ -19,3 +19,13 @@ Crédito para a legenda: "Música: Chinese Restaurant Background 7, de Sascha En
 - `story-02` (convite para o blog): Forest Mist Whispers
 - `reel-04` (hidrolato de laranja sanguínea): Forest Mist Whispers
 - `story-03` (Dia Mundial da Gentileza): Forest Mist Whispers
+- `reel-05` (Lima da Pérsia, a alegria que permanece): Forest Mist Whispers
+
+## Piano emocional (Mixkit, licença livre, sem crédito obrigatório)
+
+| Arquivo | Faixa | Artista | Duração | Tom | Licença | Origem |
+|---|---|---|---|---|---|---|
+| `mixkit-classical-vibes-2.mp3` | Classical Vibes 2 | Grigoriy Nuzhny | 1:53 | Piano clássico, emotivo | Mixkit License | https://mixkit.co/free-stock-music/discover/classical-vibes-2/ |
+
+- `institucional` (vídeo institucional dos 9 anos): Classical Vibes 2
+- `story-04` (Lima da Pérsia, vídeo + fecho com a Adeline): Classical Vibes 2

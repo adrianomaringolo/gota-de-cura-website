@@ -1,0 +1,37 @@
+{
+  "voice_name": "Áudio próprio (trecho da palestra \"Lima da Pérsia: o resgate da alegria\" + fecho do AUD-20261101-WA0005, sem música de fundo; não usa ElevenLabs)",
+  "language": "pt",
+  "lead": 2,
+  "gap": 0.5,
+  "tail": 3.2,
+  "music": "music.mp3",
+  "music_volume": 1.2,
+  "cenas": [
+    {
+      "id": "alegria",
+      "text": "A lima da Pérsia nos recorda que a alegria pode permanecer viva, mesmo quando já não conseguimos percebê-la."
+    },
+    {
+      "id": "dores",
+      "text": "Ela não nos pede que ignoremos nossas dores, ela apenas afasta suavemente aquilo que encobre a nossa luz."
+    },
+    {
+      "id": "reencontro",
+      "text": "Sua mensagem é de reencontro: reencontro com o entusiasmo, com a esperança,"
+    },
+    {
+      "id": "gratidao",
+      "text": "com a gratidão, com a capacidade de reconhecer a beleza que ainda existe."
+    },
+    {
+      "id": "parte",
+      "text": "Reencontro com a parte de nós que talvez estivesse cansada, silenciosa ou adormecida, mas que nunca deixou verdadeiramente de existir."
+    },
+    {
+      "id": "fecho",
+      "text": "Gota de Cura, cuidando com amor."
+    }
+  ],
+  "duck_ratio": 2.5,
+  "duck_threshold": 0.05
+}
