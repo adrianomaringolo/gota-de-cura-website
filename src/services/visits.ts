@@ -1,14 +1,18 @@
 import {
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   orderBy,
   query,
+  setDoc,
   updateDoc,
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import type { EnrollmentData, Visit } from '@/lib/types'
+
+export type VisitInput = { date: string; value: number }
 
 const visitsRef = collection(db, 'visits')
 
@@ -16,6 +20,39 @@ export const VisitsService = {
   async getVisitsList(): Promise<Visit[]> {
     const snapshot = await getDocs(query(visitsRef, orderBy('date')))
     return snapshot.docs.map((entry) => entry.data() as Visit)
+  },
+
+  /**
+   * The document id is the visit date itself: enrollments are written to
+   * `doc(visitsRef, visitDate)`, so the two must never diverge.
+   */
+  async save(input: VisitInput): Promise<void> {
+    const ref = doc(visitsRef, input.date)
+    if ((await getDoc(ref)).exists()) throw new Error('visit-exists')
+    await setDoc(ref, { date: input.date, value: input.value, enrollments: [] })
+  },
+
+  /** Changing the date moves the document (and its enrollments) to the new id. */
+  async update(currentDate: string, input: VisitInput): Promise<void> {
+    if (input.date === currentDate) {
+      await updateDoc(doc(visitsRef, currentDate), { value: input.value })
+      return
+    }
+
+    const target = doc(visitsRef, input.date)
+    if ((await getDoc(target)).exists()) throw new Error('visit-exists')
+
+    const current = await getDoc(doc(visitsRef, currentDate))
+    await setDoc(target, {
+      ...current.data(),
+      date: input.date,
+      value: input.value,
+    })
+    await deleteDoc(doc(visitsRef, currentDate))
+  },
+
+  async remove(date: string): Promise<void> {
+    await deleteDoc(doc(visitsRef, date))
   },
 
   async addEnrollmentToVisit(visitId: string, enrollment: EnrollmentData): Promise<void> {

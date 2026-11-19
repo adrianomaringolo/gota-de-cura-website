@@ -4,20 +4,26 @@ import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { AdminHeading, StatValue, Td, Th, TableWrap } from '@/components/admin/AdminUI'
+import { VisitFormDialog } from '@/components/admin/VisitFormDialog'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
 import { Input, Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { useVisits } from '@/lib/hooks'
 import { formatVisitDateLong } from '@/lib/format'
+import type { Visit } from '@/lib/types'
 import { EmailSender } from '@/services/email'
+import { VisitsService } from '@/services/visits'
 
 type ThankForm = { visitorName: string; visitorEmail: string; bcc: string }
 
 export default function AdminVisitsPage() {
-  const { data: visits, loading } = useVisits()
+  const { data: visits, loading, reload } = useVisits()
   const [date, setDate] = useState('')
   const [thankOpen, setThankOpen] = useState(false)
+  const [formOpen, setFormOpen] = useState(false)
+  const [editing, setEditing] = useState<Visit | null>(null)
+  const [confirmDelete, setConfirmDelete] = useState(false)
 
   const selected = useMemo(
     () => visits.find((visit) => visit.date === date),
@@ -30,13 +36,37 @@ export default function AdminVisitsPage() {
     0,
   )
 
+  const remove = async () => {
+    if (!selected) return
+    try {
+      await VisitsService.remove(selected.date)
+      toast.success('Visita removida')
+      setConfirmDelete(false)
+      setDate('')
+      await reload()
+    } catch {
+      toast.error('Não foi possível remover')
+    }
+  }
+
   return (
     <>
       <AdminHeading
         title="Visitas"
         description="Inscrições recebidas pelo site, por data de visitação."
         actions={
-          <Button onClick={() => setThankOpen(true)}>E-mail de agradecimento</Button>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setEditing(null)
+                setFormOpen(true)
+              }}
+            >
+              Nova visita
+            </Button>
+            <Button onClick={() => setThankOpen(true)}>E-mail de agradecimento</Button>
+          </div>
         }
       />
 
@@ -44,22 +74,71 @@ export default function AdminVisitsPage() {
         <LoadingRows rows={4} />
       ) : (
         <>
-          <Select
-            label="Data da visita"
-            value={date}
-            onChange={(event) => setDate(event.target.value)}
-            className="mb-8 max-w-sm"
-          >
-            <option value="">— escolha uma data —</option>
-            {[...visits]
-              .sort((a, b) => (a.date < b.date ? 1 : -1))
-              .map((visit) => (
-                <option key={visit.date} value={visit.date}>
-                  {formatVisitDateLong(visit.date)} ({visit.enrollments?.length ?? 0}{' '}
-                  inscrições)
-                </option>
+          <div className="mb-8 flex flex-wrap items-end gap-3">
+            <Select
+              label="Data da visita"
+              value={date}
+              onChange={(event) => {
+                setDate(event.target.value)
+                setConfirmDelete(false)
+              }}
+              className="w-full max-w-sm"
+            >
+              <option value="">— escolha uma data —</option>
+              {[...visits]
+                .sort((a, b) => (a.date < b.date ? 1 : -1))
+                .map((visit) => (
+                  <option key={visit.date} value={visit.date}>
+                    {formatVisitDateLong(visit.date)} ({visit.enrollments?.length ?? 0}{' '}
+                    inscrições)
+                  </option>
+                ))}
+            </Select>
+            {selected &&
+              (confirmDelete ? (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm text-ink-soft">
+                    {enrollments.length > 0
+                      ? `Apaga também ${enrollments.length} inscrição(ões).`
+                      : 'Excluir esta visita?'}
+                  </span>
+                  <Button
+                    size="sm"
+                    className="bg-danger hover:bg-danger/85"
+                    onClick={remove}
+                  >
+                    Confirmar
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setConfirmDelete(false)}
+                  >
+                    Cancelar
+                  </Button>
+                </div>
+              ) : (
+                <div className="flex gap-1.5">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      setEditing(selected)
+                      setFormOpen(true)
+                    }}
+                  >
+                    Editar
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setConfirmDelete(true)}
+                  >
+                    Excluir
+                  </Button>
+                </div>
               ))}
-          </Select>
+          </div>
 
           {!selected ? (
             <EmptyState title="Escolha uma data para ver os inscritos" />
@@ -110,6 +189,15 @@ export default function AdminVisitsPage() {
         </>
       )}
 
+      <VisitFormDialog
+        open={formOpen}
+        editing={editing}
+        onClose={() => setFormOpen(false)}
+        onSaved={async (saved) => {
+          await reload()
+          setDate(saved)
+        }}
+      />
       <ThankEmailDialog open={thankOpen} onClose={() => setThankOpen(false)} />
     </>
   )
