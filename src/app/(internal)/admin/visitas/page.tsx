@@ -7,13 +7,13 @@ import { AdminHeading, StatValue, Td, Th, TableWrap } from '@/components/admin/A
 import { VisitFormDialog } from '@/components/admin/VisitFormDialog'
 import { Button } from '@/components/ui/Button'
 import { Dialog } from '@/components/ui/Dialog'
-import { Input, Select } from '@/components/ui/Field'
+import { Checkbox, Input, Select } from '@/components/ui/Field'
 import { EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import { useVisits } from '@/lib/hooks'
-import { formatVisitDateLong } from '@/lib/format'
+import { formatCurrency, formatVisitDateLong } from '@/lib/format'
 import type { Visit } from '@/lib/types'
 import { EmailSender } from '@/services/email'
-import { VisitsService } from '@/services/visits'
+import { isUpcoming, VisitsService } from '@/services/visits'
 
 type ThankForm = { visitorName: string; visitorEmail: string; bcc: string }
 
@@ -21,6 +21,7 @@ export default function AdminVisitsPage() {
   const { data: visits, loading, reload } = useVisits()
   const [date, setDate] = useState('')
   const [thankOpen, setThankOpen] = useState(false)
+  const [showPast, setShowPast] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
   const [editing, setEditing] = useState<Visit | null>(null)
   const [confirmDelete, setConfirmDelete] = useState(false)
@@ -28,6 +29,11 @@ export default function AdminVisitsPage() {
   const selected = useMemo(
     () => visits.find((visit) => visit.date === date),
     [visits, date],
+  )
+
+  const listed = useMemo(
+    () => visits.filter((visit) => showPast || isUpcoming(visit)),
+    [visits, showPast],
   )
 
   const enrollments = selected?.enrollments ?? []
@@ -74,6 +80,18 @@ export default function AdminVisitsPage() {
         <LoadingRows rows={4} />
       ) : (
         <>
+          <Checkbox
+            label="Mostrar visitas anteriores"
+            checked={showPast}
+            onChange={(event) => {
+              setShowPast(event.target.checked)
+              if (!event.target.checked && selected && !isUpcoming(selected)) {
+                setDate('')
+                setConfirmDelete(false)
+              }
+            }}
+            className="mb-3"
+          />
           <div className="mb-8 flex flex-wrap items-end gap-3">
             <Select
               label="Data da visita"
@@ -85,7 +103,7 @@ export default function AdminVisitsPage() {
               className="w-full max-w-sm"
             >
               <option value="">— escolha uma data —</option>
-              {[...visits]
+              {[...listed]
                 .sort((a, b) => (a.date < b.date ? 1 : -1))
                 .map((visit) => (
                   <option key={visit.date} value={visit.date}>
@@ -139,6 +157,15 @@ export default function AdminVisitsPage() {
                 </div>
               ))}
           </div>
+
+          {selected && (
+            <p className="-mt-4 mb-6 text-sm text-ink-soft">
+              Valor da visitação:{' '}
+              <strong className="font-semibold text-ink">
+                {selected.value ? formatCurrency(selected.value) : 'Gratuita'}
+              </strong>
+            </p>
+          )}
 
           {!selected ? (
             <EmptyState title="Escolha uma data para ver os inscritos" />
@@ -195,6 +222,7 @@ export default function AdminVisitsPage() {
         onClose={() => setFormOpen(false)}
         onSaved={async (saved) => {
           await reload()
+          if (!isUpcoming({ date: saved } as Visit)) setShowPast(true)
           setDate(saved)
         }}
       />
