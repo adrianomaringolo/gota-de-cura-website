@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Visitas à chácara 2027: vídeo para a TV da loja</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --roxo: #503484; --noite: #291945; --lilas: #dacbf9; --creme: #faf8fc; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--noite); }
+  body { font-family: 'Archivo', sans-serif; color: #fff; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--noite); }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+  .eyebrow { font-size: 26px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--lilas); }
+
+  /* Abertura: foto da placa em tela cheia */
+  .intro .photo { position: absolute; inset: -40px; background: url('assets/placa.jpg') center / cover no-repeat; }
+  .intro .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(41,25,69,.92) 0%, rgba(41,25,69,.78) 45%, rgba(41,25,69,.2) 100%); }
+  .intro .txt { position: absolute; left: 130px; top: 0; bottom: 0; width: 1100px; display: flex; flex-direction: column; justify-content: center; }
+  .intro .logo { width: 330px; filter: brightness(0) invert(1); margin-bottom: 56px; }
+  .intro h1 { font-family: 'Petrona', serif; font-weight: 600; font-size: 128px; line-height: 1.02; letter-spacing: -0.03em; margin-top: 22px; }
+  .intro h1 em { font-style: italic; font-weight: 500; color: var(--lilas); }
+  .intro .lead { margin-top: 36px; font-size: 42px; line-height: 1.38; color: rgba(255,255,255,.86); max-width: 900px; }
+
+  /* Como é o dia */
+  .light { background: radial-gradient(ellipse 1200px 700px at 50% 0%, #fff 0%, #f3ecfb 60%, #eadff7 100%); color: #2d2250; }
+  .head { position: absolute; left: 0; right: 0; top: 78px; text-align: center; }
+  .head .eyebrow { color: #8961c7; }
+  .head h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 84px; line-height: 1.05; letter-spacing: -0.025em; margin-top: 14px; color: var(--roxo); }
+  .steps { position: absolute; left: 90px; right: 90px; top: 300px; bottom: 90px; display: flex; gap: 28px; }
+  .step { flex: 1; background: #fff; border-radius: 30px; overflow: hidden; box-shadow: 0 24px 60px rgba(80,52,132,.18); display: flex; flex-direction: column; }
+  .step .img { height: 440px; background-size: cover; background-position: center; }
+  .step .body { padding: 28px 32px 0; }
+  .step .time { font-family: 'Petrona', serif; font-weight: 600; font-size: 74px; line-height: 1; color: #8961c7; }
+  .step .t { margin-top: 12px; font-size: 38px; font-weight: 600; line-height: 1.22; color: #2d2250; }
+
+  /* Datas */
+  .dates { position: absolute; left: 90px; right: 90px; top: 330px; display: flex; gap: 28px; }
+  .date { flex: 1; text-align: center; background: #fff; border-radius: 34px; padding: 40px 0 44px; box-shadow: 0 24px 60px rgba(80,52,132,.2); border-top: 14px solid #8961c7; }
+  .date .m { font-size: 34px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #8961c7; }
+  .date .d { font-family: 'Petrona', serif; font-weight: 600; font-size: 230px; line-height: 1; color: var(--roxo); letter-spacing: -0.04em; margin-top: 6px; }
+  .date .w { font-size: 36px; font-weight: 600; color: #5f5b78; margin-top: 4px; }
+  .facts { position: absolute; left: 90px; right: 90px; bottom: 84px; display: flex; justify-content: center; gap: 22px; flex-wrap: wrap; }
+  .facts span { background: var(--roxo); color: #fff; font-size: 30px; font-weight: 600; border-radius: 999px; padding: 16px 38px; }
+
+  /* Fecho */
+  .fecho { background: radial-gradient(ellipse at 50% 30%, #6b46b0 0%, var(--roxo) 45%, var(--noite) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 160px 30px; }
+  .fecho .logo { width: 360px; filter: brightness(0) invert(1); margin-bottom: 40px; }
+  .fecho h1 { font-family: 'Petrona', serif; font-weight: 600; font-size: 140px; line-height: 1.02; letter-spacing: -0.03em; }
+  .fecho h1 em { font-style: italic; font-weight: 500; color: var(--lilas); }
+  .fecho .url { margin-top: 40px; font-size: 48px; font-weight: 600; border: 2px solid rgba(218,203,249,.55); border-radius: 999px; padding: 20px 50px; }
+  .fecho .lead { margin-top: 30px; font-size: 34px; color: rgba(255,255,255,.8); }
+  .fecho .handle { margin-top: 22px; font-size: 32px; color: rgba(255,255,255,.75); }
+  .fecho .handle em { font-style: normal; color: var(--lilas); }
+  .fecho .cause { margin-top: 36px; font-size: 24px; line-height: 1.5; color: rgba(255,255,255,.6); max-width: 1000px; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="vendor/gsap.min.js"></script>
+<script src="visitas.js"></script>
+<script>
+const FADE = 0.8
+const MESES = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro']
+const DIAS = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado']
+// "2027-04-17" é um dia do calendário, não um instante: nada de fuso, direto pelos números
+const parse = (iso) => { const [y, m, d] = iso.split('-').map(Number); return { d, m: MESES[m - 1], w: DIAS[new Date(Date.UTC(y, m - 1, d)).getUTCDay()] } }
+
+const steps = [
+  { time: '8h', t: 'Café da manhã na chácara', img: 'cafe' },
+  { time: '9h', t: 'Destilação ao vivo', img: 'destilacao' },
+  { time: '10h30', t: 'Volta pela propriedade', img: 'caminhada' },
+  { time: '12h', t: 'Encerramento com lanche', img: 'grupo' },
+]
+
+const stage = document.getElementById('stage')
+const el = (html) => { const t = document.createElement('div'); t.innerHTML = html.trim(); const n = t.firstChild; stage.appendChild(n); return n }
+const seq = []
+
+seq.push({ dur: 7, kind: 'intro', node: el(`
+  <section class="scene intro">
+    <div class="photo"></div><div class="veil"></div>
+    <div class="txt">
+      <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+      <div class="eyebrow">Visitas · 2027</div>
+      <h1>Venha ver a planta<br>antes de virar <em>óleo</em></h1>
+      <p class="lead">Uma manhã na Chácara da Mãe Luzia, em Santo Antônio de Posse.</p>
+    </div>
+  </section>`) })
+
+seq.push({ dur: 14, kind: 'steps', node: el(`
+  <section class="scene light">
+    <div class="head"><div class="eyebrow">Como é o dia</div><h2>Uma manhã inteira, das 8h às 12h</h2></div>
+    <div class="steps">${steps.map((s) => `
+      <div class="step"><div class="img" style="background-image:url(assets/${s.img}.jpg)"></div>
+        <div class="body"><div class="time">${s.time}</div><div class="t">${s.t}</div></div></div>`).join('')}
+    </div>
+  </section>`) })
+
+seq.push({ dur: 16, kind: 'dates', node: el(`
+  <section class="scene light">
+    <div class="head"><div class="eyebrow">Próximas visitas</div><h2>Datas de 2027</h2></div>
+    <div class="dates">${window.VISITAS.map(parse).map((v) => `
+      <div class="date"><div class="m">${v.m}</div><div class="d">${v.d}</div><div class="w">${v.w}</div></div>`).join('')}
+    </div>
+    <div class="facts"><span>Das 8h às 12h</span><span>Vagas limitadas</span><span>Inscrição pelo site</span></div>
+  </section>`) })
+
+seq.push({ dur: 10, kind: 'fecho', node: el(`
+  <section class="scene fecho">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Garanta a sua <em>vaga</em></h1>
+    <div class="url">gotadecura.com.br/visitas</div>
+    <p class="lead">Valores e vagas: no site ou com os nossos atendentes.</p>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    <p class="cause">Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</p>
+  </section>`) })
+
+const tl = gsap.timeline({ paused: true })
+let t = 0
+seq.forEach((s, i) => {
+  const q = (sel) => s.node.querySelectorAll(sel)
+  const last = i === seq.length - 1
+  tl.set(s.node, { visibility: 'visible' }, t)
+  tl.fromTo(s.node, { opacity: 0 }, { opacity: 1, duration: FADE, ease: 'power1.out' }, t)
+  if (s.kind === 'intro') {
+    tl.fromTo(q('.photo'), { scale: 1.12 }, { scale: 1.0, duration: s.dur + FADE, ease: 'none' }, t)
+    tl.from(q('.logo, .eyebrow, h1, .lead'), { y: 34, opacity: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out' }, t + 0.3)
+  } else if (s.kind === 'steps') {
+    tl.from(q('.head > *'), { y: 26, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' }, t + 0.2)
+    tl.from(q('.step'), { y: 60, opacity: 0, duration: 0.9, stagger: 0.4, ease: 'power3.out' }, t + 0.8)
+  } else if (s.kind === 'dates') {
+    tl.from(q('.head > *'), { y: 26, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' }, t + 0.2)
+    tl.from(q('.date'), { y: 70, opacity: 0, scale: 0.94, duration: 0.9, stagger: 0.35, ease: 'power3.out' }, t + 0.8)
+    tl.from(q('.facts span'), { y: 24, opacity: 0, duration: 0.7, stagger: 0.2, ease: 'power3.out' }, t + 2.6)
+  } else {
+    tl.from(q('.logo, h1, .url, .lead, .handle, .cause'), { y: 34, opacity: 0, duration: 0.9, stagger: 0.18, ease: 'power3.out' }, t + 0.2)
+  }
+  const end = t + s.dur
+  if (!last) tl.to(s.node, { opacity: 0, duration: FADE, ease: 'power1.in' }, end)
+  tl.set(s.node, { visibility: 'hidden' }, end + FADE)
+  t = end
+})
+tl.to(seq[seq.length - 1].node, { opacity: 0, duration: 1.2, ease: 'power1.in' }, t - 1.2)
+tl.set({}, {}, t)
+
+window.__total = t
+window.__seek = (time) => { tl.time(Math.min(time, t - 0.0001)) }
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))))
+</script>
+</body>
+</html>

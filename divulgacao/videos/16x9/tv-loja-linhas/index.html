@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gota de Cura: vídeo para a TV da loja</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #291945; }
+  body { font-family: 'Archivo', sans-serif; color: #fff; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #291945; }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+
+  /* Fundo roxo comum às cenas de texto */
+  .bg { background:
+      radial-gradient(ellipse 1100px 760px at 20% 80%, rgba(137,97,199,0.38) 0%, transparent 70%),
+      linear-gradient(160deg, #291945 0%, #3a2463 100%); }
+
+  /* ── Abertura / fecho / divisor ── */
+  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 160px; }
+  .center .logo { width: 380px; filter: brightness(0) invert(1); margin-bottom: 54px; }
+  .center h1 { font-family: 'Petrona', serif; font-weight: 500; font-size: 138px; line-height: 1.02; letter-spacing: -0.03em; }
+  .center h1 em { font-style: italic; color: #dacbf9; }
+  .center .lead { margin-top: 36px; font-size: 38px; line-height: 1.45; color: rgba(255,255,255,0.8); max-width: 1180px; }
+  .rule { width: 120px; height: 3px; border-radius: 3px; background: #dacbf9; margin: 40px 0 0; }
+  .center .url { margin-top: 44px; font-size: 44px; font-weight: 600; color: #fff;
+    border: 2px solid rgba(218,203,249,0.55); border-radius: 999px; padding: 20px 46px; }
+  .center .handle { margin-top: 28px; font-size: 32px; color: rgba(255,255,255,0.75); }
+  .center .handle em { font-style: normal; color: #dacbf9; }
+  .center .cause { margin-top: 48px; font-size: 24px; line-height: 1.5; color: rgba(255,255,255,0.6); max-width: 1000px; }
+  .eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #dacbf9; }
+  .center .eyebrow { margin-bottom: 28px; }
+
+  /* ── Cena de produto ── */
+  .copy { position: absolute; left: 0; top: 0; bottom: 0; width: 1000px; padding: 0 110px 0 130px;
+    display: flex; flex-direction: column; justify-content: center; }
+  .copy .eyebrow { margin-bottom: 30px; }
+  .copy h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 118px; line-height: 1.02; letter-spacing: -0.025em; }
+  .copy h2 small { display: block; font-family: 'Archivo', sans-serif; font-weight: 600; font-size: 34px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #dacbf9; margin-top: 18px; }
+  .copy .desc { margin-top: 44px; font-size: 46px; line-height: 1.32; color: rgba(255,255,255,0.88); max-width: 760px; }
+  .copy .bar { width: 120px; height: 3px; border-radius: 3px; background: #dacbf9; margin-top: 52px; }
+  .copy .mini { position: absolute; left: 130px; bottom: 64px; width: 170px; filter: brightness(0) invert(1); opacity: 0.7; }
+
+  .photo { position: absolute; right: 90px; top: 90px; width: 900px; height: 900px; border-radius: 36px; overflow: hidden;
+    box-shadow: 0 40px 90px rgba(8,3,20,0.6), 0 0 0 10px rgba(255,255,255,0.08); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform-origin: 50% 50%; }
+  .counter { position: absolute; right: 110px; bottom: 28px; font-size: 20px; font-weight: 600; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); }
+  .progress { position: absolute; left: 0; bottom: 0; height: 6px; width: 1920px; background: rgba(255,255,255,0.08); }
+  .progress i { display: block; height: 100%; width: 0; background: #b99be8; }
+
+  /* Linhas especiais: mesma cena, selo no canto */
+  .tag { display: inline-block; align-self: flex-start; margin-bottom: 30px; padding: 12px 26px; border-radius: 999px;
+    background: #dacbf9; color: #3a2463; font-size: 22px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="vendor/gsap.min.js"></script>
+<script>
+const DUR = 10, FADE = 0.7
+const lines = [
+  { id: 'oleos-essenciais', name: 'Óleos essenciais', desc: 'Puros e concentrados, destilados na nossa chácara.' },
+  { id: 'diluicoes-oleos-essenciais', name: 'Diluições', desc: 'Óleo essencial a 2%, pronto para usar na pele.' },
+  { id: 'hidrolatos', name: 'Hidrolatos', sub: '120 ml e 1 litro', desc: 'As águas florais da destilação, com o frescor da planta.' },
+  { id: 'sabonetes', name: 'Sabonetes artesanais', desc: 'Feitos com hidrolato no lugar da água.' },
+  { id: 'sabonetes-argila', name: 'Sabonetes de argila', desc: 'Seis argilas naturais para a sua pele.' },
+  { id: 'sabonetes-manteiga', name: 'Sabonetes de manteiga', desc: 'Azeite de oliva extra virgem e hidrolatos.' },
+  { id: 'sais', name: 'Sais de banho', desc: 'Relaxamento para o banho e o escalda-pés.' },
+  { id: 'sprays', name: 'Sprays', desc: 'Óleos essenciais e álcool de cereais. Sem essência sintética.' },
+  { id: 'sprays-topicos', name: 'Sprays tópicos', desc: 'Sprays naturais para usar sobre a pele.' },
+  { id: 'colonias', name: 'Águas de colônia', desc: 'Perfumadas com óleos essenciais, sem essência sintética.' },
+  { id: 'pomadas', name: 'Pomadas', desc: 'Óleos vegetais e essenciais. Livres de conservantes.' },
+  { id: 'tinturas', name: 'Tinturas', desc: 'Extratos de plantas medicinais, feitos à mão.' },
+]
+const specials = [
+  { id: 'amazonia', name: 'Cantinho da Amazônia', desc: 'A força e o encanto da floresta, em cada produto.' },
+  { id: 'mtc', name: 'Medicina Tradicional Chinesa', desc: 'O equilíbrio do corpo, com a sabedoria milenar.' },
+  { id: 'gotinha', name: 'Gotinha de Cura', desc: 'Cuidado suave para bebês e crianças pequenas.' },
+]
+
+const stage = document.getElementById('stage')
+const el = (html) => { const t = document.createElement('div'); t.innerHTML = html.trim(); const n = t.firstChild; stage.appendChild(n); return n }
+
+const sequence = []   // { node, dur, kind }
+sequence.push({ dur: 6.5, kind: 'center', node: el(`
+  <section class="scene bg center">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Nossas <em>linhas</em><br>de produtos</h1>
+    <div class="rule"></div>
+    <p class="lead">Feitos à mão, na chácara, com plantas cultivadas sem agrotóxico.</p>
+  </section>`) })
+
+const total = lines.length + specials.length
+let n = 0
+const product = (p, tag, eyebrow) => {
+  n++
+  return { dur: DUR, kind: 'product', progress: n / total, node: el(`
+  <section class="scene bg">
+    <div class="copy">
+      ${tag ? `<span class="tag">${tag}</span>` : `<div class="eyebrow">${eyebrow}</div>`}
+      <h2>${p.name}${p.sub ? `<small>${p.sub}</small>` : ''}</h2>
+      <p class="desc">${p.desc}</p>
+      <div class="bar"></div>
+      <img class="mini" src="assets/logo.png" alt="">
+    </div>
+    <div class="photo"><img src="../../../../public/images/categories/${p.id}.jpg" alt="${p.name}"></div>
+    <div class="counter">${String(n).padStart(2, '0')} / ${total}</div>
+    <div class="progress"><i></i></div>
+  </section>`) }
+}
+lines.forEach((p) => sequence.push(product(p, null, 'Nossos produtos')))
+
+sequence.push({ dur: 4.5, kind: 'center', node: el(`
+  <section class="scene bg center">
+    <div class="eyebrow">E ainda</div>
+    <h1>Nossas <em>linhas</em><br>especiais</h1>
+    <div class="rule"></div>
+  </section>`) })
+specials.forEach((p) => sequence.push(product(p, 'Linha especial')))
+
+sequence.push({ dur: 9, kind: 'center', node: el(`
+  <section class="scene bg center">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Venha <em>conhecer</em>.</h1>
+    <p class="lead">Pergunte pelos nossos produtos e peça uma indicação.</p>
+    <div class="url">gotadecura.com.br</div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    <p class="cause">Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</p>
+  </section>`) })
+
+// Linha do tempo: cada cena entra com fade e sai com fade sobre a próxima
+const tl = gsap.timeline({ paused: true })
+let t = 0
+sequence.forEach((s, i) => {
+  const q = (sel) => s.node.querySelectorAll(sel)
+  const last = i === sequence.length - 1
+  tl.set(s.node, { visibility: 'visible' }, t)
+  tl.fromTo(s.node, { opacity: 0 }, { opacity: 1, duration: FADE, ease: 'power1.out' }, t)
+  if (s.kind === 'product') {
+    tl.from(q('.eyebrow, .tag'), { y: 26, opacity: 0, duration: 0.7, ease: 'power3.out' }, t + 0.2)
+    tl.from(q('h2'), { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out' }, t + 0.35)
+    tl.from(q('.desc'), { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out' }, t + 0.8)
+    tl.from(q('.bar'), { scaleX: 0, transformOrigin: 'left', duration: 0.8, ease: 'power2.out' }, t + 1.2)
+    tl.from(q('.photo'), { x: 90, opacity: 0, duration: 1.1, ease: 'power3.out' }, t + 0.1)
+    tl.fromTo(q('.photo img'), { scale: 1.12 }, { scale: 1.0, duration: s.dur + FADE, ease: 'none' }, t)
+    tl.fromTo(q('.progress i'), { width: 1920 * (s.progress - 1 / total) }, { width: 1920 * s.progress, duration: s.dur, ease: 'none' }, t)
+  } else {
+    const kids = q('.logo, .eyebrow, h1, .rule, .lead, .url, .handle, .cause')
+    tl.from(kids, { y: 34, opacity: 0, duration: 0.9, stagger: 0.18, ease: 'power3.out' }, t + 0.2)
+  }
+  const end = t + s.dur
+  if (!last) tl.to(s.node, { opacity: 0, duration: FADE, ease: 'power1.in' }, end)
+  tl.set(s.node, { visibility: 'hidden' }, end + FADE)
+  t = end
+})
+// O fim do vídeo desvanece para o início, que é onde o player da TV recomeça
+tl.to(sequence[sequence.length - 1].node, { opacity: 0, duration: 1.2, ease: 'power1.in' }, t - 1.2)
+tl.set({}, {}, t)
+
+window.TOTAL = t
+window.__total = t
+window.__seek = (time) => { tl.time(Math.min(time, t - 0.0001)); }
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))))
+</script>
+</body>
+</html>

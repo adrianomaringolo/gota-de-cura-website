@@ -1,0 +1,97 @@
+[
+  {
+    "translations": {
+      "en": {
+        "name": "Bem Me Quer Cream",
+        "description": "BEM ME QUER moisturizing cream - neutral cream base with selected essential oils. Low concentration of essential oils. Safe dilution, suitable for moisturizing the skin of babies and children."
+      }
+    },
+    "name": "Creme Bem me quer",
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fcreme-bem-me-quer.jpeg?alt=media&token=70704405-6e6a-4d69-8c6b-77e299743493"
+    ],
+    "amount": 7,
+    "createdAt": "2026-09-29T19:45:08.444Z",
+    "type": "Gotinha de Cura",
+    "categories": [],
+    "available": true,
+    "id": "CREME-BMQ",
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fcreme-bem-me-quer.jpeg?alt=media&token=70704405-6e6a-4d69-8c6b-77e299743493",
+    "hidden": false,
+    "detailedDescription": "",
+    "price": 32,
+    "description": "Creme hidratante BEM ME QUER - base de creme neutra com óleos essenciais selecionados. Concentração baixa de óleos essenciais. Diluição segura para ser usado para hidratar pele de bebês e crianças."
+  },
+  {
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fsabonete-baby.jpeg?alt=media&token=052f41d1-c3d3-47c4-9adc-095f8896b53b"
+    ],
+    "amount": 21,
+    "id": "SAB-BABY",
+    "price": 16,
+    "hidden": false,
+    "detailedDescription": "",
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fsabonete-baby.jpeg?alt=media&token=052f41d1-c3d3-47c4-9adc-095f8896b53b",
+    "available": true,
+    "categories": [],
+    "translations": {
+      "en": {
+        "name": "Baby Soap",
+        "description": "Baby soap - fragrance-free, preservative-free, dye-free. Made with selected vegetable oils, predominantly extra virgin olive oil. Made for delicate baby skin."
+      }
+    },
+    "type": "Gotinha de Cura",
+    "createdAt": "2026-09-29T19:41:22.053Z",
+    "name": "Sabonete Baby",
+    "description": "Sabonete baby - sem aroma, sem conservantes, sem corantes. Feito com óleos vegetais selecionados, predominando o azeite de oliva extra virgem. Feito para a pele sensível de bebê."
+  },
+  {
+    "categories": [],
+    "id": "SPR-BOM-S",
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fspray-bom-soninho.jpeg?alt=media&token=8b6bc9fd-f6e9-4441-96f9-662867d527ca",
+    "description": "Spray energético de ambiente BOM SONINHO - feito com álcool de cereais, Hidrolato e óleos essenciais. Concentração baixa de óleos essenciais. Diluição segura para ser usado em ambiente de bebês e crianças.",
+    "detailedDescription": "",
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fspray-bom-soninho.jpeg?alt=media&token=8b6bc9fd-f6e9-4441-96f9-662867d527ca"
+    ],
+    "amount": 18,
+    "type": "Gotinha de Cura",
+    "translations": {
+      "en": {
+        "description": "BOM SONINHO (Sweet Dreams) energizing room spray - made with grain alcohol, hydrosol and essential oils. Low concentration of essential oils. Safe dilution for use in the rooms of babies and children.",
+        "name": "Sweet Dreams Spray"
+      }
+    },
+    "available": true,
+    "name": "Spray Bom Soninho",
+    "createdAt": "2026-09-29T19:38:30.505Z",
+    "price": 28,
+    "hidden": false
+  },
+  {
+    "type": "Gotinha de Cura",
+    "createdAt": "2026-11-03T03:19:39.627Z",
+    "name": "Gotinha de Cura – Bonequinha de Feltro",
+    "hidden": false,
+    "detailedDescription": "<h1><span style=\"font-weight: normal;\">Conheça a Gotinha de Cura! Nossa mascote ganhou vida em uma linda bonequinha artesanal de feltro, feita com carinho para espalhar ternura e alegria por onde passar.</span></h1><p>Com seu jeitinho sonolento, suas bochechinhas rosadas e sua aparência encantadora, ela é uma companhia especial para os pequenos e um presente cheio de afeto para quem ama a delicadeza dos detalhes feitos à mão.</p><p>A Gotinha de Cura faz parte do universo infantil da Gota de Cura, uma linha criada para celebrar o cuidado, o carinho e o amor em cada pequeno gesto.</p><p>💜 <strong>Leve essa gotinha de carinho para sua casa!</strong></p><p><strong>Produto:</strong> Bonequinha artesanal de feltro – Gotinha de Cura.</p>",
+    "amount": 11,
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fgotinha-de-cura-bonequinha-de-feltro-mw04cy4qw8a2.webp?alt=media&token=7a151eae-07e0-4498-9310-45eb5a19fe07"
+    ],
+    "translations": {
+      "en": {
+        "detailedDescription": "<h1>Meet Gotinha de Cura! Our beloved mascot has come to life as a beautiful handmade felt doll, lovingly crafted to spread tenderness and joy wherever she goes.</h1><p>With her sleepy little expression, rosy cheeks, and charming appearance, she makes a special companion for little ones and a heartfelt gift for anyone who appreciates the beauty of handmade creations.</p><p>Gotinha de Cura is part of Gota de Cura's children's collection, a line created to celebrate care, affection, and love in every little gesture.</p><p>💜 <strong>Bring this little drop of love into your home!</strong></p><p><strong>Product:</strong> Handmade Felt Doll – Gotinha de Cura.</p>",
+        "description": "Our beloved mascot has come to life as a beautiful handmade felt doll, lovingly crafted to spread tenderness and joy wherever she goes.",
+        "name": "Gotinha de Cura – Felt Doll"
+      }
+    },
+    "description": "Nossa mascote ganhou vida em uma linda bonequinha artesanal de feltro, feita com carinho para espalhar ternura e alegria por onde passar.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fgotinha-de-cura-bonequinha-de-feltro-mw04cy4qw8a2.webp?alt=media&token=7a151eae-07e0-4498-9310-45eb5a19fe07",
+    "available": true,
+    "categories": [
+      "Gotinha de Cura"
+    ],
+    "id": "boneco-gotinha",
+    "price": 69
+  }
+]

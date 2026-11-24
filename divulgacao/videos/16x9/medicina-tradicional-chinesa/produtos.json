@@ -1,0 +1,77 @@
+[
+  {
+    "description": "Elixir nutritivo da Essência do Rim e do Fígado. Indicado para aqueles cuja Essência se consome pelo cansaço ou desgaste.",
+    "type": "Medicina Tradicional Chinesa",
+    "categories": [],
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Ftintura-elixir.jpg?alt=media&token=d1b38afb-dc20-422b-b40a-5c684530f43e"
+    ],
+    "amount": 9,
+    "hidden": false,
+    "seal": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fseals%2Fseal-new.png?alt=media&token=9ad4fc11-08a0-43a9-b350-b20b57dbac92",
+    "detailedDescription": "<b>Guardião do Jing</b><br/>\n守精饮 (Shǒu Jīng Yǐn)<br/><br/>\n\nIngredientes: álcool de cereais, semente de gergelim preto e goji berry.<br/><br/>\n\nElixir nutritivo da Essência do Rim e do Fígado. Indicado para aqueles cuja Essência se consome pelo cansaço ou desgaste.<br/><br/>\n\nGuardião do Jing é uma preparação inspirada nos princípios da Fitoterapia Tradicional Chinesa, formulada para nutrir e preservar a Essência (Jing) — a substância vital associada à vitalidade, à longevidade e à base energética do organismo.<br/><br/>\n\nNa Medicina Tradicional Chinesa, o Jing é armazenado principalmente no Rim e sustenta processos fundamentais da vida, como crescimento, regeneração, vitalidade física e equilíbrio profundo do organismo. A preservação da Essência é considerada essencial para manter energia, clareza mental e qualidade de vida ao longo do tempo.<br/><br/>\n\nModo de utilização: ingestão do elixir diluído em água (para saber sobre quantidades e tratamentos, consultar um profissional especializado).",
+    "name": "Elixir Guardião do Jing",
+    "id": "MTC-ELIX",
+    "price": 32,
+    "createdAt": "2024-01-01T21:05:35.456Z",
+    "translations": {
+      "en": {
+        "detailedDescription": "<b>Guardian of Jing</b><br>守精饮 (Shǒu Jīng Yǐn)<br><br>Ingredients: grain alcohol, black sesame seeds and goji berries.<br><br>Nourishing elixir for the Essence of the Kidney and Liver. Recommended for those whose Essence is depleted by fatigue or exhaustion.<br><br>Guardian of Jing is a preparation inspired by the principles of Traditional Chinese Phytotherapy, formulated to nourish and preserve Essence (Jing) - the vital substance associated with vitality, longevity and the body's energetic foundation.<br><br>In Traditional Chinese Medicine, Jing is stored mainly in the Kidney and sustains fundamental life processes such as growth, regeneration, physical vitality and deep balance of the organism. Preserving Essence is considered essential for maintaining energy, mental clarity and quality of life over time.<br><br>Directions for use: take the elixir diluted in water (for dosage and treatment guidance, consult a qualified professional).",
+        "name": "Guardian of Jing Elixir",
+        "description": "Nourishing elixir for the Essence of the Kidney and Liver. Recommended for those whose Essence is depleted by fatigue or exhaustion."
+      }
+    },
+    "available": true,
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Ftintura-elixir.jpg?alt=media&token=d1b38afb-dc20-422b-b40a-5c684530f43e"
+  },
+  {
+    "id": "POM-ARTEM",
+    "detailedDescription": "Inspirada na sabedoria da moxabustão na medicina tradicional chinesa, a Pomada de Artemísia nasce como uma forma de oferecer o calor terapêutico de maneira mais sutil, limpa e igualmente profunda.<br/><br/>\n\nSua formulação combina manteigas e óleos vegetais e essenciais, com o óleo essencial de artemísia, criando uma sinergia que atua não apenas sobre a pele, mas também nos campos mais sutis do corpo. Ao ser aplicada, promove um aquecimento suave que se expande, favorecendo a circulação da energia e preparando o organismo para receber estímulos terapêuticos.<br/><br/>\n\nPode ser utilizada diretamente sobre a pele, em regiões específicas ou pontos de acupuntura, sendo potencializada pelo uso de fontes de calor. Sua ação vai além do físico, auxiliando na harmonização do fluxo energético, no desbloqueio de estagnações e no fortalecimento do campo vital.<br/><br/>\n\nUma ponte entre o toque, o calor e a energia — para um cuidado mais consciente, sensível e integrado.",
+    "available": true,
+    "price": 26,
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fpomada-artemisia.jpg?alt=media&token=a7d0cc29-2a8f-4cea-9cec-0a4c1f389aa5",
+    "createdAt": "2024-01-01T21:18:09.262Z",
+    "description": "Inspirada na sabedoria da moxabustão na medicina tradicional chinesa, a Pomada de Artemísia nasce como uma forma de oferecer o calor terapêutico de maneira mais sutil, limpa e igualmente profunda.",
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fpomada-artemisia.jpg?alt=media&token=a7d0cc29-2a8f-4cea-9cec-0a4c1f389aa5"
+    ],
+    "amount": 7,
+    "hidden": false,
+    "type": "Medicina Tradicional Chinesa",
+    "translations": {
+      "en": {
+        "name": "Mugwort Ointment",
+        "description": "Inspired by the wisdom of moxibustion in Traditional Chinese Medicine, the Mugwort Ointment was created as a way to offer therapeutic warmth in a subtler, cleaner and equally deep manner.",
+        "detailedDescription": "Inspired by the wisdom of moxibustion in Traditional Chinese Medicine, the Mugwort Ointment was created as a way to offer therapeutic warmth in a subtler, cleaner and equally deep manner.<br><br>Its formulation combines vegetable butters and oils with essential oils, including mugwort essential oil, creating a synergy that acts not only on the skin but also on the more subtle fields of the body. When applied, it promotes a gentle warmth that spreads, supporting the circulation of energy and preparing the body to receive therapeutic stimuli.<br><br>It can be used directly on the skin, in specific areas or acupuncture points, and is enhanced by the use of heat sources. Its action goes beyond the physical, helping to harmonize the flow of energy, release stagnation and strengthen the vital field.<br><br>A bridge between touch, warmth and energy - for a more conscious, sensitive and integrated care."
+      }
+    },
+    "categories": [],
+    "name": "Pomada de Artemísia",
+    "seal": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fseals%2Fseal-new.png?alt=media&token=9ad4fc11-08a0-43a9-b350-b20b57dbac92"
+  },
+  {
+    "categories": [],
+    "createdAt": "2024-01-01T21:18:19.235Z",
+    "detailedDescription": "Pomada para Moxinha (inspirada na Shiunko)<br/><br/>\n\nDesenvolvida para potencializar a prática da moxabustão direta tipo grão de arroz, esta pomada atua como uma base protetora e terapêutica para a pele. Inspirada na tradicional fórmula japonesa Shiunko, ela auxilia na prevenção de desconfortos, nutrindo e regenerando a região onde a moxa é aplicada.<br/><br/>\n\nSua composição fitoterápica favorece a cicatrização, suaviza a pele e harmoniza a resposta ao calor, permitindo uma aplicação mais segura e confortável da moxinha. Além disso, contribui energeticamente para a condução do calor terapêutico, potencializando os efeitos da moxabustão nos pontos de acupuntura.<br/><br/>\n\nIdeal para terapeutas e praticantes que buscam aliar tradição, cuidado com a pele e refinamento na técnica.",
+    "name": "Pomada para Moxinha",
+    "id": "POM-MOX",
+    "seal": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fseals%2Fseal-new.png?alt=media&token=9ad4fc11-08a0-43a9-b350-b20b57dbac92",
+    "description": "Desenvolvida para potencializar a prática da moxabustão direta tipo grão de arroz, esta pomada atua como uma base protetora e terapêutica para a pele. Inspirada na tradicional fórmula japonesa Shiunko, ela auxilia na prevenção de desconfortos, nutrindo e regenerando a região onde a moxa é aplicada.",
+    "available": true,
+    "translations": {
+      "en": {
+        "detailedDescription": "Moxa Ointment (inspired by Shiunko)<br><br>Developed to enhance the practice of direct rice-grain moxibustion, this ointment acts as a protective and therapeutic base for the skin. Inspired by the traditional Japanese Shiunko formula, it helps prevent discomfort by nourishing and regenerating the area where the moxa is applied.<br><br>Its herbal composition promotes healing, softens the skin and harmonizes the response to heat, allowing a safer and more comfortable application of the moxa. It also contributes energetically to conducting therapeutic heat, enhancing the effects of moxibustion on acupuncture points.<br><br>Ideal for therapists and practitioners who seek to combine tradition, skin care and refinement in technique.",
+        "name": "Moxa Ointment",
+        "description": "Developed to enhance the practice of direct rice-grain moxibustion, this ointment acts as a protective and therapeutic base for the skin. Inspired by the traditional Japanese Shiunko formula, it helps prevent discomfort by nourishing and regenerating the area where the moxa is applied."
+      }
+    },
+    "type": "Medicina Tradicional Chinesa",
+    "price": 26,
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fpomada-moxinha.jpg?alt=media&token=445a6e33-b05f-4edf-88a7-c215735cdef0"
+    ],
+    "image": "https://firebasestorage.googleapis.com/v0/b/gota-de-luz.appspot.com/o/products%2Fpomada-moxinha.jpg?alt=media&token=445a6e33-b05f-4edf-88a7-c215735cdef0",
+    "hidden": false,
+    "amount": 9
+  }
+]

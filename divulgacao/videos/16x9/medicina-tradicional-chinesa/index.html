@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Medicina Tradicional Chinesa: vídeo para a TV da loja</title>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --roxo: #503484; --noite: #291945; --verde: #1f5148; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--noite); }
+  body { font-family: 'Archivo', sans-serif; color: #fff; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--noite); }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; overflow: hidden; }
+  .han { font-family: 'Ma Shan Zheng', serif; }
+
+  /* ── Abertura: aquarela rosa da categoria ── */
+  .intro { background: #f3a9a0 url('assets/fundo-inicial.jpg') center / cover no-repeat; color: var(--verde); }
+  .intro .sym { position: absolute; left: 150px; top: 100px; width: 880px; height: 880px; filter: drop-shadow(0 24px 40px rgba(120,20,30,.3)); }
+  .intro .side { position: absolute; left: 1090px; right: 120px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .intro .han { font-size: 230px; line-height: 1; color: #a3262f; filter: drop-shadow(0 4px 0 rgba(255,255,255,.35)); }
+  .intro h1 { font-family: 'Petrona', serif; font-weight: 600; font-size: 104px; line-height: 1.04; letter-spacing: -0.025em; margin-top: 18px; text-wrap: balance; }
+  .intro p { margin-top: 30px; font-size: 38px; line-height: 1.35; color: #3a4f49; }
+
+  /* ── Produto: foto desfocada ao fundo, recorte à esquerda, texto à direita ── */
+  .bg { position: absolute; inset: -140px; background-size: cover; background-position: center; filter: blur(46px) saturate(1.1); }
+  .veil { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,.12) 0%, rgba(41,25,69,.05) 32%, rgba(41,25,69,.78) 56%, rgba(41,25,69,.92) 100%); }
+  .prod { position: absolute; left: 90px; top: 0; width: 900px; height: 1080px; display: flex; align-items: center; justify-content: center; }
+  .prod img { height: 820px; width: auto; max-width: 780px; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(41,25,69,.4)); }
+  .txt { position: absolute; left: 1060px; right: 110px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
+  .eyebrow { font-weight: 700; font-size: 26px; letter-spacing: .2em; text-transform: uppercase; color: #dacbf9; }
+  .name { font-family: 'Petrona', serif; font-weight: 600; font-size: 104px; line-height: 1.02; letter-spacing: -0.025em; margin-top: 24px; text-wrap: balance; text-shadow: 0 4px 18px rgba(41,25,69,.5); }
+  .han-sub { font-size: 60px; color: #dacbf9; margin-top: 12px; }
+  .desc { margin-top: 34px; font-size: 40px; line-height: 1.36; color: rgba(255,255,255,.92); }
+  .det { margin-top: 22px; font-size: 30px; font-weight: 600; color: #dacbf9; }
+  .note { margin-top: 44px; align-self: flex-start; font-size: 30px; font-weight: 600; color: var(--roxo);
+    background: #fff; border-radius: 999px; padding: 14px 36px; }
+  .dots { position: absolute; left: 1060px; bottom: 44px; display: flex; gap: 16px; }
+  .dots i { width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,.3); }
+  .dots i.on { background: #fff; }
+
+  /* ── Fecho ── */
+  .fecho { background: radial-gradient(ellipse at 50% 30%, #6b46b0 0%, var(--roxo) 45%, var(--noite) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 160px 40px; }
+  .fecho .logo { width: 380px; margin-bottom: 40px; filter: brightness(0) invert(1); }
+  .fecho h1 { font-family: 'Petrona', serif; font-weight: 600; font-size: 140px; line-height: 1.02; letter-spacing: -0.03em; }
+  .fecho h1 em { font-style: italic; font-weight: 500; color: #dacbf9; }
+  .fecho .lead { margin-top: 30px; font-size: 40px; color: rgba(255,255,255,.82); }
+  .fecho .url { margin-top: 40px; font-size: 44px; font-weight: 600; border: 2px solid rgba(218,203,249,.55); border-radius: 999px; padding: 20px 46px; }
+  .fecho .handle { margin-top: 26px; font-size: 32px; color: rgba(255,255,255,.75); }
+  .fecho .handle em { font-style: normal; color: #dacbf9; }
+  .fecho .cause { margin-top: 36px; font-size: 24px; line-height: 1.5; color: rgba(255,255,255,.6); max-width: 1000px; }
+  .credit { position: absolute; left: 0; right: 0; bottom: 26px; text-align: center; font-size: 19px; color: rgba(255,255,255,.45); }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="vendor/gsap.min.js"></script>
+<script>
+const DUR = 10, FADE = 0.8
+const products = [
+  { id: 'pomada-artemisia', name: 'Pomada de Artemísia', desc: 'O calor terapêutico da moxabustão, de forma suave e limpa.', det: 'Com óleo essencial de artemísia · 10 g' },
+  { id: 'pomada-moxinha', name: 'Pomada para Moxinha', desc: 'Base protetora para a moxabustão direta, inspirada na fórmula japonesa Shiunko.', det: '10 g' },
+  { id: 'tintura-elixir', name: 'Elixir Guardião do Jing', han: '守精饮', desc: 'Elixir nutritivo da Essência do Rim e do Fígado, para quem se desgasta no cansaço.', det: 'Semente de gergelim preto e goji berry · 30 ml' },
+]
+
+const stage = document.getElementById('stage')
+const el = (html) => { const t = document.createElement('div'); t.innerHTML = html.trim(); const n = t.firstChild; stage.appendChild(n); return n }
+const seq = []
+
+seq.push({ dur: 7, kind: 'intro', node: el(`
+  <section class="scene intro">
+    <img class="sym" src="assets/categoria-simbolo.png" alt="Medicina Tradicional Chinesa">
+    <div class="side">
+      <div class="han">中医</div>
+      <h1>Conheça os produtos</h1>
+      <p>Pomadas e elixir inspirados na sabedoria milenar chinesa.</p>
+    </div>
+  </section>`) })
+
+products.forEach((p, i) => seq.push({ dur: DUR, kind: 'product', node: el(`
+  <section class="scene">
+    <div class="bg" style="background-image:url(assets/${p.id}.jpg)"></div><div class="veil"></div>
+    <div class="prod"><img src="assets/${p.id}-corte.png" alt="${p.name}"></div>
+    <div class="txt">
+      <div class="eyebrow">Medicina Tradicional Chinesa</div>
+      <div class="name">${p.name}</div>
+      ${p.han ? `<div class="han han-sub">${p.han}</div>` : ''}
+      <p class="desc">${p.desc}</p>
+      <div class="det">${p.det}</div>
+      <div class="note">Consulte o valor com nossos atendentes</div>
+    </div>
+    <div class="dots">${products.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+  </section>`) }))
+
+seq.push({ dur: 9, kind: 'fecho', node: el(`
+  <section class="scene fecho">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Venha <em>conhecer</em>.</h1>
+    <p class="lead">Pergunte pelos produtos da Medicina Tradicional Chinesa.</p>
+    <div class="url">gotadecura.com.br</div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    <p class="cause">Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</p>
+    <div class="credit">Música: Chinese Restaurant Background 7, de Sascha Ende (ende.app), CC BY 4.0</div>
+  </section>`) })
+
+const tl = gsap.timeline({ paused: true })
+let t = 0
+seq.forEach((s, i) => {
+  const q = (sel) => s.node.querySelectorAll(sel)
+  const last = i === seq.length - 1
+  tl.set(s.node, { visibility: 'visible' }, t)
+  tl.fromTo(s.node, { opacity: 0 }, { opacity: 1, duration: FADE, ease: 'power1.out' }, t)
+  if (s.kind === 'product') {
+    tl.from(q('.prod'), { x: -80, opacity: 0, duration: 1.1, ease: 'power3.out' }, t + 0.1)
+    tl.fromTo(q('.prod img'), { scale: 1.06 }, { scale: 1.0, duration: s.dur + FADE, ease: 'none' }, t)
+    tl.from(q('.eyebrow, .name, .han-sub, .desc, .det, .note'), { y: 30, opacity: 0, duration: 0.8, stagger: 0.16, ease: 'power3.out' }, t + 0.4)
+  } else if (s.kind === 'intro') {
+    tl.from(q('.sym'), { scale: 0.92, opacity: 0, duration: 1.2, ease: 'power3.out' }, t + 0.1)
+    tl.from(q('.han, h1, p'), { y: 34, opacity: 0, duration: 0.9, stagger: 0.2, ease: 'power3.out' }, t + 0.5)
+  } else {
+    tl.from(q('.logo, h1, .lead, .url, .handle, .cause'), { y: 34, opacity: 0, duration: 0.9, stagger: 0.18, ease: 'power3.out' }, t + 0.2)
+  }
+  const end = t + s.dur
+  if (!last) tl.to(s.node, { opacity: 0, duration: FADE, ease: 'power1.in' }, end)
+  tl.set(s.node, { visibility: 'hidden' }, end + FADE)
+  t = end
+})
+tl.to(seq[seq.length - 1].node, { opacity: 0, duration: 1.2, ease: 'power1.in' }, t - 1.2)
+tl.set({}, {}, t)
+
+window.__total = t
+window.__seek = (time) => { tl.time(Math.min(time, t - 0.0001)) }
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))))
+</script>
+</body>
+</html>

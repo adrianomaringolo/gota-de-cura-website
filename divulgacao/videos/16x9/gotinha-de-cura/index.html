@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Gotinha de Cura: vídeo para a TV da loja</title>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #f4ecfb; }
+  body { font-family: 'Archivo', sans-serif; color: #2d2250; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background: #f4ecfb url('assets/fundo.png') center / cover no-repeat; }
+  .scene { position: absolute; inset: 0; opacity: 0; visibility: hidden; }
+
+  .eyebrow { font-size: 24px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8961c7; }
+
+  /* ── Abertura / fecho ── */
+  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 160px 60px; }
+  .center .logo { width: 360px; margin-bottom: 40px; }
+  .center h1 { font-family: 'Petrona', serif; font-weight: 600; font-size: 150px; line-height: 1; letter-spacing: -0.03em; color: #503484; }
+  .center h1 em { font-style: italic; font-weight: 500; color: #8961c7; }
+  .center .lead { margin-top: 34px; font-size: 44px; line-height: 1.4; color: #4a3d6e; max-width: 1200px; }
+  .center .url { margin-top: 44px; font-size: 44px; font-weight: 600; color: #503484;
+    background: rgba(255,255,255,0.75); border: 2px solid rgba(137,97,199,0.4); border-radius: 999px; padding: 20px 46px; }
+  .center .handle { margin-top: 26px; font-size: 32px; color: #5f5b78; }
+  .center .handle em { font-style: normal; color: #8961c7; }
+  .center .cause { margin-top: 40px; font-size: 24px; line-height: 1.5; color: #6c6586; max-width: 1000px; }
+
+  /* ── Cena de produto ── */
+  .card { position: absolute; left: 120px; top: 150px; width: 900px; height: 780px; border-radius: 44px; padding: 70px 80px;
+    background: rgba(255,255,255,0.72); box-shadow: 0 30px 80px rgba(80,52,132,0.18), 0 0 0 2px rgba(255,255,255,0.8) inset;
+    backdrop-filter: blur(6px); display: flex; flex-direction: column; justify-content: center; }
+  .card .eyebrow { margin-bottom: 26px; }
+  .card h2 { font-family: 'Petrona', serif; font-weight: 600; font-size: 104px; line-height: 1.02; letter-spacing: -0.025em; color: #503484; text-wrap: balance; }
+  .card .desc { margin-top: 36px; font-size: 40px; line-height: 1.36; color: #3d3360; }
+  .card .note { margin-top: 44px; align-self: flex-start; font-size: 30px; font-weight: 600; color: #fff;
+    background: #8961c7; border-radius: 999px; padding: 14px 36px; }
+  .card .mini { position: absolute; right: 70px; top: 62px; width: 150px; opacity: 0.9; }
+
+  .photo { position: absolute; right: 130px; top: 70px; width: 640px; height: 940px; border-radius: 44px; overflow: hidden;
+    box-shadow: 0 40px 90px rgba(80,52,132,0.35), 0 0 0 12px rgba(255,255,255,0.85); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .dots { position: absolute; left: 0; right: 0; bottom: 34px; display: flex; justify-content: center; gap: 16px; }
+  .dots i { width: 14px; height: 14px; border-radius: 50%; background: rgba(80,52,132,0.22); }
+  .dots i.on { background: #8961c7; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script src="vendor/gsap.min.js"></script>
+<script>
+const DUR = 10, FADE = 0.8
+const products = [
+  { img: 'CREME-BMQ.jpeg', name: 'Creme Bem me quer', desc: 'Hidratante com óleos essenciais, em diluição segura para a pele de bebês e crianças.' },
+  { img: 'SAB-BABY.jpeg', name: 'Sabonete Baby', desc: 'Sem aroma, sem conservantes e sem corantes. Azeite de oliva extra virgem para a pele sensível.' },
+  { img: 'SPR-BOM-S.jpeg', name: 'Spray Bom Soninho', desc: 'Spray de ambiente com hidrolato e óleos essenciais em baixa concentração, para a hora de dormir.' },
+  { img: 'boneco-gotinha.webp', name: 'Bonequinha de Feltro', desc: 'Nossa mascote em boneca artesanal de feltro, feita à mão com muito carinho.' },
+]
+
+const stage = document.getElementById('stage')
+const el = (html) => { const t = document.createElement('div'); t.innerHTML = html.trim(); const n = t.firstChild; stage.appendChild(n); return n }
+const seq = []
+
+seq.push({ dur: 7, kind: 'center', node: el(`
+  <section class="scene center">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Gotinha <em>de Cura</em></h1>
+    <p class="lead">Cuidado suave para bebês e crianças pequenas.</p>
+  </section>`) })
+
+products.forEach((p, i) => seq.push({ dur: DUR, kind: 'product', node: el(`
+  <section class="scene">
+    <div class="card">
+      <img class="mini" src="assets/logo.png" alt="">
+      <div class="eyebrow">Gotinha de Cura</div>
+      <h2>${p.name}</h2>
+      <p class="desc">${p.desc}</p>
+      <div class="note">Consulte o valor com nossos atendentes</div>
+    </div>
+    <div class="photo"><img src="assets/produtos/${p.img}" alt="${p.name}"></div>
+    <div class="dots">${products.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div>
+  </section>`) }))
+
+seq.push({ dur: 9, kind: 'center', node: el(`
+  <section class="scene center">
+    <img class="logo" src="assets/logo.png" alt="Gota de Cura">
+    <h1>Leve um <em>carinho</em><br>para os pequenos</h1>
+    <div class="url">gotadecura.com.br</div>
+    <div class="handle"><em>@</em>gotadecura_artesanais</div>
+    <p class="cause">Toda a renda sustenta os trabalhos assistenciais da Morada Espírita Prof. Lairi Hans.</p>
+  </section>`) })
+
+const tl = gsap.timeline({ paused: true })
+let t = 0
+seq.forEach((s, i) => {
+  const q = (sel) => s.node.querySelectorAll(sel)
+  const last = i === seq.length - 1
+  tl.set(s.node, { visibility: 'visible' }, t)
+  tl.fromTo(s.node, { opacity: 0 }, { opacity: 1, duration: FADE, ease: 'power1.out' }, t)
+  if (s.kind === 'product') {
+    tl.from(q('.card'), { x: -70, opacity: 0, duration: 1.0, ease: 'power3.out' }, t + 0.1)
+    tl.from(q('.eyebrow, h2, .desc, .note'), { y: 30, opacity: 0, duration: 0.8, stagger: 0.18, ease: 'power3.out' }, t + 0.4)
+    tl.from(q('.photo'), { x: 90, opacity: 0, duration: 1.1, ease: 'power3.out' }, t + 0.1)
+    tl.fromTo(q('.photo img'), { scale: 1.1 }, { scale: 1.0, duration: s.dur + FADE, ease: 'none' }, t)
+  } else {
+    tl.from(q('.logo, h1, .lead, .url, .handle, .cause'), { y: 34, opacity: 0, duration: 0.9, stagger: 0.18, ease: 'power3.out' }, t + 0.2)
+  }
+  const end = t + s.dur
+  if (!last) tl.to(s.node, { opacity: 0, duration: FADE, ease: 'power1.in' }, end)
+  tl.set(s.node, { visibility: 'hidden' }, end + FADE)
+  t = end
+})
+tl.to(seq[seq.length - 1].node, { opacity: 0, duration: 1.2, ease: 'power1.in' }, t - 1.2)
+tl.set({}, {}, t)
+
+window.__total = t
+window.__seek = (time) => { tl.time(Math.min(time, t - 0.0001)) }
+window.__ready = document.fonts.ready.then(() => Promise.all([...document.images].map((i) => i.decode().catch(() => {}))))
+</script>
+</body>
+</html>

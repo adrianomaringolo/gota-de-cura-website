@@ -1,0 +1,6 @@
+# Vídeos renderizados são gerados (os fontes estão versionados); não vão para o git.
+*.mp4
+*.webp
+
+# fontes dos vídeos (fotos, trilhas) são versionados mesmo em .webp/.mp4
+!**/assets/**
