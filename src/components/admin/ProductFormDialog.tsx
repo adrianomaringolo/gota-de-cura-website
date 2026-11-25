@@ -49,7 +49,18 @@ type ProductForm = {
   createdAt: string
   /** The English version shown on `/en`; any field left empty falls back to Portuguese. */
   en: Required<ProductTranslation>
+  /** Packed size in cm and weight in g; NaN/empty means "not informed". */
+  dimensions: Record<DimensionKey, number | undefined>
 }
+
+const dimensionFields = [
+  { key: 'height', label: 'Altura', unit: 'cm' },
+  { key: 'width', label: 'Largura', unit: 'cm' },
+  { key: 'length', label: 'Comprimento', unit: 'cm' },
+  { key: 'weight', label: 'Peso', unit: 'g' },
+] as const
+
+type DimensionKey = (typeof dimensionFields)[number]['key']
 
 const empty: ProductForm = {
   id: '',
@@ -65,6 +76,7 @@ const empty: ProductForm = {
   hidden: false,
   createdAt: '',
   en: { name: '', description: '', detailedDescription: '' },
+  dimensions: { height: undefined, width: undefined, length: undefined, weight: undefined },
 }
 
 /** Only the filled-in fields — Firestore rejects `undefined`, and blanks mean "use the Portuguese". */
@@ -80,6 +92,7 @@ const hasText = (html: string | undefined) =>
 const tabs = [
   { id: 'geral', label: 'Título e valores' },
   { id: 'descricoes', label: 'Descrições' },
+  { id: 'dimensoes', label: 'Dimensões' },
   { id: 'ingles', label: 'Inglês' },
   { id: 'imagens', label: 'Imagens' },
 ] as const
@@ -94,6 +107,7 @@ const fieldTab: Partial<Record<keyof ProductForm, TabId>> = {
   price: 'geral',
   createdAt: 'geral',
   description: 'descricoes',
+  dimensions: 'dimensoes',
   images: 'imagens',
 }
 
@@ -150,6 +164,12 @@ export function ProductFormDialog({
             available: product.available ?? true,
             hidden: product.hidden ?? false,
             createdAt: toDay(toDate(product.createdAt) ?? new Date()),
+            dimensions: {
+              height: product.dimensions?.height,
+              width: product.dimensions?.width,
+              length: product.dimensions?.length,
+              weight: product.dimensions?.weight,
+            },
             en: {
               name: product.translations?.en?.name ?? '',
               description: product.translations?.en?.description ?? '',
@@ -168,9 +188,10 @@ export function ProductFormDialog({
       const {
         oldPrice: _previousOldPrice,
         translations: previousTranslations,
+        dimensions: _previousDimensions,
         ...existing
       } = product ?? {}
-      const { oldPrice, categories, images, createdAt, en, ...fields } = data
+      const { oldPrice, categories, images, createdAt, en, dimensions, ...fields } = data
       const english = filledTranslation({
         ...en,
         // The editor leaves `<p></p>` behind when cleared.
@@ -178,6 +199,12 @@ export function ProductFormDialog({
           ? en.detailedDescription
           : '',
       })
+      // Blank fields (NaN from valueAsNumber) are left out; none filled leaves the key out.
+      const filledDimensions = Object.fromEntries(
+        Object.entries(dimensions).filter(
+          ([, value]) => typeof value === 'number' && Number.isFinite(value) && value > 0,
+        ),
+      )
       const translations = { ...previousTranslations, en: english }
       if (!english) delete translations.en
       const originalCreatedAt = toDate(product?.createdAt)
@@ -203,6 +230,7 @@ export function ProductFormDialog({
         // from valueAsNumber) has to leave the key out rather than send it.
         ...(oldPrice ? { oldPrice } : {}),
         ...(Object.keys(translations).length ? { translations } : {}),
+        ...(Object.keys(filledDimensions).length ? { dimensions: filledDimensions } : {}),
       } as ProductItem)
       // Photos removed in this edit (and uploads that didn't make the cut) are
       // only deleted now, so cancelling never leaves the product pointing at a
@@ -445,6 +473,37 @@ export function ProductFormDialog({
               />
             )}
           />
+        </div>
+
+        <div
+          id={`${tabsId}-dimensoes-panel`}
+          role="tabpanel"
+          aria-labelledby={`${tabsId}-dimensoes-tab`}
+          hidden={tab !== 'dimensoes'}
+          className="grid gap-4"
+        >
+          <p className="rounded-xl bg-brand-tint px-4 py-3 text-sm text-ink-soft">
+            Medidas do produto já embalado, para calcular o frete. Altura, largura e
+            comprimento em centímetros; peso em gramas. Pode deixar em branco.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {dimensionFields.map(({ key, label, unit }) => (
+              <Input
+                key={key}
+                label={`${label} (${unit})`}
+                type="number"
+                inputMode="decimal"
+                step="0.1"
+                min="0"
+                error={errors.dimensions?.[key] && 'Informe um número maior que zero.'}
+                {...register(`dimensions.${key}`, {
+                  setValueAs: (value) => (value === '' ? undefined : Number(value)),
+                  validate: (value) =>
+                    value === undefined || (Number.isFinite(value) && value > 0),
+                })}
+              />
+            ))}
+          </div>
         </div>
 
         <div

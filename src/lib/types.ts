@@ -46,6 +46,8 @@ export interface ProductItem {
   categories?: string[]
   urlName?: string
   amount?: number
+  /** Packed size in cm and weight in g; each is optional. */
+  dimensions?: { height?: number; width?: number; length?: number; weight?: number }
   /** ISO date stamped when the product is first created; drives the "Novo" tag. */
   createdAt?: string
   /**
