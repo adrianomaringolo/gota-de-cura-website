@@ -35,7 +35,7 @@ export function ProductList({ productType }: { productType: ProductType }) {
   if (items === null) {
     return (
       <div
-        className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4"
+        className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4"
         aria-hidden="true"
       >
         {Array.from({ length: 8 }).map((_, index) => (
@@ -70,7 +70,7 @@ export function ProductList({ productType }: { productType: ProductType }) {
         {t('count', { count: items.length })}
         {soldOut.length > 0 && ` · ${t('soldOutCount', { count: soldOut.length })}`}
       </p>
-      <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
         {ordered.map((item) => (
           <ProductCard key={item.id} item={item} type={productType.type} />
         ))}

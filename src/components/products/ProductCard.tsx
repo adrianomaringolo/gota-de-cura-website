@@ -35,6 +35,12 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
     <>
       <article className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition-[border-color,box-shadow] duration-300 hover:border-brand/30 hover:shadow-lift">
         <div className="relative aspect-square overflow-hidden bg-canvas-sunk">
+          <button
+            type="button"
+            onClick={() => setDetailOpen(true)}
+            aria-label={shown.name}
+            className="absolute inset-0 z-10 cursor-pointer focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-brand"
+          />
           {item.image ? (
             <Image
               src={item.image}
@@ -50,19 +56,19 @@ export function ProductCard({ item, type }: { item: ProductItem; type: string })
           )}
 
           {isNew && (
-            <span className="absolute top-3 left-3 rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
+            <span className="pointer-events-none absolute top-3 left-3 z-20 rounded-full bg-brand px-2.5 py-1 text-2xs font-bold tracking-[0.08em] text-white uppercase shadow-lift">
               {t('new')}
             </span>
           )}
 
           {item.priceDiscount && (
-            <span className="absolute top-3 right-3 rounded-full bg-terra px-3 py-1.5 text-sm font-bold text-white">
+            <span className="pointer-events-none absolute top-3 right-3 z-20 rounded-full bg-terra px-3 py-1.5 text-sm font-bold text-white">
               {t('discount', { value: item.priceDiscount })}
             </span>
           )}
 
           {!item.available && (
-            <span className="absolute inset-x-0 bottom-0 bg-ink/85 py-2 text-center text-sm font-medium text-white">
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 z-20 bg-ink/85 py-2 text-center text-sm font-medium text-white">
               {t('soldOut')}
             </span>
           )}
