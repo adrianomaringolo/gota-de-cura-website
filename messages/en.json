@@ -99,6 +99,11 @@
     "breadcrumb": "Breadcrumb",
     "catalog": "Catalog",
     "soldOutLong": "Currently sold out — check back soon.",
+    "dimensionsTitle": "Dimensions",
+    "height": "Height",
+    "width": "Width",
+    "length": "Length",
+    "weight": "Weight",
     "photoOf": "View photo {index} of {total}"
   },
   "productList": {

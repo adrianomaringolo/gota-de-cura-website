@@ -111,7 +111,18 @@ export default function AdminManagementPage() {
               <tr key={product.id}>
                 <Td>
                   <span className="font-medium">{product.name}</span>
-                  <span className="block text-xs text-ink-muted">{product.id}</span>
+                  {product.dimensions && (
+                    <span className="block text-xs text-ink-muted">
+                      {[
+                        product.dimensions.height && `A ${product.dimensions.height} cm`,
+                        product.dimensions.width && `L ${product.dimensions.width} cm`,
+                        product.dimensions.length && `C ${product.dimensions.length} cm`,
+                        product.dimensions.weight && `${product.dimensions.weight} g`,
+                      ]
+                        .filter(Boolean)
+                        .join(' · ')}
+                    </span>
+                  )}
                 </Td>
                 <Td className="text-ink-soft">{product.type}</Td>
                 <Td className="text-right tabular-nums">

@@ -129,6 +129,26 @@ export function ProductDetail({ urlName, typeId }: { urlName: string; typeId: st
             )}
           </div>
 
+          {shown.dimensions && Object.keys(shown.dimensions).length > 0 && (
+            <section className="mt-8">
+              <h2 className="text-sm font-semibold text-ink">{t('dimensionsTitle')}</h2>
+              <dl className="mt-2 grid grid-cols-2 gap-x-6 gap-y-1 text-sm sm:max-w-sm">
+                {(['height', 'width', 'length', 'weight'] as const).map((key) => {
+                  const value = shown.dimensions?.[key]
+                  if (!value) return null
+                  return (
+                    <div key={key} className="contents">
+                      <dt className="text-ink-muted">{t(key)}</dt>
+                      <dd className="tabular-nums text-ink">
+                        {value.toLocaleString(locale)} {key === 'weight' ? 'g' : 'cm'}
+                      </dd>
+                    </div>
+                  )
+                })}
+              </dl>
+            </section>
+          )}
+
           {shown.detailedDescription && (
             <div
               className="rich-text mt-8"

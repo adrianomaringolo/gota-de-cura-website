@@ -99,6 +99,11 @@
     "breadcrumb": "Trilha",
     "catalog": "Catálogo",
     "soldOutLong": "Esgotado no momento — volte em breve.",
+    "dimensionsTitle": "Dimensões",
+    "height": "Altura",
+    "width": "Largura",
+    "length": "Comprimento",
+    "weight": "Peso",
     "photoOf": "Ver foto {index} de {total}"
   },
   "productList": {
