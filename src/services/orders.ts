@@ -235,11 +235,12 @@ export const OrdersService = {
   async editOrderStatus(
     order: Order,
     newStatus: string,
-    options?: { comment?: string; notifyCustomer?: boolean },
+    options?: { comment?: string; notifyCustomer?: boolean; trackingUrl?: string },
   ): Promise<void> {
     const user = UsersService.getStoredUser()
     const userName = user?.name ?? '—'
     const comment = options?.comment
+    const trackingUrl = options?.trackingUrl?.trim() || undefined
     const willNotify = Boolean(options?.notifyCustomer && order.contactInfo.email)
 
     // Logged only once the e-mail actually goes out, so the comment trail
@@ -259,12 +260,13 @@ export const OrdersService = {
           comment,
           publicOrderUrl(order.id, customerLocale),
           customerLocale,
+          trackingUrl,
         )
         newComments.push({
           userName,
           comment: `📧 E-mail enviado ao cliente avisando a mudança de status para "${label}".${
             comment ? `\n\nMensagem: ${comment}` : ''
-          }`,
+          }${trackingUrl ? `\n\nRastreio: ${trackingUrl}` : ''}`,
           createdAt: new Date().toISOString(),
         })
       } catch (error) {
@@ -275,6 +277,7 @@ export const OrdersService = {
     await updateDoc(doc(ordersRef, order.id), {
       updatedAt: new Date().toISOString(),
       status: newStatus,
+      ...(trackingUrl ? { trackingUrl } : {}),
       statusLogs: [
         ...(order.statusLogs || []),
         {

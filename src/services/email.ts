@@ -212,6 +212,7 @@ export const EmailSender = {
     comment: string | undefined,
     orderUrl: string,
     locale = 'pt-BR',
+    trackingUrl?: string,
   ) {
     if (!contact.email) return Promise.resolve()
     const en = isEnglish(locale)
@@ -235,6 +236,13 @@ export const EmailSender = {
                 <p style="margin: 0"><strong>${en ? 'A message from the person helping you:' : 'Mensagem de quem está te atendendo:'}</strong></p>
                 <p style="margin: 6px 0 0; white-space: pre-line">${comment}</p>
               </div>`
+            : ''
+        }
+        ${
+          trackingUrl
+            ? `<p style="text-align: center; margin: 24px 0 0">
+                <a href="${trackingUrl}" target="_blank" rel="noopener" style="background-color: #2e7d32; color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: bold">${en ? 'Track my delivery' : 'Rastrear minha entrega'}</a>
+              </p>`
             : ''
         }
         <p style="text-align: center; margin: 30px 0">

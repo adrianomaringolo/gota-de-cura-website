@@ -649,6 +649,7 @@
     "subtotal": "Subtotal",
     "shippingFee": "Frete",
     "shippingDetails": "Detalhes do frete",
+    "tracking": "Rastreio da entrega",
     "coupon": "Cupom {code}",
     "total": "Total",
     "history": "Histórico"

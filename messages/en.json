@@ -649,6 +649,7 @@
     "subtotal": "Subtotal",
     "shippingFee": "Shipping",
     "shippingDetails": "Shipping details",
+    "tracking": "Delivery tracking",
     "coupon": "Coupon {code}",
     "total": "Total",
     "history": "History"

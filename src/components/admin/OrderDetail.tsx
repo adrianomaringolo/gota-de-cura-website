@@ -19,6 +19,7 @@ import { Dialog } from '@/components/ui/Dialog'
 import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field'
 import { Badge, EmptyState, LoadingRows, Spinner } from '@/components/ui/Feedback'
 import {
+  ORDER_STATUS,
   ORDER_STATUS_DESCRIPTIONS,
   ORDER_STATUS_OPTIONS,
   orderStatusLabel,
@@ -661,6 +662,7 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
   const [confirmOpen, setConfirmOpen] = useState(false)
   const [notifyCustomer, setNotifyCustomer] = useState(false)
   const [comment, setComment] = useState('')
+  const [trackingUrl, setTrackingUrl] = useState('')
   const [saving, setSaving] = useState(false)
   const { user } = useLoggedUser()
   const [assignOpen, setAssignOpen] = useState(false)
@@ -672,8 +674,12 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
   }, [order.status])
 
   const openConfirm = () => {
-    setNotifyCustomer(false)
+    // Shipping is when the customer most wants to hear from us: pre-check the e-mail.
+    setNotifyCustomer(
+      status === ORDER_STATUS.SEPARADO && Boolean(order.contactInfo.email),
+    )
     setComment('')
+    setTrackingUrl(order.trackingUrl ?? '')
     setAssignToMe(false)
     // Nobody looks after this order yet: offer to take it before changing status.
     if (!order.assignee && user) setAssignOpen(true)
@@ -686,12 +692,23 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
     setConfirmOpen(true)
   }
 
+  const askTracking = status === ORDER_STATUS.SEPARADO
+  const normalizedTracking = trackingUrl.trim()
+    ? /^https?:\/\//i.test(trackingUrl.trim())
+      ? trackingUrl.trim()
+      : `https://${trackingUrl.trim()}`
+    : ''
+  const trackingInvalid =
+    Boolean(normalizedTracking) && !/^https?:\/\/\S+\.\S+$/.test(normalizedTracking)
+
   const confirm = async () => {
+    if (trackingInvalid) return
     setSaving(true)
     try {
       await OrdersService.editOrderStatus(order, status, {
         comment: notifyCustomer ? comment.trim() || undefined : undefined,
         notifyCustomer,
+        trackingUrl: askTracking ? normalizedTracking : undefined,
       })
       toast.success(
         notifyCustomer ? 'Status atualizado e cliente avisado' : 'Status atualizado',
@@ -812,12 +829,33 @@ function StatusChanger({ order, onSaved }: { order: Order; onSaved: () => void }
             >
               Cancelar
             </Button>
-            <Button onClick={confirm} disabled={saving}>
+            <Button onClick={confirm} disabled={saving || trackingInvalid}>
               {saving ? <Spinner className="h-4 w-4" /> : 'Confirmar'}
             </Button>
           </>
         }
       >
+        {askTracking && (
+          <div className="mb-5 rounded-xl border-2 border-brand/40 bg-brand-tint p-4">
+            <Input
+              label="Link de rastreio do frete (opcional)"
+              type="url"
+              inputMode="url"
+              placeholder="https://rastreamento.correios.com.br/..."
+              value={trackingUrl}
+              onChange={(event) => setTrackingUrl(event.target.value)}
+              error={trackingInvalid ? 'Informe um link válido.' : undefined}
+              hint="Recomendado: o cliente acompanha a entrega sem precisar perguntar."
+            />
+            <p className="mt-3 text-sm text-ink">
+              {order.contactInfo.email
+                ? normalizedTracking && !notifyCustomer
+                  ? '⚠️ Marque o envio de e-mail abaixo para que o cliente receba este link.'
+                  : '💌 Sugerimos avisar o cliente por e-mail: ele recebe o link de rastreio e sabe que o pedido saiu.'
+                : 'Este pedido não tem e-mail cadastrado, então o cliente não receberá o link. Envie por WhatsApp.'}
+            </p>
+          </div>
+        )}
         <Checkbox
           label="Enviar e-mail para o cliente"
           hint={

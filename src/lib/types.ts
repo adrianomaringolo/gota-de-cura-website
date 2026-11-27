@@ -235,6 +235,8 @@ export interface Order {
   shippingCost?: number
   /** Free-form shipping details (carrier, tracking code, deal made), shown to the customer too. */
   shippingNotes?: string
+  /** Carrier tracking link, added when the order is marked as shipped. */
+  trackingUrl?: string
   /** Products taken out of stock for this order and not yet returned. */
   stockWithdrawn?: StockLine[]
 }

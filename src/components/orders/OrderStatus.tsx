@@ -179,6 +179,20 @@ export function OrderStatus({ orderRef }: { orderRef: string }) {
         </div>
       </dl>
 
+      {order.trackingUrl && (
+        <div className="mt-6 rounded-xl border border-line bg-surface px-5 py-4">
+          <h3 className="text-sm font-semibold text-ink">{t('tracking')}</h3>
+          <a
+            href={order.trackingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1.5 inline-block text-sm break-all text-brand underline underline-offset-4"
+          >
+            {order.trackingUrl}
+          </a>
+        </div>
+      )}
+
       {order.shippingNotes && (
         <div className="mt-6 rounded-xl border border-line bg-surface px-5 py-4">
           <h3 className="text-sm font-semibold text-ink">{t('shippingDetails')}</h3>
